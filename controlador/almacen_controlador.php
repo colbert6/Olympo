@@ -9,7 +9,7 @@ class almacenes_controlador extends controller {
             $this->redireccionar('error/access/5050');
         }
         parent::__construct();
-        $this->_almacenes = $this->cargar_modelo('almacenes');
+        $this->_almacenes = $this->cargar_modelo('almacen');
     }
 
     public function index() {

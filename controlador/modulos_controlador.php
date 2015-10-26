@@ -16,8 +16,7 @@ class modulos_controlador extends controller{
         $this->_vista->titulo = 'Lista de Modulos';
         $this->_vista->datos = $this->_modulos->selecciona();
         $this->_vista->setCss_public(array('jquery.dataTables'));
-        $this->_vista->setJs_public(array('jquery.dataTables.min'));
-        $this->_vista->setJs(array('run_table'));
+        $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');
     }
     
