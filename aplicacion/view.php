@@ -176,25 +176,10 @@ class view {
         if (count($this->_css)) {
             $css = $this->_css;
         }
-        $menu = array(
-            array(
-                'id' => 'inicio',
-                'titulo' => 'INICIO',
-                'enlace' => BASE_URL.'web/'
-                ),
-            array(
-                'id' => 'contactenos',
-                'titulo' => 'CONTÁCTENOS',
-                'enlace' => BASE_URL. 'web/contactenos'
-                )
-            
-        );
-        
         $_movilParams = array(
             'ruta_css' => BASE_URL . 'vista/movil/css/',
             'ruta_js' => BASE_URL . 'vista/movil/js/',
             'ruta_img' => BASE_URL . 'lib/img/web_movil/',            
-            'menu'=>$menu,
             'js' => $js,
             'css' => $css
         );
