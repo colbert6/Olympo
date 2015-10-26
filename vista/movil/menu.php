@@ -1,13 +1,12 @@
 <div class="sb-slidebar sb-left">
     <nav>
         <ul class="sb-menu">
-            <li><img src="http://plugins.adchsm.me/slidebars/images/slidebars-logo-white@2x.png" alt="Slidebars" width="118" height="40"></li>
-            <li class="sb-close"><a href="http://plugins.adchsm.me/slidebars/">Home</a></li>
-            <li class="sb-close"><a href="http://plugins.adchsm.me/slidebars/index.php#download">Download</a></li>
-            <li class="sb-close"><a href="http://plugins.adchsm.me/slidebars/usage.php">Usage</a></li>
-            <li class="sb-close"><a href="http://plugins.adchsm.me/slidebars/usage.php#api">API</a></li>
-            <li class="sb-close"><a href="http://plugins.adchsm.me/slidebars/compatibility.php">Compatibility</a></li>
-            <li class="sb-close"><a href="http://plugins.adchsm.me/slidebars/issues.php">Issues</a></li>
+            <li><img src="<?php echo $_movilParams['ruta_img']; ?>logo_menu.png" alt="Slidebars" width="170"></li>
+            <li class="sb-close"><a href="#">Home</a></li>
+            <li class="sb-close"><a href="#">Contactenos</a></li>
+            <li class="sb-close"><a href="#">Productos</a></li>
+            <li class="sb-close"><a href="#">Servicios</a></li>
+            <li class="sb-close"><a href="#">Membresias</a></li>
                           
         </ul>
     </nav>

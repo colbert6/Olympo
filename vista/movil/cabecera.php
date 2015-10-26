@@ -39,8 +39,8 @@
             
             <div class="container">
                 <!-- Logo -->
-                <div id="logo" class="navbar-left">
-                    <a href="http://plugins.adchsm.me/slidebars/"><img src="http://plugins.adchsm.me/slidebars/images/slidebars-logo@2x.png" alt="Slidebars Logo" width="118" height="40"></a>
+                <div id="logo" >
+                    <a href=""><img src="<?php echo $_movilParams['ruta_img']; ?>logo_header.png" alt="Slidebars Logo" width="125" height="40"></a>
                 </div><!-- /#logo -->
             </div>
         </nav>
