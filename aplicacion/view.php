@@ -190,7 +190,7 @@ class view {
             
         );
         
-        $_webParams = array(
+        $_movilParams = array(
             'ruta_css' => BASE_URL . 'vista/movil/css/',
             'ruta_js' => BASE_URL . 'vista/movil/js/',
             'ruta_img' => BASE_URL . 'lib/img/web_movil/',            
@@ -203,6 +203,7 @@ class view {
             include_once ROOT . 'vista' . DS . $this->_controlador . DS . 'cabecera.php';
             include_once ROOT . 'vista' . DS . $this->_controlador . DS . 'menu.php';
             include_once $ruta_vista;
+            include_once ROOT . 'vista' . DS . $this->_controlador . DS . 'pie.php';
             //incluimos la vista
         } else {
             throw new Exception('Error de vista');
