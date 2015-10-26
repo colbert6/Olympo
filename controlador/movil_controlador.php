@@ -1,6 +1,6 @@
 <?php
 
-class web_Controlador extends controller {
+class movil_Controlador extends controller {
     
     private $_web_servicios;
     private $_web_img_servicios;
@@ -10,8 +10,8 @@ class web_Controlador extends controller {
     
     public function __construct() {
         
-        if($this->web_movil()){
-            $this->redireccionar('movil');
+        if(!$this->web_movil()){
+            $this->redireccionar('web');
         }
         
         parent::__construct();
@@ -25,15 +25,15 @@ class web_Controlador extends controller {
     }
     
     public function index() {
-        $this->_vista->renderiza_web('index',false,true);
+        $this->_vista->renderiza_movil('index',false,true);
     }
     
     public function inicio(){
-        $this->_vista->renderiza_web('inicio','inicio',true);
+        $this->_vista->renderiza_movil('inicio','inicio',true);
     }
     public function nosotros(){
         
-        $this->_vista->renderiza_web('nosotros','nosotros',false);
+        $this->_vista->renderiza_movil('nosotros','nosotros',false);
     }
     public function productos($categoria=false,$id=false){
         
@@ -41,13 +41,13 @@ class web_Controlador extends controller {
         $this->_vista->setCss(array('productos'));
         if(!$categoria && !$id){
             $this->_vista->datos = $this->_web_categoria_productos->getCategoria_Productos();
-            $this->_vista->renderiza_web('pro_categoria',true,'productos');
+            $this->_vista->renderiza_movil('pro_categoria',true,'productos');
         }else if($categoria && !$id) {
             $this->_vista->datos = $this->_web_productos->getProductosxCategoria($categoria);
-            $this->_vista->renderiza_web('pro_lista',true,'productos');
+            $this->_vista->renderiza_movil('pro_lista',true,'productos');
         }else if($categoria && $id){
             $this->_vista->datos = $this->_web_productos->getProducto($id);
-            $this->_vista->renderiza_web('pro_detalle',true,'productos');  
+            $this->_vista->renderiza_movil('pro_detalle',true,'productos');  
         }
         
         
@@ -58,15 +58,15 @@ class web_Controlador extends controller {
         //$this->_vista->img_servicio = $this->_web_img_servicios->getImgServicios();
         $this->_vista->setCss(array('servicios'));
         //$this->_vista->js=>setJs(array('sexylightbox','jquery.easing'));
-        $this->_vista->renderiza_web('servicios','servicios',true);
+        $this->_vista->renderiza_movil('servicios','servicios',true);
     }    
     public function contactenos(){
-        $this->_vista->renderiza_web('contactenos','contactenos',false);
+        $this->_vista->renderiza_movil('contactenos','contactenos',false);
     }
 
         
     public function fotos(){
-        $this->_vista->renderiza_web('fotos','fotos');
+        $this->_vista->renderiza_movil('fotos','fotos');
     }
         
      public function web_movil() {

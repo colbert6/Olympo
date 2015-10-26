@@ -154,18 +154,61 @@ class view {
         );
         $ruta_vista = ROOT . 'vista' . DS . $this->_controlador . DS . $vista . '.php';
         if (is_readable($ruta_vista)) {
-            include_once ROOT . 'vista' . DS . $this->_controlador . DS . 'header.php';
+            include_once ROOT . 'vista' . DS . $this->_controlador . DS . 'cabecera.php';
             include_once $ruta_vista;
             if($columna){
             include_once ROOT . 'vista'. DS . $this->_controlador . DS . 'columna.php';    
             }
-            include_once ROOT . 'vista' . DS . $this->_controlador . DS . 'footer.php';
+            include_once ROOT . 'vista' . DS . $this->_controlador . DS . 'pie.php';
             //incluimos la vista
         } else {
             throw new Exception('Error de vista');
         }
     }
 
+    public function renderiza_movil($vista, $item = false) {
+        $js = array();
+        $css = array();
+
+        if (count($this->_js)) {
+            $js = $this->_js;
+        }
+        if (count($this->_css)) {
+            $css = $this->_css;
+        }
+        $menu = array(
+            array(
+                'id' => 'inicio',
+                'titulo' => 'INICIO',
+                'enlace' => BASE_URL.'web/'
+                ),
+            array(
+                'id' => 'contactenos',
+                'titulo' => 'CONTÁCTENOS',
+                'enlace' => BASE_URL. 'web/contactenos'
+                )
+            
+        );
+        
+        $_webParams = array(
+            'ruta_css' => BASE_URL . 'vista/movil/css/',
+            'ruta_js' => BASE_URL . 'vista/movil/js/',
+            'ruta_img' => BASE_URL . 'lib/img/web_movil/',            
+            'menu'=>$menu,
+            'js' => $js,
+            'css' => $css
+        );
+        $ruta_vista = ROOT . 'vista' . DS . $this->_controlador . DS . $vista . '.php';
+        if (is_readable($ruta_vista)) {
+            include_once ROOT . 'vista' . DS . $this->_controlador . DS . 'cabecera.php';
+            include_once ROOT . 'vista' . DS . $this->_controlador . DS . 'menu.php';
+            include_once $ruta_vista;
+            //incluimos la vista
+        } else {
+            throw new Exception('Error de vista');
+        }
+    }
+    
     public function renderizar_webservice($vista, $item = false) {
         //aqui podemos poner el menu
         //creamos la ruta de la vista
