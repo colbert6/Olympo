@@ -1,0 +1,195 @@
+
+
+body {
+    padding-top: 0px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    width:100%;
+    background-color: #E2E2DB;
+    /*background: url(../../../lib/admin/img/back.png) repeat;*/
+    margin: 0 auto;
+    
+}
+
+/* Customize the text color and shadow color and to optimize text legibility. */
+
+body .scrollpanel {
+  float: left;
+  margin: 30px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+}
+body .scrollpanel .sp-scrollbar {
+  width: 10px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+body .scrollpanel .sp-scrollbar .sp-thumb {
+  background-color: #aaa;
+  transition: height 0.2s ease-in-out;
+}
+body .scrollpanel .sp-scrollbar.active .sp-thumb {
+  background-color: #999;
+}
+
+
+.carousel-holder {
+    margin-top:0;
+    margin-bottom: 10px;
+}
+/*.col-md-12{
+  padding-bottom: 0px;
+  padding-right: 7px;
+  padding-left: 7px;
+}*/
+
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+.menu_activo {
+   
+  background-color: #CDCDCD;
+  background: -webkit-gradient(linear, left top, left bottom, from(#CDCDCD), to(#f2f2f2));
+  background: -webkit-linear-gradient(top, #CDCDCD, #f2f2f2);
+  background: -moz-linear-gradient(top, #CDCDCD, #f2f2f2);
+  background: -ms-linear-gradient(top, #CDCDCD, #f2f2f2);
+  background: -o-linear-gradient(top, #CDCDCD, #f2f2f2);
+  background: linear-gradient(top, #CDCDCD, #f2f2f2);
+  border-radius: 5px;
+  text-decoration: none;
+}
+.caption {
+    height: 80px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+.thumbnail .hover-bg{
+	
+	overflow: hidden;
+	position: relative;
+}
+.hover-bg .hover-text {
+	position: absolute;
+	text-align: center;
+	margin: 0 auto;
+	color: #ffffff;
+	background: rgba(0, 0, 0, 0.66);
+	padding: 10% 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+    transition: all 0.7s;
+}
+
+.hover-bg a{ color: #FCAC45;}
+.hover-bg :hover a{
+	text-decoration: none;
+	color: white;
+}
+.hover-bg .hover-text>h4{
+        text-transform: lowercase;
+	opacity: 0;
+	-webkit-transform: translateY(100%);
+            transform: translateY(100%);
+            transition: all 0.3s;
+}
+.hover-bg:hover .hover-text>h4{
+    text-transform: lowercase;
+	opacity: 1;
+    -webkit-backface-visibility:hidden;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+}
+.hover-bg .hover-text>i{
+	opacity: 0;
+	-webkit-transform: translateY(0);
+            transform: translateY(0);
+            transition: all 0.3s;
+}
+.hover-bg:hover .hover-text>i{
+	opacity: 1;
+    -webkit-backface-visibility:hidden;
+   -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+}
+.hover-bg:hover .hover-text{
+	opacity: 1;
+}
+
+.lista_eventos{
+  background-color:#33ADD6; 
+  width: 50px;
+  height: 50px;
+  padding: 4px; 
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border: 0px solid #000000;
+
+
+}
+
+
+
+nav{
+  background: red;
+}
+.mycontainer{
+  padding-right: 12.5%;
+  padding-left: 12.5%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+footer {
+    margin: 50px 0;
+}
+#footer{
+        background:#000000;
+        width: 100%;
+        margin: auto;
+	border:solid 1px #000000;
+        border-radius:0px 0px 15px 15px;
+        -moz-border-radius:0px 0px 15px 15px;
+        -webkit-border-radius:0px 0px 15px 15px;
+        -o-border-radius:0px 0px 15px 15px;
+}
+#txtFooter{
+        padding: 10px;
+	color:#FFF;
+}
+#footer a{
+        text-decoration: none;
+        color:#FFF;
+}
+#footer a:hover{
+        text-decoration: underline;
+        color: #EEE;
+}
