@@ -100,7 +100,7 @@ class modulos_controlador extends controller{
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('modulos');
         }
-        $this->_modulos->idmodulo = $this->filtrarInt($id);
+        $this->_modulos->id_modulo = $this->filtrarInt($id);
         $this->_modulos->elimina();
         $this->redireccionar('modulos');
     }
