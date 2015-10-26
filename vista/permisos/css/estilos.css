@@ -1,9 +1,13 @@
-    #div_modulos{
-        margin-left: 35%;
+   #div_modulos{
+        margin-left: 4%;
     }
     #div_modulos ul li{
         list-style: none;
     }
     #div_modulos ul li ul li{
         list-style: none;
+    }
+    #nombre_modulo{
+            font-weight:bold;
+            color:#000;
     }

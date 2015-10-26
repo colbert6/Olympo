@@ -24,26 +24,30 @@
  
 
 
-<div class="row" id="div_modulos" align="center">
-    <div id='modulos'>
+<div class="row" id="div_modulos" >
+    <div class='col-md-11' id='modulos'>
     <?php
         for($i=0;$i<count($this->datos_modulos);$i++){
             $idmodulo=$this->datos_modulos[$i]['ID_MODULO'];
             $idmodulo_padre=$this->datos_modulos[$i]['ID_PADRE'];
             $modulo=$this->datos_modulos[$i]['NOMBRE'];
+            
             if($idmodulo_padre==0){
-                echo "<div class='row'>".$modulo."<div class='row'>";
+                echo '</br>';
+                echo "<div class='row' ><h3 class='nombre_modulo'>".$modulo."</h3><ul class='list-inline'>";
                 for($j=0;$j<count($this->datos_modulos);$j++){
                     if($this->datos_modulos[$j]['ID_PADRE']==$idmodulo){
                         $id=$this->datos_modulos[$j]['ID_MODULO'];
                         $descripcion=$this->datos_modulos[$j]['NOMBRE'];
-                        echo "<div class='col-md-4'><label class='checkbox'><input type='checkbox' name='$id' id='$id'/>".$descripcion."</label></div>";
+                        echo "<li><label class='checkbox'><input type='checkbox' name='$id' id='$id'/>".$descripcion."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></li>";
                     }
                 }                
-                echo "</div></div>";
+                echo "</ul></div>";
             }
+            
+            
         }
     ?>
-    </d>
+    </div>
 </div>
 
