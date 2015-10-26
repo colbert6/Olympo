@@ -1,6 +1,6 @@
 <?php
 
-class almacenes_controlador extends controller {
+class almacen_controlador extends controller {
 
     private $_almacenes;
 
@@ -15,8 +15,8 @@ class almacenes_controlador extends controller {
     public function index() {
         $this->_vista->titulo = 'Lista de Almacenes';
         $this->_vista->datos = $this->_almacenes->selecciona();
-        $this->_vista->setJs(array('funcion'));
-        $this->_vista->setJs_Foot(array('scriptgrilla'));
+        $this->_vista->setCss_public(array('jquery.dataTables'));
+        $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');
     }
     
