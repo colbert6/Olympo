@@ -26,7 +26,13 @@ class producto_controlador extends controller {
         
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->id_marca = $_POST['id_marca'];
+            $this->_model->id_categoria_producto = $_POST['id_categoria_producto'];
+            $this->_model->nombre = $_POST['nombre'];
+            $this->_model->presentacion = $_POST['presentacion'];
+            $this->_model->precio = $_POST['precio'];
+            $this->_model->stock_max = $_POST['stock_max'];
+            $this->_model->stock_min = $_POST['stock_min'];
             $datos = $this->_model->inserta();
             $this->redireccionar('producto');
         }
@@ -46,10 +52,19 @@ class producto_controlador extends controller {
 
         if ($_POST['guardar'] == 1) {
             $this->_model->id_producto = $_POST['id_producto'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->id_marca = $_POST['id_marca'];
+            $this->_model->id_categoria_producto = $_POST['id_categoria_producto'];
+            $this->_model->nombre = $_POST['nombre'];
+            $this->_model->presentacion = $_POST['presentacion'];
+            $this->_model->precio = $_POST['precio'];
+            $this->_model->stock_max = $_POST['stock_max'];
+            $this->_model->stock_min = $_POST['stock_min'];
             $this->_model->actualiza();
             $this->redireccionar('producto');
         }
+        $this->_vista->marcas = $this->_marcas->selecciona();
+        $this->_vista->cat_productos = $this->_cat_productos->selecciona();
+        
         $this->_model->id_producto = $this->filtrarInt($id);
         $this->_vista->datos = $this->_model->selecciona_id();
         

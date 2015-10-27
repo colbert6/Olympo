@@ -3,7 +3,13 @@
 class producto extends Main{
 
     public $id_producto;
-    public $descripcion;
+    public $id_marca;
+    public $id_categoria_producto;
+    public $nombre;
+    public $presentacion;
+    public $precio;
+    public $stock_min;
+    public $stock_max;
     public $estado;
     
     public function selecciona() {
@@ -27,8 +33,14 @@ class producto extends Main{
         if (is_null($this->id_producto)) {
             $this->id_producto = 0;
         }
+        if (is_null($this->id_categoria_producto)) {
+            $this->id_categoria_producto = 0;
+        }
+        if (is_null($this->id_marca)) {
+            $this->id_marca = 0;
+        }
       
-        $datos = array($this->id_producto);
+        $datos = array($this->id_producto,$this->id_categoria_producto,$this->id_marca);
         
         $r = $this->get_consulta("pa_m2_producto",$datos);
         if ($r[1] == '') {
@@ -48,7 +60,8 @@ class producto extends Main{
     }
     
     public function inserta() {
-        $datos = array($this->descripcion);
+        $datos = array($this->id_categoria_producto,$this->id_marca,$this->presentacion,$this->nombre,
+                        $this->stock_min,$this->stock_max,$this->precio);
         $r = $this->get_consulta("pa_i_producto", $datos);
         $error = $r[1];
         $r = null;
@@ -57,7 +70,8 @@ class producto extends Main{
 
     public function actualiza() {
        
-        $datos = array($this->id_producto, $this->descripcion);
+        $datos = array($this->id_producto,$this->id_categoria_producto,$this->id_marca,$this->presentacion,$this->precio,
+                        $this->nombre, $this->stock_min,$this->stock_max);
         
         $r = $this->get_consulta("pa_u_producto", $datos);
         $error = $r[1];
