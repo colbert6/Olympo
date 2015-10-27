@@ -53,9 +53,8 @@ class modulos_controlador extends controller{
             $this->redireccionar('modulos');
         }
         
-        $this->_modulos->id_modulo = $this->filtrarInt($id);
-        
         if ($_POST['guardar'] == 1) {
+            $this->_modulos->id_modulo = $_POST['id_modulo'];
             $this->_modulos->nombre = ucwords(strtolower($_POST['nombre']));
             $this->_modulos->url = strtolower($_POST['url']);
             $this->_modulos->icono = strtoupper($_POST['icono']);
@@ -75,10 +74,12 @@ class modulos_controlador extends controller{
             $this->_modulos->actualiza();
             $this->redireccionar('modulos');
         }
+        $this->_modulos->id_modulo = $this->filtrarInt($id);
         $this->_vista->datos = $this->_modulos->selecciona_id();
         
         $this->_vista->modulos_padre = $this->_modulos->selecciona_padre(0);
         $this->_vista->titulo = 'Actualizar Modulo';
+        $this->_vista->action = BASE_URL . 'modulos/editar/'.$id;
         $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('form');
     }

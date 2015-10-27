@@ -1,13 +1,13 @@
 <?php
 
-class almacen extends Main{
+class categoria_producto extends Main{
 
-    public $id_almacen;
+    public $id_categoria_producto;
     public $descripcion;
     public $estado;
     
     public function selecciona() {
-        $r = $this->get_consulta("pa_m1_almacen",null);
+        $r = $this->get_consulta("pa_m1_capr",null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -24,13 +24,12 @@ class almacen extends Main{
         
     }
     public function selecciona_id() {
-        if (is_null($this->id_almacen)) {
-            $this->id_almacen = 0;
+        if (is_null($this->id_categoria_producto)) {
+            $this->id_categoria_producto = 0;
         }
-      
-        $datos = array($this->id_almacen);
+        $datos = array($this->id_categoria_producto);
         
-        $r = $this->get_consulta("pa_m2_almacen",$datos);
+        $r = $this->get_consulta("pa_m2_capr",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -44,22 +43,20 @@ class almacen extends Main{
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             return $stmt->fetchall();
         }
-      
     }
     
     public function inserta() {
         $datos = array($this->descripcion);
-        $r = $this->get_consulta("pa_i_almacen", $datos);
+        $r = $this->get_consulta("pa_i_capr", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
 
-    public function actualiza() {
+    public function edita() {
        
-        $datos = array($this->id_almacen, $this->descripcion);
-        
-        $r = $this->get_consulta("pa_u_almacen", $datos);
+        $datos = array($this->id_categoria_producto,$this->descripcion);
+        $r = $this->get_consulta("pa_u_capr", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -68,8 +65,8 @@ class almacen extends Main{
     
 
     public function elimina() {
-        $datos = array($this->id_almacen);
-        $r = $this->get_consulta("pa_d_almacen", $datos);
+        $datos = array($this->id_categoria_producto);
+        $r = $this->get_consulta("pa_d_capr", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -79,3 +76,5 @@ class almacen extends Main{
 }
 
 ?>
+
+
