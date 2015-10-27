@@ -7,7 +7,7 @@
            <input name="guardar" id="guardar" type="hidden" value="1">
             <?php if(isset ($this->datos[0]['ID_MODULO'])) {?>  
             <div class="form-group">
-              <label class="control-label col-sm-3" >ITEM:</label>
+              <label class="control-label col-sm-3" >Item:</label>
               <div class="col-sm-9">
                   <input name="id_modulo" id="id_modulo" class="form-control"  readonly="readonly"
                          value="<?php echo $this->datos[0]['ID_MODULO'];?>">
@@ -16,7 +16,7 @@
             <?php } ?>  
            
             <div class="form-group">
-              <label class="control-label col-sm-3" >NOMBRE:</label>
+              <label class="control-label col-sm-3" >Nombre:</label>
               <div class="col-sm-9">
                 <input name="nombre" id="nombre" class="form-control"  placeholder="Nombre" autofocus
                       value="<?php if(isset ($this->datos[0]['NOMBRE']))echo $this->datos[0]['NOMBRE']?>">
@@ -24,7 +24,7 @@
             </div>
            
             <div class="form-group">
-              <label class="control-label col-sm-3" for="url">URL:</label>
+              <label class="control-label col-sm-3" for="url">Url:</label>
               <div class="col-sm-9">
                   <input name="url" id="url" class="form-control"  placeholder="url"
                       value="<?php if(isset ($this->datos[0]['URL']))echo $this->datos[0]['URL']?>">
@@ -32,7 +32,7 @@
             </div>
            
             <div class="form-group">
-              <label class="control-label col-sm-3" for="email">ORDEN:</label>
+              <label class="control-label col-sm-3" for="email">Orden:</label>
               <div class="col-sm-9">
                 <input name="orden" id="orden" class="form-control"  placeholder="Orden"
                        value="<?php if(isset ($this->datos[0]['ORDEN']))echo $this->datos[0]['ORDEN']?>">
@@ -40,7 +40,7 @@
             </div>
            
             <div class="form-group">
-              <label class="control-label col-sm-3" for="email">ICONO:</label>
+              <label class="control-label col-sm-3" for="email">Icono:</label>
               <div class="col-sm-9">
                 <input name="icono" id="icono" class="form-control"  placeholder="Icono"
                        value="<?php if(isset ($this->datos[0]['ICONO']))echo $this->datos[0]['ICONO']?>">
@@ -48,7 +48,7 @@
             </div>
 
             <div class="form-group">
-              <label class="control-label col-sm-3" >PADRE:</label>
+              <label class="control-label col-sm-3" >Padre:</label>
               <div class="col-sm-9"> 
                   <select class="form-control glyphicon" name='padre' id='padre'>
                       <option value='0' >NO TIENE MODULO PADRE</option>
