@@ -4,11 +4,7 @@
     <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
-<<<<<<< HEAD
                 <th>ITEM</th>
-=======
-                <th>Item</th>
->>>>>>> f340eb762a3ab20f22783e8ab77bfedcc195f582
                 <th>DESCRIPCION</th>
                 <th>ESTADO</th>
                 <th>ACCIONES</th>
