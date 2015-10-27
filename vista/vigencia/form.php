@@ -24,8 +24,8 @@
           <div class="form-group">
             <label class="control-label col-sm-6" >Nro. Dias:</label>
             <div class="col-sm-6">
-                <input name="dias" id="dias" class="form-control"   placeholder="Numero de Servicios" 
-                    maxlength="2" value="<?php if(isset ($this->datos[0]['DIAS']))echo $this->datos[0]['DIAS']?>" autofocus>
+                <input name="dias" id="dias" class="form-control"  onKeyPress="return soloNumeros(event);"  placeholder="Numero de Dias" 
+                    maxlength="10" value="<?php if(isset ($this->datos[0]['DIAS']))echo $this->datos[0]['DIAS']?>" autofocus>
             </div>
           </div>
              
