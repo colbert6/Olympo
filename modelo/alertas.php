@@ -1,8 +1,8 @@
 <?php
 class alertas extends Main{
-    public $idalerta;
+    public $id_alerta;
     public $descripcion;
-    public $idmodulo;
+    public $id_modulo;
     public $estado;
     public $idperfil;
     
