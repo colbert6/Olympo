@@ -24,9 +24,6 @@ class categoria_producto extends Main{
         
     }
     public function selecciona_id() {
-        if (is_null($this->id_categoria_producto)) {
-            $this->id_categoria_producto = 0;
-        }
         $datos = array($this->id_categoria_producto);
         
         $r = $this->get_consulta("pa_m2_capr",$datos);

@@ -1,13 +1,13 @@
 <?php
 
-class categoria_ejercicio extends Main{
+class ambiente extends Main{
 
-    public $id_categoria_ejercicio;
+    public $id_ambiente;
     public $descripcion;
     public $estado;
     
     public function selecciona() {
-        $r = $this->get_consulta("pa_m1_caej",null);
+        $r = $this->get_consulta("pa_m1_ambiente",null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -24,10 +24,11 @@ class categoria_ejercicio extends Main{
         
     }
     public function selecciona_id() {
-     
-        $datos = array($this->id_categoria_ejercicio);
+ 
+      
+        $datos = array($this->id_ambiente);
         
-        $r = $this->get_consulta("pa_m2_caej",$datos);
+        $r = $this->get_consulta("pa_m2_ambiente",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -46,7 +47,7 @@ class categoria_ejercicio extends Main{
     
     public function inserta() {
         $datos = array($this->descripcion);
-        $r = $this->get_consulta("pa_i_caej", $datos);
+        $r = $this->get_consulta("pa_i_ambiente", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -54,18 +55,19 @@ class categoria_ejercicio extends Main{
 
     public function actualiza() {
        
-        $datos = array($this->id_categoria_ejercicio, $this->descripcion);
+        $datos = array($this->id_ambiente, $this->descripcion);
         
-        $r = $this->get_consulta("pa_u_caej", $datos);
+        $r = $this->get_consulta("pa_u_ambiente", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
 
+    
 
     public function elimina() {
-        $datos = array($this->id_categoria_ejercicio);
-        $r = $this->get_consulta("pa_d_caej", $datos);
+        $datos = array($this->id_ambiente);
+        $r = $this->get_consulta("pa_d_ambiente", $datos);
         $error = $r[1];
         $r = null;
         return $error;
