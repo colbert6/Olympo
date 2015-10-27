@@ -5,12 +5,12 @@
     <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
         <tr>
-            <th>Item</th>
-            <th>Nombre</th>
-            <th>Icono</th>
-            <th>Url</th>
-            <th>Modulo Padre</th>
-            <th>Acciones</th>
+            <th>ITEM</th>
+            <th>NOMBRE</th>
+            <th>ICONO</th>
+            <th>URL</th>
+            <th>MODULO PADRE</th>
+            <th>ACCIONES</th>
         </tr>
         </thead>
         <tbody>

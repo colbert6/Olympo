@@ -1,4 +1,5 @@
 $(function() {    
+      
     $( "#save" ).click(function(){
         bval = true;   
         bval = bval && $("#descripcion").required();
