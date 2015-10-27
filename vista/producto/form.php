@@ -16,23 +16,31 @@
         <?php } ?>  
         
         <div class="form-group">
-            <label class="control-label col-sm-6" >Nombre:</label>
-            <div class="col-sm-6">
-                <input name="nombre" id="nombre" class="form-control"  placeholder="Descripcion" autofocus
-                maxlength="30"  value="<?php if(isset ($this->datos[0]['NOMBRE']))echo $this->datos[0]['NOMBRE']?>">
-            </div>
-        </div>
-        
-        <div class="form-group">
             <label class="control-label col-sm-3" >Marca:</label>
             <div class="col-sm-9"> 
-                <select class="form-control glyphicon" name='marca' id='marca'>
-                    <option value='' >Seleccione marca...</option>
+                <select class="form-control" name='marca' id='marca'>
+                    <option value='' >Seleccione Marca...</option>
                     <?php for($i=0;$i<count($this->marcas);$i++){ //Aca va la lista de los modulos padres ?> 
                     <?php if( $this->datos[0]['ID_MARCA']==$this->marcas[$i]['ID_MARCA']){?>
                          <option selected value="<?php echo $this->marcas[$i]['ID_MARCA'];?>"><?php echo $this->marcas[$i]['DESCRIPCION']?></option>
                     <?php }else{?>
-                         <option value="<?php echo $this->marcas[$i]['ID_MARCA'];?>"><?php echo $this->marcas[$i]['NOMBRE']?></option>
+                         <option value="<?php echo $this->marcas[$i]['ID_MARCA'];?>"><?php echo $this->marcas[$i]['DESCRIPCION']?></option>
+                    <?php } ?>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-sm-3" >Cat. Producto:</label>
+            <div class="col-sm-9"> 
+                <select class="form-control glyphicon" name='categoria_producto' id='categoria_producto'>
+                    <option value='' >Seleccione Categoria...</option>
+                    <?php for($i=0;$i<count($this->cat_productos);$i++){ //Aca va la lista de los modulos padres ?> 
+                    <?php if( $this->datos[0]['ID_CATEGORIA_PRODUCTO']==$this->cat_productos[$i]['ID_CATEGORIA_PRODUCTO']){?>
+                         <option selected value="<?php echo $this->cat_productos[$i]['ID_CATEGORIA_PRODUCTO'];?>"><?php echo $this->cat_productos[$i]['DESCRIPCION']?></option>
+                    <?php }else{?>
+                         <option value="<?php echo $this->cat_productos[$i]['ID_CATEGORIA_PRODUCTO'];?>"><?php echo $this->cat_productos[$i]['DESCRIPCION']?></option>
                     <?php } ?>
                     <?php } ?>
                 </select>
@@ -50,8 +58,15 @@
         <div class="form-group">
             <label class="control-label col-sm-6" >Presentacion:</label>
             <div class="col-sm-6">
-                <input name="presentacion" id="presentacion" class="form-control"  placeholder="Descripcion" autofocus
-                maxlength="30"  value="<?php if(isset ($this->datos[0]['PRESENTACION']))echo $this->datos[0]['PRESENTACION']?>">
+                <select class="form-control glyphicon" name='presentacion' id='presentacion'>
+                    <option value='' >Seleccione Presentacion...</option>
+                    <option value='Unidad'>Unidad</option>
+                    <option value='Frasco'>Frasco</option>
+                    <option value='Barra'>Barra</option>
+                    <option value='Sobre'>Sobre</option>
+                    
+                    
+                </select>
             </div>
         </div>
         
