@@ -4,7 +4,7 @@
     <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Item</th>
+                <th>ITEM</th>
                 <th>DESCRIPCION</th>
                 <th>ESTADO</th>
                 <th>ACCIONES</th>
