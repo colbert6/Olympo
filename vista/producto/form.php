@@ -28,11 +28,11 @@
             <div class="col-sm-9"> 
                 <select class="form-control glyphicon" name='marca' id='marca'>
                     <option value='' >Seleccione marca...</option>
-                    <?php for($i=0;$i<count($this->modulos_padre);$i++){ //Aca va la lista de los modulos padres ?> 
-                    <?php if( $this->datos[0]['ID_PADRE']==$this->modulos_padre[$i]['ID_MODULO']){?>
-                         <option selected value="<?php echo $this->modulos_padre[$i]['ID_MODULO']."/".$this->modulos_padre[$i]['NOMBRE']?>"><?php echo $this->modulos_padre[$i]['NOMBRE']?></option>
+                    <?php for($i=0;$i<count($this->marcas);$i++){ //Aca va la lista de los modulos padres ?> 
+                    <?php if( $this->datos[0]['ID_MARCA']==$this->marcas[$i]['ID_MARCA']){?>
+                         <option selected value="<?php echo $this->marcas[$i]['ID_MARCA'];?>"><?php echo $this->marcas[$i]['DESCRIPCION']?></option>
                     <?php }else{?>
-                         <option value="<?php echo $this->modulos_padre[$i]['ID_MODULO']."/".$this->modulos_padre[$i]['NOMBRE']?>"><?php echo $this->modulos_padre[$i]['NOMBRE']?></option>
+                         <option value="<?php echo $this->marcas[$i]['ID_MARCA'];?>"><?php echo $this->marcas[$i]['NOMBRE']?></option>
                     <?php } ?>
                     <?php } ?>
                 </select>
