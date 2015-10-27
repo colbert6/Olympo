@@ -24,9 +24,7 @@ class almacen extends Main{
         
     }
     public function selecciona_id() {
-        if (is_null($this->id_almacen)) {
-            $this->id_almacen = 0;
-        }
+        
       
         $datos = array($this->id_almacen);
         

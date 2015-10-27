@@ -24,10 +24,7 @@ class categoria_empleado extends Main{
         
     }
     public function selecciona_id() {
-        if (is_null($this->id_categoria_empleado)) {
-            $this->id_categoria_empleado = 0;
-        }
-      
+    
         $datos = array($this->id_categoria_empleado);
         
         $r = $this->get_consulta("pa_m2_caem",$datos);
