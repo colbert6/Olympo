@@ -1,16 +1,13 @@
 <?php
-
 class alertas extends Main{
-
-    public $idalerta;
+    public $id_alerta;
     public $descripcion;
-    public $idmodulo;
+    public $id_modulo;
     public $estado;
     public $idperfil;
     
     public function selecciona() {
         
-        $datos = array($this->idalerta,$this->idperfil);
         $r = $this->get_consulta("pa_m1_alerta", null);
         if ($r[1] == '') {
             $stmt = $r[0];
@@ -43,5 +40,4 @@ class alertas extends Main{
     }
         
 }
-
 ?>

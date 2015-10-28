@@ -14,6 +14,7 @@ class modulos extends Main{
 
     public function selecciona() {
         //        echo '<pre>';print_r($datos);exit;
+        
         $r = $this->get_consulta("pa_m1_modulo", null);
         if ($r[1] == '') {
             $stmt = $r[0];
@@ -21,9 +22,11 @@ class modulos extends Main{
             die($r[1]);
         }
         $r = null;
-        if (BaseDatos::$_servidor == 'oci') {
+        if (BaseDatos::$_servidor == 'OCI') {
             oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            print_r($data);exit;
             return $data;
+            
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             return $stmt->fetchall();

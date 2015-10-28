@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 $(function() {    
-    $( "#sqbd" ).focus();   
+    $( "#sgbd" ).focus();   
     $( "#save" ).click(function(){
         bval = true;   
         bval = bval && $("#sgbd").required();

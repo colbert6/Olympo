@@ -3,60 +3,75 @@
 class servicio extends Main{
 
     public $id_servicio;
-    public $id_tiposervicio;
+    public $id_ambiente;
+    public $nombre;
     public $descripcion;
-    public $tiposervicio;
-
+    public $estado;
+    
     public function selecciona() {
-        if(is_null($this->id_servicio)){
-            $this->id_servicio=0;
-        }
-         if(is_null($this->descripcion)){
-            $this->descripcion='';
-        }
-         if(is_null($this->tiposervicio)){
-            $this->tiposervicio='';
-        }
-        $datos = array($this->id_servicio, $this->descripcion, $this->tiposervicio);
-        $r = $this->get_consulta("sel_servicio", $datos);
+        $r = $this->get_consulta("pa_m1_servicio",null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
             die($r[1]);
         }
         $r = null;
-        if (conexion::$_servidor == 'oci') {
+        if (BaseDatos::$_servidor == 'OCI') {
             oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
             return $data;
         } else {
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);       
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
             return $stmt->fetchall();
         }
     }
-
-    public function elimina() {
+    public function selecciona_id() {
+        
         $datos = array($this->id_servicio);
-        $r = $this->get_consulta("elim_servicio", $datos);
-        $error = $r[1];
+        
+        $r = $this->get_consulta("pa_m2_servicio",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
         $r = null;
-        return $error;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
     }
-
+    
     public function inserta() {
-        $datos = array($this->descripcion, $this->id_tiposervicio);
-        $r = $this->get_consulta("ins_servicio", $datos);
+        $datos = array($this->id_ambiente,$this->nombre,$this->descripcion);
+        $r = $this->get_consulta("pa_i_servicio", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
 
     public function actualiza() {
-        $datos = array($this->id_servicio, $this->descripcion, $this->id_tiposervicio);
-        $r = $this->get_consulta("act_servicio", $datos);
+       
+        $datos = array($this->id_servicio, $this->id_ambiente,$this->nombre,$this->descripcion);
+        
+        $r = $this->get_consulta("pa_u_servicio", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
+
+    
+    public function elimina() {
+        $datos = array($this->id_servicio);
+        $r = $this->get_consulta("pa_d_servicio", $datos);
+        $error = $r[1];
+        $r = null;
+        return $error;
+    }
+    
 
 }
 

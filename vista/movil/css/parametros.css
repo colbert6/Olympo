@@ -2,10 +2,12 @@ html, body {
 	background-color: #222222;
 }
 
+
 #sb-site {
 	box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.3); /* Shadow cast onto the slidebars when opened. */
 	padding: 50px 0 30px 0;
-	margin-top:15px;
+	margin-top:25px;
+	 
 }
 
 #adverts {
@@ -18,7 +20,9 @@ html, body {
 	margin-bottom: 10px;
 	padding: 3px;
 }
-
+nav{
+	padding-bottom: 12px;
+}
 .navbar {
 	box-shadow: /* Shadow beneath the bar and edge highlights. */
 		/* Layered single pixel shadows to create a one sided shadow effect. */

@@ -66,80 +66,77 @@ class Main {
 
             <html xmlns="http://www.w3.org/1999/xhtml">
                 <head>
-                    <link href="<?php echo BASE_URL ?>public/css/bootstrap.css" rel="stylesheet">
+                    <link href="<?php echo BASE_URL ?>lib/admin/style/bootstrap.css" rel="stylesheet">
                     
                 </head>
                 <body>
-                <script type="text/javascript">
-                        alert("¡Conexion Fallida!. El sistema se inicializara, los datos que hayan sido guardados no se perderan.");
-                    </script>    
+                   
                     <div class="row" style="width: 800; margin:0 auto;">
-                        <img src="<?php echo BASE_URL ?>public/img/logo.png" height="100" width="800" />
+                        <img src="<?php echo BASE_URL ?>lib/img/logo/cabecera.png" height="100" width="800" />
                     </div>
                      <div class="row" style="width: 800; margin:0 auto;">
-                         <h2>ES NECESARIO LLENAR ALGUNOS DATOS</h2>
-                         <h4>Para mayor informacion contacte con la FISI</h4>
+                         <h3> Se requiere informacion sobre la Base de Datos</h3>
                     </div>
-                    <div class="row" style="width: 800; margin:1% auto ;">
-                        <form method="post" action="#"  class="form-horizontal" role="form">
-                        <fieldset>    
+                    <div class="row" >
+                        <div class="col-md-12" style="width: 800; margin:0 auto;"> 
+                        <form method="post" action="#"  class="form-horizontal" >
+                           
                             <input type="hidden" name="guardar" id="guardar" value="1"/>
+                            
                             <div class="form-group">
-                                <label for="sgbd" class="col-lg-4 control-label">SGBD: </label>
-                                <div class="col-lg-4">
-                                  <select placeholder="Seleccione..." class="form-control" name="sgbd" required id="sqbd">
-                                            <option></option>
-                                            <option value="mysql">MySQL</option>
-                                            <option value="pgsql">PostgreSQL</option>
-                                            <option value="sqlsrv">SQL Server</option>
-                                            <option value="oci">Oracle</option>
-                                        </select>    
-                                </div>
+                                <label for="sgbd" class="control-label col-md-3" >SGBD: </label>
+                                    <div class="col-md-6">
+                                      <select placeholder="Seleccione..." class="form-control" name="sgbd"  id="sgbd">
+                                                <option></option>
+                                                <option value="mysql">MySQL</option>
+                                                <option value="pgsql">PostgreSQL</option>
+                                                <option value="sqlsrv">SQL Server</option>
+                                                <option value="oci">Oracle</option>
+                                            </select>    
+                                    </div>
                             </div>
                             <div class="form-group">
-                                <label for="usuario" class="col-lg-4 control-label"> Usuario: </label>
-                                <div class="col-lg-4">
-                                <input type="text" placeholder="Ingrese usuario" required class="form-control" name="usuario" value="" />
+                                <label for="usuario" class="control-label col-md-3"> Usuario: </label>
+                                <div class="col-md-6">
+                                    <input  placeholder="Ingrese usuario" class="form-control" name="usuario" value="" />
                                 </div> 
                             </div>
                             <div class="form-group">
-                                <label for="password" class="col-lg-4 control-label"> Clave: </label>
-                                <div class="col-lg-4">
+                                <label for="password" class="control-label col-sm-3"> Clave: </label>
+                                <div class="col-sm-6">
                                 <input type="password" placeholder="Ingrese contrase&ntilde;a" class="form-control" name="clave" value="" />
                                 </div> 
                             </div>
                             <div class="form-group">
-                                <label for="host" class="col-lg-4 control-label"> Host: </label>
-                                <div class="col-lg-4">
-                                <input type="text" placeholder="Ingrese host" class="form-control" required name="host" value="" />
+                                <label for="host" class="control-label col-sm-3"> Host: </label>
+                                <div class="col-sm-6">
+                                <input  placeholder="Ingrese host" class="form-control" required name="host" value="" />
                                 </div> 
                             </div> 
                             <div class="form-group">
-                                <label for="puerto" class="col-lg-4 control-label"> Puerto: </label>
-                                <div class="col-lg-4">
-                                <input type="text" placeholder="Ingrese puerto" class="form-control" required name="puerto" value="" />
+                                <label for="puerto" class="control-label col-sm-3"> Puerto: </label>
+                                <div class="col-sm-6">
+                                <input  placeholder="Ingrese puerto" class="form-control" name="puerto" value="" />
                                 </div> 
                             </div>
                             <div class="form-group">
-                                <label for="basedatos" class="col-lg-4 control-label"> Base de Datos: </label>
-                                <div class="col-lg-4">
+                                <label for="basedatos" class="control-label col-sm-3"> Base de Datos: </label>
+                                <div class="col-sm-6">
                                 <input type="text" placeholder="Ingrese nombre bd" class="form-control" required name="basedatos" value="" />
                                 </div> 
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-4 control-label"> </label>
-                                 <div class="col-lg-2">
+                                <label class="control-label col-sm-3"> </label>
+                                <div class="col-sm-6"> 
                                    <button type="submit" class="btn btn-success" >Guardar</button>
-                                </div>
-                                <div class="col-lg-4">
-                                    <button type="button" class="btn btn-danger" onclick="window.location = '<?php echo BASE_URL ?>'">Cancelar</button>
-                                
-                                </div>
+                                   <button type="button" class="btn btn-danger" onclick="window.location = '<?php echo BASE_URL ?>'">Cancelar</button>
+                                 </div>
                             </div>    
                                 
                                 
-                        </fieldset>    
+                           
                         </form>
+                        </div>
                     </div>
                 </body>
             </html>

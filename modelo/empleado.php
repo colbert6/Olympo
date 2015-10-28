@@ -1,5 +1,4 @@
 <?php
-
 class empleado extends Main{
     
     public $id_empleado;
@@ -14,7 +13,6 @@ class empleado extends Main{
     public $id_perfil;
     public $perfil;
     public $estadocivil;
-
     public function selecciona() {
         if (is_null($this->id_empleado)) {
             $this->id_empleado = 0;
@@ -48,7 +46,6 @@ class empleado extends Main{
             return $stmt->fetchall();
         }
     }
-
     public function inserta() {
         $datos = array($this->nombre, $this->apellido, $this->direccion, $this->telefono, $this->dni, $this->fechanacimiento, 
             $this->usuario, $this->clave, $this->id_perfil, $this->estadocivil);
@@ -57,7 +54,6 @@ class empleado extends Main{
         $r = null;
         return $error;
     }
-
     public function actualiza() {
         $datos = array($this->id_empleado, $this->nombre, $this->apellido, $this->direccion, $this->telefono, $this->dni, 
             $this->fechanacimiento, $this->usuario, $this->clave, $this->id_perfil, $this->estadocivil);
@@ -66,7 +62,6 @@ class empleado extends Main{
         $r = null;
         return $error;
     }
-
     public function seleccionar($usuario,$clave) {
         $datos = array($usuario,$clave);
         $r = $this->get_consulta("pa_usuario", $datos);
@@ -87,7 +82,6 @@ class empleado extends Main{
 //            die();
         }
     }
-
     public function elimina() {
         $datos = array($this->id_empleado);
         $r = $this->get_consulta("elim_empleado", $datos);
@@ -128,7 +122,5 @@ class empleado extends Main{
             return $stmt->fetchall();
         }
     }
-
 }
-
 ?>

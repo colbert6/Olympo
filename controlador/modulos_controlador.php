@@ -16,21 +16,8 @@ class modulos_controlador extends controller{
         $this->_vista->titulo = 'Lista de Modulos';
         $this->_vista->datos = $this->_modulos->selecciona();
         $this->_vista->setCss_public(array('jquery.dataTables'));
-        $this->_vista->setJs_public(array('jquery.dataTables.min'));
-        $this->_vista->setJs(array('run_table'));
+        $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');
-    }
-    
-    public function buscador(){
-        if($_POST['filtro']==0){
-            $this->_modulos->descripcion=$_POST['cadena'];
-            $this->_modulos->modulo_padre='';
-        }else{
-            $this->_modulos->descripcion='';
-            $this->_modulos->modulo_padre=$_POST['cadena'];
-        }
-        
-        echo json_encode($this->_modulos->selecciona());
     }
 
     public function nuevo() {
@@ -66,9 +53,8 @@ class modulos_controlador extends controller{
             $this->redireccionar('modulos');
         }
         
-        $this->_modulos->id_modulo = $this->filtrarInt($id);
-        
         if ($_POST['guardar'] == 1) {
+            $this->_modulos->id_modulo = $_POST['id_modulo'];
             $this->_modulos->nombre = ucwords(strtolower($_POST['nombre']));
             $this->_modulos->url = strtolower($_POST['url']);
             $this->_modulos->icono = strtoupper($_POST['icono']);
@@ -88,10 +74,12 @@ class modulos_controlador extends controller{
             $this->_modulos->actualiza();
             $this->redireccionar('modulos');
         }
+        $this->_modulos->id_modulo = $this->filtrarInt($id);
         $this->_vista->datos = $this->_modulos->selecciona_id();
         
         $this->_vista->modulos_padre = $this->_modulos->selecciona_padre(0);
         $this->_vista->titulo = 'Actualizar Modulo';
+        $this->_vista->action = BASE_URL . 'modulos/editar/'.$id;
         $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('form');
     }
@@ -100,7 +88,7 @@ class modulos_controlador extends controller{
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('modulos');
         }
-        $this->_modulos->idmodulo = $this->filtrarInt($id);
+        $this->_modulos->id_modulo = $this->filtrarInt($id);
         $this->_modulos->elimina();
         $this->redireccionar('modulos');
     }
