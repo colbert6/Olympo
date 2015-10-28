@@ -18,7 +18,7 @@
                     
         <div class="form-group">
         <label class="control-label col-sm-3" >TIPO MOVIMIENTO:</label>
-          <div class="col-sm-9"> 
+          <div class="col-sm-6"> 
            <select  class="form-control" name='id_tipo_movimiento' id='id_tipo_movimiento'>
                <option value='' >Selecciona...</option>
                <?php for($i=0;$i<count($this->datos_1);$i++){ ?> 
