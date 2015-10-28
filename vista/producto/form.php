@@ -21,7 +21,7 @@
             <label class="control-label col-sm-3" >Marca:</label>
             <div class="col-sm-9"> 
                 <select class="form-control" name='id_marca' id='id_marca' placeholder="Marca">
-                    <option value='' ></option>
+                    <option value='' >Seleccione Marca ...</option>
                     <?php for($i=0;$i<count($this->marcas);$i++){ //Aca va la lista de los modulos padres ?> 
                     <?php if( $this->datos[0]['ID_MARCA']==$this->marcas[$i]['ID_MARCA']){?>
                          <option selected value="<?php echo $this->marcas[$i]['ID_MARCA'];?>"><?php echo $this->marcas[$i]['DESCRIPCION']?></option>
@@ -36,8 +36,8 @@
         <div class="form-group">
             <label class="control-label col-sm-3" >Cat. Producto:</label>
             <div class="col-sm-9"> 
-                <select class="form-control" name='id_categoria_producto' id='id_categoria_producto' placeholder="Categoria Producto">
-                    <option value='' ></option>
+                <select class="form-control" name='id_categoria_producto' id='id_categoria_producto' >
+                    <option value='' >Seleccion Categoria de Producto ...</option>
                     <?php for($i=0;$i<count($this->cat_productos);$i++){ //Aca va la lista de los modulos padres ?> 
                     <?php if( $this->datos[0]['ID_CATEGORIA_PRODUCTO']==$this->cat_productos[$i]['ID_CATEGORIA_PRODUCTO']){?>
                          <option selected value="<?php echo $this->cat_productos[$i]['ID_CATEGORIA_PRODUCTO'];?>"><?php echo $this->cat_productos[$i]['DESCRIPCION']?></option>
@@ -61,7 +61,7 @@
             <label class="control-label col-sm-6" >Presentacion:</label>
             <div class="col-sm-6">
                 <select class="form-control" name='presentacion' id='presentacion' placeholder="Presentacion"  >
-                    <option value='' ></option>
+                    <option value='' >Seleccione Presentacion ...</option>
                     <?php for($i=0;$i<count($presentacion);$i++){ //Aca va la lista de los modulos padres ?> 
                     <?php if( $this->datos[0]['PRESENTACION']==$presentacion[$i]){?>
                          <option selected value="<?php echo $presentacion[$i];?>"><?php echo $presentacion[$i];?></option>
