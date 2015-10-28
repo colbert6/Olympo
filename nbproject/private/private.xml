@@ -15,6 +15,7 @@
         <group>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/C:/xampp/htdocs/Olympo/vista/almacen/form.php</file>
             <file>file:/C:/xampp/htdocs/Olympo/vista/informacion/index.php</file>
             <file>file:/C:/xampp/htdocs/Olympo/vista/almacen/index.php</file>
@@ -28,12 +29,17 @@
 =======
 =======
 >>>>>>> 4a28443e78ddbfe37c28512c1c4fa62115eef589
+=======
+            <file>file:/C:/xampp/htdocs/Olympo/vista/web/index.php</file>
+            <file>file:/C:/xampp/htdocs/Olympo/vista/web/css/bootstrap.css</file>
+>>>>>>> edafdbf706b88c9633521dd538493c2af12293b7
             <file>file:/C:/xampp/htdocs/Olympo/modelo/producto.php</file>
             <file>file:/C:/xampp/htdocs/Olympo/vista/producto/js/funciones_form.js</file>
             <file>file:/C:/xampp/htdocs/Olympo/controlador/producto_controlador.php</file>
             <file>file:/C:/xampp/htdocs/Olympo/vista/producto/index.php</file>
             <file>file:/C:/xampp/htdocs/Olympo/vista/producto/form.php</file>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 4a28443e78ddbfe37c28512c1c4fa62115eef589
 =======
 >>>>>>> 4a28443e78ddbfe37c28512c1c4fa62115eef589
@@ -41,6 +47,9 @@
 >>>>>>> ba1c8a6b5a5aa7a36409cd5f5d75989781e9f253
 =======
 >>>>>>> ba1c8a6b5a5aa7a36409cd5f5d75989781e9f253
+=======
+
+>>>>>>> edafdbf706b88c9633521dd538493c2af12293b7
         </group>
     </open-files>
 </project-private>
