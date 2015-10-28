@@ -45,6 +45,7 @@ class marca_controlador extends controller {
         }
         $this->_model->id_marca = $this->filtrarInt($id);
         $this->_vista->datos = $this->_model->selecciona_id();
+       
         
         $this->_vista->titulo = 'Actualizar Marca';
         $this->_vista->action = BASE_URL . 'marca/editar/'.$id;

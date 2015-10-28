@@ -1,3 +1,5 @@
+                            
+<?php     $presentacion =array('Unidad','Frasco','Barra','Sobre');     ?>
 <div class="navbar-inner">
     
     <div class="col-md-2"></div>
@@ -18,8 +20,8 @@
         <div class="form-group">
             <label class="control-label col-sm-3" >Marca:</label>
             <div class="col-sm-9"> 
-                <select class="form-control" name='id_marca' id='id_marca'>
-                    <option value='' >Seleccione Marca...</option>
+                <select class="form-control" name='id_marca' id='id_marca' placeholder="Marca">
+                    <option value='' ></option>
                     <?php for($i=0;$i<count($this->marcas);$i++){ //Aca va la lista de los modulos padres ?> 
                     <?php if( $this->datos[0]['ID_MARCA']==$this->marcas[$i]['ID_MARCA']){?>
                          <option selected value="<?php echo $this->marcas[$i]['ID_MARCA'];?>"><?php echo $this->marcas[$i]['DESCRIPCION']?></option>
@@ -34,8 +36,8 @@
         <div class="form-group">
             <label class="control-label col-sm-3" >Cat. Producto:</label>
             <div class="col-sm-9"> 
-                <select class="form-control" name='id_categoria_producto' id='id_categoria_producto'>
-                    <option value='' >Seleccione Categoria...</option>
+                <select class="form-control" name='id_categoria_producto' id='id_categoria_producto' placeholder="Categoria Producto">
+                    <option value='' ></option>
                     <?php for($i=0;$i<count($this->cat_productos);$i++){ //Aca va la lista de los modulos padres ?> 
                     <?php if( $this->datos[0]['ID_CATEGORIA_PRODUCTO']==$this->cat_productos[$i]['ID_CATEGORIA_PRODUCTO']){?>
                          <option selected value="<?php echo $this->cat_productos[$i]['ID_CATEGORIA_PRODUCTO'];?>"><?php echo $this->cat_productos[$i]['DESCRIPCION']?></option>
@@ -58,30 +60,15 @@
         <div class="form-group">
             <label class="control-label col-sm-6" >Presentacion:</label>
             <div class="col-sm-6">
-                <select class="form-control" name='presentacion' id='presentacion'>
-                    
-                    <?php switch ($this->datos[0]['PRESENTACION']){
-                            case 'Unidad':
-                                echo "<option selected value='Unidad'>Unidad</option>";
-                                break;
-                            case 'Frasco':
-                                echo "<option selected value='Frasco'>Frasco</option>";
-                                break;
-                            case 'Barra':
-                                echo "<option selected value='Barra'>Barra</option>";
-                                break;
-                            case 'Sobre':
-                                echo "<option selected value='Sobre'>Sobre</option>";
-                                break;
-                        
-                    }?>
-                    <option value='' >Seleccione Presentacion...</option>
-                    <option value='Unidad'>Unidad</option>
-                    <option value='Frasco'>Frasco</option>
-                    <option value='Barra'>Barra</option>
-                    <option value='Sobre'>Sobre</option>
-                    
-                    
+                <select class="form-control" name='presentacion' id='presentacion' placeholder="Presentacion"  >
+                    <option value='' ></option>
+                    <?php for($i=0;$i<count($presentacion);$i++){ //Aca va la lista de los modulos padres ?> 
+                    <?php if( $this->datos[0]['PRESENTACION']==$presentacion[$i]){?>
+                         <option selected value="<?php echo $presentacion[$i];?>"><?php echo $presentacion[$i];?></option>
+                    <?php }else{?>
+                         <option value="<?php echo $presentacion[$i];?>"><?php echo $presentacion[$i];?></option>
+                    <?php } ?>
+                    <?php } ?>
                 </select>
             </div>
         </div>

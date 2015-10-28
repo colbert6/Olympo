@@ -10,7 +10,7 @@
             <label class="control-label col-sm-6" >Item:</label>
             <div class="col-sm-6">
                 <input name="id_marca" id="id_marca" class="form-control"  readonly="readonly"
-                       maxlength="30" alue="<?php echo $this->datos[0]['ID_MARCA'];?>">
+                       maxlength="30" value="<?php echo $this->datos[0]['ID_MARCA'];?>">
             </div>
         </div>  
         <?php } ?>  
