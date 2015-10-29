@@ -1,7 +1,19 @@
-$(function() {    
+$(function() {   
+    $( "#fecha_nacimiento" ).datepicker({changeMonth: true,changeYear: true,dateFormat: 'yy-mm-dd'}); 
     $( "#save" ).click(function(){
         bval = true;   
-        bval = bval && $("#descripcion").required();
+        bval = bval && $("#nombre").required();
+        bval = bval && $("#apellido_paterno").required();
+        bval = bval && $("#apellido_materno").required();
+        bval = bval && $("#tipo_socio").required();
+        bval = bval && $("#dni").required();
+        bval = bval && $("#direccion").required();
+        bval = bval && $("#sexo").required();
+        bval = bval && $("#estado_civil").required();
+        bval = bval && $("#celular").required();
+        bval = bval && $("#telefono").required();
+        bval = bval && $("#fecha_nacimiento").required();
+        
         
         if (bval) 
         {
@@ -9,7 +21,23 @@ $(function() {
         }
         return false;
     }); 
-    $('#region').change(function(){
+
+    $("#dni").blur(function(){
+        if($(this).val()!='' && $(this).val().length==8){
+            $.post(url+'socio/buscador_dni','dni='+$("#dni").val(),function(datos){
+                if(datos.length>0 ){
+                    if($("#id_socio").val()==datos[0].ID_SOCIO){   
+                        
+                    }else{
+                        alert("El DNI ya se encuentra Registrado");
+                        $("#dni").focus();
+                    }
+                    
+                }
+            },'json');
+        }
+    });
+    /*$('#region').change(function(){
         $('#provincia,#distrito').empty();
 
         $.getJSON(url+'socio/get_provincias',{codigo_region:$('#region').val()},function(datos){
@@ -26,7 +54,7 @@ $(function() {
                 $("#distrito").append(new Option(datos[i].DESCRIPCION,datos[i].IDUBIGEO));
             };
         });
-    });
+    });*/
     /*$("#region").change(function(){
         if(!$("#region").val()){
             $("#provincia").html('<option>Cargando...</option>');
