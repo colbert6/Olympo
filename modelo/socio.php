@@ -4,7 +4,7 @@ class socio extends Main{
 
     public $id_socio;
     public $id_tipo_socio;
-    public $id_ubigeo;
+    public $idubigeo;
     public $dni;
     public $aliass;
     public $nombre;
@@ -72,7 +72,7 @@ class socio extends Main{
     
     public function inserta() {
         $datos = array($this->id_tipo_socio,
-                       $this->id_ubigeo,
+                       $this->idubigeo,
                        $this->dni,
                        $this->aliass,
                        $this->nombre,
@@ -100,7 +100,7 @@ class socio extends Main{
                        $this->ingresos);
 
         $r = $this->get_consulta("pa_i_socio", $datos);
-
+        print_r($r); exit;
         $error = $r[1];
         $r = null;
         return $error;

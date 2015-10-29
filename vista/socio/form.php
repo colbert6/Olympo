@@ -1,7 +1,7 @@
 <div class="navbar-inner">
   </script>
-    <div class="col-md-1"></div>
-    <div class="col-md-10" style="color:#000">
+    <div class="col-md-2"></div>
+    <div class="col-md-7" style="color:#000">
     <form  role="form" id="frm" method="post" action="<?php echo $this->action; ?>">
         <input name="guardar" id="guardar" type="hidden" value="1">
 
@@ -16,7 +16,7 @@
               </div>  
         <?php } ?> 
         <div class="row"  >
-            <div class="col-md-4">
+            <div class="col-md-12">
             <div class="form-group">
                     <label class="control-label "  for"nombre">NOMBRE:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                       <input <?php echo $bloqueo;?> name="nombre" id="nombre" class="form-control"  placeholder="Nombre(s)" autofocus
@@ -24,17 +24,17 @@
                 
                 </div>  
             </div> 
-            <div class="col-md-4">
+            <div class="col-md-12">
             <div class="form-group">
-                    <label class="control-label" for="apellido_paterno" >APELLIDO PATERNO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                    <label class="control-label" for="apellido_paterno" >APELLIDO PATERNO:  &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                       <input <?php echo $bloqueo;?> name="apellido_paterno" id="apellido_paterno" class="form-control"  placeholder="Apellido Paterno" 
                             value="<?php if(isset ($this->datos[0]['APELLIDO_PATERNO']))echo $this->datos[0]['APELLIDO_PATERNO']?>">
                     
                   </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
             <div class="form-group">
-                    <label class="control-label" for="apellido_materno" >APELLIDO MATERNO:</label>
+                    <label class="control-label" for="apellido_materno" >APELLIDO MATERNO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                 
                       <input <?php echo $bloqueo;?> name="apellido_materno" id="apellido_materno" class="form-control"  placeholder="Apellido Materno" 
                             value="<?php if(isset ($this->datos[0]['APELLIDO_MATERNO']))echo $this->datos[0]['APELLIDO_MATERNO']?>">
@@ -46,9 +46,9 @@
     
         
         <div class="row" >
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
-                        <label class="control-label" >TIPO SOCIO:</label>
+                        <label class="control-label" >TIPO SOCIO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                        <select <?php echo $bloqueo;?> class="form-control glyphicon" name='id_tipo_socio' id='padre'>
                            <option value='' >Selecciona...</option>
                            <?php for($i=0;$i<count($this->tipo_socio);$i++){ ?> 
@@ -61,16 +61,16 @@
                       </select>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
-                <label class="control-label" for="dni" >DNI:</label>
+                <label class="control-label" for="dni" >DNI: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                 
                   <input <?php echo $bloqueo;?> name="dni" id="dni" class="form-control"  placeholder="DNI" 
                         value="<?php if(isset ($this->datos[0]['DNI']))echo $this->datos[0]['DNI']?>">
         
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
             <div class="form-group">
                 <label class="control-label" for="aliass" >ALIAS:</label>
                   <input <?php echo $bloqueo;?> name="aliass" id="aliass" class="form-control"  placeholder="Alias" 
@@ -80,8 +80,8 @@
             </div>
             
         </div>
-        <div class="row" >
-            <div class="col-md-4">
+        <!--div class="row" >
+            <div class="col-md-12">
                 <div class="form-group">
                         <label class="control-label" >DEPARTAMENTO:</label>
                        <select <?php echo $bloqueo;?> class="form-control glyphicon" name='region' id='region'>
@@ -92,7 +92,7 @@
                       </select>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
                         <label class="control-label" >PROVINCIA:</label>
                        <select <?php echo $bloqueo;?> class="form-control glyphicon" name='provincia' id='provincia'>
@@ -101,7 +101,7 @@
                       </select>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
                         <label class="control-label" >DISTRITO</label>
                        <select <?php echo $bloqueo;?> class="form-control glyphicon" name='distrito' id='distrito'>
@@ -111,18 +111,18 @@
                 </div>
             </div>
 
-        </div>
+        </div-->
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label  class="control-label" for="direccion" >DIRECION:</label>
+                    <label  class="control-label" for="direccion" >DIRECION: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
                       <input <?php echo $bloqueo;?> name="direccion" id="direccion" class="form-control"  placeholder="Direccion" 
                             value="<?php if(isset ($this->datos[0]['DIRECCION'])) echo $this->datos[0]['DIRECCION']?>">
                     </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                  <div class="form-group">
                     <label class="control-label" for="sexo" >SEXO:</label>
                     
@@ -142,9 +142,9 @@
                    
                   </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label class="control-label" for="sexo" >ESTADO CIVIL:</label>
+                    <label class="control-label" for="sexo" >ESTADO CIVIL: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                   
                       <select <?php echo $bloqueo;?> class="form-control glyphicon" name='estado_civil' id='estado_civil'>
                            <option value='' >Selecciona...</option>
@@ -166,27 +166,27 @@
         </div>
         
         <div class="row" >
-            <div class="col-md-4">
+            <div class="col-md-12">
                  <div class="form-group">
                     <label class="control-label" for="email" >E-MAIL:</label>
-                    
-                      <input <?php echo $bloqueo;?>  id="email" class="form-control"  placeholder="E-mail" 
+            
+                      <input <?php echo $bloqueo;?>  id="email" class="form-control"  placeholder="E-mail"  name='email'
                             value="<?php if(isset ($this->datos[0]['EMAIL'])) echo $this->datos[0]['EMAIL']?>">
                   
                   </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label class="control-label " for="telefono" >TELEFONO:</label>
+                    <label class="control-label " for="telefono" >TELEFONO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
                       <input <?php echo $bloqueo;?> name="telefono" id="telefono" class="form-control"  placeholder="Telefono" 
                             value="<?php if(isset ($this->datos[0]['TELEFONO'])) echo $this->datos[0]['TELEFONO']?>">
                 
                   </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label class="control-label" for="celular" >CELULAR:</label>
+                    <label class="control-label" for="celular" >CELULAR: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
                       <input <?php echo $bloqueo;?>  name="celular" id="celular" class="form-control" placeholder="Celular" 
                             value="<?php if(isset ($this->datos[0]['CELULAR'])) echo $this->datos[0]['CELULAR']?>">
@@ -196,16 +196,16 @@
         </div>
 
         <div class="row" >
-            <div class="col-md-4">
+            <div class="col-md-12">
                  <div class="form-group">
-                    <label class="control-label" for="fecha_nacimiento" >FECHA NACIMIENTO:</label>
+                    <label class="control-label" for="fecha_nacimiento" >FECHA NACIMIENTO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                    
                       <input <?php echo $bloqueo;?> name="fecha_nacimiento" id="fecha_nacimiento" class="form-control"   placeholder="Fecha Nacimiento" 
                             value="<?php if(isset ($this->datos[0]['FECHA_NACIMIENTO'])) echo $this->datos[0]['FECHA_NACIMIENTO']?>">
                     
                   </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                  <div class="form-group">
                     <label class="control-label" for="ocupacion" >OCUPACION:</label>
                    
@@ -214,7 +214,7 @@
                    
                   </div>
             </div>
-            <div class="col-md-4">
+            <!--div class="col-md-12">
                 <div class="form-group">
                     <label class="control-label" for="grupo_sanguineo" >GRUPO SANGUINEO:</label>
                     
@@ -222,11 +222,11 @@
                             value="<?php if(isset ($this->datos[0]['GRUPO_SANGUINEO'])) echo $this->datos[0]['GRUPO_SANGUINEO']?>">
                    
                   </div>
-            </div>
+            </div-->
         </div>
         
-        <div class="row" >
-            <div class="col-md-4">
+        <!--div class="row" >
+            <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label " for="hobby" >HOBBY:</label>
                     
@@ -235,7 +235,7 @@
                    
                   </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label" for="nacionalidad" >NACIONALIDAD:</label>
                     
@@ -244,7 +244,7 @@
                     
                   </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label class="control-label" for="seguro_medico" >SEGURO MEDICO:</label>
 
@@ -252,9 +252,9 @@
                             value="<?php if(isset ($this->datos[0]['SEGURO_MEDICO'])) echo $this->datos[0]['SEGURO_MEDICO']?>">
                   </div>
             </div>
-        </div>
-        <div class="row" >
-            <div class="col-md-4">
+        </div-->
+        <!--div class="row" >
+            <div class="col-md-12">
                   <div class="form-group">
                     <label  class="control-label" for="observacion" >OBSERVACION:</label>
                     
@@ -263,7 +263,7 @@
                    
                   </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label class="control-label" for="antecedente_medico" >ANTECEDENTES MEDICOS:</label>
                     
@@ -273,7 +273,7 @@
                   </div>
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                <div class="form-group">
                     <label class="control-label" for="codigo_postal" >CODIGO POSTAL:</label>
                   
@@ -283,10 +283,10 @@
                   </div>
 
             </div>
-        </div>
+        </div-->
 
          <div class="row" >
-            <div class="col-md-4">
+            <!--div class="col-md-12">
                   <div class="form-group">
                 <label class="control-label" for="fax" >FAX:</label>
                
@@ -294,8 +294,8 @@
                         value="<?php if(isset ($this->datos[0]['FAX'])) echo $this->datos[0]['FAX']?>">
             
               </div>
-            </div>
-            <div class="col-md-4">
+            </div-->
+            <div class="col-md-12">
                 <div class="form-group">
                 <label class="control-label" for="numero_hijo" >NUMERO DE HIJOS:</label>
                
@@ -305,7 +305,7 @@
               </div>
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                <div class="form-group">
                 <label class="control-label" for="sector" >SECTOR:</label>
                
@@ -318,7 +318,7 @@
         </div>
 
         <div class="row" >
-            <div class="col-md-4">
+            <div class="col-md-12">
                  <div class="form-group">
                         <label class="control-label" for="grado_estudio" >GRADO DE ESTUDIO:</label>
 
@@ -328,7 +328,7 @@
                       </div>
 
             </div>
-            <div class="col-md-4">
+            <!--div class="col-md-12">
                 <div class="form-group">
                     <label class="control-label" for="ingreso" >INGRESO:</label>
                   
@@ -338,8 +338,8 @@
                   </div>
 
 
-            </div>
-            <div class="col-md-4">
+            </div-->
+            <!--div class="col-md-12">
                <div class="form-group">
                 <label class="control-label" for="sector" >SECTOR:</label>
                
@@ -348,7 +348,7 @@
 
               </div>
 
-            </div>
+            </div-->
         </div>
         
         <div class="form-group" style="margin-top: 8%"> 
