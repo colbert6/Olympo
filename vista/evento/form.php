@@ -1,18 +1,4 @@
 <div class="navbar-inner">
-     <script>
-      $(function() {
-        $( "#fecha_inicio" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: 'yy-mm-dd'
-        });
-        $( "#fecha_fin" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: 'yy-mm-dd'
-        });
-      });
-  </script>
     <div class="col-md-2"></div>
     <div class="col-md-7" style="color:#000">
     <form class="form-horizontal" role="form" id="frm" method="post" action="<?php echo $this->action; ?>">

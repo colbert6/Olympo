@@ -1,4 +1,6 @@
 $(function() {    
+    $( "#fecha_inicio" ).datepicker({changeMonth: true,changeYear: true,dateFormat: 'yy-mm-dd'});
+    $( "#fecha_fin" ).datepicker({changeMonth: true,changeYear: true,dateFormat: 'yy-mm-dd'});
     $( "#save" ).click(function(){
         bval = true;   
         bval = bval && $("#id_categoria_evento").required();
