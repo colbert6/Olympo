@@ -1,4 +1,4 @@
-
+<div class="navbar-inner">
 <?php if (isset($this->datos) && count($this->datos)) { ?>
 <div class="navbar-inner text-center">
    
