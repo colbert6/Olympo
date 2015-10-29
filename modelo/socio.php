@@ -69,6 +69,27 @@ class socio extends Main{
         }
       
     }
+
+    public function selecciona_dni() {
+        
+        $datos = array($this->dni);
+        
+        $r = $this->get_consulta("sel_dni",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
     
     public function inserta() {
         $datos = array($this->id_tipo_socio,
@@ -100,7 +121,6 @@ class socio extends Main{
                        $this->ingresos);
 
         $r = $this->get_consulta("pa_i_socio", $datos);
-        print_r($r); exit;
         $error = $r[1];
         $r = null;
         return $error;
@@ -110,7 +130,7 @@ class socio extends Main{
        
         $datos = array($this->id_socio,
                        $this->id_tipo_socio,
-                       $this->id_ubigeo,
+                       $this->idubigeo,
                        $this->dni,
                        $this->aliass,
                        $this->nombre,

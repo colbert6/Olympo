@@ -19,7 +19,7 @@
             <div class="col-md-12">
             <div class="form-group">
                     <label class="control-label "  for"nombre">NOMBRE:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
-                      <input <?php echo $bloqueo;?> name="nombre" id="nombre" class="form-control"  placeholder="Nombre(s)" autofocus
+                      <input <?php echo $bloqueo;?> onKeyPress="return soloLetras(event);" maxlength='30' name="nombre" id="nombre" class="form-control"  placeholder="Nombre(s)" autofocus
                             value="<?php if(isset ($this->datos[0]['NOMBRE']))echo $this->datos[0]['NOMBRE']?>">
                 
                 </div>  
@@ -27,7 +27,7 @@
             <div class="col-md-12">
             <div class="form-group">
                     <label class="control-label" for="apellido_paterno" >APELLIDO PATERNO:  &nbsp;&nbsp;&nbsp;&nbsp;*</label>
-                      <input <?php echo $bloqueo;?> name="apellido_paterno" id="apellido_paterno" class="form-control"  placeholder="Apellido Paterno" 
+                      <input onKeyPress="return soloLetras(event);" maxlength='30' <?php echo $bloqueo;?> name="apellido_paterno" id="apellido_paterno" class="form-control"  placeholder="Apellido Paterno" 
                             value="<?php if(isset ($this->datos[0]['APELLIDO_PATERNO']))echo $this->datos[0]['APELLIDO_PATERNO']?>">
                     
                   </div>
@@ -36,7 +36,7 @@
             <div class="form-group">
                     <label class="control-label" for="apellido_materno" >APELLIDO MATERNO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                 
-                      <input <?php echo $bloqueo;?> name="apellido_materno" id="apellido_materno" class="form-control"  placeholder="Apellido Materno" 
+                      <input  onKeyPress="return soloLetras(event);" <?php echo $bloqueo;?> maxlength='30' name="apellido_materno" id="apellido_materno" class="form-control"  placeholder="Apellido Materno" 
                             value="<?php if(isset ($this->datos[0]['APELLIDO_MATERNO']))echo $this->datos[0]['APELLIDO_MATERNO']?>">
                    
                   </div>
@@ -65,7 +65,7 @@
                 <div class="form-group">
                 <label class="control-label" for="dni" >DNI: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                 
-                  <input <?php echo $bloqueo;?> name="dni" id="dni" class="form-control"  placeholder="DNI" 
+                  <input onKeyPress="return soloNumeros(event);" maxlength='8' <?php echo $bloqueo;?> name="dni" id="dni" class="form-control"  placeholder="DNI" 
                         value="<?php if(isset ($this->datos[0]['DNI']))echo $this->datos[0]['DNI']?>">
         
               </div>
@@ -73,7 +73,7 @@
             <div class="col-md-12">
             <div class="form-group">
                 <label class="control-label" for="aliass" >ALIAS:</label>
-                  <input <?php echo $bloqueo;?> name="aliass" id="aliass" class="form-control"  placeholder="Alias" 
+                  <input maxlength='45' <?php echo $bloqueo;?> name="aliass" id="aliass" class="form-control"  placeholder="Alias" 
                         value="<?php if(isset ($this->datos[0]['ALIASS']))echo $this->datos[0]['ALIASS']?>">
         
               </div>
@@ -119,7 +119,7 @@
                     <label  class="control-label" for="direccion" >DIRECION: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
                       <input <?php echo $bloqueo;?> name="direccion" id="direccion" class="form-control"  placeholder="Direccion" 
-                            value="<?php if(isset ($this->datos[0]['DIRECCION'])) echo $this->datos[0]['DIRECCION']?>">
+                            maxlength='45' value="<?php if(isset ($this->datos[0]['DIRECCION'])) echo $this->datos[0]['DIRECCION']?>">
                     </div>
             </div>
             <div class="col-md-12">
@@ -179,7 +179,7 @@
                 <div class="form-group">
                     <label class="control-label " for="telefono" >TELEFONO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
-                      <input <?php echo $bloqueo;?> name="telefono" id="telefono" class="form-control"  placeholder="Telefono" 
+                      <input  onKeyPress="return soloNumeros(event);" maxlength='9' <?php echo $bloqueo;?> name="telefono" id="telefono" class="form-control"  placeholder="Telefono" 
                             value="<?php if(isset ($this->datos[0]['TELEFONO'])) echo $this->datos[0]['TELEFONO']?>">
                 
                   </div>
@@ -188,7 +188,7 @@
                 <div class="form-group">
                     <label class="control-label" for="celular" >CELULAR: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
-                      <input <?php echo $bloqueo;?>  name="celular" id="celular" class="form-control" placeholder="Celular" 
+                      <input  onKeyPress="return soloNumeros(event);" maxlength='9' <?php echo $bloqueo;?>  name="celular" id="celular" class="form-control" placeholder="Celular" 
                             value="<?php if(isset ($this->datos[0]['CELULAR'])) echo $this->datos[0]['CELULAR']?>">
                 
                   </div>
@@ -200,7 +200,7 @@
                  <div class="form-group">
                     <label class="control-label" for="fecha_nacimiento" >FECHA NACIMIENTO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                    
-                      <input <?php echo $bloqueo;?> name="fecha_nacimiento" id="fecha_nacimiento" class="form-control"   placeholder="Fecha Nacimiento" 
+                      <input <?php echo $bloqueo;?> readonly name="fecha_nacimiento" id="fecha_nacimiento" class="form-control"   placeholder="Fecha Nacimiento" 
                             value="<?php if(isset ($this->datos[0]['FECHA_NACIMIENTO'])) echo $this->datos[0]['FECHA_NACIMIENTO']?>">
                     
                   </div>
