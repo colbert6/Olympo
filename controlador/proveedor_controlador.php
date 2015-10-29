@@ -22,7 +22,13 @@ class proveedor_controlador extends controller {
         
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
-            $this->_model->descripcion = $_POST['descripcion'];
+            
+            $this->_model->razon_social = $_POST['razon_social'];
+            $this->_model->ruc = $_POST['ruc'];
+            $this->_model->telefono = $_POST['telefono'];
+            $this->_model->email = $_POST['email'];
+            $this->_model->direccion = $_POST['direccion'];
+            $this->_model->id_ubigeo = $_POST['id_ubigeo'];
             $datos = $this->_model->inserta();
             $this->redireccionar('proveedor');
         }
@@ -39,7 +45,13 @@ class proveedor_controlador extends controller {
 
         if ($_POST['guardar'] == 1) {
             $this->_model->id_proveedor = $_POST['id_proveedor'];
-            $this->_model->descripcion = $_POST['descripcion'];
+             $this->_model->razon_social = $_POST['razon_social'];
+            $this->_model->ruc = $_POST['ruc'];
+            $this->_model->telefono = $_POST['telefono'];
+            $this->_model->email = $_POST['email'];
+            $this->_model->direccion = $_POST['direccion'];
+            $this->_model->id_ubigeo = $_POST['id_ubigeo'];
+            
             $this->_model->actualiza();
             $this->redireccionar('proveedor');
         }

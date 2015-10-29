@@ -2,7 +2,10 @@ $(function() {
       
     $( "#save" ).click(function(){
         bval = true;   
-        bval = bval && $("#descripcion").required();
+        bval = bval && $("#id_proveedor").required();
+        bval = bval && $("#razon_social").required();
+        bval = bval && $("#ruc").required();
+        bval = bval && $("#id_ubigeo").required();
         
         if (bval) 
         {
