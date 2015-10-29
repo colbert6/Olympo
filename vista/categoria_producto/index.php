@@ -1,4 +1,4 @@
- 
+<div class="navbar-inner"> 
 <?php if (isset($this->datos) && count($this->datos)) { ?>
     
     <table id="table" class="display" cellspacing="0" width="100%">

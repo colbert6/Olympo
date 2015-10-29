@@ -2,11 +2,7 @@
 
 class web_Controlador extends controller {
     
-    private $_web_servicios;
-    private $_web_img_servicios;
-    private $_web_categoria_productos;
-    private $_web_productos;
-    private $_datos_olympo;
+    private $_model;
     
     public function __construct() {
         
@@ -15,6 +11,7 @@ class web_Controlador extends controller {
         }
         
         parent::__construct();
+        $this->_model = $this->cargar_modelo('informacion');
       /*  $this->_web_servicios = $this->loadModel('servicio');
         $this->_web_img_servicios = $this->loadModel('imagen_servicio');
         $this->_web_categoria_productos =  $this->loadModel('cat_producto');
@@ -26,13 +23,14 @@ class web_Controlador extends controller {
     
     public function index() {
         $this->_vista->renderiza_web('index',false,true);
+        
     }
     
     public function inicio(){
         $this->_vista->renderiza_web('inicio','inicio',true);
     }
     public function nosotros(){
-        
+        $this->_vista->datos = $this->_model->selecciona();
         $this->_vista->renderiza_web('nosotros','nosotros',false);
     }
     public function productos($categoria=false,$id=false){

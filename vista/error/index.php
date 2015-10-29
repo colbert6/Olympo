@@ -1,3 +1,4 @@
+<div class="navbar-inner">
 <table width="60%">
     <tr>
         <td>
