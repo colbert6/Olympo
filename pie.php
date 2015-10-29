@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col-md-12">
             <!-- Copyright info -->
-            <p class="copy">Copyright &copy; 2014 | <a href="javascript:">Olympo Ginevra & Company Fitness</a> </p>
+            <p class="copy">Copyright &copy; 2015 | <a href="javascript:">Olympo Ginevra & Company Fitness</a> </p>
       </div>
     </div>
   </div>

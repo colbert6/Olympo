@@ -1,6 +1,6 @@
 <?php
 
-class detcomprainsumo extends Main{
+class compra_producto extends Main{
     
     public $id_compra;
     public $id_insumo;
