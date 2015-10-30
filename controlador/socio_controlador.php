@@ -68,6 +68,7 @@ class socio_controlador extends controller {
         $this->_vista->titulo = 'Registrar socio';
         $this->_vista->action = BASE_URL . 'socio/nuevo';
         $this->_vista->tipo_socio = $this->_tipo_socio->selecciona();
+        $this->_vista->regiones = $this->_ubigeo->selecciona_departamento();
         $this->_vista->setCss_public(array('jquery-ui.custom'));
         $this->_vista->setJs_public(array('jquery-ui.min'));
         $this->_vista->setJs(array('funciones_form'));
@@ -138,7 +139,9 @@ class socio_controlador extends controller {
     public function get_provincias() {
 
         $this->_ubigeo->codigo_region = $_REQUEST['codigo_region'];
-        echo json_encode($this->_ubigeo->selecciona_provincia());
+        #echo '<pre>';print_r($this->_ubigeo->selecciona_provincia());exit;
+        $data = $this->_ubigeo->selecciona_provincia();
+        echo json_encode($data);
     }
 
     public function get_ciudades() {

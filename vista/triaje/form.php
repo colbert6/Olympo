@@ -33,7 +33,7 @@
         <div class="row" >
           <div class="col-md-8">
              <div class="form-group">
-                <input name="id_triaje[]" id="id_triaje" type="text" value="<?php 
+                <input name="id_triaje[]" id="id_triaje" type="hidden" value="<?php 
                     if(isset($this->utriaje)){
                         for ($j=0; $j<count($this->utriaje) ; $j++) { 
                           if($j==$i){
@@ -50,7 +50,7 @@
 
 
                 ?>">
-                <input name="id_concepto_triaje[]" id="id_concepto_triaje" type="text" value="<?php echo $this->concepto_triaje[$i]["ID_CONCEPTO_TRIAJE"];?>">
+                <input name="id_concepto_triaje[]" id="id_concepto_triaje" type="hidden" value="<?php echo $this->concepto_triaje[$i]["ID_CONCEPTO_TRIAJE"];?>">
                 <label class="control-label" ><?php echo $this->concepto_triaje[$i]['DESCRIPCION']?>:</label>
                   <input  name="valor[]" id="valor" class="form-control" 
                         value="<?php 

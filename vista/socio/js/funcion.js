@@ -3,8 +3,18 @@ $(document).ready(function(){
 
 });
 
+function hoy(){
+    var d = new Date();
+    var month = d.getMonth()+1;
+    var day = d.getDate();
+    var output = d.getFullYear() + '-' +
+        (month<10 ? '0' : '') + month + '-' +
+        (day<10 ? '0' : '') + day;
+    return output;
+}
 function ver(id){
-
+    
+    
     $.post(url+'socio/buscador','id='+id,function(datos){
         socio = datos[0]["NOMBRE"]+" "+datos[0]["APELLIDO_PATERNO"]+" "+datos[0]["APELLIDO_MATERNO"];
         titulo = "<strong>SOCIO</strong>: "+socio.toUpperCase();
@@ -87,9 +97,13 @@ function ver(id){
                     //alert(utriaje.length);
                     triaje="<br>";
                     triaje+="<div class='btn-group btn-group-justified' style='width:60%; margin:0 auto;'>";
-                    triaje+=" <a href='"+url+"triaje/editar/"+id+"' class='btn btn-danger'>Editar Triaje</a>";
-                    triaje+=" <a href='"+url+"triaje/nuevo/"+id+"' class='btn btn-warning'>Nuevo Triaje</a>";
-                    triaje+=" <a href='#' class='btn btn-success'>Ver Historial</a>";
+                    triaje+=" <a href='"+url+"triaje/editar_ultimo/"+id+"' class='btn btn-danger'>Editar Triaje</a>";
+                    if (Date.parse(hoy())==Date.parse(utriaje[0]["FECHA"])){
+                        triaje+="";
+                    }else{
+                        triaje+=" <a href='"+url+"triaje/nuevo/"+id+"' class='btn btn-warning'>Nuevo Triaje</a>";    
+                    }
+                    triaje+=" <a href='"+url+"triaje/historial/"+id+"' class='btn btn-success'>Ver Historial</a>";
                     triaje+="</div>";
                     triaje+='<br>';
                     triaje+='<table class="table table-striped table-bordered table-hover sortable">';
@@ -110,6 +124,7 @@ function ver(id){
                     triaje+='</table>';
                     //alert(triaje);
                     $("#triaje").html(triaje);
+                    
 
                 },'json');
             
