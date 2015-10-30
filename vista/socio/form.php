@@ -299,7 +299,7 @@
                 <div class="form-group">
                 <label class="control-label" for="numero_hijo" >NUMERO DE HIJOS:</label>
                
-                  <input <?php echo $bloqueo;?> name="numero_hijo" id="numero_hijo" class="form-control"   placeholder="Numero de Hijos" 
+                  <input onKeyPress="return soloNumeros(event);" maxlength='9' <?php echo $bloqueo;?> name="numero_hijo" id="numero_hijo" class="form-control"   placeholder="Numero de Hijos" 
                         value="<?php if(isset ($this->datos[0]['NUMERO_HIJO'])) echo $this->datos[0]['NUMERO_HIJO']?>">
             
               </div>
