@@ -5,7 +5,7 @@ class compra_controlador extends controller {
     private $_compra;
     private $_almacen;
     private $_compra_producto;
-    private $_cuota_compra;
+    private $_cronograma_pago;
     private $_proveedor;
     private $_param;
 
@@ -18,7 +18,7 @@ class compra_controlador extends controller {
         $this->_almacen = $this->cargar_modelo('almacen');
         $this->_proveedor = $this->cargar_modelo('proveedor');
         $this->_compra_producto = $this->cargar_modelo('compra_producto');
-        $this->_cuota_compra = $this->cargar_modelo('amortizacion_compra');
+        $this->_cronograma_pago = $this->cargar_modelo('cronograma_pago');
         $this->_param = $this->cargar_modelo('param');
     }
 
@@ -62,7 +62,6 @@ class compra_controlador extends controller {
         
         
         if ($_POST['guardar'] == 1) {
-            print_r($_POST);exit;
 //            echo '<pre>';print_r($_POST);exit;
             $this->_cuota_compra->id_proveedor = $_POST['id_proveedor'];
             $this->_cuota_compra->id_empleado = session::get('id_empleado');
@@ -106,21 +105,23 @@ class compra_controlador extends controller {
                 }
                 $fecha_temp = date("Y-m-d", strtotime("$fecha_compra +$intervalo_dias day"));
                 for($i=1;$i<=$c;$i++){
-                    $this->_cronogpago->id_cuota_pago=$dato_compra[0]['INS_COMPRA'];
-                    $this->_cronogpago->fecha=$fecha_temp;
-                    $this->_cronogpago->monto=$cuota[$i];
-                    $this->_cronogpago->nrocuota=$i;
-                    $this->_cronogpago->inserta();
+                    $this->_cronograma_pago->id_compra=$dato_compra[0]['MAX_COMPRA'];
+                    $this->_cronograma_pago->fecha_venc=$fecha_temp;
+                    $this->_cronograma_pago->num_cuota=$i;
+                    $this->_cronograma_pago->monto_cuota=$cuota[$i];
+                    $this->_cronograma_pago->inserta();
                     $fecha_temp = date("Y-m-d", strtotime("$fecha_temp +$intervalo_dias day"));
                 }
                 
                 
             }else{
-                $this->_cronogpago->id_compra = $dato_compra[0]['MAX_COMPRA'];
-                $this->_cronogpago->fecha = $_POST['fechacompra'];
-                $this->_cronogpago->monto = $_POST['total'];
-                $this->_cronogpago->nrocuota = 1;
-                $this->_cronogpago->inserta();
+                                
+                $this->_cronograma_pago->id_compra=$dato_compra[0]['MAX_COMPRA'];
+                $this->_cronograma_pago->fecha_venc=$_POST['fechacompra'];
+                $this->_cronograma_pago->monto_cuota=$_POST['total'];
+                $this->_cronograma_pago->num_cuota=1;
+          
+                $this->_cronograma_pago->inserta();
             }
             $this->redireccionar('compra');
         }
