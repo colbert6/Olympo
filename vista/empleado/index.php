@@ -1,6 +1,7 @@
+<div class="navbar-inner">
 <?php if (isset($this->datos) && count($this->datos)) { ?>
-<div class="navbar-inner text-center"
-    <div id="grilla">
+<div class="navbar-inner text-center">
+    
     <table id="table" class="display">
         <thead>
         <tr>
@@ -29,12 +30,13 @@
         <?php } ?>
         </tbody>
     </table>
-    <div class="btn-group">
+    </div>
+    
+    <div class="navbar-inner">
     <a href="<?php echo BASE_URL?>empleado/nuevo" class="btn btn-primary">Nuevo</a>
     </div>
-    </div>
     <?php } else { ?>
-      <div class="btn-group">
+      <div class="navbar-inner">
         <p>NO SE ENCONTRARON DATOS</p>
         <a href="<?php echo BASE_URL?>empleado/nuevo" class="btn btn-primary">Nuevo</a>
       </div>
@@ -46,17 +48,22 @@
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel"></h3>
+            <h3 id="titulo"></h3>
         </div>
         <div class="modal-body text-justify">
-            <div id="bodymodal">
-                <div class="text-center">
-                    <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Datos</a></li>
+                    
+                </ul>
+                <div class="tab-content" style="margin-left:50px;margin-right:50px; ">
+                    <div id="home" class="tab-pane fade in active">
+                      
+                    </div>
                 </div>
-            </div>
+                
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Ok</button>
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
         </div>
         </div>
         </div>

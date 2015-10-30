@@ -52,6 +52,25 @@ class empleado extends Main{
     public function selecciona_id() {
         $datos = array($this->id_empleado);
         
+        $r = $this->get_consulta("pa_m3_empleado",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
+    public function selecciona_id_e() {
+        $datos = array($this->id_empleado);
+        
         $r = $this->get_consulta("pa_m2_empleado",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
@@ -69,6 +88,27 @@ class empleado extends Main{
       
     }
     
+    public function selecciona_dni() {
+        
+        $datos = array($this->dni);
+        
+        $r = $this->get_consulta("sel_dni_empleado",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
+   
     public function inserta() {
         
         $datos = array($this->id_categoria_empleado,$this->nombre, $this->apellido_paterno,$this->apellido_materno, $this->dni, 
@@ -84,12 +124,12 @@ class empleado extends Main{
 
     public function actualiza() {
        
-        $datos = array($this->id_categoria_empleado,$this->nombre, $this->apellido_paterno,$this->apellido_materno, $this->dni, 
+        $datos = array($this->id_empleado,$this->id_categoria_empleado,$this->nombre, $this->apellido_paterno,$this->apellido_materno, $this->dni, 
             $this->email, $this->telefono,$this->celular,$this->sexo,   $this->direccion, $this->fecha_nacimiento,$this->estado_civil,$this->grupo_sanguineo,  
             $this->hobby,$this->aliass,$this->nacionalidad,$this->seguro_medico,$this->observacion,
             $this->antecedente_medico,$this->codigo_postal,$this->numero_hijo, $this->sector,
             $this->grado_estudio,$this->tipo_vivienda,$this->anio_contratacion, $this->usuario,$this->clave,$this->id_perfil_usuario);
-        
+        //print_r($datos);exit;
         $r = $this->get_consulta("pa_u_empleado", $datos);
         $error = $r[1];
         $r = null;
