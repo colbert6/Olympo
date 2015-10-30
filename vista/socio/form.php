@@ -80,8 +80,8 @@
             </div>
             
         </div>
-        <!--div class="row" >
-            <div class="col-md-12">
+        <div class="row" >
+            <div class="col-md-4">
                 <div class="form-group">
                         <label class="control-label" >DEPARTAMENTO:</label>
                        <select <?php echo $bloqueo;?> class="form-control glyphicon" name='region' id='region'>
@@ -92,7 +92,7 @@
                       </select>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
                         <label class="control-label" >PROVINCIA:</label>
                        <select <?php echo $bloqueo;?> class="form-control glyphicon" name='provincia' id='provincia'>
@@ -101,7 +101,7 @@
                       </select>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
                         <label class="control-label" >DISTRITO</label>
                        <select <?php echo $bloqueo;?> class="form-control glyphicon" name='distrito' id='distrito'>
@@ -111,7 +111,7 @@
                 </div>
             </div>
 
-        </div-->
+        </div>
 
         <div class="row">
             <div class="col-md-12">

@@ -37,24 +37,24 @@ $(document).ready(function() {
             },'json');
         }
     });
-    /*$('#region').change(function(){
+    $('#region').change(function(){
         $('#provincia,#distrito').empty();
 
-        $.getJSON(url+'socio/get_provincias',{codigo_region:$('#region').val()},function(datos){
-            for (var i = 0; i < 4; i++) {
-                $("#provincia").append(new Option(datos[i].DESCRIPCION,datos[i].CODIGO_PROVINCIA));
-            };
-            alert( $('#region').val());
-        });
+        $.get(url+'socio/get_provincias',{codigo_region:$('#region').val()},function(response){
+            console.log(response);
+            for (var i = 0; i < response.length; i++) {
+                $("#provincia").append(new Option(response[i].DESCRIPCION,response[i].CODIGO_PROVINCIA));
+            }
+        },'json');
     });
     $('#provincia').change(function(){
         $('#distrito').empty();
-        $.getJSON(url+'socio/get_ciudades',{codigo_region:$('#region option:selected').val(),codigo_provincia:$('#provincia option:selected').val()},function(datos){
+        $.get(url+'socio/get_ciudades',{codigo_region:$('#region option:selected').val(),codigo_provincia:$('#provincia option:selected').val()},function(datos){
             for (var i = 0; i < datos.length; i++) {
                 $("#distrito").append(new Option(datos[i].DESCRIPCION,datos[i].IDUBIGEO));
             };
-        });
-    });*/
+        },'json');
+    });
     /*$("#region").change(function(){
         if(!$("#region").val()){
             $("#provincia").html('<option>Cargando...</option>');
