@@ -5,6 +5,8 @@ class socio_controlador extends controller {
     private $_socio;
     private $_tipo_socio;
     private $_ubigeo;
+    private $_triaje;
+    private $_concepto_triaje;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -14,11 +16,14 @@ class socio_controlador extends controller {
         $this->_socio = $this->cargar_modelo('socio');
         $this->_tipo_socio = $this->cargar_modelo('tipo_socio');
         $this->_ubigeo = $this->cargar_modelo('ubigeo');
+        $this->_triaje = $this->cargar_modelo('triaje');
+        $this->_concepto_triaje = $this->cargar_modelo('concepto_triaje');
     }
 
     public function index() {
         $this->_vista->titulo = 'Lista de Socios';
         $this->_vista->datos = $this->_socio->selecciona();
+        $this->_vista->setJs(array('funcion'));
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');
@@ -141,12 +146,31 @@ class socio_controlador extends controller {
         $this->_ubigeo->codigo_provincia = $_REQUEST ['codigo_provincia'];
         echo json_encode($this->_ubigeo->selecciona_distrito());
     }
-     public function buscador_dni(){
-        $this->_socio->dni=$_POST['dni'];
-        $socio = $this->_socio->selecciona_dni();
+     public function buscador(){
+        if(isset($_POST['dni'])){
+            $this->_socio->dni=$_POST['dni'];
+            $socio = $this->_socio->selecciona_dni();
+            
+        }else if(isset($_REQUEST['id'])){
+            $this->_socio->id_socio=$_REQUEST['id'];
+            $socio = $this->_socio->selecciona_id();
+        }
         echo json_encode($socio);
     }
-
+    public function extraerTriaje(){
+        $this->_triaje->id_socio=$_POST['id'];
+        $datos = $this->_triaje->triaje_x_socio();
+        echo json_encode($datos);
+    }
+    public function ultimoTriaje(){
+        $this->_triaje->id_socio=$_POST['id'];
+        $datos = $this->_triaje->ultimo_triaje();
+        echo json_encode($datos);
+    }
+    public function conceptoTriaje(){
+        $datos = $this->_concepto_triaje->selecciona();
+        echo json_encode($datos);
+    }
 }
 
 ?>

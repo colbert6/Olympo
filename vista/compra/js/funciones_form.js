@@ -143,7 +143,7 @@ $(function() {
         bval = bval && $("#precio").required();
 
         if (bval) {
-            if ($(".id_prod[value=" + $("#id_producto").val() + "]").length) {
+            if ($(".id_prod[value=" + $("#id_producto").val() + "]").length && $(".id_alm[value=" + $("#id_almacen").val() + "]").length) {
                 bootbox.alert("Este insumo ya fue agregado");
                 return false;
             }
@@ -152,7 +152,7 @@ $(function() {
             html += '   <input type="hidden" name="id_producto[]" class="id_prod" value="' + $("#id_producto").val() + '" />' + $("#producto").val();
             html += '</td>';
             html += '<td>';
-            html += '   <input type="hidden" name="id_almacen[]" value="' + $("#id_almacen").val() + '" />' + $("#almacen").val();
+            html += '   <input type="hidden" name="id_almacen[]" class="id_alm" value="' + $("#id_almacen").val() + '" />' + $("#almacen").val();
             html += '</td>';
             html += '<td>';
             html += '   <input type="hidden" name="cantidad[]" value="' + $("#cantidad").val() + '" />' + $("#cantidad").val();
@@ -289,7 +289,6 @@ function buscarInsumo() {
                 '<th>Presentacion</th>'+
                 '<th>Categoria</th>'+
                 '<th>Marca</th>'+
-                '<th>Stock</th>'+
                 '<th>Acciones</th>'+
                 '</tr>' +
                 '</thead>' +
@@ -300,9 +299,8 @@ function buscarInsumo() {
             HTML = HTML + '<td>'+(i+1)+'</td>';
             HTML = HTML + '<td>'+datos[i].NOMBRE+'</td>';
             HTML = HTML + '<td>'+datos[i].PRESENTACION+'</td>';
-            HTML = HTML + '<td>'+datos[i].CATEGORIA+'</td>';
-            HTML = HTML + '<td>'+datos[i].MARCA+'</td>';
-            HTML = HTML + '<td>'+datos[i].STOCK_ALMACEN+'</td>';
+            HTML = HTML + '<td>'+datos[i].DESCRIPCION_CAPR+'</td>';
+            HTML = HTML + '<td>'+datos[i].DESCRIPCION_MAR+'</td>';
             var id_producto = datos[i].ID_PRODUCTO;
             var id_almacen =$("#sel_almacen").val();
             var nombre = datos[i].NOMBRE;

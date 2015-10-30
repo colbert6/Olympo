@@ -18,7 +18,7 @@ class producto_controlador extends controller {
     
     public function buscador(){
         $this->_model->id_almacen = $_POST['id_almacen'];
-        echo json_encode($this->_model->selecciona_almacen());
+        echo json_encode($this->_model->selecciona());
     }
 
     public function index() {

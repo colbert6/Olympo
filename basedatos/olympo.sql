@@ -97,6 +97,7 @@ delete from concepto_movimiento
 where id_concepto_movimiento=paid_concepto_movimiento;
 end$$
 
+
 DROP PROCEDURE IF EXISTS `pa_d_cotr`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_d_cotr`(
 paid_concepto_triaje int
@@ -315,6 +316,7 @@ insert into categoria_producto (id_categoria_producto,descripcion,estado)
 values
 (_nuevo,padescripcion,'1') ;
 end$$
+
 
 DROP PROCEDURE IF EXISTS `pa_i_como`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_i_como`(
@@ -579,6 +581,29 @@ end if;
 insert into proveedor(id_proveedor,razon_social,ruc,telefono,email,direccion,id_ubigeo) values
 (_nuevo,parazon_social,paruc,patelefono,paemail,padireccion,paid_ubigeo) ;
 end$$
+DROP PROCEDURE IF EXISTS `pa_i_socio`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_i_socio`(IN `paid_tipo_socio` INT, IN `paid_ubigeo` INT, IN `padni` CHAR(8), IN `paaliass` VARCHAR(50), IN `panombre` VARCHAR(30), IN `paapellido_paterno` VARCHAR(30), IN `paapellido_materno` VARCHAR(30), IN `paemail` VARCHAR(50), IN `patelefono` VARCHAR(15), IN `pacelular` VARCHAR(15), IN `padireccion` VARCHAR(50), IN `pafecha_nacimiento` DATE, IN `pasexo` CHAR(1), IN `paestado_civil` VARCHAR(20), IN `paocupacion` VARCHAR(50), IN `pagrupo_sanguineo` VARCHAR(10), IN `pahobby` VARCHAR(30), IN `panacionalidad` VARCHAR(30), IN `paseguro_medico` VARCHAR(30), IN `paobservacion` VARCHAR(250), IN `paantecedente_medico` VARCHAR(100), IN `pacodigo_postal` VARCHAR(10), IN `pafax` VARCHAR(20), IN `panumero_hijo` INT, IN `pasector` VARCHAR(30), IN `pagrado_estudio` VARCHAR(30), IN `paingresos` VARCHAR(30))
+begin
+declare  _actual int;
+declare _nuevo int ;
+set _actual=(select max(id_socio) from socio);
+set _nuevo =(_actual+1);
+if (_nuevo IS NULL or _nuevo<1) then
+	set _nuevo =1;
+end if;
+INSERT INTO `socio`(`id_socio`, `id_tipo_socio`, `idubigeo`, `dni`, `aliass`, `nombre`, 
+	`apellido_paterno`, `apellido_materno`, `email`, `telefono`, `celular`, `direccion`, 
+	`fecha_nacimiento`, `sexo`, `estado_civil`, `ocupacion`, `estado`, `grupo_sanguineo`, 
+	`hobby`, `nacionalidad`, `seguro_medico`, `observacion`, `antecedente_medico`, 
+	`codigo_postal`, `fax`, `numero_hijo`, `sector`, `grado_estudio`, 
+	`ingresos`)
+VALUES (_nuevo, paid_tipo_socio,paid_ubigeo,padni,paaliass,panombre,paapellido_paterno,
+	 paapellido_materno, paemail ,patelefono ,pacelular,padireccion,pafecha_nacimiento,
+	 pasexo ,paestado_civil ,paocupacion ,'1',pagrupo_sanguineo ,pahobby ,panacionalidad ,
+	paseguro_medico, paobservacion ,paantecedente_medico ,pacodigo_postal ,pafax ,
+	panumero_hijo ,pasector ,pagrado_estudio ,paingresos);
+
+end$$
 
 DROP PROCEDURE IF EXISTS `pa_i_time`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_i_time`(
@@ -632,6 +657,29 @@ begin
 		`celular`=pacelular,`mision`=pamision,`vision`=pavision,`historia`=pahistoria WHERE id_datos_empresa=1;
 	END IF;
 
+end$$
+DROP PROCEDURE IF EXISTS `pa_i_triaje`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_i_triaje`(
+   paid_socio int(11),
+   paid_concepto_triaje int(11),
+   paunidad_medida varchar(10),
+   pavalor float,
+   pafecha date
+)
+begin
+
+declare  _actual int;
+declare _nuevo int ;
+set _actual=(select max(id_triaje) from triaje);
+set _nuevo =(_actual+1);
+
+if (_nuevo IS NULL or _nuevo<1) then
+	set _nuevo =1;
+end if;
+
+insert into triaje(id_triaje,id_socio,id_concepto_triaje,unidad_medida,valor,fecha) 
+values
+(_nuevo,paid_socio,paid_concepto_triaje,paunidad_medida,pavalor,pafecha) ;
 end$$
 
 DROP PROCEDURE IF EXISTS `pa_i_vigencia`$$
@@ -1004,6 +1052,8 @@ SELECT c.*, p.razon_social as 'RAZON_SOCIAL', mt.descripcion as 'MODALIDAD_TRANS
 
 end$$
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 DROP PROCEDURE IF EXISTS `pa_m2_cotr`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_m2_cotr`(
 paid_concepto_triaje int
@@ -1107,6 +1157,49 @@ begin
 SELECT `id_servicio`, `id_ambiente`, `nombre`, `descripcion`, `estado` 
 FROM `servicio`
 where (id_servicio=paid_servicio) and estado='1';
+end$$
+
+DROP PROCEDURE IF EXISTS `pa_m2_socio`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_m2_socio`(IN `paid_socio` INT)
+begin
+select 
+  s.id_socio, 
+  pu.id_perfil_usuario,
+  pu.descripcion as 'perfil',
+  ts.descripcion as 'tipo_socio',
+  ts.id_tipo_socio,
+  u.idubigeo,
+  s.dni,
+  s.aliass,
+  s.nombre,
+  s.apellido_paterno,
+  s.apellido_materno,
+  s.email,
+  s.telefono,
+  s.celular,
+  s.direccion,
+  s.fecha_nacimiento,
+  s.sexo,
+  s.estado_civil,
+  s.ocupacion,
+  s.estado,
+  s.grupo_sanguineo,
+  s.hobby,
+  s.nacionalidad,
+  s.seguro_medico,
+  s.observacion,
+  s.antecedente_medico,
+  s.codigo_postal,
+  s.fax,
+  s.numero_hijo,
+  s.sector,
+  s.grado_estudio,
+  s.ingresos 
+from socio as s 
+inner join tipo_socio as ts on ts.id_tipo_socio=s.id_tipo_socio
+inner join perfil_usuario as pu on pu.id_perfil_usuario=s.id_perfil_usuario
+inner join ubigeos as u on u.idubigeo=s.idubigeo
+where ( s.id_socio=paid_socio) and s.estado='1';
 end$$
 
 DROP PROCEDURE IF EXISTS `pa_m2_time`$$
@@ -1258,6 +1351,7 @@ update categoria_producto set descripcion=padescripcion
 where id_categoria_producto=paid_categoria_producto;
 end$$
 
+<<<<<<< HEAD
 DROP PROCEDURE IF EXISTS `pa_u_como`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_u_como`(
   paid_concepto_movimiento int(11),
@@ -1414,6 +1508,71 @@ direccion=padireccion,id_ubigeo=paid_ubigeo
 where id_proveedor=paid_proveedor;
 end$$
 
+DROP PROCEDURE IF EXISTS `pa_u_socio`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_u_socio`(
+paid_socio int,
+paid_tipo_socio int,
+paid_ubigeo int,
+padni char(8),
+paaliass varchar(50),
+panombre varchar(30),
+paapellido_paterno varchar(30),
+paapellido_materno varchar (30),
+paemail varchar(50),
+patelefono varchar(15),
+pacelular varchar(15),
+padireccion varchar(50),
+pafecha_nacimiento date,
+pasexo char(1),
+paestado_civil varchar(20),
+paocupacion varchar(50),
+pagrupo_sanguineo varchar(10),
+pahobby varchar(30),
+panacionalidad varchar(30),
+paseguro_medico varchar(30),
+paobservacion varchar(250),
+paantecedente_medico varchar(100),
+pacodigo_postal varchar(10),
+pafax varchar(20),
+panumero_hijo int,
+pasector varchar(30),
+pagrado_estudio varchar(30),
+paingresos varchar(30)
+)
+begin
+UPDATE `socio` 
+SET 	`id_socio`=paid_socio ,
+	`id_tipo_socio`=paid_tipo_socio,
+	`idubigeo`=paid_ubigeo ,
+	`dni`=padni ,
+	`aliass`=paaliass,
+	`nombre`=panombre,
+	`apellido_paterno`=paapellido_paterno,
+	`apellido_materno`=paapellido_materno,
+	`email`=paemail,
+	`telefono`=patelefono,
+	`celular`=pacelular,
+	`direccion`=padireccion,
+	`fecha_nacimiento`=pafecha_nacimiento,
+	`sexo`= pasexo,
+	`estado_civil`=paestado_civil,
+	`ocupacion`=paocupacion,
+	`grupo_sanguineo`=pagrupo_sanguineo,
+	`hobby`=pahobby,
+	`nacionalidad`=panacionalidad,
+	`seguro_medico`=paseguro_medico,
+	`observacion`=paobservacion,
+	`antecedente_medico`=paantecedente_medico,
+	`codigo_postal`=pacodigo_postal,
+	`fax`=pafax,
+	`numero_hijo`=panumero_hijo,
+	`sector`=pasector,
+	`grado_estudio`=pagrado_estudio,
+	`ingresos`=paingresos
+	
+where `id_socio`=paid_socio ;
+end$$
+
 DROP PROCEDURE IF EXISTS `pa_u_time`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_u_time`(
   paid_tipo_membresia int(11),
@@ -1433,6 +1592,22 @@ padescripcion varchar(30)
 begin
 update tipo_socio set descripcion=padescripcion
 where id_tipo_socio=paid_tipo_socio ;
+end$$
+
+
+DROP PROCEDURE IF EXISTS `pa_u_triaje`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_u_triaje`(
+   paid_triaje int(11) ,
+   paid_socio int(11),
+   paid_concepto_triaje int(11),
+   paunidad_medida varchar(10),
+   pavalor float,
+   pafecha date
+)
+begin
+update triaje set id_socio=paid_socio,id_concepto_triaje=paid_concepto_triaje,
+unidad_medida=paunidad_medida,valor=pavalor,fecha=pafecha
+where id_triaje=paid_triaje ;
 end$$
 
 DROP PROCEDURE IF EXISTS `pa_u_vigencia`$$
@@ -1473,6 +1648,24 @@ where
 
 end$$
 
+
+DROP PROCEDURE IF EXISTS `sel_dni`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sel_dni`(
+padni char(8)
+
+)
+begin
+SELECT `id_socio`, `id_tipo_socio`, `idubigeo`, `dni`, `aliass`,
+	 `nombre`, `apellido_paterno`, `apellido_materno`, `email`,
+	 `telefono`, `celular`, `direccion`, `fecha_nacimiento`, `sexo`,
+	 `estado_civil`, `ocupacion`, `estado`, `grupo_sanguineo`, `hobby`,
+	 `nacionalidad`, `seguro_medico`, `observacion`, `antecedente_medico`,
+	 `codigo_postal`, `fax`, `numero_hijo`, `sector`, `grado_estudio`,
+	 `ingresos`
+FROM `socio`
+where (dni=padni) and estado='1';
+end$$
+
 DROP PROCEDURE IF EXISTS `sel_provincia`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sel_provincia`(
    pacod_region varchar(5)
@@ -1487,6 +1680,44 @@ where
 
 end$$
 
+
+DROP PROCEDURE IF EXISTS `triaje_socio`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `triaje_socio`(
+   paid_socio int(11)
+)
+begin
+select t.id_triaje,s.nombre,s.apellido_paterno,
+       s.apellido_materno,ct.descripcion,t.unidad_medida,t.valor,t.fecha
+
+from triaje as t
+inner join socio as s on s.id_socio=t.id_socio
+inner join concepto_triaje as ct on ct.id_concepto_triaje=t.id_concepto_triaje
+
+where (t.id_socio=paid_socio);
+
+end$$
+
+DROP PROCEDURE IF EXISTS `ultimo_triaje`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ultimo_triaje`(
+   paid_socio int(11)
+)
+begin
+declare  _ultimo date;
+
+set _ultimo  =(select max(fecha) from triaje where id_socio = paid_socio);
+
+select t.id_triaje,s.nombre,s.apellido_paterno,
+       s.apellido_materno,ct.id_concepto_triaje as 'id_concepto_triaje',ct.descripcion as 'concepto_triaje',t.unidad_medida,t.valor,t.fecha
+
+from triaje as t
+inner join socio as s on s.id_socio=t.id_socio
+inner join concepto_triaje as ct on ct.id_concepto_triaje=t.id_concepto_triaje
+
+where (t.id_socio=paid_socio and t.fecha=_ultimo);
+
+end$$
+
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -1516,6 +1747,7 @@ CREATE TABLE IF NOT EXISTS `almacen` (
   `estado` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `almacen`
 --
@@ -1547,6 +1779,8 @@ INSERT INTO `almacen_producto` (`id_almacen`, `id_producto`, `stock`) VALUES
 (1, 2, 10),
 (2, 1, 5);
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1560,6 +1794,7 @@ CREATE TABLE IF NOT EXISTS `ambiente` (
   `estado` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `ambiente`
 --
@@ -1569,6 +1804,8 @@ INSERT INTO `ambiente` (`id_ambiente`, `descripcion`, `estado`) VALUES
 (2, 'Planta1', '1'),
 (3, 'Planta4', '1');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1580,10 +1817,14 @@ CREATE TABLE IF NOT EXISTS `amortizacion_compra` (
   `id_amortizacion_compra` int(11) NOT NULL,
   `id_cuota_compra` int(11) NOT NULL,
   `id_movimiento` int(11) NOT NULL,
+<<<<<<< HEAD
   `monto` float NOT NULL,
   `fecha` date NOT NULL,
   `num_cuota` int(11) NOT NULL,
   `monto_pagado` decimal(18,2) NOT NULL
+=======
+  `monto` float NOT NULL
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1671,6 +1912,7 @@ CREATE TABLE IF NOT EXISTS `categoria_ejercicio` (
   `estado` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `categoria_ejercicio`
 --
@@ -1680,6 +1922,8 @@ INSERT INTO `categoria_ejercicio` (`id_categoria_ejercicio`, `descripcion`, `est
 (2, 'Fuerza', '0'),
 (3, 'Tonificacion', '1');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1693,6 +1937,7 @@ CREATE TABLE IF NOT EXISTS `categoria_empleado` (
   `estado` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `categoria_empleado`
 --
@@ -1704,6 +1949,8 @@ INSERT INTO `categoria_empleado` (`id_categoria_empleado`, `descripcion`, `estad
 (4, 'Instructor', '0'),
 (5, 'Instructor', '1');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1717,6 +1964,7 @@ CREATE TABLE IF NOT EXISTS `categoria_evento` (
   `estado` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `categoria_evento`
 --
@@ -1726,6 +1974,8 @@ INSERT INTO `categoria_evento` (`id_categoria_evento`, `descripcion`, `estado`) 
 (2, 'Caminata2', '0'),
 (3, 'Caminata3', '1');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1739,6 +1989,7 @@ CREATE TABLE IF NOT EXISTS `categoria_producto` (
   `estado` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `categoria_producto`
 --
@@ -1753,6 +2004,8 @@ INSERT INTO `categoria_producto` (`id_categoria_producto`, `descripcion`, `estad
 (7, 'Energia', '1'),
 (8, 'Ã±ojÃ±lkjpoiupo iupoi uopiu op', '1');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1765,6 +2018,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
   `id_proveedor` int(11) NOT NULL,
   `id_empleado` int(11) NOT NULL,
   `id_modalidad_transaccion` int(11) NOT NULL,
+<<<<<<< HEAD
   `fecha` date NOT NULL,
   `monto` decimal(18,2) NOT NULL,
   `estado` char(1) NOT NULL,
@@ -1789,6 +2043,11 @@ INSERT INTO `compra` (`id_compra`, `id_proveedor`, `id_empleado`, `id_modalidad_
 (9, 1, 1, 1, '2015-10-29', '4.50', '1', '', '0', '0.19'),
 (10, 1, 1, 1, '2015-10-28', '19.10', '1', 'nuevo', '0', '0.19');
 
+=======
+  `fecha` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1797,10 +2056,15 @@ INSERT INTO `compra` (`id_compra`, `id_proveedor`, `id_empleado`, `id_modalidad_
 
 DROP TABLE IF EXISTS `compra_producto`;
 CREATE TABLE IF NOT EXISTS `compra_producto` (
+<<<<<<< HEAD
+=======
+  `id_compra_producto` int(11) NOT NULL,
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
   `id_compra` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `id_almacen` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
+<<<<<<< HEAD
   `precio_uni` decimal(18,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1815,6 +2079,11 @@ INSERT INTO `compra_producto` (`id_compra`, `id_producto`, `id_almacen`, `cantid
 (10, 1, 1, 2, '4.50'),
 (10, 2, 1, 1, '10.10');
 
+=======
+  `monto` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1828,6 +2097,7 @@ CREATE TABLE IF NOT EXISTS `concepto_movimiento` (
   `descripcion` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `concepto_movimiento`
 --
@@ -1836,6 +2106,8 @@ INSERT INTO `concepto_movimiento` (`id_concepto_movimiento`, `id_tipo_movimiento
 (2, 0, 'reidratante'),
 (3, 1, 'PAGO DE LUZ');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1848,6 +2120,7 @@ CREATE TABLE IF NOT EXISTS `concepto_triaje` (
   `descripcion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `concepto_triaje`
 --
@@ -1856,6 +2129,8 @@ INSERT INTO `concepto_triaje` (`id_concepto_triaje`, `descripcion`) VALUES
 (1, 'Brazo3'),
 (2, 'Deltoides');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1911,7 +2186,11 @@ DROP TABLE IF EXISTS `datos_empresa`;
 CREATE TABLE IF NOT EXISTS `datos_empresa` (
   `id_datos_empresa` int(11) NOT NULL,
   `razon_social` varchar(40) NOT NULL,
+<<<<<<< HEAD
   `ruc` char(11) NOT NULL,
+=======
+  `ruc` int(11) NOT NULL,
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
   `telefono` varchar(15) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `facebook` varchar(500) NOT NULL,
@@ -1927,6 +2206,7 @@ CREATE TABLE IF NOT EXISTS `datos_empresa` (
   `id_ubigeo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `datos_empresa`
 --
@@ -1934,6 +2214,8 @@ CREATE TABLE IF NOT EXISTS `datos_empresa` (
 INSERT INTO `datos_empresa` (`id_datos_empresa`, `razon_social`, `ruc`, `telefono`, `direccion`, `facebook`, `celular`, `twiter`, `instagram`, `google_maps`, `google_mas`, `logo`, `mision`, `vision`, `historia`, `id_ubigeo`) VALUES
 (1, 'Olympo Fitnes', '10412117803', '#466268', 'Jr. San Martin N# 422 ', '', '942886594', '', '', '', '', '', '                                                         Inspirar a nuestros miembros inconparable energia para ayudarles a alcanzar sus objetivos individuales; con nuestra amplia experiencia les preeveemos bienestar en base a un esmerado servicio, a un ambiente agradabre y con un personal entrenado en los ultimos conocimientos disponibles.                                                                                                                                                ', '                                                        Ser el mejor Gimnasio de la Region brindando bienestar a nuestos mienbros y en general a la poblacion, generando valor a nuestra empresa, a nuestros colaboradores y a nuestra comunidad                                                                                                                                                ', '                                                        OLYMPO FITNESS es una empresa familiar con grandes aspiraciones de fomentar la salud fÃ­sica y mental, otorgando beneficios a su vida diaria; contamos con instructores capacitados, con aÃ±os de experiencia en la materia, brindamos tambiÃ©n orientaciÃ³n y atenciÃ³n de mÃ©dicos generales, especialistas en traumatologÃ­a c y servicio nutricional. Estamos comprometidos con mejorar la calidad de vida de las personas a travÃ©s de la filosofÃ­a del ejercicio, infraestructura, programas, productos y de inculcar en la vida de toda la comunidad el valor de la salud y el ejercicio.                                                                                                                                                ', 0);
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -1988,6 +2270,7 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `id_perfil_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `empleado`
 --
@@ -1996,6 +2279,8 @@ INSERT INTO `empleado` (`id_empleado`, `id_categoria_empleado`, `nombre`, `apell
 (1, 1, 'Colbert', 'Calampa', 'Tantachuco', '73031934', '', '', '', '', '', '0000-00-00', '', '1', '', '', '', '', '', '', '', '', 0, '', '', '', '0000-00-00', 'admin', '81dc9bdb52d04dc20036dbd8313ed055', 1),
 (2, 1, 'Javier', 'Melendez', 'Tello', '73031935', '', '', '', '', '', '0000-00-00', '', '1', '', '', '', '', '', '', '', '', 0, '', '', '', '0000-00-00', '', '', 0);
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2080,6 +2365,7 @@ CREATE TABLE IF NOT EXISTS `marca` (
   `descripcion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `marca`
 --
@@ -2094,6 +2380,8 @@ INSERT INTO `marca` (`id_marca`, `descripcion`) VALUES
 (7, 'Dymatize'),
 (8, 'BSN');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2140,6 +2428,7 @@ CREATE TABLE IF NOT EXISTS `modalidad_transaccion` (
   `descripcion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `modalidad_transaccion`
 --
@@ -2148,6 +2437,8 @@ INSERT INTO `modalidad_transaccion` (`id_modalidad_transaccion`, `descripcion`) 
 (1, 'CONTADO'),
 (2, 'CREDITO');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2166,6 +2457,7 @@ CREATE TABLE IF NOT EXISTS `modulo` (
   `icono` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `modulo`
 --
@@ -2225,6 +2517,8 @@ INSERT INTO `modulo` (`id_modulo`, `nombre`, `url`, `orden`, `estado`, `id_padre
 (53, 'Empleado', 'empleado', NULL, '1', 9, 'Empleado', ''),
 (54, 'Parametros', 'param', NULL, '1', 3, 'Seguridad', '');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2245,6 +2539,7 @@ CREATE TABLE IF NOT EXISTS `movimiento` (
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Estructura de tabla para la tabla `param`
 --
 
@@ -2268,6 +2563,8 @@ INSERT INTO `param` (`id_param`, `valor`, `descripcion`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- Estructura de tabla para la tabla `perfil_usuario`
 --
 
@@ -2278,6 +2575,7 @@ CREATE TABLE IF NOT EXISTS `perfil_usuario` (
   `estado` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `perfil_usuario`
 --
@@ -2289,6 +2587,8 @@ INSERT INTO `perfil_usuario` (`id_perfil_usuario`, `descripcion`, `estado`) VALU
 (3, 'Cajeros', '1'),
 (4, 'Gerente', '1');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2302,6 +2602,7 @@ CREATE TABLE IF NOT EXISTS `permisos` (
   `id_perfil_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `permisos`
 --
@@ -2353,6 +2654,8 @@ INSERT INTO `permisos` (`estado`, `id_modulo`, `id_perfil_usuario`) VALUES
 ('1', 53, 1),
 ('1', 54, 1);
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2373,6 +2676,7 @@ CREATE TABLE IF NOT EXISTS `producto` (
   `estado` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `producto`
 --
@@ -2382,6 +2686,8 @@ INSERT INTO `producto` (`id_producto`, `id_categoria_producto`, `id_marca`, `pre
 (2, 1, 1, 'Unidad', 0, 10.1, 'Gold Whey', 5, 55, '1'),
 (3, 1, 1, 'Frasco', 0, 10.1, 'Gold Standard', 5, 55, '1');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2399,6 +2705,7 @@ CREATE TABLE IF NOT EXISTS `proveedor` (
   `id_ubigeo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `proveedor`
 --
@@ -2406,6 +2713,8 @@ CREATE TABLE IF NOT EXISTS `proveedor` (
 INSERT INTO `proveedor` (`id_proveedor`, `razon_social`, `ruc`, `telefono`, `email`, `direccion`, `id_ubigeo`) VALUES
 (1, 'Master', '12121312312', 'asasas', 'asas', 'asas', 1);
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2449,6 +2758,7 @@ CREATE TABLE IF NOT EXISTS `servicio` (
   `estado` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `servicio`
 --
@@ -2456,6 +2766,8 @@ CREATE TABLE IF NOT EXISTS `servicio` (
 INSERT INTO `servicio` (`id_servicio`, `id_ambiente`, `nombre`, `descripcion`, `estado`) VALUES
 (1, 1, 'Maquina', 'tonificacion del cuerpo', '1');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2507,7 +2819,11 @@ CREATE TABLE IF NOT EXISTS `socio` (
   `celular` varchar(15) DEFAULT NULL,
   `direccion` varchar(50) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
+<<<<<<< HEAD
   `sexo` char(1) DEFAULT NULL,
+=======
+  `sexo` bit(1) DEFAULT NULL,
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
   `estado_civil` varchar(20) DEFAULT NULL,
   `ocupacion` varchar(50) DEFAULT NULL,
   `estado` char(1) DEFAULT NULL,
@@ -2528,6 +2844,7 @@ CREATE TABLE IF NOT EXISTS `socio` (
   `id_perfil_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `socio`
 --
@@ -2535,6 +2852,8 @@ CREATE TABLE IF NOT EXISTS `socio` (
 INSERT INTO `socio` (`id_socio`, `id_tipo_socio`, `idubigeo`, `dni`, `aliass`, `nombre`, `apellido_paterno`, `apellido_materno`, `email`, `telefono`, `celular`, `direccion`, `fecha_nacimiento`, `sexo`, `estado_civil`, `ocupacion`, `estado`, `grupo_sanguineo`, `hobby`, `nacionalidad`, `seguro_medico`, `observacion`, `antecedente_medico`, `codigo_postal`, `fax`, `numero_hijo`, `sector`, `grado_estudio`, `ingresos`, `usuario`, `clave`, `id_perfil_usuario`) VALUES
 (1, 1, 1, '1', 'Col', 'luis', 'fernando', 'aguila', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2562,6 +2881,7 @@ CREATE TABLE IF NOT EXISTS `tipo_documento` (
   `descripcion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `tipo_documento`
 --
@@ -2569,6 +2889,8 @@ CREATE TABLE IF NOT EXISTS `tipo_documento` (
 INSERT INTO `tipo_documento` (`id_tipo_documento`, `descripcion`) VALUES
 (1, 'NUEVO');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2583,6 +2905,7 @@ CREATE TABLE IF NOT EXISTS `tipo_membresia` (
   `numero_servicios` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `tipo_membresia`
 --
@@ -2591,6 +2914,8 @@ INSERT INTO `tipo_membresia` (`id_tipo_membresia`, `descripcion`, `estado`, `num
 (1, 'full membresia', '', 0),
 (2, 'nuevo', '', 0);
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2603,6 +2928,7 @@ CREATE TABLE IF NOT EXISTS `tipo_movimiento` (
   `descripcion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `tipo_movimiento`
 --
@@ -2611,6 +2937,8 @@ INSERT INTO `tipo_movimiento` (`id_tipo_movimiento`, `descripcion`) VALUES
 (1, 'EGRESO'),
 (2, 'INGRESO');
 
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- --------------------------------------------------------
 
 --
@@ -2666,6 +2994,7 @@ CREATE TABLE IF NOT EXISTS `ubigeos` (
   `codigo_provincia` varchar(5) NOT NULL,
   `codigo_distrito` varchar(5) NOT NULL,
   `descripcion` varchar(200) NOT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2060 ;
 
 --
@@ -4733,6 +5062,9 @@ INSERT INTO `ubigeos` (`idubigeo`, `codigo_region`, `codigo_provincia`, `codigo_
 (2057, '25', '03', '04', 'SEPAHUA'),
 (2058, '25', '04', '00', 'PURUS'),
 (2059, '25', '04', '01', 'PURUS');
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=2060 DEFAULT CHARSET=latin1;
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 
 -- --------------------------------------------------------
 
@@ -4779,6 +5111,7 @@ CREATE TABLE IF NOT EXISTS `vigencia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+<<<<<<< HEAD
 -- Volcado de datos para la tabla `vigencia`
 --
 
@@ -4787,6 +5120,8 @@ INSERT INTO `vigencia` (`id_vigencia`, `descripcion`, `dias`) VALUES
 (2, 'Semana', 7);
 
 --
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- Índices para tablas volcadas
 --
 
@@ -4803,12 +5138,15 @@ ALTER TABLE `almacen`
  ADD PRIMARY KEY (`id_almacen`);
 
 --
+<<<<<<< HEAD
 -- Indices de la tabla `almacen_producto`
 --
 ALTER TABLE `almacen_producto`
  ADD PRIMARY KEY (`id_almacen`,`id_producto`);
 
 --
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- Indices de la tabla `ambiente`
 --
 ALTER TABLE `ambiente`
@@ -4884,7 +5222,11 @@ ALTER TABLE `compra`
 -- Indices de la tabla `compra_producto`
 --
 ALTER TABLE `compra_producto`
+<<<<<<< HEAD
  ADD PRIMARY KEY (`id_compra`,`id_producto`,`id_almacen`), ADD KEY `almacen_compra_producto_fk` (`id_almacen`), ADD KEY `compra_compra_producto_fk` (`id_compra`), ADD KEY `producto_compra_producto_fk` (`id_producto`);
+=======
+ ADD PRIMARY KEY (`id_compra_producto`), ADD KEY `almacen_compra_producto_fk` (`id_almacen`), ADD KEY `compra_compra_producto_fk` (`id_compra`), ADD KEY `producto_compra_producto_fk` (`id_producto`);
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 
 --
 -- Indices de la tabla `concepto_movimiento`
@@ -5001,12 +5343,15 @@ ALTER TABLE `movimiento`
  ADD PRIMARY KEY (`id_movimiento`), ADD KEY `concepto_movimiento_movimiento_fk` (`id_concepto_movimiento`), ADD KEY `forma_pago_movimiento_fk` (`id_forma_pago`), ADD KEY `serie_documento_movimiento_fk` (`id_serie_documento`), ADD KEY `sesion_caja_movimiento_fk` (`id_sesion_caja`);
 
 --
+<<<<<<< HEAD
 -- Indices de la tabla `param`
 --
 ALTER TABLE `param`
  ADD PRIMARY KEY (`id_param`);
 
 --
+=======
+>>>>>>> 6a0ba8b163071302c7948becd4c9edb9d0bb27a8
 -- Indices de la tabla `perfil_usuario`
 --
 ALTER TABLE `perfil_usuario`

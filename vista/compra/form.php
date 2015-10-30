@@ -53,7 +53,7 @@
         <div class="row" style=" background: ">
             <div class="col-md-6 ">
                 <div class="form-group">
-                    <label class="col-md-5 control-label" >Almacen:</label>
+                    <label class="col-md-5 control-label" >Destino:</label>
                     <div class="col-md-7">
                         <select class="form-control" name='sel_almacen' id='sel_almacen' placeholder="">
                             <option value='' ></option>

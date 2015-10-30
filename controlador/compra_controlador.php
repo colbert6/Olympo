@@ -59,7 +59,10 @@ class compra_controlador extends controller {
     }
     
     public function nuevo() {
+        
+        
         if ($_POST['guardar'] == 1) {
+            print_r($_POST);exit;
 //            echo '<pre>';print_r($_POST);exit;
             $this->_compra->id_proveedor = $_POST['id_proveedor'];
             $this->_compra->id_empleado = session::get('id_empleado');
@@ -83,35 +86,25 @@ class compra_controlador extends controller {
             //insertamos cronograma de pago
             if($_POST['id_tipopago']==2){
                 $fecha_compra = $_POST['fechacompra'];
-                $fecha_vencimiento = $_POST['fecha_vencimiento'];
-                $intervalo_dias = $_POST['intervalo_dias'];
+                $intervalo_dias = $_POST['intervalo'];
+                $letras=$_POST['cuotas'];
                 $monto = $_POST['total'];
-                $c=0;
+                $c=$letras;
                 $fecha_temp = $fecha_compra;
                 $mayor = true;
                 $cuota = array();
-                while($mayor){
-                    $c++;
-                    $fecha_temp =  date("Y-m-d", strtotime("$fecha_temp +$intervalo_dias day"));
-                    if(new DateTime($fecha_temp,new DateTimeZone('America/Lima')) >= new DateTime($fecha_vencimiento,new DateTimeZone('America/Lima'))){
-                        $mayor = false;
-                    }
-                }
-                if(new DateTime($fecha_temp,new DateTimeZone('America/Lima')) > new DateTime($fecha_vencimiento,new DateTimeZone('America/Lima'))){
-                    $c=$c-1;
-                }
+                
                 $monto_pagado = 0;
                 $pago_mensual = (int)($monto / $c);
 
                 for($i=1;$i<=$c;$i++){
                     $cuota[$i]=$pago_mensual;
-                    $monto_pagado = $monto_pagado + $pago_mensual;
+                    $monto_pagado = $monto_pagado + $pago_mensual;  
                 }
                 if($monto_pagado != $monto){
                     $cuota[$c]=	$cuota[$c] + ($monto- $monto_pagado);
                 }
                 $fecha_temp = date("Y-m-d", strtotime("$fecha_compra +$intervalo_dias day"));
-
                 for($i=1;$i<=$c;$i++){
                     $this->_cronogpago->id_compra=$dato_compra[0]['INS_COMPRA'];
                     $this->_cronogpago->fecha=$fecha_temp;
@@ -120,6 +113,8 @@ class compra_controlador extends controller {
                     $this->_cronogpago->inserta();
                     $fecha_temp = date("Y-m-d", strtotime("$fecha_temp +$intervalo_dias day"));
                 }
+                
+                
             }else{
                 $this->_cronogpago->id_compra = $dato_compra[0]['MAX_COMPRA'];
                 $this->_cronogpago->fecha = $_POST['fechacompra'];

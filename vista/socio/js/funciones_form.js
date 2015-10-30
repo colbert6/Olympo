@@ -1,17 +1,17 @@
-$(function() {   
-    $( "#fecha_nacimiento" ).datepicker({changeMonth: true,changeYear: true,dateFormat: 'yy-mm-dd'}); 
+$(document).ready(function() {   
+    $( "#fecha_nacimiento" ).datepicker({changeMonth: true,changeYear: true,dateFormat: 'yy-mm-dd',yearRange: '-100:+0'}); 
     $( "#save" ).click(function(){
         bval = true;   
         bval = bval && $("#nombre").required();
         bval = bval && $("#apellido_paterno").required();
         bval = bval && $("#apellido_materno").required();
-        bval = bval && $("#tipo_socio").required();
+        bval = bval && $("#id_tipo_socio").required();
         bval = bval && $("#dni").required();
         bval = bval && $("#direccion").required();
         bval = bval && $("#sexo").required();
         bval = bval && $("#estado_civil").required();
-        bval = bval && $("#celular").required();
         bval = bval && $("#telefono").required();
+        bval = bval && $("#celular").required();
         bval = bval && $("#fecha_nacimiento").required();
         
         
@@ -24,7 +24,7 @@ $(function() {
 
     $("#dni").blur(function(){
         if($(this).val()!='' && $(this).val().length==8){
-            $.post(url+'socio/buscador_dni','dni='+$("#dni").val(),function(datos){
+            $.post(url+'socio/buscador','dni='+$("#dni").val(),function(datos){
                 if(datos.length>0 ){
                     if($("#id_socio").val()==datos[0].ID_SOCIO){   
                         
