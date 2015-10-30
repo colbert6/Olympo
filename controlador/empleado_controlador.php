@@ -1,6 +1,6 @@
 <?php
 
-class concepto_movimiento_controlador extends controller {
+class empleado_controlador extends controller {
 
     private $_model;
     private $_model_1;
