@@ -5,7 +5,7 @@ $(document).ready(function() {
         bval = bval && $("#nombre").required();
         bval = bval && $("#apellido_paterno").required();
         bval = bval && $("#apellido_materno").required();
-        bval = bval && $("#tipo_socio").required();
+        bval = bval && $("#id_tipo_socio").required();
         bval = bval && $("#dni").required();
         bval = bval && $("#direccion").required();
         bval = bval && $("#sexo").required();
