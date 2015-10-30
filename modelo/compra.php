@@ -4,13 +4,14 @@ class compra extends Main{
     
     public $id_compra;
     public $id_proveedor;
-    public $id_tipopago;
-    public $fechacompra;
+    public $id_empleado;
+    public $id_modalidad_transaccion;
+    public $fecha;
     public $monto;
-    public $nrodoc;
+    public $estado;
+    public $num_documento;
     public $igv;
     public $estadopago;
-    public $proveedor;
 
     public function selecciona() {
         
@@ -30,10 +31,28 @@ class compra extends Main{
             return $stmt->fetchall();
         }
     }
+    public function selecciona_id() {
+        $datos=array($this->id_compra);
+//        echo '<pre>';print_r($datos);exit;
+        $r = $this->get_consulta("pa_m2_compra", $datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'oci') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+    }
 
     public function inserta() {
-        $datos = array($this->id_proveedor, $this->id_tipopago, $this->fechacompra, $this->monto, $this->nrodoc, $this->igv);
-        $r = $this->get_consulta("ins_compra", $datos);
+        $datos = array($this->id_proveedor,$this->id_empleado, $this->id_modalidad_transaccion, $this->fecha, $this->monto, $this->num_documento, $this->igv);
+        $r = $this->get_consulta("pa_i_compra", $datos);
 //        echo '<pre>';print_r($datos);exit;
         if ($r[1] == '') {
             $stmt = $r[0];
@@ -41,7 +60,7 @@ class compra extends Main{
             die($r[1]);
         }
         $r = null;
-        if (conexion::$_servidor == 'oci') {
+        if (BaseDatos::$_servidor == 'oci') {
             oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
             return $data;
         } else {

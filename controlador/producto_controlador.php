@@ -15,10 +15,16 @@ class producto_controlador extends controller {
         $this->_marcas = $this->cargar_modelo('marca');
         $this->_cat_productos = $this->cargar_modelo('categoria_producto');
     }
+    
+    public function buscador(){
+        $this->_model->id_almacen = $_POST['id_almacen'];
+        echo json_encode($this->_model->selecciona_almacen());
+    }
 
     public function index() {
         $this->_vista->titulo = 'Lista de Productos';
         $this->_vista->datos = $this->_model->selecciona();
+        //print_r($this->_vista->datos);exit;
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');
