@@ -14,7 +14,7 @@ function hoy(){
 }
 function ver(id,fecha){
     $.post(url+'triaje/datos_triajes','id='+id+"&fecha="+fecha,function(datos){
-        alert(datos.length); 
+        //alert(datos.length); 
         html="";
         html+="<div class='row'>";
         html+="<div class='col-md-9'>";
@@ -33,7 +33,7 @@ function ver(id,fecha){
         html+='<table class="table table-striped table-bordered table-hover sortable">';
         for (var i = 0; i < datos.length; i++) {     
             html+= '<tr>';
-            html+= '<th>'+datos[i]["DESCRIPCION"]+':</th>';
+            html+= '<th>'+datos[i]["CONCEPTO_TRIAJE"]+':</th>';
             html+= '<td>'+datos[i]["VALOR"]+" "+datos[i]["UNIDAD_MEDIDA"]+'</td>';
             html+= '</tr>';
          }; 

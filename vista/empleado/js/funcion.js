@@ -71,7 +71,7 @@ function ver(id){
         html+= '</tr>';
         html+= '</tr>';
         html+= '<th>CLAVE:</th>';
-        html+= '<td>'+datos[0]["CLAVE"]+'</td>';
+        html+= '<td>'+"***********"+'</td>';
         html+= '</tr>';
         html+= '</tr>';
         html+= '<th>PERFIL DE USUARIO:</th>';

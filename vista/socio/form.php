@@ -86,8 +86,12 @@
                         <label class="control-label" >DEPARTAMENTO:</label>
                        <select  class="form-control glyphicon" name='region' id='region'>
                            <option value='' >Selecciona...</option>
-                           <?php for($i=0;$i<count($this->regiones);$i++){ ?> 
-                                        <option value="<?php echo $this->regiones[$i]['CODIGO_REGION'];?>"><?php echo $this->regiones[$i]['DESCRIPCION']?></option>
+                           <?php for($i=0;$i<count($this->region);$i++){ ?> 
+                            <?php if( strcmp($this->region[$i]['CODIGO_REGION'], $this->ubigeo[0]['CODIGO_REGION']) == 0){?>
+                                 <option selected value="<?php echo $this->region[$i]['CODIGO_REGION'];?>"><?php echo $this->region[$i]['DESCRIPCION']?></option>
+                            <?php }else{?>
+                                 <option value="<?php echo $this->region[$i]['CODIGO_REGION'];?>"><?php echo $this->region[$i]['DESCRIPCION']?></option>
+                            <?php } ?>
                            <?php } ?>
                       </select>
                 </div>
@@ -97,7 +101,13 @@
                         <label class="control-label" >PROVINCIA:</label>
                        <select class="form-control glyphicon" name='provincia' id='provincia'>
                            <option value='' >Selecciona...</option>
-                           
+                           <?php for($i=0;$i<count($this->provincia);$i++){ ?> 
+                            <?php if( strcmp($this->provincia[$i]['CODIGO_PROVINCIA'], $this->ubigeo[0]['CODIGO_PROVINCIA']) == 0){?>
+                                 <option selected value="<?php echo $this->provincia[$i]['CODIGO_PROVINCIA'];?>"><?php echo $this->provincia[$i]['DESCRIPCION']?></option>
+                            <?php }else{?>
+                                 <option value="<?php echo $this->provincia[$i]['CODIGO_PROVINCIA'];?>"><?php echo $this->provincia[$i]['DESCRIPCION']?></option>
+                            <?php } ?>
+                           <?php } ?>
                       </select>
                 </div>
             </div>
@@ -106,6 +116,13 @@
                         <label class="control-label" >DISTRITO</label>
                        <select class="form-control glyphicon" name='id_ubigeo' id='id_ubigeo'>
                            <option value='' >Selecciona...</option>
+                           <?php for($i=0;$i<count($this->distrito);$i++){ ?> 
+                            <?php if( strcmp($this->distrito[$i]['CODIGO_DISTRITO'], $this->ubigeo[0]['CODIGO_DISTRITO']) == 0){?>
+                                 <option selected value="<?php echo $this->distrito[$i]['IDUBIGEO'];?>"><?php echo $this->distrito[$i]['DESCRIPCION']?></option>
+                            <?php }else{?>
+                                 <option value="<?php echo $this->distrito[$i]['IDUBIGEO'];?>"><?php echo $this->distrito[$i]['DESCRIPCION']?></option>
+                            <?php } ?>
+                           <?php } ?>
                            
                       </select>
                 </div>
@@ -130,12 +147,13 @@
                         <option value='' >Selecciona...</option>
 
                           <?php 
-                           $sexo = array("femenino","masculino");
-                            for($i=0;$i<count($sexo);$i++){  ?> 
-                            <?php if(strcmp($this->datos[0]['SEXO'], $i) == 0 ){?>
-                                 <option selected value="<?php echo $i;?>"><?php echo strtoupper($sexo[$i]);?></option>
+                           $des_sexo = array("Masculino","Femenino");
+                           $id_sexo = array("m","f");
+                            for($i=0;$i<count($des_sexo);$i++){  ?> 
+                            <?php if(strcmp($this->datos[0]['SEXO'], $id_sexo[$i]) == 0 ){?>
+                                 <option selected value="<?php echo $id_sexo[$i];?>"><?php echo strtoupper($des_sexo[$i]);?></option>
                             <?php }else{?>
-                                 <option value="<?php echo $i;?>"><?php echo strtoupper($sexo[$i]);?></option>
+                                 <option value="<?php echo $id_sexo[$i];?>"><?php echo strtoupper($des_sexo[$i]);?></option>
                             <?php } ?>
                            <?php } ?>
                       </select>
