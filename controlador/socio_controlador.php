@@ -5,6 +5,8 @@ class socio_controlador extends controller {
     private $_socio;
     private $_tipo_socio;
     private $_ubigeo;
+    private $_triaje;
+    private $_concepto_triaje;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -14,6 +16,8 @@ class socio_controlador extends controller {
         $this->_socio = $this->cargar_modelo('socio');
         $this->_tipo_socio = $this->cargar_modelo('tipo_socio');
         $this->_ubigeo = $this->cargar_modelo('ubigeo');
+        $this->_triaje = $this->cargar_modelo('triaje');
+        $this->_concepto_triaje = $this->cargar_modelo('concepto_triaje');
     }
 
     public function index() {
@@ -152,6 +156,20 @@ class socio_controlador extends controller {
             $socio = $this->_socio->selecciona_id();
         }
         echo json_encode($socio);
+    }
+    public function extraerTriaje(){
+        $this->_triaje->id_socio=$_POST['id'];
+        $datos = $this->_triaje->triaje_x_socio();
+        echo json_encode($datos);
+    }
+    public function ultimoTriaje(){
+        $this->_triaje->id_socio=$_POST['id'];
+        $datos = $this->_triaje->ultimo_triaje();
+        echo json_encode($datos);
+    }
+    public function conceptoTriaje(){
+        $datos = $this->_concepto_triaje->selecciona();
+        echo json_encode($datos);
     }
 }
 

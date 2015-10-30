@@ -49,11 +49,11 @@
         </div>
         <div class="modal-body text-justify">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Datos</a></li>
-                    <li><a data-toggle="tab" href="#triaje">Triaje</a></li>
-                    <li><a data-toggle="tab" href="#rutina">Rutina</a></li>
+                    <li class="active"><a data-toggle="tab" href="#home">DATOS</a></li>
+                    <li><a data-toggle="tab" href="#triaje">TRIAJE</a></li>
+                    <li><a data-toggle="tab" href="#rutina">RUTINA</a></li>
                 </ul>
-                <div class="tab-content" style="margin-left:50px;margin-right:50px; ">
+                <div class="tab-content" style="margin-left:30px;margin-right:30px; ">
                     <div id="home" class="tab-pane fade in active">
                       
                     </div>
@@ -67,7 +67,7 @@
                 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
         </div>
         </div>
         </div>
