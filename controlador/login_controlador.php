@@ -21,7 +21,7 @@ class login_controlador extends controller {
         if($datos[0]['USUARIO']==$_POST['usuario'] && $datos[0]['CLAVE']==md5($_POST['clave']) && $datos[0]['ID_EMPLEADO']!=''){
             session::set('autenticado', true);
             session::set('empleado', $datos[0]['NOMBRE'].' '.$datos[0]['APELLIDO_PATERNO']);
-            session::set('idempleado', $datos[0]['ID_EMPLEADO']);
+            session::set('id_empleado', $datos[0]['ID_EMPLEADO']);
             session::set('perfil', $datos[0]['DESCRIPCION']);
             session::set('idperfil', $datos[0]['ID_PERFIL_USUARIO']);
             $this->redireccionar();

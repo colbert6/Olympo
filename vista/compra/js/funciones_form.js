@@ -6,6 +6,9 @@ $(function() {
             $("#celda_credito").hide();
         }
     });
+    $("#sel_almacen").change(function() {
+        limpiar();
+    });
     $("#nrodoc").focus();
     $("#subtotal,#total,#igv").val('0.00');
     $("#chbx_igv").click(function() {
@@ -46,21 +49,34 @@ $(function() {
         return false;
     });
     $("#selectInsumo").click(function() {
+        bval = true;   
+        bval = bval && $("#sel_almacen").required();
+        if (!bval) 
+        {
+           return false;
+        }
         buscarInsumo();
-        $("#buscarInsumo").focus();
         $("#VtnBuscarInsumo").show();
     });
-    $("#insumo").click(function() {
+    $("#producto").click(function() {
+        bval = true;   
+        bval = bval && $("#sel_almacen").required();
+        if (!bval) 
+        {
+           return false;
+        }
         buscarInsumo();
-        $("#buscarInsumo").focus();
         $("#VtnBuscarInsumo").show();
-        $("#buscarInsumo").focus();
     });
     $("#AbrirVtnBuscarInsumo").click(function() {
+        bval = true;   
+        bval = bval && $("#sel_almacen").required();
+        if (!bval) 
+        {
+           return false;
+        }
         buscarInsumo();
-        $("#buscarInsumo").focus();
         $("#VtnBuscarInsumo").show();
-        $("#buscarInsumo").focus();
     });
     $("#proveedor").click(function() {
         buscarProveedor();
@@ -105,32 +121,12 @@ $(function() {
         $("#buscarProveedor").focus();
     });
 
-    $("#cantidadum").keyup(function() {
+    $("#cantidad").keyup(function() {
         setImporte();
     });
-    $("#id_unidadmedida").change(function() {
+    
+    $("#precio").keyup(function() {
         setImporte();
-        var precioub = parseFloat($("#precioub").val());
-        var cantidadub = parseInt($("#id_unidadmedida option:selected").attr('count'));
-        var preciounitario = cantidadub * precioub;
-        preciounitario = Math.round(preciounitario * 100) / 100;
-        $("#preciounitario").val(preciounitario.toFixed(2));
-        setImporte();
-    });
-    $("#preciounitario").keyup(function() {
-        setImporte();
-        var preciounitario = $("#preciounitario").val();
-        preciounitario = parseFloat(preciounitario);
-        if (isNaN(preciounitario)) {
-            preciounitario = 0;
-        }
-        var cantidadub = $("#id_unidadmedida option:selected").attr('count');
-        cantidadub = parseInt(cantidadub);
-        if (isNaN(cantidadub)) {
-            cantidadub = 0;
-        }
-        var precioub = preciounitario / cantidadub;
-        $("#precioub").val(precioub.toFixed(6));
     });
     $("#preciounitario").blur(function() {
         var preciounitario = parseFloat($(this).val());
@@ -142,31 +138,27 @@ $(function() {
 
     $("#addDetalle").click(function() {
         bval = true;
-        bval = bval && $("#insumo").required();
-        bval = bval && $("#id_unidadmedida").required();
-        bval = bval && $("#cantidadum").required();
-        bval = bval && $("#preciounitario").required();
+        bval = bval && $("#producto").required();
+        bval = bval && $("#cantidad").required();
+        bval = bval && $("#precio").required();
 
         if (bval) {
-            if ($(".id_prod[value=" + $("#id_insumo").val() + "]").length) {
+            if ($(".id_prod[value=" + $("#id_producto").val() + "]").length && $(".id_alm[value=" + $("#id_almacen").val() + "]").length) {
                 bootbox.alert("Este insumo ya fue agregado");
                 return false;
             }
             var html = '<tr class="row_tmp">';
             html += '<td>';
-            html += '   <input type="hidden" name="id_insumo[]" class="id_prod" value="' + $("#id_insumo").val() + '" />' + $("#insumo").val();
+            html += '   <input type="hidden" name="id_producto[]" class="id_prod" value="' + $("#id_producto").val() + '" />' + $("#producto").val();
             html += '</td>';
             html += '<td>';
-            html += '   <input type="hidden" name="id_unidadmedida[]" value="' + $("#id_unidadmedida option:selected").val() + '" />' + $("#id_unidadmedida option:selected").html();
+            html += '   <input type="hidden" name="id_almacen[]" class="id_alm" value="' + $("#id_almacen").val() + '" />' + $("#almacen").val();
             html += '</td>';
             html += '<td>';
-            html += '   <input type="hidden" name="cantidadum[]" value="' + $("#cantidadum").val() + '" />' + $("#cantidadum").val();
-            html += '   <input type="hidden" name="stockactual[]" value="' + $("#stockactual").val() + '" />';
-            html += '   <input type="hidden" name="cantidadub[]" value="' + $("#cantidadub").val() + '" />';
+            html += '   <input type="hidden" name="cantidad[]" value="' + $("#cantidad").val() + '" />' + $("#cantidad").val();
             html += '</td>';
             html += '<td>';
-            html += '   <input type="hidden" name="precioub[]" value="' + $("#precioub").val() + '" />';
-            html += '   <input type="hidden" name="preciounitario[]" value="' + $("#preciounitario").val() + '" />' + $("#preciounitario").val();
+            html += '   <input type="hidden" name="precio[]" value="' + $("#precio").val() + '" />' + $("#precio").val();
             html += '</td>';
             html += '<td>';
             html += '   <input type="hidden" name="importe[]" class="importe" value="' + $("#importe").val() + '" />' + $("#importe").val();
@@ -249,14 +241,12 @@ $(function() {
 });
 
 function setImporte() {
-    var cantidad = $("#cantidadum").val();
+    var cantidad = $("#cantidad").val();
     cantidad = parseInt(cantidad);
     if (isNaN(cantidad)) {
         cantidad = 0;
     }
-    var cantidadub = cantidad * parseInt($("#id_unidadmedida option:selected").attr('count'));
-    $("#cantidadub").val(cantidadub);
-    var precio = $("#preciounitario").val();
+    var precio = $("#precio").val();
     precio = parseFloat(precio);
     if (isNaN(precio)) {
         precio = 0;
@@ -287,18 +277,18 @@ function setTotal(importe, aumenta) {
     $("#total").val(total.toFixed(2));
 }
 function buscarInsumo() {
+    $("#title_almacen").html('<h4>'+$( "#sel_almacen option:selected" ).text()+'</h4>');
     $("#grillaInsumo").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
     $("#grillaProveedor").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
-    $.post(url + 'insumo/buscador', 'cadena=' + $("#buscarInsumo").val() + '&filtro=' + $("#filtroInsumo").val(), function(datos) {
-        var HTML = '<table id="table" class="table table-striped table-bordered table-hover sortable">' +
+    $.post(url + 'producto/buscador','id_almacen=' + $("#sel_almacen").val(), function(datos) {
+        var HTML = '<table id="table2" class="display" cellspacing="0" width="100%">' +
                 '<thead>' +
                 '<tr>' +
                 '<th>Item</th>'+
-                '<th>Insumo</th>'+
-                '<th>Almacen</th>'+
-                '<th>Unid. Med.</th>'+
-                '<th>Stock</th>'+
-                '<th>Prec. Compra</th>'+
+                '<th>Producto</th>'+
+                '<th>Presentacion</th>'+
+                '<th>Categoria</th>'+
+                '<th>Marca</th>'+
                 '<th>Acciones</th>'+
                 '</tr>' +
                 '</thead>' +
@@ -307,35 +297,35 @@ function buscarInsumo() {
         for (var i = 0; i < datos.length; i++) {
             HTML = HTML + '<tr>';
             HTML = HTML + '<td>'+(i+1)+'</td>';
-            HTML = HTML + '<td>'+datos[i].DESCRIPCION+'</td>';
-            HTML = HTML + '<td>'+datos[i].AALMACEN+'</td>';
-            HTML = HTML + '<td>'+datos[i].UUNIDADMEDIDA+'</td>';
-            HTML = HTML + '<td>'+datos[i].STOCK+'</td>';
-            HTML = HTML + '<td>'+datos[i].PRECIOC+'</td>';
-            var idinsumo = datos[i].ID_INSUMO;
-            var descripcion = datos[i].DESCRIPCION;
-            var stock = datos[i].STOCK;
-            var precioc = datos[i].PRECIOC;
-            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_insumo(\'' + idinsumo + '\',\'' + descripcion + '\',\'' + stock + '\',\'' + precioc + '\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
+            HTML = HTML + '<td>'+datos[i].NOMBRE+'</td>';
+            HTML = HTML + '<td>'+datos[i].PRESENTACION+'</td>';
+            HTML = HTML + '<td>'+datos[i].DESCRIPCION_CAPR+'</td>';
+            HTML = HTML + '<td>'+datos[i].DESCRIPCION_MAR+'</td>';
+            var id_producto = datos[i].ID_PRODUCTO;
+            var id_almacen =$("#sel_almacen").val();
+            var nombre = datos[i].NOMBRE;
+            var almacen = $( "#sel_almacen option:selected" ).text();
+            var stock = datos[i].STOCK_ALMACEN;
+            var precioc = datos[i].PRECIO;
+            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_insumo(\'' + id_producto + '\',\'' + id_almacen + '\',\'' + almacen + '\',\'' + nombre + '\',\'' + stock + '\',\'' + precioc + '\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
             HTML = HTML + '</td>';
             HTML = HTML + '</tr>';
         }
         HTML = HTML + '</tbody></table>'
         $("#grillaInsumo").html(HTML);
-        $("#jsfoot").html('<script src="' + url + 'vista/web/js/scriptgrilla.js"></script>');
+        $("#jsfoot").html('<script src="' + url + 'vista/compra/js/run_table.js"></script>');
     }, 'json');
 }
 
 function buscarProveedor() {
     $("#grillaInsumo").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
     $("#grillaProveedor").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
-    $.post(url + 'proveedor/buscador', 'cadena=' + $("#buscarProveedor").val() + '&filtro=' + $("#filtroProveedor").val(), function(datos) {
-        var HTML = '<table id="table" class="table table-striped table-bordered table-hover sortable">' +
+    $.post(url + 'proveedor/buscador', function(datos) {
+        var HTML = '<table id="table2" class="display" cellspacing="0" width="100%">' +
                 '<thead>' +
                 '<tr>' +
                 '<th>Item</th>' +
                 '<th>Razon Social</th>' +
-                '<th>Representante</th>' +
                 '<th>Ruc</th>' +
                 '<th>Telefono</th>' +
                 '<th>Acciones</th>' +
@@ -346,56 +336,48 @@ function buscarProveedor() {
         for (var i = 0; i < datos.length; i++) {
             HTML = HTML + '<tr>';
             HTML = HTML + '<td>' + (i + 1) + '</td>';
-            HTML = HTML + '<td>' + datos[i].RAZONSOCIAL + '</td>';
-            HTML = HTML + '<td>' + datos[i].NOMBRE + '</td>';
+            HTML = HTML + '<td>' + datos[i].RAZON_SOCIAL + '</td>';
             HTML = HTML + '<td>' + datos[i].RUC + '</td>';
-            HTML = HTML + '<td>' + datos[i].TELEFMOVIL + '</td>';
+            HTML = HTML + '<td>' + datos[i].TELEFONO + '</td>';
             var idproveedor = datos[i].ID_PROVEEDOR;
-            var descripcion = $.trim(datos[i].RAZONSOCIAL);
-            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_proveedor(\'' + idproveedor + '\',\'' + descripcion + '\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
+            var descripcion = $.trim(datos[i].RAZON_SOCIAL);
+            var ruc         = datos[i].RUC;
+            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_proveedor(\'' + idproveedor + '\',\'' + descripcion + '\',\'' + ruc + '\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
             HTML = HTML + '</td>';
             HTML = HTML + '</tr>';
         }
         HTML = HTML + '</tbody></table>';
         $("#grillaProveedor").html(HTML);
-        $("#jsfoot").html('<script src="' + url + 'vista/web/js/scriptgrilla.js"></script>');
+        $("#jsfoot").html('<script src="' + url + 'vista/compra/js/run_table.js"></script>');
     }, 'json');
 }
 
-function sel_insumo(id_i, d, s, pc) {
-    $("#cantidadum,#preciounitario").attr('disabled', false);
-    getUnidadesInsumo(id_i);
-    $("#id_insumo").val(id_i);
-    $("#insumo").val(d);
+function sel_insumo(id_p,id_a,a, d, s, pc) {
+    $("#cantidad,#precio").attr('disabled', false);
+    $("#id_almacen").val(id_a);
+    $("#almacen").val(a);
+    $("#id_producto").val(id_p);
+    $("#producto").val(d);
     $("#stockactual").val(s);
-    $("#precioub").val(pc);
-    $("#preciounitario").val(parseFloat(pc).toFixed(2));
+    $("#precio").val(parseFloat(pc).toFixed(2));
     $('#modalInsumo').modal('hide');
-    $("#id_unidadmedida").focus();
+    $("#cantidad").focus();
+    setImporte()
 }
 
-function sel_proveedor(id_p, d) {
+function sel_proveedor(id_p, d,ruc) {
     $("#id_proveedor").val(id_p);
     $("#proveedor").val(d);
+    $("#ruc_prov").val(ruc);
     $('#modalProveedor').modal('hide');
     $("#id_tipopago").focus();
 }
 
-function getUnidadesInsumo(p_id) {
-    $("#id_unidadmedida").html('<option>Cargando...</option>');
-    $.post(url + 'compra/getUnidadesInsumo', 'id_insumo=' + p_id, function(datos) {
-        var HTML = '';
-        for (var i = 0; i < datos.length; i++) {
-            HTML = HTML + "<option value='" + datos[i].ID_UNIDADMEDIDA + "' count='" + datos[i].CANT_UNIDAD + "'>" + datos[i].UUNIDADMEDIDA + "</option>";
-        }
-        $("#id_unidadmedida").html(HTML).attr('disabled', false);
-    }, 'json');
-}
+f
 
 function limpiar() {
-    $("#id_insumo,#stockactual,#insumo,#cantidadum,#cantidadub,#precioub,#preciounitario,#importe").val('');
-    $("#cantidadum,#preciounitario,#id_unidadmedida").attr('disabled', true);
-    $("#id_unidadmedida").html('<option value="0">Unid. Med.:</option>');
+    $("#id_producto,#id_almacen,#stockactual,#producto,#cantidad,#precio,#importe").val('');
+    $("#cantidad,#precio").attr('disabled', true);
 }
 
 function seleccionaDias(fecha_final) {

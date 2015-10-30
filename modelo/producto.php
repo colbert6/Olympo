@@ -59,6 +59,30 @@ class producto extends Main{
       
     }
     
+    public function selecciona_almacen() {
+        if (is_null($this->id_almacen)) {
+            $this->id_almacen = 0;
+        }
+      
+        $datos = array($this->id_almacen);
+        
+        $r = $this->get_consulta("pa_m3_producto",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
+    
     public function inserta() {
         $datos = array($this->id_categoria_producto,$this->id_marca,$this->presentacion,$this->nombre,
                         $this->stock_min,$this->stock_max,$this->precio);
