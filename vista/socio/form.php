@@ -148,7 +148,7 @@
 
                           <?php 
                            $des_sexo = array("Masculino","Femenino");
-                           $id_sexo = array("1","0");
+                           $id_sexo = array("m","f");
                             for($i=0;$i<count($des_sexo);$i++){  ?> 
                             <?php if(strcmp($this->datos[0]['SEXO'], $id_sexo[$i]) == 0 ){?>
                                  <option selected value="<?php echo $id_sexo[$i];?>"><?php echo strtoupper($des_sexo[$i]);?></option>
