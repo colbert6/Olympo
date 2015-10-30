@@ -45,6 +45,41 @@ class triaje extends Main{
         }
       
     }
+    public function fecha_socio() {
+        $datos = array($this->id_socio);
+        $r = $this->get_consulta("t_fechxsocio",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+    }
+    public function triaje_x_fecha() {
+        $datos = array($this->id_socio,$this->fecha);
+        $r = $this->get_consulta("triajexfecha",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
 
     //------------------------------------------------------------------------------
     
@@ -68,7 +103,7 @@ class triaje extends Main{
         return $error;
     }
     public function elimina() {
-        $datos = array($this->id_triaje);
+        $datos = array($this->id_socio,$this->fecha);
         $r = $this->get_consulta("pa_d_triaje", $datos);
         $error = $r[1];
         $r = null;

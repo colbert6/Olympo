@@ -1826,9 +1826,9 @@ color: #eee;
 background-color: #3276c3;
 }
 textarea,select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
--webkit-border-radius: 0!important;
--moz-border-radius: 0!important;
-border-radius: 0!important;
+-webkit-border-radius: 4px!important;
+-moz-border-radius: 4px!important;
+border-radius: 4px!important;
 border-width: 1px;
 color: #333;
 background-color: #fff;

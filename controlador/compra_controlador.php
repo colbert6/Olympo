@@ -3,9 +3,11 @@
 class compra_controlador extends controller {
 
     private $_compra;
+    private $_almacen;
     private $_compra_producto;
-    private $_amortizacion_compra;
+    private $_cronograma_pago;
     private $_proveedor;
+    private $_param;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -13,17 +15,20 @@ class compra_controlador extends controller {
         }
         parent::__construct();
         $this->_compra = $this->cargar_modelo('compra');
+        $this->_almacen = $this->cargar_modelo('almacen');
         $this->_proveedor = $this->cargar_modelo('proveedor');
-        $this->_detcomprainsumo = $this->cargar_modelo('compra_producto');
-        $this->_cronogpago = $this->cargar_modelo('amortizacion_compra');
+        $this->_compra_producto = $this->cargar_modelo('compra_producto');
+        $this->_cronograma_pago = $this->cargar_modelo('cronograma_pago');
+        $this->_param = $this->cargar_modelo('param');
     }
 
     public function index() {
         $this->_vista->titulo = 'Lista de Compras';
         //$this->_vista->datos = $this->_compra->selecciona();
-        //$this->_vista->setJs(array('funcion'));
+        $this->_vista->setJs(array('funcion'));
         //$this->_vista->setJs_Foot(array('scriptgrilla'));
         $this->_vista->datos = $this->_compra->selecciona();
+        //print_r($this->_vista->datos);exit;
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');
@@ -46,100 +51,86 @@ class compra_controlador extends controller {
         echo json_encode($this->_proveedor->selecciona());
     }
     
-    public function buscador(){
-        if($_POST['filtro']==0){
-            $this->_compra->nrodoc=$_POST['descripcion'];
-        }
-        if($_POST['filtro']==1){
-            $this->_compra->fechacompra=$_POST['descripcion'];
-        }
-        if($_POST['filtro']==2){
-            $this->_compra->proveedor=$_POST['descripcion'];
-        }
-        echo json_encode($this->_compra->selecciona());
-    }
     
     public function ver(){
-        $this->_detcomprainsumo->id_compra=$_POST['idcompra'];
-        echo json_encode($this->_detcomprainsumo->selecciona());
+        $this->_compra->id_compra=$_POST['id_compra'];
+        //print_r($this->_compra->selecciona());exit;
+        echo json_encode($this->_compra->selecciona_id());
     }
     
     public function nuevo() {
+        
+        
         if ($_POST['guardar'] == 1) {
 //            echo '<pre>';print_r($_POST);exit;
-            $this->_compra->id_proveedor = $_POST['id_proveedor'];
-            $this->_compra->id_tipopago = $_POST['id_tipopago'];
-            $this->_compra->fechacompra = $_POST['fechacompra'];
-            $this->_compra->monto = $_POST['subtotal'];
-            $this->_compra->nrodoc = $_POST['nrodoc'];
-            $this->_compra->igv = $_POST['igv'];
+            $this->_cuota_compra->id_proveedor = $_POST['id_proveedor'];
+            $this->_cuota_compra->id_empleado = session::get('id_empleado');
+            $this->_cuota_compra->id_modalidad_transaccion= $_POST['id_tipopago'];
+            $this->_cuota_compra->fecha = $_POST['fechacompra'];
+            $this->_cuota_compra->monto = $_POST['subtotal'];
+            $this->_cuota_compra->num_documento = $_POST['nrodoc'];
+            $this->_cuota_compra->igv = $_POST['igv'];
+            
             $dato_compra = $this->_compra->inserta();
 //            print_r($dato_compra);exit;
             //inserta detalle compra
-            for($i=0;$i<count($_POST['id_insumo']);$i++){
-                $this->_detcomprainsumo->id_compra=$dato_compra[0]['INS_COMPRA'];
-                $this->_detcomprainsumo->id_insumo= $_POST['id_insumo'][$i];
-                $this->_detcomprainsumo->cantidadum= $_POST['cantidadum'][$i];
-                $this->_detcomprainsumo->preciounitario= $_POST['preciounitario'][$i];
-                $this->_detcomprainsumo->id_unidadmedida= $_POST['id_unidadmedida'][$i];
-                $this->_detcomprainsumo->cantidadub= $_POST['cantidadub'][$i];
-                $this->_detcomprainsumo->precioub= $_POST['precioub'][$i];
-                $this->_detcomprainsumo->stockactual= $_POST['stockactual'][$i];
-                $this->_detcomprainsumo->inserta();
+            for($i=0;$i<count($_POST['id_producto']);$i++){
+                $this->_compra_producto->id_compra=$dato_compra[0]['MAX_COMPRA'];
+                $this->_compra_producto->id_producto= $_POST['id_producto'][$i];
+                $this->_compra_producto->id_almacen= $_POST['id_almacen'][$i];
+                $this->_compra_producto->cantidad= $_POST['cantidad'][$i];
+                $this->_compra_producto->precio= $_POST['precio'][$i];
+                $this->_compra_producto->inserta();
             }
             //insertamos cronograma de pago
             if($_POST['id_tipopago']==2){
                 $fecha_compra = $_POST['fechacompra'];
-                $fecha_vencimiento = $_POST['fecha_vencimiento'];
-                $intervalo_dias = $_POST['intervalo_dias'];
+                $intervalo_dias = $_POST['intervalo'];
+                $letras=$_POST['cuotas'];
                 $monto = $_POST['total'];
-                $c=0;
+                $c=$letras;
                 $fecha_temp = $fecha_compra;
                 $mayor = true;
                 $cuota = array();
-                while($mayor){
-                    $c++;
-                    $fecha_temp =  date("Y-m-d", strtotime("$fecha_temp +$intervalo_dias day"));
-                    if(new DateTime($fecha_temp,new DateTimeZone('America/Lima')) >= new DateTime($fecha_vencimiento,new DateTimeZone('America/Lima'))){
-                        $mayor = false;
-                    }
-                }
-                if(new DateTime($fecha_temp,new DateTimeZone('America/Lima')) > new DateTime($fecha_vencimiento,new DateTimeZone('America/Lima'))){
-                    $c=$c-1;
-                }
+                
                 $monto_pagado = 0;
                 $pago_mensual = (int)($monto / $c);
 
                 for($i=1;$i<=$c;$i++){
                     $cuota[$i]=$pago_mensual;
-                    $monto_pagado = $monto_pagado + $pago_mensual;
+                    $monto_pagado = $monto_pagado + $pago_mensual;  
                 }
                 if($monto_pagado != $monto){
                     $cuota[$c]=	$cuota[$c] + ($monto- $monto_pagado);
                 }
                 $fecha_temp = date("Y-m-d", strtotime("$fecha_compra +$intervalo_dias day"));
-
                 for($i=1;$i<=$c;$i++){
-                    $this->_cronogpago->id_compra=$dato_compra[0]['INS_COMPRA'];
-                    $this->_cronogpago->fecha=$fecha_temp;
-                    $this->_cronogpago->monto=$cuota[$i];
-                    $this->_cronogpago->nrocuota=$i;
-                    $this->_cronogpago->inserta();
+                    $this->_cronograma_pago->id_compra=$dato_compra[0]['MAX_COMPRA'];
+                    $this->_cronograma_pago->fecha_venc=$fecha_temp;
+                    $this->_cronograma_pago->num_cuota=$i;
+                    $this->_cronograma_pago->monto_cuota=$cuota[$i];
+                    $this->_cronograma_pago->inserta();
                     $fecha_temp = date("Y-m-d", strtotime("$fecha_temp +$intervalo_dias day"));
                 }
+                
+                
             }else{
-                $this->_cronogpago->id_compra = $dato_compra[0]['INS_COMPRA'];
-                $this->_cronogpago->fecha = $_POST['fechacompra'];
-                $this->_cronogpago->monto = $_POST['total'];
-                $this->_cronogpago->nrocuota = 1;
-                $this->_cronogpago->inserta();
+                                
+                $this->_cronograma_pago->id_compra=$dato_compra[0]['MAX_COMPRA'];
+                $this->_cronograma_pago->fecha_venc=$_POST['fechacompra'];
+                $this->_cronograma_pago->monto_cuota=$_POST['total'];
+                $this->_cronograma_pago->num_cuota=1;
+          
+                $this->_cronograma_pago->inserta();
             }
             $this->redireccionar('compra');
         }
+        $this->_vista->almacen = $this->_almacen->selecciona();
         $this->_vista->titulo = 'Registrar Compra';
         $this->_vista->action = BASE_URL . 'compra/nuevo';
+        $this->_vista->setCss_public(array('jquery.dataTables'));
+        $this->_vista->setJs_public(array('jquery.dataTables.min'));
         $this->_vista->setJs(array('funciones_form','jquery-ui.min'));
-        $this->_vista->setJs_Foot(array('scriptgrilla'));
         $this->_vista->renderizar('form');
     }
 

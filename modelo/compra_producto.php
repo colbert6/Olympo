@@ -3,24 +3,21 @@
 class compra_producto extends Main{
     
     public $id_compra;
-    public $id_insumo;
-    public $cantidadum;
-    public $preciounitario;
-    public $id_unidadmedida;
-    public $cantidadub;
-    public $precioub;
-    public $stockactual;
+    public $id_producto;
+    public $id_almacen;
+    public $cantidad;
+    public $precio;
 
     public function selecciona() {
         if (is_null($this->id_compra)) {
             $this->id_compra = 0;
         }
-        if (is_null($this->id_insumo)) {
-            $this->id_insumo = 0;
+        if (is_null($this->id_producto)) {
+            $this->id_producto = 0;
         }
-        $datos = array($this->id_compra, $this->id_insumo);
+        $datos = array($this->id_compra, $this->id_producto);
 //        echo '<pre>';print_r($datos);exit;
-        $r = $this->get_consulta("sel_detcompins", $datos);
+        $r = $this->get_consulta("pa_m1_copr", $datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -37,10 +34,9 @@ class compra_producto extends Main{
     }
     
     public function inserta() {
-        $datos = array($this->id_compra, $this->id_insumo, $this->cantidadum, $this->preciounitario, $this->id_unidadmedida,
-            $this->cantidadub, $this->precioub, $this->stockactual);
+        $datos = array($this->id_compra, $this->id_producto, $this->id_almacen, $this->cantidad, $this->precio);
 //        print_r($datos);exit;
-        $r = $this->get_consulta("ins_detcompins", $datos);
+        $r = $this->get_consulta("pa_i_copr", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -48,7 +44,7 @@ class compra_producto extends Main{
 
     public function elimina() {
         $datos = array($this->id_compra, $this->id_insumo);
-        $r = $this->get_consulta("elim_detcompins", $datos);
+        $r = $this->get_consulta("pa_d_copr", $datos);
         $error = $r[1];
         $r = null;
         return $error;

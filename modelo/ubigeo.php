@@ -63,6 +63,25 @@ class ubigeo extends Main{
         }
       
     }
+    public function selecciona_id() {
+        $datos = array($this->idubigeo);
+        
+        $r = $this->get_consulta("sel_ubigeo",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
     
     
 

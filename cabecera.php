@@ -18,9 +18,9 @@
         <link href="<?php echo BASE_URL ?>lib/admin/style/style.css" rel="stylesheet" />
 
         
-        <script src="<?php echo $_params['ruta_js']; ?>jquery.js"></script>
-        <script src="<?php echo $_params['ruta_js']; ?>validaciones.js"></script>
+        <!--<script src="<?php echo $_params['ruta_js']; ?>jquery.js"></script>-->
         <script src="<?php echo $_params['ruta_js']; ?>jquery.min.js"></script>
+        <script src="<?php echo $_params['ruta_js']; ?>validaciones.js"></script>
         <script src="<?php echo $_params['ruta_js']; ?>modernizr-2.6.2.min.js"></script>
         <?php if(isset($_params['js']) && count($_params['js'])): ?>
         <?php for($i=0; $i < count($_params['js']); $i++): ?>

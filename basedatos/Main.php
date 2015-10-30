@@ -167,7 +167,7 @@ class Main {
 
     protected static function get_consulta($pa, $datos) {
         if (BaseDatos::$_servidor != 'OCI') {
-            //self::$db->exec("SET CHARACTER SET utf8");
+            self::$db->exec("SET CHARACTER SET utf8");
             self::$db->setAttribute(PDO::ATTR_CASE, PDO::CASE_UPPER);
             return self::procedimientoAlmacenado($pa, $datos);
         } else {

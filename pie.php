@@ -10,7 +10,11 @@
         <?php endfor; ?>
         <?php endif; ?>
     </div>
+    <div id="jsfoot1">
+        
+    </div>
     <footer>
+        
   <div class="container">
     <div class="row">
       <div class="col-md-12">
