@@ -13,28 +13,16 @@ class compra extends Main{
     public $proveedor;
 
     public function selecciona() {
-        if (is_null($this->id_compra)) {
-            $this->id_compra = 0;
-        }
-        if (is_null($this->nrodoc)) {
-            $this->nrodoc = '';
-        }
-        if (is_null($this->fechacompra)) {
-            $this->fechacompra = '';
-        }
-        if (is_null($this->proveedor)) {
-            $this->proveedor = '';
-        }
-        $datos = array($this->id_compra, $this->nrodoc, $this->fechacompra, $this->proveedor);
+        
 //        echo '<pre>';print_r($datos);exit;
-        $r = $this->get_consulta("sel_compra", $datos);
+        $r = $this->get_consulta("pa_m1_compra", null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
             die($r[1]);
         }
         $r = null;
-        if (conexion::$_servidor == 'oci') {
+        if (BaseDatos::$_servidor == 'oci') {
             oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
             return $data;
         } else {

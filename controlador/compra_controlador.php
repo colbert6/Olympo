@@ -23,6 +23,7 @@ class compra_controlador extends controller {
         //$this->_vista->datos = $this->_compra->selecciona();
         //$this->_vista->setJs(array('funcion'));
         //$this->_vista->setJs_Foot(array('scriptgrilla'));
+        $this->_vista->datos = $this->_compra->selecciona();
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');

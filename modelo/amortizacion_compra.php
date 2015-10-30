@@ -1,6 +1,6 @@
 <?php
 
-class cronogpago extends Main{
+class amortizacion_compra extends Main{
     
     public $id_cronogpago;
     public $id_compra;
