@@ -115,7 +115,7 @@
                            $sexo = array('femenino','masculino');
                            $sexo_id = array('0','1');
                             for($i=0;$i<count($sexo);$i++){ ?> 
-                            <?php if(strcmp($this->datos[0]['SEXO'], $sexo[$i])==0){?>
+                            <?php if(strcmp($this->datos[0]['SEXO'], $sexo_id[$i])==0){?>
                                  <option selected value="<?php echo $sexo_id[$i];?>"><?php echo strtoupper($sexo[$i]);?></option>
                             <?php }else{?>
                                  <option value="<?php echo $sexo_id[$i];?>"><?php echo strtoupper($sexo[$i]);?></option>
