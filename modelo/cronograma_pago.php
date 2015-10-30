@@ -2,11 +2,11 @@
 
 class cronograma_pago extends Main{
 
-    public $id_cuota_pago;
+    public $id_cuota_compra;
     public $id_compra;
-    public $fecha;
+    public $fecha_venc;
     public $monto_cuota;
-    public $nrocuota;
+    public $num_cuota;
     public $monto_pagado;
     
     public function selecciona() {
@@ -27,8 +27,6 @@ class cronograma_pago extends Main{
         
     }
     public function selecciona_cuota() {
-        
-      
         $datos = array($this->id_compra);
         
         $r = $this->get_consulta("pa_m2_cuco",$datos);
@@ -49,7 +47,7 @@ class cronograma_pago extends Main{
     }
     
     public function inserta() {
-        $datos = array($this->descripcion);
+        $datos = array($this->id_compra,$this->fecha_venc,$this->$id_compra,  $this->$id_compra);
         $r = $this->get_consulta("pa_i_almacen", $datos);
         $error = $r[1];
         $r = null;

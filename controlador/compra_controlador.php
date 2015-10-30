@@ -5,7 +5,7 @@ class compra_controlador extends controller {
     private $_compra;
     private $_almacen;
     private $_compra_producto;
-    private $_amortizacion_compra;
+    private $_cuota_compra;
     private $_proveedor;
     private $_param;
 
@@ -18,7 +18,7 @@ class compra_controlador extends controller {
         $this->_almacen = $this->cargar_modelo('almacen');
         $this->_proveedor = $this->cargar_modelo('proveedor');
         $this->_compra_producto = $this->cargar_modelo('compra_producto');
-        $this->_cronogpago = $this->cargar_modelo('amortizacion_compra');
+        $this->_cuota_compra = $this->cargar_modelo('amortizacion_compra');
         $this->_param = $this->cargar_modelo('param');
     }
 
@@ -64,13 +64,13 @@ class compra_controlador extends controller {
         if ($_POST['guardar'] == 1) {
             print_r($_POST);exit;
 //            echo '<pre>';print_r($_POST);exit;
-            $this->_compra->id_proveedor = $_POST['id_proveedor'];
-            $this->_compra->id_empleado = session::get('id_empleado');
-            $this->_compra->id_modalidad_transaccion= $_POST['id_tipopago'];
-            $this->_compra->fecha = $_POST['fechacompra'];
-            $this->_compra->monto = $_POST['subtotal'];
-            $this->_compra->num_documento = $_POST['nrodoc'];
-            $this->_compra->igv = $_POST['igv'];
+            $this->_cuota_compra->id_proveedor = $_POST['id_proveedor'];
+            $this->_cuota_compra->id_empleado = session::get('id_empleado');
+            $this->_cuota_compra->id_modalidad_transaccion= $_POST['id_tipopago'];
+            $this->_cuota_compra->fecha = $_POST['fechacompra'];
+            $this->_cuota_compra->monto = $_POST['subtotal'];
+            $this->_cuota_compra->num_documento = $_POST['nrodoc'];
+            $this->_cuota_compra->igv = $_POST['igv'];
             
             $dato_compra = $this->_compra->inserta();
 //            print_r($dato_compra);exit;
@@ -106,7 +106,7 @@ class compra_controlador extends controller {
                 }
                 $fecha_temp = date("Y-m-d", strtotime("$fecha_compra +$intervalo_dias day"));
                 for($i=1;$i<=$c;$i++){
-                    $this->_cronogpago->id_compra=$dato_compra[0]['INS_COMPRA'];
+                    $this->_cronogpago->id_cuota_pago=$dato_compra[0]['INS_COMPRA'];
                     $this->_cronogpago->fecha=$fecha_temp;
                     $this->_cronogpago->monto=$cuota[$i];
                     $this->_cronogpago->nrocuota=$i;
