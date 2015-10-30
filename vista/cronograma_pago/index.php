@@ -39,13 +39,15 @@
         if($var == 2){ ?>
             <tr class="error" >
         <?php }?> 
+                <?php $total= (int)(($this->datos[$i]['MONTO']*(1+$this->datos[$i]['IGV']) )*100)?>
+                <?php $total= $total/100?>
                 <td><?php echo ($i+1);//id ?></td>
                 <td><?php echo $this->datos[$i]['NUM_DOCUMENTO']; ?></td>
                 <td><?php echo $this->datos[$i]['XPROVEEDOR']; ?></td>
                 <td><?php echo $this->datos[$i]['FECHA'];?></td>
-                <td><?php echo $this->datos[$i]['MONTO'];?></td> 
+                <td><?php echo $total;?></td> 
                 <td><?php echo $this->datos[$i]['XMONTO_PAGADO'];?></td> 
-                <td><?php echo ($this->datos[$i]['MONTO']-$this->datos[$i]['XMONTO_PAGADO']);?></td> 
+                <td><?php echo ($total-$this->datos[$i]['XMONTO_PAGADO']);?></td> 
                 
                 <td>
                     <a title="Cronograma" href="<?php echo BASE_URL ?>cronograma_pago/cronograma/<?php echo $this->datos[$i]['ID_COMPRA'].'/'.(($this->datos[$i]['IGV']+1)*$this->datos[$i]['MONTO'] - $this->datos[$i]['XMONTO_PAGADO'])?>" class="btn btn-info btn-minier"><i class="icon-list-alt icon-white"></i></a>

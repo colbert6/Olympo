@@ -1,16 +1,11 @@
 <?php
+class caja extends Main{
 
-class cronograma_pago extends Main{
-
-    public $id_cuota_compra;
-    public $id_compra;
-    public $fecha_venc;
-    public $monto_cuota;
-    public $num_cuota;
-    public $monto_pagado;
+    public $id_caja;
+    public $nombre;
     
     public function selecciona() {
-        $r = $this->get_consulta("pa_m1_cuco",null);
+        $r = $this->get_consulta("pa_m1_caja",null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -26,10 +21,11 @@ class cronograma_pago extends Main{
         }
         
     }
-    public function selecciona_cuota() {
-        $datos = array($this->id_compra);
+    
+    public function selecciona_id() {
+        $datos = array($this->id_caja);
         
-        $r = $this->get_consulta("pa_m2_cuco",$datos);
+        $r = $this->get_consulta("pa_m2_caja",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -45,10 +41,11 @@ class cronograma_pago extends Main{
         }
       
     }
-    
+   
     public function inserta() {
-        $datos = array($this->id_compra,$this->fecha_venc,$this->num_cuota,$this->monto_cuota,$this->monto_pagado);
-        $r = $this->get_consulta("pa_i_almacen", $datos);
+        
+        $datos = array($this->nombre);
+        $r = $this->get_consulta("pa_i_caja", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -56,9 +53,9 @@ class cronograma_pago extends Main{
 
     public function actualiza() {
        
-        $datos = array($this->id_almacen, $this->descripcion);
-        
-        $r = $this->get_consulta("pa_u_almacen", $datos);
+        $datos = array($this->id_caja,$this->nombre);
+        //print_r($datos);exit;
+        $r = $this->get_consulta("pa_u_caja", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -67,14 +64,11 @@ class cronograma_pago extends Main{
     
 
     public function elimina() {
-        $datos = array($this->id_almacen);
-        $r = $this->get_consulta("pa_d_almacen", $datos);
+        $datos = array($this->id_caja);
+        $r = $this->get_consulta("pa_d_caja", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
-    
-
 }
-
 ?>
