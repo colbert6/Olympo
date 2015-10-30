@@ -10,17 +10,20 @@
                 <th>NRO. DOC.</th>
                 <th>PROVEEDOR</th>
                 <th>FECHA</th>
+                <th>MONTO</th>
                 <th>ACCIONES</th>
             </tr>
         </thead>
         <tbody>
             <?php for ($i = 0; $i < count($this->datos); $i++) { ?>
                 <tr>
+                    <?php $total= round($this->datos[$i]['MONTO']*(1+$this->datos[$i]['IGV']), 2); ?>
                     <td><?php echo ($i+1) ?></td>
                     <td><?php echo $this->datos[$i]['EMPLEADO'] ?></td>
                     <td><?php echo $this->datos[$i]['NUM_DOCUMENTO'] ?></td>
                     <td><?php echo $this->datos[$i]['RAZON_SOCIAL'] ?></td>
                     <td><?php echo $this->datos[$i]['FECHA'] ?></td>
+                    <td><?php echo $total; ?></td>
                     <td>
                         <a href="#myModal" role="button" data-toggle="modal" onclick="ver('<?php echo $this->datos[$i]['ID_COMPRA']; ?>')" class="btn btn-warning btn-minier"><i class="icon-eye-open icon-white"></i></a>
                         <?php if($this->datos[$i]['ESTADO_PAGO'] == 0) {  ?>

@@ -54,7 +54,7 @@ class empleado_controlador extends controller {
             //$this->_empleado->tipo_vivienda = $_POST['tipo_vivienda'];//59
             //$this->_empleado->anio_contratacion = $_POST['anio_contratacion'];//60
             $this->_empleado->usuario = $_POST['usuario'];//61
-            $this->_empleado->clave = $_POST['clave'];//62
+            $this->_empleado->clave = md5($_POST['clave']);//62
             $this->_empleado->id_perfil_usuario = $_POST['id_perfil_usuario'];//63
             
             

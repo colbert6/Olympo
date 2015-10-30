@@ -32,8 +32,8 @@ $(function() {
         bval = bval && $("#proveedor").required();
         bval = bval && $("#id_tipopago").required();
         if ($("#id_tipopago").val() == 2) {
-            bval = bval && $("#fecha_vencimiento").required();
-            bval = bval && $("#intervalo_dias").required();
+            bval = bval && $("#cuotas").required();
+            bval = bval && $("#intervalo").required();
         }
         if (bval) {
             if ($(".row_tmp").length) {

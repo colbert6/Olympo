@@ -24,9 +24,7 @@ class compra_controlador extends controller {
 
     public function index() {
         $this->_vista->titulo = 'Lista de Compras';
-        //$this->_vista->datos = $this->_compra->selecciona();
         $this->_vista->setJs(array('funcion'));
-        //$this->_vista->setJs_Foot(array('scriptgrilla'));
         $this->_vista->datos = $this->_compra->selecciona();
         //print_r($this->_vista->datos);exit;
         $this->_vista->setCss_public(array('jquery.dataTables'));
@@ -62,14 +60,14 @@ class compra_controlador extends controller {
         
         
         if ($_POST['guardar'] == 1) {
-//            echo '<pre>';print_r($_POST);exit;
-            $this->_cuota_compra->id_proveedor = $_POST['id_proveedor'];
-            $this->_cuota_compra->id_empleado = session::get('id_empleado');
-            $this->_cuota_compra->id_modalidad_transaccion= $_POST['id_tipopago'];
-            $this->_cuota_compra->fecha = $_POST['fechacompra'];
-            $this->_cuota_compra->monto = $_POST['subtotal'];
-            $this->_cuota_compra->num_documento = $_POST['nrodoc'];
-            $this->_cuota_compra->igv = $_POST['igv'];
+            //echo '<pre>';print_r($_POST);exit;
+            $this->_compra->id_proveedor = $_POST['id_proveedor'];
+            $this->_compra->id_empleado = session::get('id_empleado');
+            $this->_compra->id_modalidad_transaccion= $_POST['id_tipopago'];
+            $this->_compra->fecha = $_POST['fechacompra'];
+            $this->_compra->monto = $_POST['subtotal'];
+            $this->_compra->num_documento = $_POST['nrodoc'];
+            $this->_compra->igv = $_POST['igv'];
             
             $dato_compra = $this->_compra->inserta();
 //            print_r($dato_compra);exit;
@@ -114,13 +112,11 @@ class compra_controlador extends controller {
                 }
                 
                 
-            }else{
-                                
+            }else{         
                 $this->_cronograma_pago->id_compra=$dato_compra[0]['MAX_COMPRA'];
                 $this->_cronograma_pago->fecha_venc=$_POST['fechacompra'];
                 $this->_cronograma_pago->monto_cuota=$_POST['total'];
                 $this->_cronograma_pago->num_cuota=1;
-          
                 $this->_cronograma_pago->inserta();
             }
             $this->redireccionar('compra');

@@ -47,8 +47,8 @@ class cronograma_pago extends Main{
     }
     
     public function inserta() {
-        $datos = array($this->id_compra,$this->fecha_venc,$this->num_cuota,$this->monto_cuota,$this->monto_pagado);
-        $r = $this->get_consulta("pa_i_almacen", $datos);
+        $datos = array($this->id_compra,$this->fecha_venc,$this->num_cuota,$this->monto_cuota);
+        $r = $this->get_consulta("pa_i_cuco", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -58,7 +58,7 @@ class cronograma_pago extends Main{
        
         $datos = array($this->id_almacen, $this->descripcion);
         
-        $r = $this->get_consulta("pa_u_almacen", $datos);
+        $r = $this->get_consulta("pa_u_cuco", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -68,7 +68,7 @@ class cronograma_pago extends Main{
 
     public function elimina() {
         $datos = array($this->id_almacen);
-        $r = $this->get_consulta("pa_d_almacen", $datos);
+        $r = $this->get_consulta("pa_d_cuco", $datos);
         $error = $r[1];
         $r = null;
         return $error;

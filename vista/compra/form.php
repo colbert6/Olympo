@@ -12,7 +12,8 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" > Nro. Doc.:</label>
                     <div class="col-md-6">
-                        <input name="nrodoc" id="nrodoc" class="form-control"  placeholder="Numero Documento" autofocus maxlength="20"  >
+                        <input name="nrodoc" id="nrodoc" class="form-control"  onkeypress="return serieComprobante(event)" 
+                               placeholder="Numero Documento" autofocus maxlength="20"  >
                     </div>
                 </div>
             </div>
@@ -58,7 +59,12 @@
                         <select class="form-control" name='sel_almacen' id='sel_almacen' placeholder="">
                             <option value='' ></option>
                             <?php for($i=0;$i<count($this->almacen);$i++){ //Aca va la lista de los modulos padres ?> 
-                                <option value="<?php echo $this->almacen[$i]['ID_ALMACEN'];?>"><?php echo $this->almacen[$i]['DESCRIPCION']?></option>
+                                <?php if( $this->almacen[$i]['ID_ALMACEN']==1){?>
+                                    <option selected value="<?php echo $this->almacen[$i]['ID_ALMACEN'];?>"><?php echo $this->almacen[$i]['DESCRIPCION']?></option>
+                               <?php }else{?>
+                                    <option value="<?php echo $this->almacen[$i]['ID_ALMACEN'];?>"><?php echo $this->almacen[$i]['DESCRIPCION']?></option>
+                               <?php } ?>
+                                
                             <?php } ?>
                         </select>
                     </div>
