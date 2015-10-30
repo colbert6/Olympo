@@ -113,7 +113,7 @@
                         <option value='' >Selecciona...</option>
                            <?php 
                            $sexo = array('femenino','masculino');
-                           $sexo_id = array('0','1');
+                           $sexo_id = array('F','M');
                             for($i=0;$i<count($sexo);$i++){ ?> 
                             <?php if(strcmp($this->datos[0]['SEXO'], $sexo_id[$i])==0){?>
                                  <option selected value="<?php echo $sexo_id[$i];?>"><?php echo strtoupper($sexo[$i]);?></option>
@@ -353,7 +353,7 @@
                  <div class="form-group">
                         <label class="control-label" for="clave" >CLAVE:</label>
 
-                          <input name="clave" id="clave" class="form-control" placeholder="Clave" 
+                          <input type="password" name="clave" id="clave" class="form-control" placeholder="Clave" 
                                 value="<?php if(isset ($this->datos[0]['CLAVE'])) echo $this->datos[0]['CLAVE']?>">
 
                       </div>
