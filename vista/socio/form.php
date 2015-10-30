@@ -84,7 +84,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                         <label class="control-label" >DEPARTAMENTO:</label>
-                       <select <?php echo $bloqueo;?> class="form-control glyphicon" name='region' id='region'>
+                       <select  class="form-control glyphicon" name='region' id='region'>
                            <option value='' >Selecciona...</option>
                            <?php for($i=0;$i<count($this->regiones);$i++){ ?> 
                                         <option value="<?php echo $this->regiones[$i]['CODIGO_REGION'];?>"><?php echo $this->regiones[$i]['DESCRIPCION']?></option>
@@ -95,7 +95,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                         <label class="control-label" >PROVINCIA:</label>
-                       <select <?php echo $bloqueo;?> class="form-control glyphicon" name='provincia' id='provincia'>
+                       <select class="form-control glyphicon" name='provincia' id='provincia'>
                            <option value='' >Selecciona...</option>
                            
                       </select>
@@ -104,7 +104,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                         <label class="control-label" >DISTRITO</label>
-                       <select <?php echo $bloqueo;?> class="form-control glyphicon" name='distrito' id='distrito'>
+                       <select class="form-control glyphicon" name='id_ubigeo' id='id_ubigeo'>
                            <option value='' >Selecciona...</option>
                            
                       </select>
@@ -146,7 +146,7 @@
                 <div class="form-group">
                     <label class="control-label" for="sexo" >ESTADO CIVIL: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                   
-                      <select <?php echo $bloqueo;?> class="form-control glyphicon" name='estado_civil' id='estado_civil'>
+                      <select class="form-control glyphicon" name='estado_civil' id='estado_civil'>
                            <option value='' >Selecciona...</option>
                            <?php 
                            $estado_civil = array('soltero','casado','divorciado','viudo');

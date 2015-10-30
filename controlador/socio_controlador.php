@@ -34,7 +34,7 @@ class socio_controlador extends controller {
 
              //$this->_socio->id_socio = $_POST['id_socio'];
             $this->_socio->id_tipo_socio = $_POST['id_tipo_socio'];
-            $this->_socio->idubigeo = 1;//$_POST['id_ubigeo'];
+            $this->_socio->idubigeo = $_POST['id_ubigeo'];
             $this->_socio->dni = $_POST['dni'];
             $this->_socio->aliass = $_POST['aliass'];
             $this->_socio->nombre = $_POST['nombre'];
@@ -83,7 +83,7 @@ class socio_controlador extends controller {
         if ($_POST['guardar'] == 1) {
             $this->_socio->id_socio = $_POST['id_socio'];
             $this->_socio->id_tipo_socio = $_POST['id_tipo_socio'];
-            $this->_socio->idubigeo = 1;//$_POST['id_ubigeo'];
+            $this->_socio->idubigeo = $_POST['id_ubigeo'];
             $this->_socio->dni = $_POST['dni'];
             $this->_socio->aliass = $_POST['aliass'];
             $this->_socio->nombre = $_POST['nombre'];
@@ -117,6 +117,9 @@ class socio_controlador extends controller {
 
         $this->_socio->id_socio = $this->filtrarInt($id);
         $this->_vista->datos = $this->_socio->selecciona_id();
+        //$this->_vista->region =  $this->_ubigeo->selecciona_id();
+        //$this->_vista->provincia = $this->_ubigeo->selecciona_id();
+        //$this->_vista->distrito = $this->_ubigeo->selecciona_id();
         $this->_vista->tipo_socio = $this->_tipo_socio->selecciona();
         //jquery-ui.min
         $this->_vista->titulo = 'Actualizar Socio';

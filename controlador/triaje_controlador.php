@@ -104,7 +104,7 @@ class triaje_controlador extends controller {
         //EXTRAER CONCEPTO DE TRIAJE
         $this->_vista->concepto_triaje = $this->_concepto_triaje->selecciona();
         //ENVIAR ACCION
-        $this->_vista->action = BASE_URL . 'triaje/editar/'.$id;
+        $this->_vista->action = BASE_URL . 'triaje/editar_ultimo/'.$id."/";
         $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('form');
     }
@@ -142,7 +142,7 @@ class triaje_controlador extends controller {
         //EXTRAER CONCEPTO DE TRIAJE
         $this->_vista->concepto_triaje = $this->_concepto_triaje->selecciona();
         //ENVIAR ACCION
-        $this->_vista->action = BASE_URL . 'triaje/editar/'.$id."/".$fecha;
+        $this->_vista->action = BASE_URL . 'triaje/editar/'.$id."/".$fecha."/";
         $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('form');
     }
