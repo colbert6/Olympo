@@ -68,7 +68,7 @@ class socio_controlador extends controller {
         $this->_vista->titulo = 'Registrar socio';
         $this->_vista->action = BASE_URL . 'socio/nuevo';
         $this->_vista->tipo_socio = $this->_tipo_socio->selecciona();
-        $this->_vista->regiones = $this->_ubigeo->selecciona_departamento();
+        $this->_vista->region = $this->_ubigeo->selecciona_departamento();
         $this->_vista->setCss_public(array('jquery-ui.custom'));
         $this->_vista->setJs_public(array('jquery-ui.min'));
         $this->_vista->setJs(array('funciones_form'));
@@ -80,7 +80,7 @@ class socio_controlador extends controller {
             $this->redireccionar('socio');
         }
 
-        if ($_POST['guardar'] == 1) {
+        if (@$_POST['guardar'] == 1) {
             $this->_socio->id_socio = $_POST['id_socio'];
             $this->_socio->id_tipo_socio = $_POST['id_tipo_socio'];
             $this->_socio->idubigeo = $_POST['id_ubigeo'];
@@ -116,10 +116,20 @@ class socio_controlador extends controller {
 
 
         $this->_socio->id_socio = $this->filtrarInt($id);
-        $this->_vista->datos = $this->_socio->selecciona_id();
-        //$this->_vista->region =  $this->_ubigeo->selecciona_id();
-        //$this->_vista->provincia = $this->_ubigeo->selecciona_id();
-        //$this->_vista->distrito = $this->_ubigeo->selecciona_id();
+        $this->_vista->datos = $this->_socio->selecciona_id();//Extraigo UBIGEO
+
+        // SACANDO OTRAS PARTES DE UBIGEO
+        $this->_ubigeo->idubigeo = $this->_vista->datos[0]["IDUBIGEO"];
+        $this->_vista->ubigeo = $this->_ubigeo->selecciona_id();
+
+        $this->_ubigeo->codigo_region =$this->_vista->ubigeo[0]["CODIGO_REGION"];
+        $this->_ubigeo->codigo_provincia =$this->_vista->ubigeo[0]["CODIGO_PROVINCIA"];
+        $this->_ubigeo->codigo_distrito =$this->_vista->ubigeo[0]["CODIGO_DISTRITO"];
+
+        
+        $this->_vista->region =  $this->_ubigeo->selecciona_departamento();
+        $this->_vista->provincia = $this->_ubigeo->selecciona_provincia();
+        $this->_vista->distrito = $this->_ubigeo->selecciona_distrito();
         $this->_vista->tipo_socio = $this->_tipo_socio->selecciona();
         //jquery-ui.min
         $this->_vista->titulo = 'Actualizar Socio';
