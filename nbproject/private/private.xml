@@ -12,19 +12,19 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/xampp/htdocs/Olympo/vista/cronograma_pago/index.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/modelo/cronograma_pago.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/controlador/cronograma_pago_controlador.php</file>
-=======
-            <file>file:/C:/xampp/htdocs/Olympo/vista/empleado/index.php</file>
             <file>file:/C:/xampp/htdocs/Olympo/controlador/empleado_controlador.php</file>
+<<<<<<< HEAD
+            <file>file:/C:/xampp/htdocs/Olympo/vista/compra/js/funciones_form.js</file>
+            <file>file:/C:/xampp/htdocs/Olympo/vista/compra/form.php</file>
+            <file>file:/C:/xampp/htdocs/Olympo/controlador/compra_controlador.php</file>
+=======
             <file>file:/C:/xampp/htdocs/Olympo/vista/empleado/js/funciones_form.js</file>
             <file>file:/C:/xampp/htdocs/Olympo/controlador/socio_controlador.php</file>
             <file>file:/C:/xampp/htdocs/Olympo/modelo/empleado.php</file>
             <file>file:/C:/xampp/htdocs/Olympo/vista/empleado/js/funcion.js</file>
             <file>file:/C:/xampp/htdocs/Olympo/vista/empleado/form.php</file>
 >>>>>>> ba5079a034e9508e0f1729b5052d2c6790f3b530
+>>>>>>> 4f06bc428bbd0bb95da71356b9b5036e2f9ef82b
         </group>
     </open-files>
 </project-private>

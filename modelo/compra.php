@@ -14,8 +14,7 @@ class compra extends Main{
     public $estadopago;
 
     public function selecciona() {
-        
-//        echo '<pre>';print_r($datos);exit;
+  
         $r = $this->get_consulta("pa_m1_compra", null);
         if ($r[1] == '') {
             $stmt = $r[0];
@@ -71,7 +70,7 @@ class compra extends Main{
 
     public function elimina() {
         $datos = array($this->id_compra);
-        $r = $this->get_consulta("elim_compra", $datos);
+        $r = $this->get_consulta("pa_d_compra", $datos);
         $error = $r[1];
         $r = null;
         return $error;

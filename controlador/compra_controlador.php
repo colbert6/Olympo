@@ -5,6 +5,7 @@ class compra_controlador extends controller {
     private $_compra;
     private $_almacen;
     private $_compra_producto;
+    private $_almacen_producto;
     private $_cronograma_pago;
     private $_proveedor;
     private $_param;
@@ -19,14 +20,13 @@ class compra_controlador extends controller {
         $this->_proveedor = $this->cargar_modelo('proveedor');
         $this->_compra_producto = $this->cargar_modelo('compra_producto');
         $this->_cronograma_pago = $this->cargar_modelo('cronograma_pago');
+        $this->_almacen_producto = $this->cargar_modelo('almacen_producto');
         $this->_param = $this->cargar_modelo('param');
     }
 
     public function index() {
         $this->_vista->titulo = 'Lista de Compras';
-        //$this->_vista->datos = $this->_compra->selecciona();
         $this->_vista->setJs(array('funcion'));
-        //$this->_vista->setJs_Foot(array('scriptgrilla'));
         $this->_vista->datos = $this->_compra->selecciona();
         //print_r($this->_vista->datos);exit;
         $this->_vista->setCss_public(array('jquery.dataTables'));
@@ -62,14 +62,14 @@ class compra_controlador extends controller {
         
         
         if ($_POST['guardar'] == 1) {
-//            echo '<pre>';print_r($_POST);exit;
-            $this->_cuota_compra->id_proveedor = $_POST['id_proveedor'];
-            $this->_cuota_compra->id_empleado = session::get('id_empleado');
-            $this->_cuota_compra->id_modalidad_transaccion= $_POST['id_tipopago'];
-            $this->_cuota_compra->fecha = $_POST['fechacompra'];
-            $this->_cuota_compra->monto = $_POST['subtotal'];
-            $this->_cuota_compra->num_documento = $_POST['nrodoc'];
-            $this->_cuota_compra->igv = $_POST['igv'];
+            //echo '<pre>';print_r($_POST);exit;
+            $this->_compra->id_proveedor = $_POST['id_proveedor'];
+            $this->_compra->id_empleado = session::get('id_empleado');
+            $this->_compra->id_modalidad_transaccion= $_POST['id_tipopago'];
+            $this->_compra->fecha = $_POST['fechacompra'];
+            $this->_compra->monto = $_POST['subtotal'];
+            $this->_compra->num_documento = $_POST['nrodoc'];
+            $this->_compra->igv = $_POST['igv'];
             
             $dato_compra = $this->_compra->inserta();
 //            print_r($dato_compra);exit;
@@ -114,13 +114,11 @@ class compra_controlador extends controller {
                 }
                 
                 
-            }else{
-                                
+            }else{         
                 $this->_cronograma_pago->id_compra=$dato_compra[0]['MAX_COMPRA'];
                 $this->_cronograma_pago->fecha_venc=$_POST['fechacompra'];
                 $this->_cronograma_pago->monto_cuota=$_POST['total'];
                 $this->_cronograma_pago->num_cuota=1;
-          
                 $this->_cronograma_pago->inserta();
             }
             $this->redireccionar('compra');
@@ -138,9 +136,34 @@ class compra_controlador extends controller {
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('compra');
         }
-        $this->_compra->id_compra = $this->filtrarInt($id);
-        $this->_compra->elimina();
-        $this->redireccionar('compra');
+        $this->_compra_producto->id_compra = $this->filtrarInt($id);
+        $dato_compra=$this->_compra_producto->comparar_stocks();
+        
+        $c=TRUE;
+        for($i=0;$i<count($dato_compra);$i++){
+            if($dato_compra[$i]['CANT_COMPRA']>$dato_compra[$i]['STOCK_ACTUAL']){
+                $c=FALSE;
+                break;
+            }
+        }
+            
+        if($c){
+            for($i=0;$i<count($dato_compra);$i++){
+                $cantidad=$dato_compra[$i]['STOCK_ACTUAL']-$dato_compra[$i]['CANT_COMPRA'];
+                $this->_almacen_producto->id_almacen = $dato_compra[$i]['ID_ALMACEN'];
+                $this->_almacen_producto->id_producto = $dato_compra[$i]['ID_PRODUCTO'];
+                $this->_almacen_producto->cantidad = $cantidad;
+                $this->_almacen_producto->quitar_stock();
+            }
+            $this->_compra->id_compra = $id;
+            $this->_compra->elimina();
+            $this->redireccionar('compra');
+        }else{
+            echo "<script>alert('Stock menor a la cantidad comprada')</script>";
+            $this->redireccionar('compra');
+        }
+        
+        
     }
     
     public function getParam(){

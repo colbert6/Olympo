@@ -39,8 +39,8 @@
         if($var == 2){ ?>
             <tr class="error" >
         <?php }?> 
-                <?php $total= (int)(($this->datos[$i]['MONTO']*(1+$this->datos[$i]['IGV']) )*100)?>
-                <?php $total= $total/100?>
+                <?php $total= round($this->datos[$i]['MONTO']*(1+$this->datos[$i]['IGV']), 2); ?>
+                
                 <td><?php echo ($i+1);//id ?></td>
                 <td><?php echo $this->datos[$i]['NUM_DOCUMENTO']; ?></td>
                 <td><?php echo $this->datos[$i]['XPROVEEDOR']; ?></td>
