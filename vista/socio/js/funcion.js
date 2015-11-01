@@ -22,15 +22,15 @@ function ver(id){
         html+='<table class="table table-striped table-bordered table-hover sortable">';
         html+= '<tr>';
         html+= '<th>NOMBRE:</th>';
-        html+= '<td>'+datos[0]["NOMBRE"]+'</td>';
+        html+= '<td>'+datos[0]["NOMBRE"].toUpperCase()+'</td>';
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>APELLIDOS</th>';
-        html+= '<td>'+datos[0]["APELLIDO_PATERNO"]+' '+datos[0]["APELLIDO_MATERNO"]+'</td>';
+        html+= '<td>'+datos[0]["APELLIDO_PATERNO"].toUpperCase()+' '+datos[0]["APELLIDO_MATERNO"].toUpperCase()+'</td>';
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>TIPO DE SOCIO:</th>';
-        html+= '<td>'+datos[0]["TIPO_SOCIO"]+'</td>';
+        html+= '<td>'+datos[0]["TIPO_SOCIO"].toUpperCase()+'</td>';
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>DNI:</th>';
@@ -38,19 +38,19 @@ function ver(id){
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>ALIAS:</th>';
-        html+= '<td>'+datos[0]["ALIASS"]+'</td>';
+        html+= '<td>'+datos[0]["ALIASS"].toUpperCase()+'</td>';
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>DIRECCION:</th>';
-        html+= '<td>'+datos[0]["DIRECCION"]+'</td>';
+        html+= '<td>'+datos[0]["DIRECCION"].toUpperCase()+'</td>';
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>SEXO:</td>';
-        if(datos[0]['SEXO']==0){
-            html+= '<td>Femenino</td>';
+        if(datos[0]['SEXO']=='f'){
+            html+= '<td>FEMENINO</td>';
         }
         else{
-            html+= '<td>Masculino</td>';
+            html+= '<td>MASCULINO</td>';
         }
         html+= '</tr>';
         html+= '<tr>';
@@ -70,7 +70,7 @@ function ver(id){
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>OCUPACION:</th>';
-        html+= '<td>'+datos[0]["OCUPACION"]+'</td>';
+        html+= '<td>'+datos[0]["OCUPACION"].toUpperCase()+'</td>';
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>NUMERO DE HIJOS:</th>';
@@ -78,11 +78,11 @@ function ver(id){
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>SECTOR:</th>';
-        html+= '<td>'+datos[0]["SECTOR"]+'</td>';
+        html+= '<td>'+datos[0]["SECTOR"].toUpperCase()+'</td>';
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>GRADO DE ESTUDIO:</th>';
-        html+= '<td>'+datos[0]["GRADO_ESTUDIO"]+'</td>';
+        html+= '<td>'+datos[0]["GRADO_ESTUDIO"].toUpperCase()+'</td>';
         html+= '</tr>';
         html+= '</table>';
         $("#titulo").html(titulo);
@@ -91,19 +91,19 @@ function ver(id){
     $.post(url+'socio/extraerTriaje','id='+id,function(triaje){
         //alert(triaje.length);
         if(triaje.length>0){
-            $.post(url+'socio/conceptoTriaje',function(concepto_triaje){
+            $.post(url+'concepto_triaje/jsonExtraerConceptoTriaje',function(concepto_triaje){
                 //alert(concepto_triaje.length);
                 $.post(url+'socio/ultimoTriaje','id='+id,function(utriaje){
                     //alert(utriaje.length);
                     triaje="<br>";
-                    triaje+="<div class='btn-group btn-group-justified' style='width:60%; margin:0 auto;'>";
-                    triaje+=" <a href='"+url+"triaje/editar_ultimo/"+id+"' class='btn btn-danger'>Editar Triaje</a>";
+                    triaje+="<div class='btn-group btn-group-justified' style='width:80%; margin:0 auto;'>";
+                    triaje+=" <a href='"+url+"triaje/editar_ultimo/"+id+"' class='btn btn-danger'>EDITAR TRIAJE</a>";
                     if (Date.parse(hoy())==Date.parse(utriaje[0]["FECHA"])){
                         triaje+="";
                     }else{
-                        triaje+=" <a href='"+url+"triaje/nuevo/"+id+"' class='btn btn-warning'>Nuevo Triaje</a>";    
+                        triaje+=" <a href='"+url+"triaje/nuevo/"+id+"' class='btn btn-warning'>NUEVO TRIAJE</a>";    
                     }
-                    triaje+=" <a href='"+url+"triaje/historial/"+id+"' class='btn btn-success'>Ver Historial</a>";
+                    triaje+=" <a href='"+url+"triaje/historial/"+id+"' class='btn btn-success'>VER HISTORIAL</a>";
                     triaje+="</div>";
                     triaje+='<br>';
                     triaje+='<table class="table table-striped table-bordered table-hover sortable">';
@@ -113,7 +113,7 @@ function ver(id){
                         triaje+= '<td>';
                         for (var i = 0; i < utriaje.length; i++) {
                             if(concepto_triaje[j]["ID_CONCEPTO_TRIAJE"] == utriaje[i]["ID_CONCEPTO_TRIAJE"]){
-                                triaje+= utriaje[i]["VALOR"]+utriaje[i]["UNIDAD_MEDIDA"];
+                                triaje+= utriaje[i]["VALOR"]+" "+utriaje[i]["UNIDAD_MEDIDA"];
                             }else{
                                 triaje+="";
                             }
@@ -139,12 +139,51 @@ function ver(id){
         }
         
     },'json');
-    $.post(url+'socio/extraerTriaje','id='+id,function(datos){
+    $.post(url+'socio/extraerRutina','id='+id,function(rutina){
+        //alert(rutina.length);
+        if(rutina.length>0){
+            $.post(url+'categoria_ejercicio/jsonCategoria_Ejercicio',function(categoria_ejercicio){      
+                //   alert(categoria_ejercicio.length);
+                dat_rutina="<br>";
+                dat_rutina+="<div class='btn-group btn-group-justified' style='width:40%; margin:0 auto;'>";
+                dat_rutina+=" <a href='"+url+"rutina/editar/"+id+"' class='btn btn-warning'>EDITAR RUTINA </a>";
+                dat_rutina+="</div>";
+                dat_rutina+='<br>';
+                dat_rutina+='<table class="table table-striped table-bordered table-hover sortable">';
+                dat_rutina+='<thead>';
+                dat_rutina+='<th>DIA</th>';
+                dat_rutina+='<th>CATEGORIA EJERCICIO</th>';
+                dat_rutina+='</thead>';
+                dat_rutina+='<tbody>';
+               for (var k = 0; k <rutina.length; k++) {
+                    dat_rutina+='<tr>';
+                    dat_rutina+='<th>'+rutina[k]["DIA"]+'</th>';
+                    for (var l = 0; l < categoria_ejercicio.length; l++) {
+                        if(categoria_ejercicio[l]["ID_CATEGORIA_EJERCICIO"] == rutina[k]["ID_CATEGORIA_EJERCICIO"]){
+                            dat_rutina+= '<td>'+categoria_ejercicio[l]["DESCRIPCION"].toUpperCase()+'</td>';
+                        }
+                    };
+                    dat_rutina+= '</tr>';
+                };
+                dat_rutina+='</tbody>';
 
 
+                
+                dat_rutina+= '</table>';
+              //  alert(dat_rutina);
+            
+                $("#rutina").html(dat_rutina);
+            
+            },'json');
+            
+        }else{
+            btnFinal="<br>";
+            btnFinal+="<div class='btn-group btn-group-justified' style='width:20%; margin:0 auto;'>";
+            btnFinal+=" <a href='"+url+"rutina/nuevo/"+id+"' class='btn btn-warning'>Agregar Rutina</a>";
+            btnFinal+="</div>";
+            $("#rutina").html(btnFinal);
+        }
 
-
-        $("#rutina").html(datos[0]["NOMBRE"]);
     },'json');
 }
 

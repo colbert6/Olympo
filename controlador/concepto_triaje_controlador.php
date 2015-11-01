@@ -61,6 +61,11 @@ class concepto_triaje_controlador extends controller{
         $this->_concepto_triaje->elimina();
         $this->redireccionar('concepto_triaje');
     }
+
+    public function jsonExtraerConceptoTriaje(){
+        $datos = $this->_concepto_triaje->selecciona();
+        echo json_encode($datos);
+    }
     
 }
 

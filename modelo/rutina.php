@@ -46,6 +46,26 @@ class rutina extends Main{
       
     }
     
+    public function socio_x_rutina() {
+        
+        $datos = array($this->id_socio);
+        
+        $r = $this->get_consulta("rutinaxsocio",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
     public function inserta() {
         
         $datos = array($this->dia,$this->id_categoria_ejercicio,$this->id_socio);
