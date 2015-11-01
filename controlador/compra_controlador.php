@@ -5,6 +5,7 @@ class compra_controlador extends controller {
     private $_compra;
     private $_almacen;
     private $_compra_producto;
+    private $_almacen_producto;
     private $_cronograma_pago;
     private $_proveedor;
     private $_param;
@@ -19,6 +20,7 @@ class compra_controlador extends controller {
         $this->_proveedor = $this->cargar_modelo('proveedor');
         $this->_compra_producto = $this->cargar_modelo('compra_producto');
         $this->_cronograma_pago = $this->cargar_modelo('cronograma_pago');
+        $this->_almacen_producto = $this->cargar_modelo('almacen_producto');
         $this->_param = $this->cargar_modelo('param');
     }
 
@@ -134,9 +136,34 @@ class compra_controlador extends controller {
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('compra');
         }
-        $this->_compra->id_compra = $this->filtrarInt($id);
-        $this->_compra->elimina();
-        $this->redireccionar('compra');
+        $this->_compra_producto->id_compra = $this->filtrarInt($id);
+        $dato_compra=$this->_compra_producto->comparar_stocks();
+        
+        $c=TRUE;
+        for($i=0;$i<count($dato_compra);$i++){
+            if($dato_compra[$i]['CANT_COMPRA']>$dato_compra[$i]['STOCK_ACTUAL']){
+                $c=FALSE;
+                break;
+            }
+        }
+            
+        if($c){
+            for($i=0;$i<count($dato_compra);$i++){
+                $cantidad=$dato_compra[$i]['STOCK_ACTUAL']-$dato_compra[$i]['CANT_COMPRA'];
+                $this->_almacen_producto->id_almacen = $dato_compra[$i]['ID_ALMACEN'];
+                $this->_almacen_producto->id_producto = $dato_compra[$i]['ID_PRODUCTO'];
+                $this->_almacen_producto->cantidad = $cantidad;
+                $this->_almacen_producto->quitar_stock();
+            }
+            $this->_compra->id_compra = $id;
+            $this->_compra->elimina();
+            $this->redireccionar('compra');
+        }else{
+            echo "<script>alert('Stock menor a la cantidad comprada')</script>";
+            $this->redireccionar('compra');
+        }
+        
+        
     }
     
     public function getParam(){

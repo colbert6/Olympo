@@ -89,7 +89,8 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" > Cuotas:</label>
                     <div class="col-md-8">
-                        <input name="cuotas" id="cuotas" class="form-control"  placeholder="Cuotas" autofocus maxlength="10"  >
+                        <input name="cuotas" id="cuotas" class="form-control"  placeholder="Cuotas" onkeypress="return soloNumeros(event)"
+                               maxlength="2"  >
                     </div>
                 </div>
             </div>
@@ -97,7 +98,8 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" >Intervalo:</label>
                     <div class="col-md-8">
-                        <input name="intervalo" id="intervalo" class="form-control"  placeholder="Intervalo" autofocus maxlength="10"  >
+                        <input name="intervalo" id="intervalo" class="form-control"  placeholder="Intervalo" onkeypress="return soloNumeros(event)"
+                               maxlength="3"  >
                     </div>
                 </div>
             </div>
@@ -117,7 +119,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-            <input type="text" name="cantidad" id="cantidad" placeholder="Cantidad" class="form-control" onkeypress="return soloNumeros(event)" style="width: 110px" />
+            <input type="text" name="cantidad" id="cantidad" placeholder="Cantidad" class="form-control" onkeypress="return soloNumeros(event)" maxlength="3" style="width: 110px" />
             <input type="text" name="precio" id="precio" placeholder="PUxUM" class="form-control" onkeypress="return dosDecimales(event,this)" style="width: 110px" />  
             <input type="text" name="importe" id="importe" placeholder="Importe" class="form-control" readonly="readonly" style="width: 110px" />
             <button type="button" class="btn btn-primary btn-sm" title="Agregar al Detalle" id="addDetalle"><i class="icon-hand-down icon-white"></i></button>
