@@ -5,6 +5,9 @@ class tipo_membresia extends Main{
     public $id_tipo_membresia;
     public $descripcion;
     public $numero_servicios;
+    public $duracion;
+    public $vigencia;
+    public $precio;
     public $estado;
 
     public function selecciona() {
@@ -43,7 +46,7 @@ class tipo_membresia extends Main{
     }
     
     public function inserta() {
-        $datos = array($this->descripcion,$this->numero_servicios);
+        $datos = array($this->descripcion,$this->numero_servicios,$this->duracion,$this->vigencia,$this->precio);
         $r = $this->get_consulta("pa_i_time", $datos);
         $error = $r[1];
         $r = null;
@@ -51,7 +54,7 @@ class tipo_membresia extends Main{
     }
 
     public function actualiza() {
-        $datos = array($this->id_tipo_membresia,$this->descripcion,$this->numero_servicios);
+        $datos = array($this->id_tipo_membresia,$this->descripcion,$this->numero_servicios,$this->duracion,$this->vigencia,$this->precio);
         $r = $this->get_consulta("pa_u_time", $datos);       
         $error = $r[1];
         $r = null;

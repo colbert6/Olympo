@@ -34,33 +34,27 @@ class compra_controlador extends controller {
         $this->_vista->renderizar('index');
     }
     
-    public function inserta_prov(){        
-        $this->_proveedor->nombre=$_POST['nombre'];
-        $this->_proveedor->direccion=$_POST['dir'];
-        $this->_proveedor->razonsocial=$_POST['rs'];
+    public function inserta_prov(){
+         $this->_proveedor->direccion=$_POST['dir'];
+        $this->_proveedor->razon_social=$_POST['rs'];
         $this->_proveedor->email=$_POST['em'];
-        $this->_proveedor->ciudad=$_POST['ciu'];
+        $this->_proveedor->id_ubigeo=$_POST['ciu'];
         $this->_proveedor->ruc=$_POST['ruc'];
-        $this->_proveedor->telefmovil=$_POST['tel'];
+        $this->_proveedor->telefono=$_POST['tel'];
         $datos = $this->_proveedor->inserta();
         echo json_encode(array('id_proveedor'=>$datos[0]['INS_PROVEEDOR']));
     }
     
     public function get_proveedor(){
-        $this->_proveedor->id_proveedor=9999;
         echo json_encode($this->_proveedor->selecciona());
     }
     
-    
     public function ver(){
         $this->_compra->id_compra=$_POST['id_compra'];
-        //print_r($this->_compra->selecciona());exit;
         echo json_encode($this->_compra->selecciona_id());
     }
     
     public function nuevo() {
-        
-        
         if ($_POST['guardar'] == 1) {
             //echo '<pre>';print_r($_POST);exit;
             $this->_compra->id_proveedor = $_POST['id_proveedor'];
@@ -112,7 +106,6 @@ class compra_controlador extends controller {
                     $this->_cronograma_pago->inserta();
                     $fecha_temp = date("Y-m-d", strtotime("$fecha_temp +$intervalo_dias day"));
                 }
-                
                 
             }else{         
                 $this->_cronograma_pago->id_compra=$dato_compra[0]['MAX_COMPRA'];
@@ -171,11 +164,6 @@ class compra_controlador extends controller {
         echo json_encode($this->_param->selecciona());
     }
     
-    public function getUnidadesInsumo(){
-        $this->_detinsumoum->id_insumo = $_POST['id_insumo'];
-        echo json_encode($this->_detinsumoum->selecciona());
-    }
-
 }
 
 ?>

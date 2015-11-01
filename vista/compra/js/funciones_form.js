@@ -24,7 +24,7 @@ $(function() {
     });
     $("input:text[readonly=readonly]").css('cursor', 'pointer');
     limpiar();
-    $("#fechacompra, #fecha_vencimiento").datepicker({dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true});
+    $("#fechacompra").datepicker({dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true});
     $("#save").click(function() {
         bval = true;
         bval = bval && $("#nrodoc").required();
@@ -48,16 +48,6 @@ $(function() {
         }
         return false;
     });
-    $("#selectInsumo").click(function() {
-        bval = true;   
-        bval = bval && $("#sel_almacen").required();
-        if (!bval) 
-        {
-           return false;
-        }
-        buscarInsumo();
-        $("#VtnBuscarInsumo").show();
-    });
     $("#producto").click(function() {
         bval = true;   
         bval = bval && $("#sel_almacen").required();
@@ -78,12 +68,6 @@ $(function() {
         buscarInsumo();
         $("#VtnBuscarInsumo").show();
     });
-    $("#proveedor").click(function() {
-        buscarProveedor();
-        $("#buscarProveedor").focus();
-        $("#VtnBuscarProveedor").show();
-        $("#buscarProveedor").focus();
-    });
     $("#proveedor").focus(function() {
         buscarProveedor();
         $("#buscarProveedor").focus();
@@ -97,43 +81,12 @@ $(function() {
         $("#buscarProveedor").focus();
     });
 
-    $("#buscarInsumo").keypress(function(event) {
-        if (event.which == 13) {
-            event.preventDefault();
-            buscarInsumo();
-        }
-    });
-
-    $("#btn_buscarInsumo").click(function() {
-        buscarInsumo();
-        $("#buscarInsumo").focus();
-    });
-
-    $("#buscarProveedor").keypress(function(event) {
-        if (event.which == 13) {
-            event.preventDefault();
-            buscarProveedor();
-        }
-    });
-
-    $("#btn_buscarProveedor").click(function() {
-        buscarProveedor();
-        $("#buscarProveedor").focus();
-    });
-
     $("#cantidad").keyup(function() {
         setImporte();
     });
     
     $("#precio").keyup(function() {
         setImporte();
-    });
-    $("#preciounitario").blur(function() {
-        var preciounitario = parseFloat($(this).val());
-        if (isNaN(preciounitario)) {
-            preciounitario = 0;
-        }
-        $(this).val(preciounitario.toFixed(2));
     });
 
     $("#addDetalle").click(function() {
@@ -193,44 +146,39 @@ $(function() {
             $("#razonsocialprov").focus();
         }
         else {
-            if (prov == "") {
-                alert("Ingrese Representante");
-                $("#nombreprov").focus();
+            if (ruc == "") {
+                alert("Ingrese Ruc");
+                $("#rucprov").focus();
             }
             else {
-                if (ruc == "") {
-                    alert("Ingrese Ruc");
-                    $("#rucprov").focus();
+                if (dir == "") {
+                    alert("Ingrese Direccion");
+                    $("#direccionprov").focus();
                 }
                 else {
-                    if (dir == "") {
-                        alert("Ingrese Direccion");
-                        $("#direccionprov").focus();
+                    if (tel == "") {
+                        alert("Ingrese Telefono");
+                        $("#telefmovilprov").focus();
                     }
                     else {
-                        if (tel == "") {
-                            alert("Ingrese Telefono");
-                            $("#telefmovilprov").focus();
+                        if (email == "") {
+                            alert("Ingrese Email");
+                            $("#emailprov").focus();
                         }
                         else {
-                            if (email == "") {
-                                alert("Ingrese Email");
-                                $("#emailprov").focus();
+                            if (ciu == "") {
+                                alert("Ingrese Ciudad");
+                                $("#ciudadprov").focus();
                             }
                             else {
-                                if (ciu == "") {
-                                    alert("Ingrese Ciudad");
-                                    $("#ciudadprov").focus();
-                                }
-                                else {
-                                    $.post(url + 'compra/inserta_prov', 'nombre=' + $("#nombreprov").val() + '&dir=' + $("#direccionprov").val() + '&rs=' + $("#razonsocialprov").val() +
-                                            '&em=' + $("#emailprov").val() + '&ciu=' + $("#ciudadprov").val() + '&ruc=' + $("#rucprov").val() + '&tel=' + $("#telefmovilprov").val(), function(datos) {
-                                        $("#id_proveedor").val(datos.id_proveedor);
-                                        $("#proveedor").val($("#razonsocialprov").val());
-                                        $('#modalNuevoProveedor').modal('hide');
-                                        $("#razonsocialprov,#nombreprov,#rucprov,#direccionprov,#telefmovilprov,#emailprov,#ciudadprov").val('');
-                                    }, 'json')
-                                }
+                                $.post(url + 'compra/inserta_prov', 'dir=' + $("#direccionprov").val() + '&rs=' + $("#razonsocialprov").val() +
+                                        '&em=' + $("#emailprov").val() + '&ciu=' + $("#ciudadprov").val() + '&ruc=' + $("#rucprov").val() + '&tel=' + $("#telefmovilprov").val(), function(datos) {
+                                    $("#id_proveedor").val(datos.id_proveedor);
+                                    $("#proveedor").val($("#razonsocialprov").val());
+                                    $("#ruc_prov").val($("#rucprov").val());
+                                    $('#modalNuevoProveedor').modal('hide');
+                                    $("#razonsocialprov,#rucprov,#direccionprov,#telefmovilprov,#emailprov,#ciudadprov").val('');
+                                }, 'json')
                             }
                         }
                     }
@@ -373,23 +321,7 @@ function sel_proveedor(id_p, d,ruc) {
     $("#id_tipopago").focus();
 }
 
-f
-
 function limpiar() {
     $("#id_producto,#id_almacen,#stockactual,#producto,#cantidad,#precio,#importe").val('');
     $("#cantidad,#precio").attr('disabled', true);
-}
-
-function seleccionaDias(fecha_final) {
-    fecha_inicio = $("#fechacompra").val();
-    if (fecha_inicio == '') {
-        bootbox.alert("Escoja una fecha valida");
-        $("#fecha_vencimiento").val('');
-        return;
-    }
-    var dias = getDias($(fecha_final).val(), fecha_inicio);
-    if (dias <= 0) {
-        bootbox.alert("Escoja una fecha valida");
-        $("#fecha_vencimiento").val('');
-    }
 }
