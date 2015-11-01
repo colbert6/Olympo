@@ -61,6 +61,11 @@ class categoria_ejercicio_controlador extends controller {
         $this->redireccionar('categoria_ejercicio');
     }
 
+    public function jsonCategoria_Ejercicio(){
+        $datos = $this->_model->selecciona();
+        echo json_encode($datos);
+    }
+
 }
 
 ?>

@@ -159,6 +159,8 @@ class triaje_controlador extends controller {
         $this->redireccionar('triaje/historial/'.$id);
     }
 
+    
+
 }
 
 ?>

@@ -12,7 +12,7 @@ function ver(id){
         html+='<table class="table table-striped table-bordered table-hover sortable">';
         html+= '<tr>';
         html+= '<th>CATEGORIA DE EMPLEADO:</th>';
-        html+= '<td <?php >'+datos[0]["CATEGORIA-EMPLEADO"]+'</td>';
+        html+= '<td>'+datos[0]["CATEGORIA-EMPLEADO"]+'</td>';
         html+= '</tr>';
         html+= '<tr>';
         html+= '<th>NOMBRE:</th>';
@@ -43,7 +43,12 @@ function ver(id){
         html+= '</tr>';
         html+= '</tr>';
         html+= '<th>SEXO:</th>';
-        html+= '<td>'+datos[0]["SEXO"]+'</td>';
+        if(datos[0]['SEXO']=='f'){
+            html+= '<td>FEMENINO</td>';
+        }
+        else{
+            html+= '<td>MASCULINO</td>';
+        }
         html+= '</tr>';
         html+= '</tr>';
         html+= '<th>DIRECCION:</th>';

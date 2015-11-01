@@ -7,6 +7,7 @@ class socio_controlador extends controller {
     private $_ubigeo;
     private $_triaje;
     private $_concepto_triaje;
+    private $_rutina;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -18,6 +19,7 @@ class socio_controlador extends controller {
         $this->_ubigeo = $this->cargar_modelo('ubigeo');
         $this->_triaje = $this->cargar_modelo('triaje');
         $this->_concepto_triaje = $this->cargar_modelo('concepto_triaje');
+        $this->_rutina = $this->cargar_modelo('rutina');
     }
 
     public function index() {
@@ -167,8 +169,8 @@ class socio_controlador extends controller {
             $this->_socio->dni=$_POST['dni'];
             $socio = $this->_socio->selecciona_dni();
             
-        }else if(isset($_REQUEST['id'])){
-            $this->_socio->id_socio=$_REQUEST['id'];
+        }else if(isset($_POST['id'])){
+            $this->_socio->id_socio=$_POST['id'];
             $socio = $this->_socio->selecciona_id();
         }
         echo json_encode($socio);
@@ -183,10 +185,14 @@ class socio_controlador extends controller {
         $datos = $this->_triaje->ultimo_triaje();
         echo json_encode($datos);
     }
-    public function conceptoTriaje(){
-        $datos = $this->_concepto_triaje->selecciona();
+    
+    public function extraerRutina(){
+        $this->_rutina->id_socio=$_POST['id'];
+        $datos = $this->_rutina->socio_x_rutina();
         echo json_encode($datos);
     }
+    
+
 }
 
 ?>

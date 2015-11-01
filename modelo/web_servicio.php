@@ -1,14 +1,13 @@
 <?php
 
-class rutina extends Main{
+class web_servicio extends Main{
 
-    public $id_rutina;
-    public $dia;
-    public $id_categoria_ejercicio;
-    public $id_socio;
+    public $id_almacen;
+    public $descripcion;
+    public $estado;
     
     public function selecciona() {
-        $r = $this->get_consulta("pa_m1_rutina",null);
+        $r = $this->get_consulta("pa_m1_img_ser",null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -27,9 +26,9 @@ class rutina extends Main{
     public function selecciona_id() {
         
       
-        $datos = array($this->id_rutina);
+        $datos = array($this->id_almacen);
         
-        $r = $this->get_consulta("pa_m2_rutina",$datos);
+        $r = $this->get_consulta("pa_m2_img_ser",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -46,30 +45,9 @@ class rutina extends Main{
       
     }
     
-    public function socio_x_rutina() {
-        
-        $datos = array($this->id_socio);
-        
-        $r = $this->get_consulta("rutinaxsocio",$datos);
-        if ($r[1] == '') {
-            $stmt = $r[0];
-        } else {
-            die($r[1]);
-        }
-        $r = null;
-        if (BaseDatos::$_servidor == 'OCI') {
-            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
-            return $data;
-        } else {
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            return $stmt->fetchall();
-        }
-      
-    }
     public function inserta() {
-        
-        $datos = array($this->dia,$this->id_categoria_ejercicio,$this->id_socio);
-        $r = $this->get_consulta("pa_i_rutina", $datos);
+        $datos = array($this->descripcion);
+        $r = $this->get_consulta("pa_i_img_ser", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -77,9 +55,9 @@ class rutina extends Main{
 
     public function actualiza() {
        
-        $datos = array($this->id_rutina,$this->dia,$this->id_categoria_ejercicio,$this->id_socio);
+        $datos = array($this->id_almacen, $this->descripcion);
         
-        $r = $this->get_consulta("pa_u_rutina", $datos);
+        $r = $this->get_consulta("pa_u_img_ser", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -88,8 +66,8 @@ class rutina extends Main{
     
 
     public function elimina() {
-        $datos = array($this->id_rutina);
-        $r = $this->get_consulta("pa_d_rutina", $datos);
+        $datos = array($this->id_almacen);
+        $r = $this->get_consulta("pa_d_img_ser", $datos);
         $error = $r[1];
         $r = null;
         return $error;

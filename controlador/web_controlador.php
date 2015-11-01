@@ -12,8 +12,8 @@ class web_Controlador extends controller {
         
         parent::__construct();
         $this->_model = $this->cargar_modelo('informacion');
-      /*  $this->_web_servicios = $this->loadModel('servicio');
-        $this->_web_img_servicios = $this->loadModel('imagen_servicio');
+        $this->_servicios = $this->cargar_modelo('web_servicio');
+        /*$this->_web_img_servicios = $this->loadModel('imagen_servicio');
         $this->_web_categoria_productos =  $this->loadModel('cat_producto');
         $this->_web_productos = $this->loadModel('producto');
       */  
@@ -31,6 +31,7 @@ class web_Controlador extends controller {
     }
     public function nosotros(){
         $this->_vista->datos = $this->_model->selecciona();
+        
         $this->_vista->renderiza_web('nosotros','nosotros',false);
     }
     public function productos($categoria=false,$id=false){
@@ -51,11 +52,9 @@ class web_Controlador extends controller {
         
     }
     public function servicios($servicio=false){
-        $this->_vista->informacion =$servicio;
-        $this->_vista->datos_servicio = $this->_web_servicios->getServicios();
-        //$this->_vista->img_servicio = $this->_web_img_servicios->getImgServicios();
-        $this->_vista->setCss(array('servicios'));
-        //$this->_vista->js=>setJs(array('sexylightbox','jquery.easing'));
+        
+        $this->_vista->datos_servicio = $this->_servicios->selecciona();
+        
         $this->_vista->renderiza_web('servicios','servicios',true);
     }    
     public function contactenos(){

@@ -11,9 +11,9 @@
             </tr>
         </thead>
          <tbody>
-            <?php for ($i = 0; $i < count($this->datos); $i++) { ?>
+            <?php for ($i = 1; $i < count($this->datos); $i++) { ?>
             <tr>
-                <td><?php echo ($i+1);//id ?></td>
+                <td><?php echo ($i);//id ?></td>
                 <td><?php echo $this->datos[$i]['DESCRIPCION'];//nombre ?></td> 
                 <td><?php if($this->datos[$i]['ESTADO']=='1'){
                     echo 'Activo';
