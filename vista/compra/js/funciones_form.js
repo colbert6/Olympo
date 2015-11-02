@@ -9,6 +9,7 @@ $(function() {
     $("#sel_almacen").change(function() {
         limpiar();
     });
+    
     $("#nrodoc").focus();
     $("#subtotal,#total,#igv").val('0.00');
     $("#chbx_igv").click(function() {
@@ -70,15 +71,11 @@ $(function() {
     });
     $("#proveedor").focus(function() {
         buscarProveedor();
-        $("#buscarProveedor").focus();
         $("#VtnBuscarProveedor").show();
-        $("#buscarProveedor").focus();
     });
     $("#AbrirVtnBuscarProveedor").click(function() {
         buscarProveedor();
-        $("#buscarProveedor").focus();
         $("#VtnBuscarProveedor").show();
-        $("#buscarProveedor").focus();
     });
 
     $("#cantidad").keyup(function() {

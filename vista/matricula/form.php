@@ -10,8 +10,8 @@
             <div class="form-group">
                 <label class="control-label col-sm-6" >Item:</label>
                 <div class="col-sm-6">
-                    <input name="id_almacen" id="id_almacen" class="form-control"  readonly="readonly"
-                       value="<?php echo $this->datos[0]['ID_ALMACEN'];?>">
+                    <input name="id_matricula" id="id_matricula" class="form-control"  readonly="readonly"
+                       value="<?php echo $this->datos[0]['ID_MATRICULA'];?>">
                 </div>
             </div> 
         </div> 
@@ -44,8 +44,8 @@
                 <div class="form-group" style="margin: 5px auto 5px auto">
                 <label class="col-md-4 control-label" >Membresia:</label>
                     <div >
-                        <input type="hidden" name="id_membresia" id="id_membresia"/>
-                        <input type="text" name="tipo_membresia" id="tipo_membresia" readonly="readonly" placeholder="Membresia" data-toggle="modal" data-target="#modalMembresia" class="form-control"  style="width: 60%;margin-left: 13px;" />
+                        <input type="hidden" name="id_tipo_membresia" id="id_tipo_membresia"/>
+                        <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Membresia" data-toggle="modal" data-target="#modalMembresia" class="form-control"  style="width: 60%;margin-left: 13px;" />
                         <button data-toggle="modal" data-target="#modalMembresia" type="button" class="btn btn-primary btn-sm" title="Buscar Membresia" id="AbrirVtnBuscarMembresia"><i class="icon-search icon-white"></i></button>
                         <!--button style="margin-right: 10px" data-toggle="modal" data-target="#modalNuevoProveedor" type="button" class="btn btn-primary btn-sm" title="Insertar Socio"><i class="icon-plus icon-white"></i></button-->
                     </div>
@@ -114,3 +114,64 @@
         </div>
 
     </form>
+    
+    <!-- Modal -->
+    <style>
+        #modalMembresia .modal-content,#modalSocio .modal-content {
+            width: 800px;
+            left: -18%;
+        }
+    </style>
+    <div id="modalMembresia" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Lista de Membresias</h3>
+        </div>
+        <div class="modal-body">
+            <form id="VtnBuscarMembresia">
+                <div class="navbar-inner text-center">
+                    
+                    <div id="grillaMembresia">
+                        <div class="page-header">
+                            <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        </div>
+        </div>
+        </div>
+    </div>
+    
+    <div id="modalSocio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Lista de Socios</h3>
+        </div>
+        <div class="modal-body">
+            <form id="VtnBuscarSocio">
+                <div class="navbar-inner text-center">
+                    
+                    <div id="grillaSocio">
+                        <div class="page-header">
+                            <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        </div>
+        </div>
+        </div>
+    </div>

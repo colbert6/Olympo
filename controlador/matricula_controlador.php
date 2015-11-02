@@ -28,7 +28,10 @@ class matricula_controlador extends controller {
         }
         $this->_vista->titulo = 'Asignar Membresia';
         $this->_vista->action = BASE_URL . 'matricula/nuevo';
-        $this->_vista->setJs(array('funciones_form'));
+        
+        $this->_vista->setCss_public(array('jquery.dataTables'));
+        $this->_vista->setJs_public(array('jquery.dataTables.min'));
+        $this->_vista->setJs(array('funciones_form','jquery-ui.min'));
         $this->_vista->renderizar('form');
     }
 
