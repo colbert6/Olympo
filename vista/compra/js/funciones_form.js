@@ -373,7 +373,6 @@ function sel_proveedor(id_p, d,ruc) {
     $("#id_tipopago").focus();
 }
 
-f
 
 function limpiar() {
     $("#id_producto,#id_almacen,#stockactual,#producto,#cantidad,#precio,#importe").val('');

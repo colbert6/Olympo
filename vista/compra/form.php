@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-6 ">
                 <div class="form-group">
-                <label class="col-md-4 control-label" >Proveedor:</label>
+                <label class="col-md-4 control-label" >Proveedor:</label>buscarProveedor
                     <div >
                         <input type="hidden" name="id_proveedor" id="id_proveedor"/>
                         <input type="text" name="proveedor" id="proveedor" readonly="readonly" placeholder="Proveedor" data-toggle="modal" data-target="#modalProveedor" class="form-control"  style="width: 50%;margin-left: 13px;" />

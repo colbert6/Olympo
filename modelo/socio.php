@@ -173,7 +173,6 @@ class socio extends Main{
         $r = null;
         return $error;
     }
-    
 
 }
 
