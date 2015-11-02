@@ -1,4 +1,4 @@
-# Podemos especificar archivos individuales
+﻿# Podemos especificar archivos individuales
 .DS_Store
 
 # O usar comodines
@@ -9,4 +9,11 @@
 *.ini
 *.temp
 
-/nbproject
+# netbeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml

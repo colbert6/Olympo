@@ -2,14 +2,15 @@
 <script src="<?php echo $_params['ruta_js']; ?>bootbox.min.js"></script>
 <div class="navbar-inner">
    
-    <form method="post" action="<?php if (isset($this->action)) echo $this->action ?>" id="frm" class="form-horizontal" >
+    <form method="post"  action="<?php if (isset($this->action)) echo $this->action ?>" id="frm" class="form-horizontal" >
         <input type="hidden" name="guardar" id="guardar" value="1"/>
         <input type="hidden" readonly="readonly" name="codigo" id="codigo"
                value="<?php if (isset($this->datos[0]['ID_COMPRA'])) echo $this->datos[0]['ID_COMPRA'] ?>"/>
             
-        <div class="row">
+        <div class="row"  style="border-bottom: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
+            
             <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group"  style="margin: 5px auto 5px auto">
                     <label class="col-md-4 control-label" > Nro. Doc.:</label>
                     <div class="col-md-6">
                         <input name="nrodoc" id="nrodoc" class="form-control"  onkeypress="return serieComprobante(event)" 
@@ -18,7 +19,7 @@
                 </div>
             </div>
             <div class="col-md-6 ">
-                <div class="form-group">
+                <div class="form-group" style="margin: 5px auto 5px auto">
                     <label class="col-md-7 control-label" > Fecha:</label>
                     <div class="col-md-5">
                         <input name="fechacompra" id="fechacompra" class="form-control"  placeholder="Fecha" readonly="readonly" >
@@ -27,10 +28,10 @@
             </div>
         </div>
         
-        <div class="row">
+        <div class="row" style="border-bottom: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
             <div class="col-md-6 ">
-                <div class="form-group">
-                <label class="col-md-4 control-label" >Proveedor:</label>buscarProveedor
+                <div class="form-group" style="margin: 5px auto 5px auto">
+                <label class="col-md-4 control-label" >Proveedor:</label>
                     <div >
                         <input type="hidden" name="id_proveedor" id="id_proveedor"/>
                         <input type="text" name="proveedor" id="proveedor" readonly="readonly" placeholder="Proveedor" data-toggle="modal" data-target="#modalProveedor" class="form-control"  style="width: 50%;margin-left: 13px;" />
@@ -39,21 +40,54 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 ">
-                <div class="form-group">
-                <label class="col-md-2 control-label" >Ruc:</label>
+            <div class="col-md-6 ">
+                <div class="form-group" style="margin: 5px auto 5px auto">
+                <label class="col-md-7 control-label" >Ruc:</label>
                     <div class="col-md-8 ">
                     <input type="text" name="ruc_prov" id="ruc_prov" readonly="readonly" placeholder="Ruc"  class="form-control"/>
                     </div>
                 </div>
-            </div>
-            
-            
+            </div>    
         </div>
         
-        <div class="row" style=" background: ">
+        <div class="row"  style="border-bottom: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
+            <div class="col-md-4 ">
+                <div class="form-group" style="margin: 5px auto 5px auto">
+                <label class="col-md-7 control-label" >Tipo Pago:</label>
+                    <div class="col-md-5">
+                    <select id="id_tipopago" name="id_tipopago" class="input-medium">
+                        <option value="0"></option>
+                        <option value="1">Contado</option>
+                        <option value="2">Credito</option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <div id="celda_credito" style="display:none ">
+                <div class="col-md-3">
+                    <div class="form-group" style="margin: 5px auto 5px auto">
+                        <label class="col-md-4 control-label" style="width: 50px"> Cuotas:</label>
+                        <div class="col-md-8">
+                            <input name="cuotas" id="cuotas" class="form-control"  placeholder="Cuotas" onkeypress="return soloNumeros(event)"
+                                   maxlength="2"  >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group" style="margin: 5px auto 5px auto">
+                        <label class="col-md-4 control-label" style="width: 60px">Intervalo:</label>
+                        <div class="col-md-8">
+                            <input name="intervalo" id="intervalo" class="form-control"  placeholder="Intervalo" onkeypress="return soloNumeros(event)"
+                                   maxlength="3"  >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row"  style="margin: 0px 0px 0px 0px">
             <div class="col-md-6 ">
-                <div class="form-group">
+                <div class="form-group" style="margin: 5px auto 2px auto">
                     <label class="col-md-5 control-label" >Destino:</label>
                     <div class="col-md-7">
                         <select class="form-control" name='sel_almacen' id='sel_almacen' placeholder="">
@@ -70,43 +104,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 ">
-                <div class="form-group">
-                <label class="col-md-7 control-label" >Tipo Pago:</label>
-                    <div class="col-md-5">
-                    <select id="id_tipopago" name="id_tipopago" class="input-medium">
-                        <option value="0"></option>
-                        <option value="1">Contado</option>
-                        <option value="2">Credito</option>
-                    </select>
-                    </div>
-                </div>
-            </div>
         </div>
-
-        <div class="row" id="celda_credito" style="display:none ">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="col-md-4 control-label" > Cuotas:</label>
-                    <div class="col-md-8">
-                        <input name="cuotas" id="cuotas" class="form-control"  placeholder="Cuotas" onkeypress="return soloNumeros(event)"
-                               maxlength="2"  >
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="col-md-4 control-label" >Intervalo:</label>
-                    <div class="col-md-8">
-                        <input name="intervalo" id="intervalo" class="form-control"  placeholder="Intervalo" onkeypress="return soloNumeros(event)"
-                               maxlength="3"  >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5">
-                <div class="form-group">
+        <div class="row" style="margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
+            <div class="col-md-6">
+                <div class="form-group" style="margin: 3px auto 5px auto">
                     <label class=" col-md-4 control-label" >Producto:</label>
                     <div class="col-md-8">
             <input type="hidden" name="id_producto" id="id_producto"/>
@@ -118,16 +119,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin: 3px auto 5px auto">
             <input type="text" name="cantidad" id="cantidad" placeholder="Cantidad" class="form-control" onkeypress="return soloNumeros(event)" maxlength="3" style="width: 110px" />
-            <input type="text" name="precio" id="precio" placeholder="PUxUM" class="form-control" onkeypress="return dosDecimales(event,this)" style="width: 110px" />  
+            <input type="text" name="precio" id="precio" placeholder="Precio" class="form-control" onkeypress="return dosDecimales(event,this)" style="width: 110px" />  
             <input type="text" name="importe" id="importe" placeholder="Importe" class="form-control" readonly="readonly" style="width: 110px" />
             <button type="button" class="btn btn-primary btn-sm" title="Agregar al Detalle" id="addDetalle"><i class="icon-hand-down icon-white"></i></button>
             </div> 
         </div>
-        <div class="row">
+        <div class="row" style="margin: 0px 0px 0px 0px">
             <div class="col-md-12" >
-                <table class="table table-bordered" id="tblDetalle" style="margin-right: 10px;margin-top: 10px;">
+                <table class="table table-bordered" id="tblDetalle" style="margin-right: 10px;margin-top: 5px;">
                     <th>Producto</th>
                     <th>Almacen</th>
                     <th>Cantidad</th>
@@ -230,10 +231,6 @@
                     <tr>
                         <td><label>Razon Social:</label></td>
                         <td><input type="text" name="razonsocialprov" id="razonsocialprov" /></td>
-                    </tr>
-                    <tr>
-                        <td><label>Representante:</label></td>
-                        <td><input type="text" name="nombreprov" id="nombreprov" onkeypress="return soloLetras(event)" /></td>
                     </tr>
                     <tr>
                         <td><label>RUC:</label></td>
