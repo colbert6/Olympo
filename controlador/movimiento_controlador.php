@@ -47,6 +47,7 @@ class movimiento_controlador extends controller {
         echo json_encode($datos);
     }
 
+
 }
 
 ?>

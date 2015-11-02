@@ -76,6 +76,24 @@ class compra extends Main{
         return $error;
     }
 
+    public function compras_x_proveedor() {
+        $datos=array($this->id_proveedor);
+        $r = $this->get_consulta("pa_proxcomp", $datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'oci') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+    }
+
 }
 
 ?>

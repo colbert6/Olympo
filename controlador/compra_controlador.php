@@ -163,6 +163,12 @@ class compra_controlador extends controller {
         $this->_param->id_param = $_POST['id_param'];
         echo json_encode($this->_param->selecciona());
     }
+
+    public function getComprasProveedor(){
+        $this->_compra->id_proveedor = $_POST['id_p'];
+        echo json_encode($this->_compra->compras_x_proveedor());
+
+    }
     
 }
 

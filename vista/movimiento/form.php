@@ -5,6 +5,7 @@
    
     <form method="post" action="<?php if (isset($this->action)) echo $this->action ?>" id="frm" class="form-horizontal" >
         <input type="hidden" name="guardar" id="guardar" value="1"/>
+        <input type="hidden" name="num_opc" id="num_opc"/>
          
          <div class="row">
             <div class="col-md-4"></div>
@@ -47,7 +48,6 @@
         </div>
         <br>
         <div id='acciones'>
-            <legend>Lista de Ventas</legend>
         </div>
         <div id='cronograma'>
             <!--legend>Cronograma de Pago</legend-->

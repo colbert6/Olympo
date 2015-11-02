@@ -1,6 +1,7 @@
 $(function() {    
 	//alert("abrio");
 	$("#acciones,#cronograma").hide();
+    $("#amortizar").attr('disabled',true);
     $( "#save" ).click(function(){
         bval = true;   
         bval = bval && $("#descripcion").required();
@@ -68,6 +69,7 @@ function buscarActores(){
         HTML = HTML + '</tbody></table>';
         $("#grillaActor").html(HTML);
         $("#jsfoot").html('<script src="' + url + 'vista/movimiento/js/run_table.js"></script>');
+
     }, 'json');
 }
 
@@ -78,29 +80,129 @@ function sel_actor(id_actor,tipo_actor,razon_social,nro_doc) {
     $("#nro_doc").val(nro_doc);
     $("#razon_social").val(razon_social);
     $('#modalActor').modal('hide');
+
     if(tipo_actor == 's'){
         $("#tipo_movimiento").val("INGRESO");
-        mostrarVentas();
+       // mostrarVentas();
 
     }else{
         $("#tipo_movimiento").val("EGRESO");
-        mostrarCompras();
+        mostrarCompras(id_actor);
     }
     //$("#id_tipo_movimiento").focus();
     //$("#id_tipo_movimiento").append(new Option('INGRESO','1'));
     //$("#id_tipo_movimiento").append(new Option('EGRESO','2'));
 }
 
-function mostrarVentas(){
+function mostrarCompras(id_p){
     $("#acciones").show();
-    HTML="";
-    HTML+="<legend>Ventas Pendientes de Pago</legend>";
-    $("#acciones").html(HTML);
+    
+    //alert(id_p);
+    $.post(url + 'compra/getComprasProveedor',"id_p="+id_p, function(proveedor) {
+        $("#num_opc").val(proveedor.length);
+        HTML ="";
+        HTML +="<legend>Compras Pendientes de Pago</legend>";
+        HTML += '<table class=\'table table-striped table-bordered table-hover sortable\'>' +
+                '<thead>' +
+                    '<tr>' +
+                    '<th class=\'text-center\'>ITEM</th>' +
+                    '<th class=\'text-center\'>FECHA</th>' +
+                    '<th class=\'text-center\'>DOCUMENTO</th>' +
+                    '<th class=\'text-center\'>MODALIDAD</th>' +
+                    '<th class=\'text-center\'>MONTO</th>' +
+                    '<th class=\'text-center\'>VER CRONOGRAMA</th>' +
+                    '</tr>' +
+                '</thead>' +
+                '<tbody>';
+
+        for (var i = 0; i < proveedor.length; i++) {
+            HTML += '<tr>';
+            HTML += '   <td class=\'text-center\'>' + (i + 1) + '</td>';
+            HTML += '   <td class=\'text-center\'>' + proveedor[i].FECHA + '</td>';
+            HTML += '   <td class=\'text-center\'>' + proveedor[i].NUM_DOCUMENTO + '</td>';
+            HTML += '   <td class=\'text-center\'>' + proveedor[i].MODALIDAD_TRANSACCION + '</td>';
+            HTML += '   <td class=\'text-center\'>' + proveedor[i].MONTO + '</td>';
+            HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+proveedor[i].ID_COMPRA+'\'></td>';
+            HTML += '</tr>';
+        }
+        HTML += '</tbody></table>';
+        $("#acciones").html(HTML);
+    }, 'json');
+
+    
 }
 
-function mostrarCompras(){
+
+/*function mostrarVentas(){
     $("#acciones").show();   
     HTML="";
     HTML+="<legend>Compras Pendientes de Pago</legend>";
     $("#acciones").html(HTML);
+}*/
+
+
+function validaCheckBox(check){
+    var total = parseInt($("#num_opc").val());
+    var contador = 0;
+    for (var i = 1; i <= total; i++) {
+        var elemento = document.getElementById("cronograma"+i);
+        //alert(i);
+        if(elemento.checked){
+            contador++;
+        }
+    }
+    //alert(total+" / "+contador);
+    if(contador>1){
+        check.checked = false;
+        alert("Solo puede Marcar una Opcion")
+    }else{
+        if(check.checked){
+         $("#amortizar").attr('disabled',false);
+          mostrarCronograma(check.value);  
+        }else{
+            $("#amortizar").attr('disabled',true);
+            $("#cronograma").hide();
+        }
+    }
+}
+
+function mostrarCronograma(id){
+    $("#cronograma").show();
+    $.post(url + 'cronograma_pago/getCuotasCompra',"id_c="+id, function(cuotas) {
+        alert(cuotas.length);
+       
+        HTML ="";
+        HTML +="<legend>Cronograma de Pagos</legend>";
+        HTML += '<table class=\'table table-striped table-bordered table-hover sortable\'>' +
+                '<thead>' +
+                    '<tr>' +
+                    '<th class=\'text-center\'># CUOTA</th>' +
+                    '<th class=\'text-center\'>FECHA VENC.</th>' +
+                    '<th class=\'text-center\'>MONTO</th>' +
+                    '<th class=\'text-center\'>MONTO PAGADO</th>' +
+                    '<th class=\'text-center\'>MONTO RESTANTE</th>' +
+                    '<th class=\'text-center\'>ESTADO</th>' +
+                    '</tr>' +
+                '</thead>' +
+                '<tbody>';
+//style="border:none; background:none"
+        for (var i = 0; i < cuotas.length; i++) {
+            HTML += '<tr>';
+            HTML += '   <td class=\'text-center\'>' + cuotas[i].NUM_CUOTA  + '</td>';
+            HTML += '   <td class=\'text-center\'>' + cuotas[i].FECHA_VENC + '</td>';
+            HTML += '   <td class=\'text-center\'>' + cuotas[i].MONTO_CUOTA + '</td>';
+            HTML += '   <td class=\'text-center\' > <input style=\'text-align:center;border:none; background:none\' name=\'monto_pagado[]\' id=\'monto_pagado'+(i+1)+'\' value=\''+cuotas[i].MONTO_PAGADO+'\'/></td>';
+            HTML += '   <td class=\'text-center\' > <input style=\'text-align:center;border:none; background:none\' name=\'monto_restante[]\' id=\'monto_restante'+(i+1)+'\' value=\'0.00\'/></td>';
+            HTML += '   <td class=\'text-center\'>';
+            if(cuotas[i].MONTO_CUOTA == cuotas[i].MONTO_PAGADO){
+                HTML += 'CANCELADO';
+            }else{
+                HTML += 'PENDIENTE';
+            }
+            HTML += '</td>';
+            HTML += '</tr>';
+        }
+        HTML += '</tbody></table>';
+        $("#cronograma").html(HTML);
+    }, 'json');
 }

@@ -72,6 +72,12 @@ class cronograma_pago_controlador extends controller {
         $this->redireccionar('almacen');
     }
 
+    public function getCuotasCompra(){
+        $this->_model->id_compra = $_POST["id_c"];
+        $datos = $this->_model->cuota_x_compra();
+        echo json_encode($datos);
+    }
+
 }
 
 ?>
