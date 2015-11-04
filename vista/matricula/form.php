@@ -60,35 +60,39 @@
                 </div>
             </div>       
         </div>
-        <div id="celda_servicio" style="display:none ">
-            <div class="row" style="margin: 0px 0px 0px 0px;">
-                <div class="col-md-5 ">
-                    <div class="form-group" style="margin: 5px auto 5px auto">
-                    <label class="col-md-6 control-label" >Servicio:</label>
-                        <div >
-                            <input type="text" name="servicio_sel" id="servicio_sel" readonly="readonly" placeholder="Servicio" data-toggle="modal" data-target="#modalServicio" class="form-control"  style="width: 55%;margin-left: 11px;" />
-                            <button data-toggle="modal" data-target="#modalServicio" type="button" class="btn btn-primary btn-sm" title="Buscar Servicio" id="AbrirVtnBuscarServicio"><i class="icon-search icon-white"></i></button>
-                            <!--button style="margin-right: 10px" data-toggle="modal" data-target="#modalNuevoProveedor" type="button" class="btn btn-primary btn-sm" title="Insertar Socio"><i class="icon-plus icon-white"></i></button-->
+          <div class="row" id="celda_matricula" style="display:;margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
+            
+            <div class="row"  style="margin: 0px auto 10px auto;">
+                <div class="col-md-12">
+                    <div class="col-md-offset-1 col-md-2" style="padding-top: 12px">
+                        <label>Servicios ( 2 ) :</label>
+                    </div>    
+                    <div class="col-md-6">
+                        <div class="checkbox col-md-4" >
+                          <label>
+                            <input type="checkbox"> Cardio
+                          </label>
+                        </div>
+                        <div class="checkbox col-md-4">
+                          <label>
+                            <input type="checkbox"> Maquinas
+                          </label>
+                        </div>
+                        
+                        <div class="checkbox col-md-4">
+                          <label>
+                            <input type="checkbox"> Pesas
+                          </label>
+                        </div>
+                        <div class="checkbox col-md-4">
+                          <label>
+                            <input type="checkbox"> Aerobicos
+                          </label>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 ">
-                    <div class="form-group" style="margin: 5px auto 6px auto">
-                    <label class="col-md-6 control-label" >Cantidad:</label>
-                        <div class="col-md-5 ">
-                            <input type="text" readonly="readonly" name="numero_servicios" id="numero_servicios" class="form-control" />
-                        </div>
-                    </div>
-                </div> 
-
-                <div class="col-md-4 ">
-                    <div class="form-group" style="margin: 5px auto 5px auto">
-                    <label class="col-md-6 control-label" >Precio:</label>
-                        <div class="col-md-5 ">
-                            <input type="" name="precio" id="precio" placeholder="Precio" class="form-control" value=""/>
-                        </div>
-                    </div>
-                </div>
+                
+                
             </div>
         </div>
         

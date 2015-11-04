@@ -138,37 +138,67 @@
             </div> 
         </div>
         
-        <div class="row" id="celda_matricula" style="display:none;margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
+        <div class="row" id="celda_matricula" style="display:;margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
             <div class="row"  style="margin: 0px 0px 0px 0px;">
-                <div class="col-md-6">
-                    <div class="form-group" style="margin: 5px auto 5px auto">
+                <div class="col-md-6" style="padding-right: 0px;">
+                    <div class="form-group" style="margin: 5px 0px 5px 0px">
                         <label class=" col-md-4 control-label" >Membresia:</label>
-                        <div class="col-md-8">
-                            <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Seleccione Membresia" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 170px"/>
+                        <div class="col-md-9" style="padding-right: 0px;">
+                            <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Seleccione Membresia" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 200px"/>
                             <button type="button" data-toggle="modal" data-target="#modalMembresia" class="btn btn-primary btn-sm" title="Buscar Membresia" id="AbrirVtnBuscarMembresia"><i class="icon-search icon-white"></i></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group" style="margin: 5px auto 5px auto">
+                <div class="col-md-6" style="padding-left: 0px;">
+                    <div class="form-group" style="margin: 5px 0px 5px 0px">
                         <label class=" col-md-4 control-label" >Cliente:</label>
-                        <div class="col-md-8">
-                            <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Seleccione Membresia" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 170px"/>
+                        <div class="col-md-9" style="padding-left: 0px;">
+                            <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Seleccione Cliente" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 200px"/>
                             <button type="button" data-toggle="modal" data-target="#modalMembresia" class="btn btn-primary btn-sm" title="Buscar Membresia" id="AbrirVtnBuscarMembresia"><i class="icon-search icon-white"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row"  style="margin: 0px 0px 0px 0px;">
-                
-                <div class="col-md-6">
-                    <div class="form-group" style="margin: 5px auto 5px auto">
-                        <label class=" col-md-4 control-label" >Fecha Inicio:</label>
-                        <div class="col-md-8">
-                            <input type="text" name="membresia" id="membresia"  placeholder="Seleccione Membresia" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 170px"/>
+            <div class="row"  style="margin: 0px auto 10px auto;">
+                <div class="col-md-4">
+                    <label class=" col-md-offset-1 control-label " >Servicios (2) :</label>
+                    <div class="col-md-offset-3 col-md-10">
+                        <div class="checkbox col-md-6" >
+                          <label>
+                            <input type="checkbox"> Cardio
+                          </label>
+                        </div>
+                        <div class="checkbox col-md-6">
+                          <label>
+                            <input type="checkbox"> Maquinas
+                          </label>
+                        </div>
+                        <div class="checkbox col-md-6">
+                          <label>
+                            <input type="checkbox"> Pesas
+                          </label>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-8" style="margin: 10px auto 10px auto;">
+                        
+                        <div class="col-md-4 ">
+                            <label class="col-md-4 control-label" style="width: 110px" > Fecha Inicio:</label>
+                            <input name="fechainicio" id="fechainicio" class="form-control"  placeholder="Fecha" readonly="readonly" value="<?php echo date('Y-m-d') ?>">
+                                
+                        </div>
+                        <div class="col-md-4">
+                             <label class=" col-md-4 control-label" >Fecha Fin:</label>
+                            <input name="membresia" id="membresia"  placeholder="Fecha Fin" readonly="readonly" class="form-control"   />
+                        </div>
+                    
+                        <div class="col-md-3">
+                             <label class=" col-md-4 control-label" >Precio:</label>
+                            <input  name="precio" id="membresia"  placeholder="Precio" class="form-control" />
+                        </div>
+                    
+                </div>
+                
             </div>
         </div>
         

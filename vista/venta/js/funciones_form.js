@@ -26,9 +26,12 @@ $(function() {
         if($(this).val()==2){
             $("#celda_matricula").hide();
             $("#celda_producto").show();    
-        }else{
+        }else if($(this).val()==1){
             $("#celda_producto").hide();
             $("#celda_matricula").show();
+        }else{
+            $("#celda_producto").hide();
+            $("#celda_matricula").hide();
         }
     });
     //  \/-\/-\/-\/-\/------PRODUCTOS--------\/-\/-\/-\/-\/-------//
@@ -114,7 +117,7 @@ $(function() {
     $("input:text[readonly=readonly]").css('cursor','pointer');
     
     limpiar();
-    $("#fechaventa").datepicker({dateFormat:'yy-mm-dd',changeMonth:true,changeYear:true});
+    $("#fechaventa,#fechainicio").datepicker({dateFormat:'yy-mm-dd',changeMonth:true,changeYear:true});
     
     $( "#save" ).click(function(){
         bval = true;   
