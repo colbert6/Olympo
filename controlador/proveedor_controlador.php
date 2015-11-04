@@ -19,10 +19,6 @@ class proveedor_controlador extends controller {
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');
     }
-    
-    public function buscador(){
-        echo json_encode($this->_model->selecciona());
-    }
         
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
@@ -75,6 +71,10 @@ class proveedor_controlador extends controller {
         $this->_model->id_proveedor = $this->filtrarInt($id);
         $this->_model->elimina();
         $this->redireccionar('proveedor');
+    }
+    
+     public function buscador(){
+        echo json_encode($this->_model->selecciona());
     }
 
 }

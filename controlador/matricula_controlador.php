@@ -21,9 +21,21 @@ class matricula_controlador extends controller {
     }
         
     public function nuevo() {
+        //echo '<pre>'; print_r($_POST);exit;
+        
         if ($_POST['guardar'] == 1) {
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->id_socio = $_POST['id_socio'];
+            $this->_model->id_tipo_membresia = $_POST['id_membresia'];
+            $this->_model->fecha_registro = $_POST['fecha_registro'];
+            $this->_model->precio = $_POST['precio'];;
             $datos = $this->_model->inserta();
+            for($i=0;$i<count($_POST['id_servicio']);$i++){
+                //usamos el modelo de matricula para el detallle enre matricula y servicios
+                $this->_model->id_matricula=$dato_compra[0]['ID_MATRICULA'];
+                $this->_model->id_servicio= $_POST['id_servicio'][$i];
+                $this->_model->inserta_mat_serv();
+            }
+            
             $this->redireccionar('matricula');
         }
         $this->_vista->titulo = 'Asignar Membresia';

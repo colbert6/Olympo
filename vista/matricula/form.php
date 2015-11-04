@@ -33,7 +33,7 @@
                 <div class="form-group" style="margin: 5px auto 5px auto">
                 <label class="col-md-4 control-label" >DNI:</label>
                     <div class="col-md-7 ">
-                    <input type="text" name="dni_socio" id="dni_socio" readonly="readonly" placeholder="DNI"  class="form-control"/>
+                    <input type="text" name="dni" id="dni" readonly="readonly" placeholder="DNI"  class="form-control"/>
                     </div>
                 </div>
             </div>      
@@ -44,7 +44,7 @@
                 <div class="form-group" style="margin: 5px auto 5px auto">
                 <label class="col-md-4 control-label" >Membresia:</label>
                     <div >
-                        <input type="hidden" name="id_tipo_membresia" id="id_tipo_membresia"/>
+                        <input type="hidden" name="id_membresia" id="id_membresia"/>
                         <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Membresia" data-toggle="modal" data-target="#modalMembresia" class="form-control"  style="width: 60%;margin-left: 13px;" />
                         <button data-toggle="modal" data-target="#modalMembresia" type="button" class="btn btn-primary btn-sm" title="Buscar Membresia" id="AbrirVtnBuscarMembresia"><i class="icon-search icon-white"></i></button>
                         <!--button style="margin-right: 10px" data-toggle="modal" data-target="#modalNuevoProveedor" type="button" class="btn btn-primary btn-sm" title="Insertar Socio"><i class="icon-plus icon-white"></i></button-->
@@ -60,14 +60,13 @@
                 </div>
             </div>       
         </div>
-        <div id="celda_servicios" style="display:none ">
+        <div id="celda_servicio" style="display:none ">
             <div class="row" style="margin: 0px 0px 0px 0px;">
                 <div class="col-md-5 ">
                     <div class="form-group" style="margin: 5px auto 5px auto">
                     <label class="col-md-6 control-label" >Servicio:</label>
                         <div >
-                            <input type="hidden" name="id_servicio" id="id_servicio"/>
-                            <input type="text" name="servicio" id="servicio" readonly="readonly" placeholder="Servicio" data-toggle="modal" data-target="#modalServicio" class="form-control"  style="width: 55%;margin-left: 11px;" />
+                            <input type="text" name="servicio_sel" id="servicio_sel" readonly="readonly" placeholder="Servicio" data-toggle="modal" data-target="#modalServicio" class="form-control"  style="width: 55%;margin-left: 11px;" />
                             <button data-toggle="modal" data-target="#modalServicio" type="button" class="btn btn-primary btn-sm" title="Buscar Servicio" id="AbrirVtnBuscarServicio"><i class="icon-search icon-white"></i></button>
                             <!--button style="margin-right: 10px" data-toggle="modal" data-target="#modalNuevoProveedor" type="button" class="btn btn-primary btn-sm" title="Insertar Socio"><i class="icon-plus icon-white"></i></button-->
                         </div>
@@ -77,7 +76,7 @@
                     <div class="form-group" style="margin: 5px auto 6px auto">
                     <label class="col-md-6 control-label" >Cantidad:</label>
                         <div class="col-md-5 ">
-                            <input type="text" readonly="readonly" name="numero_servicios" id="numero_servicios" class="form-control" value=""/>
+                            <input type="text" readonly="readonly" name="numero_servicios" id="numero_servicios" class="form-control" />
                         </div>
                     </div>
                 </div> 
@@ -117,7 +116,7 @@
     
     <!-- Modal -->
     <style>
-        #modalMembresia .modal-content,#modalSocio .modal-content {
+        #modalMembresia .modal-content,#modalSocio .modal-content,#modalServicio .modal-content {
             width: 800px;
             left: -18%;
         }
@@ -161,6 +160,32 @@
                 <div class="navbar-inner text-center">
                     
                     <div id="grillaSocio">
+                        <div class="page-header">
+                            <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        </div>
+        </div>
+        </div>
+    </div>
+    <div id="modalServicio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Lista de Servicios</h3>
+        </div>
+        <div class="modal-body">
+            <form id="VtnBuscarServicio">
+                <div class="navbar-inner text-center">
+                    
+                    <div id="grillaServicio">
                         <div class="page-header">
                             <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
                         </div>

@@ -8,7 +8,6 @@
                value="<?php if (isset($this->datos[0]['ID_COMPRA'])) echo $this->datos[0]['ID_COMPRA'] ?>"/>
             
         <div class="row"  style="border-bottom: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
-            
             <div class="col-md-6">
                 <div class="form-group"  style="margin: 5px auto 5px auto">
                     <label class="col-md-4 control-label" > Nro. Doc.:</label>
@@ -50,46 +49,11 @@
             </div>    
         </div>
         
-        <div class="row"  style="border-bottom: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
-            <div class="col-md-4 ">
-                <div class="form-group" style="margin: 5px auto 5px auto">
-                <label class="col-md-7 control-label" >Tipo Pago:</label>
-                    <div class="col-md-5">
-                    <select id="id_tipopago" name="id_tipopago" class="input-medium">
-                        <option value="0"></option>
-                        <option value="1">Contado</option>
-                        <option value="2">Credito</option>
-                    </select>
-                    </div>
-                </div>
-            </div>
-            <div id="celda_credito" style="display:none ">
-                <div class="col-md-3">
-                    <div class="form-group" style="margin: 5px auto 5px auto">
-                        <label class="col-md-4 control-label" style="width: 50px"> Cuotas:</label>
-                        <div class="col-md-8">
-                            <input name="cuotas" id="cuotas" class="form-control"  placeholder="Cuotas" onkeypress="return soloNumeros(event)"
-                                   maxlength="2"  >
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group" style="margin: 5px auto 5px auto">
-                        <label class="col-md-4 control-label" style="width: 60px">Intervalo:</label>
-                        <div class="col-md-8">
-                            <input name="intervalo" id="intervalo" class="form-control"  placeholder="Intervalo" onkeypress="return soloNumeros(event)"
-                                   maxlength="3"  >
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row"  style="margin: 0px 0px 0px 0px">
-            <div class="col-md-6 ">
-                <div class="form-group" style="margin: 5px auto 2px auto">
+        <div class="row"  style="margin: 0px 0px 0px 0px;">
+            <div class="col-md-4 " style="padding-right: 0px;">
+                <div class="form-group" style="margin: 5px 0px 0px auto" style="padding-right: 0px;">
                     <label class="col-md-5 control-label" >Destino:</label>
-                    <div class="col-md-7">
+                    <div class="col-md-7" style="padding-right: 0px;">
                         <select class="form-control" name='sel_almacen' id='sel_almacen' placeholder="">
                             <option value='' ></option>
                             <?php for($i=0;$i<count($this->almacen);$i++){ //Aca va la lista de los modulos padres ?> 
@@ -104,7 +68,36 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3 " style="padding-right: 0px;">
+                <div class="form-group" style="margin: 5px 0px 5px 0px;" >
+                    <label class="col-md-4 control-label" style="width: 70px;padding-top: 0px;" > Tipo Pago:</label>
+                    <div class="col-md-7" style="padding-right: 0px;">
+                        <select id="id_tipopago" name="id_tipopago" class="form-control">
+                            <option value="0"></option>
+                            <option value="1">Contado</option>
+                            <option value="2">Credito</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5" style="padding:0px 0px 0px 5px ;">
+                <div id="celda_credito" style="float:left;display: none;" >
+                    <div class="form-group"  style="float:left;margin: 5px auto 5px auto;">
+                        <label class="col-md-4 control-label" style="width: 50px;margin-right: 15px;"> Cuotas:</label>
+                        <input name="cuotas" id="cuotas" class="form-control"  placeholder="Cuotas" onkeypress="return soloNumeros(event)"
+                                   maxlength="2" style="width: 70px"  >
+                    </div>        
+                    <div class="form-group"  style="float:left;margin: 5px auto 5px 0px;">
+                        <label class="col-md-4 control-label" style="width: 60px;margin-right: 15px;padding-top: 0px;">Intervalo Dias:</label>
+                        <input name="intervalo" id="intervalo" class="form-control"  placeholder="Intervalo" onkeypress="return soloNumeros(event)"
+                                   maxlength="3" style="width: 80px" >
+                        
+                    </div>
+                </div>
+            </div>
         </div>
+
+        
         <div class="row" style="margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
             <div class="col-md-6">
                 <div class="form-group" style="margin: 3px auto 5px auto">
