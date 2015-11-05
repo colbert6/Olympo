@@ -7,9 +7,9 @@ class rutina_controlador extends controller {
     private $_socio;
 
     public function __construct() {
-        if (!$this->acceso()) {
+        /*if (!$this->acceso()) {
             $this->redireccionar('error/access/5050');
-        }
+        }*/
         parent::__construct();
         $this->_rutina = $this->cargar_modelo('rutina');
         $this->_categoria_ejercicio = $this->cargar_modelo('categoria_ejercicio');

@@ -78,6 +78,13 @@ class cronograma_pago_controlador extends controller {
         echo json_encode($datos);
     }
 
+    public function getSaldoCompra(){
+        $this->_model->id_compra = $_POST["id_c"];
+        $datos = $this->_model->saldo_compra();
+        echo json_encode($datos);
+    }
+
+
 }
 
 ?>
