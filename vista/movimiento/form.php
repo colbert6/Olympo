@@ -6,6 +6,7 @@
     <form method="post" action="<?php if (isset($this->action)) echo $this->action ?>" id="frm" class="form-horizontal" >
         <input type="hidden" name="guardar" id="guardar" value="1"/>
         <input type="hidden" name="num_opc" id="num_opc"/>
+        <input type="hidden" name="num_cuotas" id="num_cuotas"/>
          
          <div class="row">
             <div class="col-md-4"></div>
@@ -42,8 +43,9 @@
 
             <div class="col-md-4">
                 <strong> MONTO:</strong>
-                <input type="text" name="importe" id="importe" placeholder="Importe" class="form-control"  style="width: 125px" />
-                <button type="button" class="btn btn-primary btn-sm"  id="amortizar">Amortizar</button>
+                <input type="text" name="importe" id="importe" onkeypress="return dosDecimales(event,this)" placeholder="Importe" class="form-control"  style="width: 80px" />
+                <button type="button" class="btn btn-primary btn-sm"  id="amortizar">Distribuir</button>
+                <button type="button" class="btn btn-warning btn-sm"  id="deshacer"><i class="icon-repeat icon-white"></i></button>
             </div> 
         </div>
         <br>
