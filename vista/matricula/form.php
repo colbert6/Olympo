@@ -95,9 +95,9 @@
         <div class="row" style="border-TOP: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
             <div class="col-md-12" >
                 <table class="table table-bordered" id="tblDetalle" style="margin-right: 10px;margin-top: 5px;">
-                    <th>ITEM</th>
-                    <th>SERVICIO</th>
-                    <th>AMBIENTE</th>
+                    <th>Item</th>
+                    <th>Servicio</th>
+                    <th>Ambiente</th>
                     <th>Acciones</th>   
                 </table>
             </div>
