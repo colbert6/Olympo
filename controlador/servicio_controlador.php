@@ -71,6 +71,9 @@ class servicio_controlador extends controller {
         $this->_model->elimina();
         $this->redireccionar('servicio');
     }
+     public function buscador(){
+        echo json_encode($this->_model->selecciona());
+    }
 
 }
 

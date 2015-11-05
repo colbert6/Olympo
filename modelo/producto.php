@@ -11,6 +11,7 @@ class producto extends Main{
     public $stock_min;
     public $stock_max;
     public $estado;
+    public $id_almacen;
     
     public function selecciona() {
         $r = $this->get_consulta("pa_m1_producto",null);
@@ -63,7 +64,6 @@ class producto extends Main{
         if (is_null($this->id_almacen)) {
             $this->id_almacen = 0;
         }
-      
         $datos = array($this->id_almacen);
         
         $r = $this->get_consulta("pa_m3_producto",$datos);

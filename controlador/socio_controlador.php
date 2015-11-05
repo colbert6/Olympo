@@ -30,7 +30,7 @@ class socio_controlador extends controller {
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');
     }
-        
+    
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
 
@@ -164,7 +164,7 @@ class socio_controlador extends controller {
         $this->_ubigeo->codigo_provincia = $_REQUEST ['codigo_provincia'];
         echo json_encode($this->_ubigeo->selecciona_distrito());
     }
-     public function buscador(){
+    public function buscador(){
         if(isset($_POST['dni'])){
             $this->_socio->dni=$_POST['dni'];
             $socio = $this->_socio->selecciona_dni();
@@ -172,6 +172,8 @@ class socio_controlador extends controller {
         }else if(isset($_POST['id'])){
             $this->_socio->id_socio=$_POST['id'];
             $socio = $this->_socio->selecciona_id();
+        }else if(isset($_POST['matricula'])){
+            $socio = $this->_socio->selecciona();
         }
         echo json_encode($socio);
     }
@@ -191,6 +193,7 @@ class socio_controlador extends controller {
         $datos = $this->_rutina->socio_x_rutina();
         echo json_encode($datos);
     }
+    
     
 
 }

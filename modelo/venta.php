@@ -16,31 +16,31 @@ class venta extends Main{
     public $empleado;
 
     public function selecciona() {
-        if (is_null($this->id_venta)) {
-            $this->id_venta = 0;
-        }
-        if (is_null($this->nrodoc)) {
-            $this->nrodoc = '';
-        }
-        if (is_null($this->fechaventa)) {
-            $this->fechaventa = '';
-        }
-        if (is_null($this->cliente)) {
-            $this->cliente = '';
-        }
-        if (is_null($this->empleado)) {
-            $this->empleado = '';
-        }
-        $datos = array($this->id_venta, $this->nrodoc, $this->fechaventa, $this->cliente, $this->empleado);
-//        echo '<pre>';print_r($datos);exit;
-        $r = $this->get_consulta("sel_venta", $datos);
+         $r = $this->get_consulta("pa_m1_venta", null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
             die($r[1]);
         }
         $r = null;
-        if (conexion::$_servidor == 'oci') {
+        if (BaseDatos::$_servidor == 'oci') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+    }
+    public function selecciona_id() {
+        $datos=array($this->id_venta);
+         $r = $this->get_consulta("pa_m2_venta", $datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'oci') {
             oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
             return $data;
         } else {
