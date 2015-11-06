@@ -46,6 +46,23 @@ class sesion_caja extends Main{
         }
         
     }
+    public function cajas_activas() {
+        $r = $this->get_consulta("cajas_activas",null);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+        
+    }
 
     /*public function selecciona_id() {
         $datos = array($this->id_almacen);
@@ -68,7 +85,7 @@ class sesion_caja extends Main{
     }*/
     
     public function inserta() {
-        $datos = array($this->id_caja,$this->id_empleado,$this->fecha_entrada,$this->monto_inicio);
+        $datos = array($this->id_caja,$this->id_empleado,$this->fecha_entrada,$this->monto_inicio,$this->estado);
         $r = $this->get_consulta("pa_i_seca", $datos);
         $error = $r[1];
         $r = null;
