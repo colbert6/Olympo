@@ -32,3 +32,9 @@ function enviarApertura(id,monto){
   	$.post(url+'sesion_caja/aperturar',{id:id,monto:monto});
     window.location = url+'sesion_caja/';
 }
+function cerrarCaja(url){
+    if(confirm("¿Esta seguro de Cerrar esta Caja?")){
+        href = url;
+        window.location = href;
+    }
+}
