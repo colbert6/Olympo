@@ -3,6 +3,8 @@
 class web_Controlador extends controller {
     
     private $_model;
+    private $_servicios;
+    private $_productos;
     
     public function __construct() {
         
@@ -13,6 +15,8 @@ class web_Controlador extends controller {
         parent::__construct();
         $this->_model = $this->cargar_modelo('informacion');
         $this->_servicios = $this->cargar_modelo('web_servicio');
+        $this->_productos = $this->cargar_modelo('web_producto');
+        $this->_contacto = $this->cargar_modelo('contacto');//
         /*$this->_web_img_servicios = $this->loadModel('imagen_servicio');
         $this->_web_categoria_productos =  $this->loadModel('cat_producto');
         $this->_web_productos = $this->loadModel('producto');
@@ -35,7 +39,12 @@ class web_Controlador extends controller {
         $this->_vista->renderiza_web('nosotros','nosotros',false);
     }
     public function productos($categoria=false,$id=false){
+        $this->_vista->datos_producto = $this->_productos->selecciona();
+
+        //$this->_vista->setCss(array('productos'));
         
+        $this->_vista->renderiza_web('productos','productos',true); 
+        /*
         $this->_vista->categoria = $categoria; 
         $this->_vista->setCss(array('productos'));
         if(!$categoria && !$id){
@@ -49,16 +58,25 @@ class web_Controlador extends controller {
             $this->_vista->renderiza_web('pro_detalle',true,'productos');  
         }
         
-        
+        */
     }
     public function servicios($servicio=false){
         
-        $this->_vista->datos_servicio = $this->_servicios->selecciona();
+        $this->_vista->datos_servicio = $this->_servicios->selecciona();//
         
         $this->_vista->renderiza_web('servicios','servicios',true);
     }    
     public function contactenos(){
+        $this->_vista->datos = $this->_model->selecciona();
         $this->_vista->renderiza_web('contactenos','contactenos',false);
+        if ($_POST['guardar'] == 1) {
+            $this->_contacto->nombre = $_POST['nombre'];
+            $this->_contacto->telefono = $_POST['telefono'];
+            $this->_contacto->email = $_POST['email'];
+            $this->_contacto->mensaje = $_POST['mensaje'];
+            $datos = $this->_contacto->inserta();
+            //$this->redireccionar('almacen');
+        }
     }
 
         

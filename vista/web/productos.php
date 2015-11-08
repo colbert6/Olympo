@@ -2,33 +2,26 @@
     <?php if (!$this->informacion) { //saber si se ha pedido informacion de algun servicio?> 
     
             
-                    <?php if (isset($this->datos) && count($this->datos)){ ?>
-                     <div class="col-lg-12">
-                         <h2 class="page-header">Categorias de Productos</h2>
-                     </div>
-
-                    <div class="row">
-                    <?php for ($i = 0; $i < count($this->datos); $i++) {?>
-                            
+        <?php if (isset($this->datos_producto) && count($this->datos_producto)){ ?>
                      
-                     <div class="col-md-3 col-sm-6">
-                         <div class="thumbnail">
-                            <img src="<?php echo $_webParams['ruta_img']; ?>5.jpg" alt="">
-                            <div class="text-center">
-                                <h4><a href="<?php echo BASE_URL."web/productos/".$this->datos[$i]['descripcion']."/". $this->datos[$i]['id_categoria_producto'];?>"><?php echo $this->datos[$i]['descripcion']; ?></a>
-                                </h4>
-                                <p>Para afianzarnos con nuestros clientes</p>
-                                <div class="ratings">
-                                    <p class="text-center"><a href="<?php echo BASE_URL."web/productos/".$this->datos[$i]['descripcion']."/". $this->datos[$i]['id_categoria_producto'];?>" class="btn btn-success">Ver Productos</a></p>
-                                
-                            </div>
-                                
-                            </div>
-                            
-                        </div>
-                     </div>
-                         
- 
+                    <div class="row">
+                    <?php for ($i = 0; $i < count($this->datos_producto); $i++) {?>
+                         <div class="col-sm-4 col-lg-4 col-md-4">
+                                 <div class="thumbnail">
+                                     <div class="hover-bg img-thumbnail">
+                                         <div class="hover-text">
+                                             <a> <h4 >Productos</h4>
+                                             <h5><?php if(isset ($this->datos_producto[$i]['DESCRIPCION']))echo $this->datos_producto[$i]['DESCRIPCION']?></h5>
+                                             <div class="clearfix"></div>
+                                             </a>
+                                         </div>    
+                                         <img src="<?php echo $_webParams['ruta_img_pro']; ?><?php if(isset ($this->datos_producto[$i]['IMAGEN']))echo $this->datos_producto[$i]['IMAGEN']?>" alt=""> 
+                                         <div class="caption">
+                                           <h4><a href="#"><?php if(isset ($this->datos_producto[$i]['TITULO']))echo $this->datos_producto[$i]['TITULO']?></a></h4>  
+                                         </div>
+                                     </div>
+                                 </div>
+                          </div>
                    <?php } ?>
                     </div> 
                  
