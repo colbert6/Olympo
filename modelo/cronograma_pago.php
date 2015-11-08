@@ -64,7 +64,6 @@ class cronograma_pago extends Main{
         return $error;
     }
     
-
     public function cuota_x_compra() {
         $datos = array($this->id_compra);
         
@@ -84,7 +83,5 @@ class cronograma_pago extends Main{
         }
       
     }
-
-}
 
 ?>
