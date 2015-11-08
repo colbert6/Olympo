@@ -1,71 +1,73 @@
 <?php
 
-class tipo_membresia extends Main{
+class cronograma_cobro extends Main{
 
-    public $id_tipo_membresia;
-    public $descripcion;
-    public $numero_servicios;
-    public $duracion;
-    public $vigencia;
-    public $precio;
-    public $estado;
-
+    public $id_cuota_venta;
+    public $id_venta;
+    public $fecha_venc;
+    public $monto_cuota;
+    public $num_cuota;
+    public $monto_pagado;
+    
     public function selecciona() {
-        //        echo '<pre>';print_r($datos);exit;
-        $r = $this->get_consulta("pa_m1_time", null);
+        $r = $this->get_consulta("pa_m1_cuve",null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
             die($r[1]);
         }
         $r = null;
-        if (BaseDatos::$_servidor == 'oci') {
+        if (BaseDatos::$_servidor == 'OCI') {
             oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
             return $data;
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             return $stmt->fetchall();
         }
+        
     }
-
-    public function selecciona_id() {
-        $datos = array($this->id_tipo_membresia);
-        $r = $this->get_consulta("pa_m2_time", $datos);
+    public function selecciona_cuota() {
+        $datos = array($this->id_compra);
+        
+        $r = $this->get_consulta("pa_m2_cuve",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
             die($r[1]);
         }
-         if (BaseDatos::$_servidor == 'oci') {
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
             oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
             return $data;
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             return $stmt->fetchall();
         }
+      
     }
     
     public function inserta() {
-        $datos = array($this->descripcion,$this->numero_servicios,$this->duracion,$this->vigencia,$this->precio);
-        $r = $this->get_consulta("pa_i_time", $datos);
+        $datos = array($this->id_venta,$this->fecha_venc,$this->num_cuota,$this->monto_cuota);
+        $r = $this->get_consulta("pa_i_cuve", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
 
     public function actualiza() {
-        $datos = array($this->id_tipo_membresia,$this->descripcion,$this->numero_servicios,$this->duracion,$this->vigencia,$this->precio);
-        $r = $this->get_consulta("pa_u_time", $datos);       
+       
+        $datos = array($this->id_almacen, $this->descripcion);
+        
+        $r = $this->get_consulta("pa_u_cuve", $datos);
         $error = $r[1];
         $r = null;
         return $error;
-    }
+    }   
 
     public function elimina() {
-        $datos = array($this->id_tipo_membresia);
-        $r = $this->get_consulta("pa_d_time", $datos);
+        $datos = array($this->id_almacen);
+        $r = $this->get_consulta("pa_d_cuco", $datos);
         $error = $r[1];
-        
         $r = null;
         return $error;
     }

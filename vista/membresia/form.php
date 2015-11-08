@@ -60,7 +60,7 @@
             <div class="form-group" style="margin-top: 4%"> 
             <div class="col-sm-offset-2 col-sm-8">
             <button type="button" class="btn btn-primary" id="save"> Guardar</button>
-                <a style="margin-left: 8%" href="<?php echo BASE_URL?>tipo_membresia"  class="btn btn-danger">Cancelar</a>
+                <a style="margin-left: 8%" href="<?php echo BASE_URL?>membresia"  class="btn btn-danger">Cancelar</a>
             </div>
         </div>
 

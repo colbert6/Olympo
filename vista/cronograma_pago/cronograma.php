@@ -36,6 +36,6 @@
     <?php } ?>
 </table>
 
-<p><a type="button" class="btn btn-info" href="<?php echo $this->btn_action ?>">Amortizar</a>
-<a href="<?php echo BASE_URL?>cronograma_pago" class="btn btn-primary">Volver</a></p>
+<p>
+    <a href="<?php echo BASE_URL?>cronograma_pago" class="btn btn-primary">Volver</a></p>
 <br/>

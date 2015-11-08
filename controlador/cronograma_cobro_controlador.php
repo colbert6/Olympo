@@ -1,6 +1,6 @@
 <?php
 
-class cronograma_pago_controlador extends controller {
+class cronograma_cobro_controlador extends controller {
 
     private $_model;
 
@@ -9,11 +9,11 @@ class cronograma_pago_controlador extends controller {
             $this->redireccionar('error/access/5050');
         }
         parent::__construct();
-        $this->_model = $this->cargar_modelo('cronograma_pago');
+        $this->_model = $this->cargar_modelo('cronograma_cobro');
     }
 
     public function index() {
-        $this->_vista->titulo = 'Lista de Pagos';
+        $this->_vista->titulo = 'Lista de Cobros';
         $this->_vista->datos = $this->_model->selecciona();
         //print_r($this->_vista->datos);exit;
         $this->_vista->setCss_public(array('jquery.dataTables'));

@@ -7,9 +7,9 @@ class triaje_controlador extends controller {
     private $_socio;
 
     public function __construct() {
-        if (!$this->acceso()) {
+        /*if (!$this->acceso()) {
             $this->redireccionar('error/access/5050');
-        }
+        }*/
         parent::__construct();
         $this->_triaje = $this->cargar_modelo('triaje');
         $this->_concepto_triaje = $this->cargar_modelo('concepto_triaje');

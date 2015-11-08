@@ -17,10 +17,15 @@ class producto_controlador extends controller {
     }
     
     public function buscador(){
-        $this->_model->id_almacen = $_POST['id_almacen'];
-        echo json_encode($this->_model->selecciona());
+        if (isset($_POST['id_almacen'])){
+            $this->_model->id_almacen = $_POST['id_almacen'];
+            $datos=$this->_model->selecciona_almacen();
+        }else{
+            $datos=$this->_model->selecciona();
+        }
+        
+        echo json_encode($datos);
     }
-
     public function index() {
         $this->_vista->titulo = 'Lista de Productos';
         $this->_vista->datos = $this->_model->selecciona();

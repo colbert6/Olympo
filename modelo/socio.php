@@ -121,7 +121,6 @@ class socio extends Main{
                        $this->ingresos);
         //print_r($datos); exit;
         $r = $this->get_consulta("pa_i_socio", $datos);
-        print_r($r); exit;
         $error = $r[1];
         $r = null;
         return $error;
@@ -173,7 +172,6 @@ class socio extends Main{
         $r = null;
         return $error;
     }
-    
 
 }
 

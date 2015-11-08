@@ -45,15 +45,6 @@ class compra_controlador extends controller {
         echo json_encode(array('id_proveedor'=>$datos[0]['INS_PROVEEDOR']));
     }
     
-    public function get_proveedor(){
-        echo json_encode($this->_proveedor->selecciona());
-    }
-    
-    public function ver(){
-        $this->_compra->id_compra=$_POST['id_compra'];
-        echo json_encode($this->_compra->selecciona_id());
-    }
-    
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
             //echo '<pre>';print_r($_POST);exit;
@@ -163,7 +154,21 @@ class compra_controlador extends controller {
         $this->_param->id_param = $_POST['id_param'];
         echo json_encode($this->_param->selecciona());
     }
+
+    public function getComprasProveedor(){
+        $this->_compra->id_proveedor = $_POST['id_p'];
+        echo json_encode($this->_compra->compras_x_proveedor());
+
+    }
     
+    public function get_proveedor(){
+        echo json_encode($this->_proveedor->selecciona());
+    }
+    
+    public function ver(){
+        $this->_compra->id_compra=$_POST['id_compra'];
+        echo json_encode($this->_compra->selecciona_id());
+    }
 }
 
 ?>

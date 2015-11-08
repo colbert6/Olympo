@@ -20,8 +20,8 @@
                 <td><?php echo $this->datos[$i]['NUMERO_SERVICIOS']; ?></td>
                 <td><?php echo $this->datos[$i]['PRECIO']; ?></td>
                 <td>
-                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>tipo_membresia/editar/<?php echo $this->datos[$i]['ID_TIPO_MEMBRESIA'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
-                    <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>tipo_membresia/eliminar/<?php echo $this->datos[$i]['ID_TIPO_MEMBRESIA'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
+                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>membresia/editar/<?php echo $this->datos[$i]['ID_TIPO_MEMBRESIA'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
+                    <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>membresia/eliminar/<?php echo $this->datos[$i]['ID_TIPO_MEMBRESIA'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
                 </td>
             </tr>
         <?php } ?>
@@ -30,11 +30,11 @@
 </div>
 
 <div class="navbar-inner">
-    <a href="<?php echo BASE_URL?>tipo_membresia/nuevo" class="btn btn-primary">Nuevo</a>
+    <a href="<?php echo BASE_URL?>membresia/nuevo" class="btn btn-primary">Nuevo</a>
 </div>
     <?php } else { ?>
 <div class="navbar-inner">
         <p>NO SE ENCONTRARON DATOS</p>
-<a href="<?php echo BASE_URL?>tipo_membresia/nuevo" class="btn btn-primary">Nuevo</a>
+<a href="<?php echo BASE_URL?>membresia/nuevo" class="btn btn-primary">Nuevo</a>
 </div>
     <?php } ?>

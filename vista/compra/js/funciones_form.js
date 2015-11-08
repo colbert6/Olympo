@@ -9,6 +9,7 @@ $(function() {
     $("#sel_almacen").change(function() {
         limpiar();
     });
+    
     $("#nrodoc").focus();
     $("#subtotal,#total,#igv").val('0.00');
     $("#chbx_igv").click(function() {
@@ -43,7 +44,7 @@ $(function() {
                     }
                 });
             } else {
-                bootbox.alert("Agregue los insumos al detalle");
+                bootbox.alert("Agregue los Productos al detalle");
             }
         }
         return false;
@@ -70,15 +71,11 @@ $(function() {
     });
     $("#proveedor").focus(function() {
         buscarProveedor();
-        $("#buscarProveedor").focus();
         $("#VtnBuscarProveedor").show();
-        $("#buscarProveedor").focus();
     });
     $("#AbrirVtnBuscarProveedor").click(function() {
         buscarProveedor();
-        $("#buscarProveedor").focus();
         $("#VtnBuscarProveedor").show();
-        $("#buscarProveedor").focus();
     });
 
     $("#cantidad").keyup(function() {
@@ -228,7 +225,7 @@ function buscarInsumo() {
     $("#title_almacen").html('<h4>'+$( "#sel_almacen option:selected" ).text()+'</h4>');
     $("#grillaInsumo").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
     $("#grillaProveedor").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
-    $.post(url + 'producto/buscador','id_almacen=' + $("#sel_almacen").val(), function(datos) {
+    $.post(url + 'producto/buscador', function(datos) {
         var HTML = '<table id="table2" class="display" cellspacing="0" width="100%">' +
                 '<thead>' +
                 '<tr>' +
@@ -322,6 +319,6 @@ function sel_proveedor(id_p, d,ruc) {
 }
 
 function limpiar() {
-    $("#id_producto,#id_almacen,#stockactual,#producto,#cantidad,#precio,#importe").val('');
+    $("#id_producto,#producto,#id_almacen,#stockactual,#producto,#cantidad,#precio,#importe").val('');
     $("#cantidad,#precio").attr('disabled', true);
 }

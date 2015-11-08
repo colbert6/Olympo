@@ -53,7 +53,7 @@
                         <input readonly name="id_concepto_triaje[]" id="id_concepto_triaje" type="hidden" value="<?php echo $this->concepto_triaje[$i]["ID_CONCEPTO_TRIAJE"];?>">
                         <label class="control-label" ><?php echo $this->concepto_triaje[$i]['DESCRIPCION']?>:</label>
                       </td>
-                      <td width='30' >
+                      <td width='100' >
                           <input onkeypress="return dosDecimales(event,this)" style="text-align:center" name="valor[]" id="valor" class="form-control" 
                         value="<?php 
                             if(isset($this->utriaje)){
@@ -70,7 +70,7 @@
                             
                         ?>">
                       </td>
-                      <td  width='30'>
+                      <td  width='80'>
                           <!--input name="unidad_medida[]" id="unidad_medida" 
                             value="<?php 
                                 if(isset($this->utriaje)){

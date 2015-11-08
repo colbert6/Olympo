@@ -1,13 +1,12 @@
 <?php
-
 class cronograma_pago extends Main{
-
     public $id_cuota_compra;
     public $id_compra;
     public $fecha_venc;
     public $monto_cuota;
     public $num_cuota;
     public $monto_pagado;
+    public $fecha_cancelacion;
     
     public function selecciona() {
         $r = $this->get_consulta("pa_m1_cuco",null);
@@ -53,28 +52,32 @@ class cronograma_pago extends Main{
         $r = null;
         return $error;
     }
-
     public function actualiza() {
-       
-        $datos = array($this->id_almacen, $this->descripcion);
-        
+        $datos = array($this->id_cuota_compra, $this->monto_pagado,$this->fecha_cancelacion);
         $r = $this->get_consulta("pa_u_cuco", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
-
-    
-
-    public function elimina() {
-        $datos = array($this->id_almacen);
-        $r = $this->get_consulta("pa_d_cuco", $datos);
-        $error = $r[1];
+    public function cuota_x_compra() {
+        $datos = array($this->id_compra);
+        
+        $r = $this->get_consulta("pa_cuotas_compra",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
         $r = null;
-        return $error;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
     }
     
-
 }
-
 ?>
