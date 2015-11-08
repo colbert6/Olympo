@@ -1,7 +1,5 @@
 <?php
-
 class cronograma_pago extends Main{
-
     public $id_cuota_compra;
     public $id_compra;
     public $fecha_venc;
@@ -53,7 +51,6 @@ class cronograma_pago extends Main{
         $r = null;
         return $error;
     }
-
     public function actualiza() {
        
         $datos = array($this->id_almacen, $this->descripcion);
@@ -83,12 +80,6 @@ class cronograma_pago extends Main{
         }
       
     }
-<<<<<<< HEAD
-=======
     
-
->>>>>>> 2e5fce50249d112946477ad49919fccea21f3b0b
 }
-
-
 ?>
