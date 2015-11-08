@@ -72,10 +72,6 @@ class cronograma_cobro extends Main{
         return $error;
     }
 
-
- 
-    
-
 }
 
 ?>

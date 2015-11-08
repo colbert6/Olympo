@@ -54,6 +54,7 @@ class movimiento_controlador extends controller {
                 $monto = $_POST['importe'];
                 $referencia = $_POST['referencia'];
                 $id_accion = $_POST['id_accion'];
+                $deuda_total = $_POST['deuda'];
                 $fecha = date("Y-m-d H:i:s");
                 //-------------------------------------------------------------
                 //------------INSERTAR MOVIMIENTO------------------------------
@@ -64,6 +65,8 @@ class movimiento_controlador extends controller {
                 $this->_movimiento->descripcion = $referencia;
                 $this->_movimiento->fecha = $fecha;
                 $ultimo = $this->_movimiento->inserta();
+                $id_movimiento = $ultimo[0]["ULTIMO_ID"];
+
                 //-------------------------------------------------------------
                 // ---------------- ACTUALIZACION DE SALDO --------------------
                 if($tipo_movimiento == "INGRESO"){
@@ -80,34 +83,49 @@ class movimiento_controlador extends controller {
 
                 }else if($tipo_movimiento == "EGRESO"){
                     $this->_cronograma_pago->id_compra = $id_accion;
-                    $cuotas = $this->_cronograma_pago->cuota_x_compra;
+                    $cuotas = $this->_cronograma_pago->cuota_x_compra();
                     for ($i = 0; $i < count($cuotas); $i++) {
                         if ($cuotas[$i]['MONTO_CUOTA'] > $cuotas[$i]['MONTO_PAGADO']) {
                             $monto_restantexcuota = $cuotas[$i]['MONTO_CUOTA'] - $cuotas[$i]['MONTO_PAGADO'];
                             if ($monto != 0) {
                                 if ($monto_restantexcuota >= $monto) {
-                                    //actualiza monto_pagado en cuota_pago
-                                    $this->_cronogcobro->id_cronogcobro = $datos_cronogcobro[$i]['ID_CRONOGCOBRO'];
-                                    $this->_cronogcobro->id_venta= $idventa;
-                                    $this->_cronogcobro->monto = $monto_amortizado + $datos_cronogcobro[$i]['MONTO_COBRADO'];
-                                    $this->_cronogcobro->nrocuota = $datos_cronogcobro[$i]['NROCUOTA'];
-                                    $this->_cronogcobro->actualiza();
+                                    //---------ACTUALIZAMOS TABLA CUOTA COMPRAS-----------------------
+                                    $this->_cronograma_pago->id_cuota_compra = $cuotas[$i]['ID_CUOTA_COMPRA'];
+                                    $this->_cronograma_pago->monto_pagado = $monto + $cuotas[$i]['MONTO_PAGADO'];
+                                    if($monto_restantexcuota == $monto){
+                                        $this->_cronograma_pago->fecha_cancelacion = $fecha;      
+                                    }else{
+                                        $this->_cronograma_pago->fecha_cancelacion = '1990-01-01';
+                                    }
+                                    $this->_cronograma_pago->actualiza();
+                                    //---------INSERTAMOS EN LA TABLA AMORTIZACINO-----------------------
+                                    $this->_amortizacion_compra->id_cuota_compra = $cuotas[$i]['ID_CUOTA_COMPRA'];
+                                    $this->_amortizacion_compra->id_movimiento = $id_movimiento;
+                                    $this->_amortizacion_compra->monto = $monto;
+                                    $this->_amortizacion_compra->inserta();
                                     $monto = 0;
                                 } else {
-                                    //actualiza monto_pagado en cuota_pago
-                                    $this->_cronogcobro->id_cronogcobro = $datos_cronogcobro[$i]['ID_CRONOGCOBRO'];
-                                    $this->_cronogcobro->id_venta= $idventa;
-                                    $this->_cronogcobro->monto = $datos_cronogcobro[$i]['MONTO_CUOTA'];
-                                    $this->_cronogcobro->nrocuota = $datos_cronogcobro[$i]['NROCUOTA'];
-                                    $this->_cronogcobro->actualiza();
-                                    $monto_amortizado = $monto_amortizado - $monto_restantexcuota;
+
+                                    $this->_cronograma_pago->id_cuota_compra = $cuotas[$i]['ID_CUOTA_COMPRA'];
+                                    $this->_cronograma_pago->monto_pagado = $cuotas[$i]['MONTO_CUOTA'];
+                                    $this->_cronograma_pago->fecha_cancelacion = $fecha; 
+                                    $this->_cronograma_pago->actualiza();
+                                    //---------INSERTAMOS EN LA TABLA AMORTIZACINO-----------------------
+                                    $this->_amortizacion_compra->id_cuota_compra = $cuotas[$i]['ID_CUOTA_COMPRA'];
+                                    $this->_amortizacion_compra->id_movimiento = $id_movimiento;
+                                    $this->_amortizacion_compra->monto = $monto_restantexcuota;
+                                    $this->_amortizacion_compra->inserta();
+                                    $monto = $monto - $monto_restantexcuota;
                                 }
                             }
                         }
                     }
+
+                    if($deuda_total == 0){
+
+                    }
                 }
 
-                $id_movimiento = $ultimo[0]["ULTIMO_ID"];
                 $this->redireccionar('movimiento');     
 
             }

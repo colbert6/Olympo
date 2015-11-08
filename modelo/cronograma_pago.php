@@ -6,6 +6,7 @@ class cronograma_pago extends Main{
     public $monto_cuota;
     public $num_cuota;
     public $monto_pagado;
+    public $fecha_cancelacion;
     
     public function selecciona() {
         $r = $this->get_consulta("pa_m1_cuco",null);
@@ -52,15 +53,12 @@ class cronograma_pago extends Main{
         return $error;
     }
     public function actualiza() {
-       
-        $datos = array($this->id_almacen, $this->descripcion);
-        
+        $datos = array($this->id_cuota_compra, $this->monto_pagado,$this->fecha_cancelacion);
         $r = $this->get_consulta("pa_u_cuco", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
-    
     public function cuota_x_compra() {
         $datos = array($this->id_compra);
         
