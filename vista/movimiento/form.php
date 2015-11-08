@@ -7,6 +7,8 @@
         <input type="hidden" name="guardar" id="guardar" value="1"/>
         <input type="hidden" name="num_opc" id="num_opc"/>
         <input type="hidden" name="num_cuotas" id="num_cuotas"/>
+        <input type="hidden" name="id_concepto_movimiento" id="id_concepto_movimiento"/>
+        <input type="hidden" name="id_accion" id="id_accion"/>
          
          <div class="row">
             <div class="col-md-4"></div>
@@ -21,8 +23,6 @@
             </div>
         </div>
         
-        
-
         <div class="row">
             <div class="col-md-4">
                     <strong>ACTOR:</strong>
@@ -42,11 +42,22 @@
             </div> 
 
             <div class="col-md-4">
-                <strong> MONTO:</strong>
-                <input type="text" name="importe" id="importe" onkeypress="return dosDecimales(event,this)" placeholder="Importe" class="form-control"  style="width: 80px" />
-                <button type="button" class="btn btn-primary btn-sm"  id="amortizar">Distribuir</button>
-                <button type="button" class="btn btn-warning btn-sm"  id="deshacer"><i class="icon-repeat icon-white"></i></button>
+                <strong>FORMA PAGO</strong>
+                <select name='id_forma_pago' id='id_forma_pago'>
+                    <option value=''>Seleccione...</option>
+                    <!--option value='1'>Efectivo</option>
+                    <option value='2'>Tarjeta</option-->
+                </select>
             </div> 
+
+<!--<div class=\"col-md-4\">
+    <strong> MONTO:</strong>
+    <input type=\"text\" name=\"importe\" id=\"importe\" onkeypress=\"return dosDecimales(event,this)\" placeholder=\"Importe\" class=\"form-control\"  style=\"width: 80px\" />
+    <button type=\"button\" class=\"btn btn-primary btn-sm\"  id=\"amortizar\">Distribuir</button>
+    <button type=\"button\" class=\"btn btn-warning btn-sm\"  id=\"deshacer\"><i class=\"icon-repeat icon-white\"></i></button>
+</div> -->
+
+
         </div>
         <br>
         <div id='acciones'>
@@ -58,8 +69,8 @@
         <div class="row-fluid">
             <div class="span12 text-center">
                 <p>
-                    <button type="button" class="btn btn-primary" id="save">Guardar</button>
-                    <a href="<?php echo BASE_URL ?>compra" class="btn btn-danger">Cancelar</a>
+                    <button type="button" class="btn btn-primary" id='save' onclick='return validarMovimiento()'>Guardar</button>
+                    <a href="<?php echo BASE_URL ?>movimiento" class="btn btn-danger">Cancelar</a>
                 </p>
             </div>
         </div>

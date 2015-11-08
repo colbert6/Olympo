@@ -1,19 +1,7 @@
-$(function() {    
+$(document).ready(function() {    
 	//alert("abrio");
 	$("#acciones,#cronograma").hide();
-    $("#amortizar").attr('disabled',true);
-    $("#deshacer").attr('disabled',true);
-    $("#importe").attr('readonly',true);
-    $( "#save" ).click(function(){
-        bval = true;   
-        bval = bval && $("#descripcion").required();
-        
-        if (bval) 
-        {
-            $("#frm").submit();
-        }
-        return false;
-    }); 
+    $("#save").attr("disabled",true);
     
    /* $("#id_tipo_movimiento").change(function(){
 
@@ -30,40 +18,37 @@ $(function() {
         buscarActores();
         $("#form-Actor").show();
     });
-    $("#amortizar").click(function() {
-        if($("#importe").val()!=''){
-            if(!isNaN($("#importe").val())){
-                amortizacion();                    
-            }else{
-                alert("Ingrese Solo Numeros");
-                $("#importe").focus();
-            }
 
+
+});
+function validarMovimiento(){
+    bval = true;   
+    bval = bval && $("#id_forma_pago").required();
+    bval = bval && $("#importe").required();
+    if (bval){
+        $("#frm").submit();
+    }else{
+        alert("Complete los campos Necesarios");    
+    }
+    return false;
+}
+
+function validaDistribucion(){
+    if($("#importe").val()!=''){
+        if(!isNaN($("#importe").val())){
+            distribucion();                    
         }else{
-            alert("Ingrese Monto a Amortizar");
+            alert("Ingrese Solo Numeros");
             $("#importe").focus();
         }
-        
-    });
-    $("#deshacer").click(function() {
-        deshacer();
-    });
-});
-function deshacer(){
-    var total = parseInt($("#num_opc").val());
-    for (var i = 1; i <= total; i++) {
-        var elemento = document.getElementById("cronograma"+i);
-        if(elemento.checked){
-            mostrarCronograma(elemento.value); 
-            $("#amortizar").attr('disabled',false);
-            $("#deshacer").attr('disabled',true);
-            $("#importe").attr('readonly',false);
-            break;        
-        }
+
+    }else{
+        alert("Ingrese Monto a Amortizar");
+        $("#importe").focus();
     }
-    
 }
-function amortizacion(){
+function distribucion(){
+     $("#save").attr("disabled",false);
 
     monto_amortizacion = parseFloat($("#importe").val());
     gasto_total = parseFloat($("#deuda").val());
@@ -107,18 +92,20 @@ function amortizacion(){
 
             if(monto_pagado == 0){
                 document.getElementById("fila"+j).className = "danger";
+                document.getElementById('text_estado'+j).value = 'PENDIENTE';
+                document.getElementById('estado'+j).value = '0';
             }else if(monto_pagado>0 && monto_pagado<monto_total){
                 document.getElementById("fila"+j).className = "warning";
+                document.getElementById('text_estado'+j).value = 'PENDIENTE';
+                document.getElementById('estado'+j).value = '0';
             }else if(monto_pagado==monto_total) {
                 document.getElementById("fila"+j).className = "success";
+                document.getElementById('text_estado'+j).value = 'CANCELADO';
+                document.getElementById('estado'+j).value = '1';
             }else{
                 clase = 'default';
             }
-
-
-
-            
-        };
+        }
         
         document.getElementById("pago").value = pago.toFixed(2);
         document.getElementById("deuda").value = deuda.toFixed(2);
@@ -181,18 +168,21 @@ function sel_actor(id_actor,tipo_actor,razon_social,nro_doc) {
 
     if(tipo_actor == 's'){
         $("#tipo_movimiento").val("INGRESO");
+        $("#id_concepto_movimiento").val("2");
        // mostrarVentas();
 
     }else{
         $("#tipo_movimiento").val("EGRESO");
+        $("#id_concepto_movimiento").val("1");
         mostrarCompras(id_actor);
     }
     $("#cronograma").hide();
     $("#importe").attr('readonly',true);
     $("#amortizar").attr('disabled',true);
+
     //$("#id_tipo_movimiento").focus();
-    //$("#id_tipo_movimiento").append(new Option('INGRESO','1'));
-    //$("#id_tipo_movimiento").append(new Option('EGRESO','2'));
+    $("#id_forma_pago").append(new Option('Efectivo','1'));
+    $("#id_forma_pago").append(new Option('Tarjeta','2'));
 }
 
 function mostrarCompras(id_p){
@@ -268,7 +258,12 @@ function validaCheckBox(check){
             check.disabled = true;
             $("#importe").attr('readonly',false);
             $("#amortizar").attr('disabled',false);
-            mostrarCronograma(check.value); 
+            if($("#tipo_actor").val()=='s'){
+
+            }else{
+                mostrarCronogramaCompra(check.value);
+            }
+             
         }else{
             check.checked = false;
         }
@@ -285,14 +280,37 @@ function validaCheckBox(check){
             check.disabled = true;
             $("#importe").attr('readonly',false);
             $("#amortizar").attr('disabled',false);
-            mostrarCronograma(check.value); 
+            if($("#tipo_actor").val()=='s'){
+
+            }else{
+                mostrarCronogramaCompra(check.value);
+            } 
     }
     
      
 }
 
-function mostrarCronograma(id){
+function borrar(){
+    $("#save").attr("disabled",true);
+    var total = parseInt($("#num_opc").val());
+    for (var i = 1; i <= total; i++) {
+        var elemento = document.getElementById("cronograma"+i);
+        if(elemento.checked){
+            if($("#tipo_actor").val()=='s'){
+
+            }else{
+                mostrarCronogramaCompra(elemento.value);
+            }
+            $("#amortizar").attr('disabled',false);
+            $("#deshacer").attr('disabled',true);
+            $("#importe").attr('readonly',false);
+            break;        
+        }
+    } 
+}
+function mostrarCronogramaCompra(id){
     $("#cronograma").show();
+    $("#id_accion").val(id);
     $.post(url + 'cronograma_pago/getCuotasCompra',"id_c="+id, function(cuotas) {
 //        alert(cuotas.length);
         var total_pagado = 0;
@@ -311,7 +329,12 @@ function mostrarCronograma(id){
         
             HTML +="<legend>Cronograma de Pagos</legend>";
             HTML+="<div class=\'row\'>";
-            HTML+="    <div class=\'col-md-4\'></div>";
+            HTML+="    <div class=\'col-md-4\'>";
+            HTML+="     <strong> MONTO:</strong>";
+            HTML+="         <input type=\"text\" name=\"importe\" id=\"importe\" onkeypress=\"return dosDecimales(event,this)\" placeholder=\"Importe\" class=\"form-control\"  style=\"width: 80px\" />";
+            HTML+="         <button type=\"button\" class=\"btn btn-primary btn-sm\"  id=\"amortizar\" onclick='validaDistribucion()'>Distribuir</button>";
+            HTML+="         <button type=\"button\" class=\"btn btn-warning btn-sm\"  id=\"deshacer\" onclick='borrar()'><i class=\"icon-repeat icon-white\"></i></button>";
+            HTML+="     </div>";
             HTML+="    <div class=\'col-md-4\'>";
             HTML+="        <div class=\'form-group\'>";
             HTML+="            <label class=\'col-md-3 control-label\' >PAGO TOTAL</label>";              
@@ -320,7 +343,6 @@ function mostrarCronograma(id){
             HTML+="            </div>";
             HTML+="        </div>";
             HTML+="    </div>";
-
             HTML+="    <div class=\'col-md-4 \'>";
             HTML+="        <div class=\'form-group\'>";
             HTML+="            <label class=\'col-md-3 control-label\' > DEUDA TOTAL</label>";              
@@ -339,6 +361,7 @@ function mostrarCronograma(id){
                         '<th class=\'text-center\'>MONTO</th>' +
                         '<th class=\'text-center\'>MONTO PAGADO</th>' +
                         '<th class=\'text-center\'>MONTO RESTANTE</th>' +
+                        '<th class=\'text-center\'>ESTADO</th>' +
                         '</tr>' +
                     '</thead>' +
                     '<tbody>';
@@ -346,11 +369,17 @@ function mostrarCronograma(id){
             for (var i = 0; i < cuotas.length; i++) {
                 if(parseFloat(cuotas[i].MONTO_PAGADO) == 0){
                     clase = 'danger';
+                    text_estado = 'PENDIENTE';
+                    estado = '0';
                 }
                 else if(parseFloat(cuotas[i].MONTO_PAGADO)>0 && parseFloat(cuotas[i].MONTO_PAGADO)<parseFloat(cuotas[i].MONTO_CUOTA)){
                     clase = 'warning';
+                    text_estado = 'PENDIENTE';
+                    estado = '0';
                 }else if(parseFloat(cuotas[i].MONTO_PAGADO)==parseFloat(cuotas[i].MONTO_CUOTA)) {
                     clase = 'success';
+                    text_estado = 'CANCELADO';
+                    estado = '1';
                 }else{
                     clase = 'default';
                 }
@@ -361,12 +390,24 @@ function mostrarCronograma(id){
                 HTML += '   <td class=\'text-center\'><input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_cuota[]\' id=\'monto_cuota'+(i+1)+'\' value=\''+cuotas[i].MONTO_CUOTA+'\'/></td>';
                 HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_pagado[]\' id=\'monto_pagado'+(i+1)+'\' value=\''+cuotas[i].MONTO_PAGADO+'\'/></td>';
                 HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_restante[]\' id=\'monto_restante'+(i+1)+'\' value=\''+cuotas[i].MONTO_RESTANTE+'\'/></td>';
-                
+                HTML += '   <td class=\'text-center\' >';
+                HTML += '<input type=\'hidden\' name=\'estado[]\' id=\'estado'+(i+1)+'\' value=\''+estado+'\'/>';
+                HTML += '<input readonly  style=\'text-align:center;border:none; background:none\' name=\'text_estado[]\' id=\'text_estado'+(i+1)+'\' value=\''+text_estado+'\'/></td>';
                 HTML += '</tr>';
             }
             HTML += '</tbody></table>';
+            HTML+=" <div class=\'row\'>";
+            HTML+="    <div class=\'col-md-2\'>";
+            HTML+="            <label class=\'control-label\' >REFERENCIA:</label>";              
+            HTML+="    </div>";
+            HTML+="    <div class=\'col-md-10\'>";
+            HTML+="                <textarea name=\'referencia\' id=\'referencia\' class=\'form-control\' ></textarea>";
+            HTML+="    </div>";
+            HTML+=" </div> <br>";
+      
             $("#num_cuotas").val(cuotas.length);
             $("#cronograma").html(HTML);
+            $("#deshacer").attr('disabled',true);
 
        // }, 'json');
     }, 'json');
