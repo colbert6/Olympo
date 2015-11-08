@@ -67,11 +67,8 @@ class web_Controlador extends controller {
         $this->_vista->renderiza_web('servicios','servicios',true);
     }    
     public function contactenos(){
-<<<<<<< HEAD
+
         $this->_vista->datos = $this->_model->selecciona();
-=======
-        
->>>>>>> ec0053f4799f1b0d4880953add96e87f74c9721f
         $this->_vista->renderiza_web('contactenos','contactenos',false);
         if ($_POST['guardar'] == 1) {
             $this->_contacto->nombre = $_POST['nombre'];
