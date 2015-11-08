@@ -9,7 +9,7 @@
                 <th>ACCIONES</th>
             </tr>
         </thead>
-         <tbody>
+        <tbody>
             <?php for ($i = 0; $i < count($this->datos); $i++) { ?>
             <tr>
                 <td><?php echo ($i+1);//id ?></td>

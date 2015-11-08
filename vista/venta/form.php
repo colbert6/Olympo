@@ -3,18 +3,16 @@
 <script src="<?php echo $_params['ruta_js']; ?>bootbox.min.js"></script>
 <div class="navbar-inner">
     <form method="post" action="<?php if (isset($this->action)) echo $this->action ?>" id="frm" class="form-horizontal">
-        <input type="hidden" name="guardar" id="guardar" value="1"/>
-        <input type="hidden" readonly="readonly" name="codigo" id="codigo"
-               value="<?php if (isset($this->datos[0]['ID_VENTA'])) echo $this->datos[0]['ID_VENTA'] ?>"/>
+        <input type="hidden" name="guardar" id="guardar" value="1" />
         
         <div class="row" style="border-bottom: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;" >
             <div class="col-md-7">
                 <div class="form-group" style="margin: 5px auto 5px auto" >
                     <label class="col-md-4 control-label" > Cliente:</label>
                     <div class="col-md-9">
-                        <input type="hidden" name="aceptacredito" id="aceptacredito"/>
-                    <input type="hidden" name="id_socio" id="id_socio"/>
-                    <input type="text" name="socio" id="socio" readonly="readonly" data-toggle="modal" data-target="#modalSocio" class="form-control" style="width: 70%" />
+                        
+                    <input type="hidden" name="id_cliente" id="id_cliente"/>
+                    <input type="text" name="cliente" id="cliente" readonly="readonly" data-toggle="modal" data-target="#modalSocio" class="form-control" style="width: 70%" />
                     <button data-toggle="modal" data-target="#modalSocio" type="button" class="btn btn-sm btn-primary" title="Buscar Cliente" id="AbrirVtnBuscarSocio"><i class="icon-search icon-white"></i></button>
                     <!--button style="margin-right: 5px" data-toggle="modal" data-target="#modalNuevoCliente" type="button" class="btn btn-primary btn-sm" title="Insertar Cliente"><i class="icon-plus icon-white"></i></button-->
                     </div>
@@ -86,7 +84,7 @@
             </div>
             <div class="col-md-6 ">
                 <div class="form-group" style="margin: 5px auto 5px auto">
-                    <label class="col-md-7 control-label" > Fecha:</label>
+                    <label class="col-md-7 control-label" style="padding-top: 0px;"> Fecha Actual:</label>
                     <div class="col-md-5">
                         <input name="fechaventa" id="fechaventa" class="form-control"  placeholder="Fecha" readonly="readonly" value="<?php echo date('Y-m-d') ?>">
                     </div>
@@ -138,99 +136,39 @@
             </div> 
         </div>
         
-        <div class="row" id="celda_matricula" style="display:;margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
-            <div class="row"  style="margin: 0px 0px 0px 0px;">
-                <div class="col-md-6" style="padding-right: 0px;">
-                    <div class="form-group" style="margin: 5px 0px 5px 0px">
-                        <label class=" col-md-4 control-label" >Membresia:</label>
-                        <div class="col-md-9" style="padding-right: 0px;">
-                            <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Seleccione Membresia" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 200px"/>
-                            <button type="button" data-toggle="modal" data-target="#modalMembresia" class="btn btn-primary btn-sm" title="Buscar Membresia" id="AbrirVtnBuscarMembresia"><i class="icon-search icon-white"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6" style="padding-left: 0px;">
-                    <div class="form-group" style="margin: 5px 0px 5px 0px">
-                        <label class=" col-md-4 control-label" >Cliente:</label>
-                        <div class="col-md-9" style="padding-left: 0px;">
-                            <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Seleccione Cliente" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 200px"/>
-                            <button type="button" data-toggle="modal" data-target="#modalMembresia" class="btn btn-primary btn-sm" title="Buscar Membresia" id="AbrirVtnBuscarMembresia"><i class="icon-search icon-white"></i></button>
-                        </div>
+        <div class="row" id="celda_matricula" style="display:none;margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
+            <div class="col-md-5" style="padding-right: 0px;">
+                <div class="form-group" style="margin: 5px 0px 5px 0px">
+                    <label class=" col-md-4 control-label" >Membresia:</label>
+                    <div class="col-md-8" style="padding-right: 0px;">
+                        <input type="hidden" name="id_matricula" id="id_matricula"/>
+                        <input type="hidden" name="id_membresia" id="id_membresia"/>
+                        <input type="hidden" name="socio" id="socio"/>
+                        <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Seleccione Membresia" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 150px"/>
+                        <button type="button" data-toggle="modal" data-target="#modalMembresia" class="btn btn-primary btn-sm" title="Buscar Membresia" id="AbrirVtnBuscarMembresia"><i class="icon-search icon-white"></i></button>
                     </div>
                 </div>
             </div>
-            <div class="row"  style="margin: 0px auto 10px auto;">
-                <div class="col-md-4">
-                    <label class=" col-md-offset-1 control-label " >Servicios (2) :</label>
-                    <div class="col-md-offset-3 col-md-10">
-                        <div class="checkbox col-md-6" >
-                          <label>
-                            <input type="checkbox"> Cardio
-                          </label>
-                        </div>
-                        <div class="checkbox col-md-6">
-                          <label>
-                            <input type="checkbox"> Maquinas
-                          </label>
-                        </div>
-                        <div class="checkbox col-md-6">
-                          <label>
-                            <input type="checkbox"> Pesas
-                          </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8" style="margin: 10px auto 10px auto;">
-                        
-                        <div class="col-md-4 ">
-                            <label class="col-md-4 control-label" style="width: 110px" > Fecha Inicio:</label>
-                            <input name="fechainicio" id="fechainicio" class="form-control"  placeholder="Fecha" readonly="readonly" value="<?php echo date('Y-m-d') ?>">
-                                
-                        </div>
-                        <div class="col-md-4">
-                             <label class=" col-md-4 control-label" >Fecha Fin:</label>
-                            <input name="membresia" id="membresia"  placeholder="Fecha Fin" readonly="readonly" class="form-control"   />
-                        </div>
-                    
-                        <div class="col-md-3">
-                             <label class=" col-md-4 control-label" >Precio:</label>
-                            <input  name="precio" id="membresia"  placeholder="Precio" class="form-control" />
-                        </div>
-                    
-                </div>
-                
-            </div>
+            
+            <div class="col-md-7" style="margin: 3px auto 5px auto">
+                    <input type="text" name="fecha_ini" id="fecha_ini" placeholder="Fecha Inicio" class="form-control" style="width: 140px" />
+                    <input type="text" name="precio_m" id="precio_m" placeholder="Precio" class="form-control" onkeypress="return dosDecimales(event,this)" style="width: 110px" />  
+                    <button type="button" class="btn btn-primary btn-sm" title="Agregar al Detalle" id="addDetalleMembresia"><i class="icon-hand-down icon-white"></i></button>
+            </div> 
+             
         </div>
         
         <div class="row">
             <div class="col-md-12" style="margin: 5px auto;">
-                <ul class="nav nav-tabs">
-                  <li ><a data-toggle="tab" href="#tabServicios">Servicios</a></li>
-                  <li class="active"><a data-toggle="tab" href="#tabProductos">Productos</a></li>
-                </ul>
-
-                <div class="tab-content" style="padding: 10px 10px 10px 10px;" >
-                    <div id="tabServicios" class="tab-pane fade " >
-                        <table class="table table-striped table-bordered table-hover table-condensed" id="tblDetalleMembresias">
-                            <th>Servicio</th>
-                            <th>Unid. Med.</th>
-                            <th>Cantidad</th>
-                            <th>Precio</th>
-                            <th>Importe (S/.)</th>
-                            <th>Acciones</th>   
-                        </table>
-                    </div>
-                    <div id="tabProductos" class="tab-pane fade in active">
-                        <table class="table table-striped table-bordered table-hover table-condensed" id="tblDetalleProductos">
-                            <th>Producto</th>
-                            <th>Almacen</th>
-                            <th>Cantidad</th>
-                            <th>Precio</th>
-                            <th>Importe (S/.)</th>
-                            <th>Acciones</th>   
-                        </table>
-                    </div>
-                </div>
+                <table class="table table-striped table-bordered table-hover table-condensed" id="tblDetalle">
+                    <th>Tipo</th>
+                    <th>Descripcion</th>
+                    <th>Soc. / Alm.</th>
+                    <th>Fecha / Cant</th>
+                    <th>Precio</th>
+                    <th>Importe (S/.)</th>
+                    <th>Acciones</th>   
+                </table>
             </div>
         </div>
         <div class="row-fluid">
@@ -257,7 +195,7 @@
     
     <!-- Modal -->
     <style>
-        #modalSocio .modal-content,#modalProducto .modal-content,#modalNuevoCliente .modal-content{
+        #modalSocio .modal-content,#modalProducto .modal-content,#modalMembresia .modal-content{
             width: 800px;
             left: -18%;
         }
@@ -315,48 +253,23 @@
         </div>
         </div>
     </div>
-    <div id="modalServicio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="modalMembresia" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Lista de Servicios</h3>
+            <h3 id="myModalLabel">Lista de Membresias</h3>
         </div>
         <div class="modal-body">
-            <form id="VtnBuscarServicio">
+            <form id="VtnBuscarMembresia">
                 <div class="navbar-inner text-center">
-                    <p>
-                        <select class="list" id="filtroServicio">
-                            <option value="0">Descripcion</option>
-                            <option value="1">Tipo Servicio</option>
-                        </select>
-                        <input type="text" class="input-xlarge" id="buscarServicio">
-                        <button type="button" class="btn btn-primary" id="btn_buscarServicio"><i class="icon-search icon-white"></i></button>
-                    </p>
-                    <div id="grillaServicio">
+                    
+                    <div id="grillaMembresia">
                         <div class="page-header">
                             <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
                         </div>
                     </div>
-                    <div id="controls">
-                        <div id="perpage">
-                            <select onchange="sorter.size(this.value)">
-                                <option value="5">5</option>
-                                <option value="10" selected="selected">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                            <span>Entradas por Página</span>
-                        </div>
-                        <div id="navigation">
-                            <img src="<?php echo BASE_URL ?>lib/img/first.gif" width="16" height="16" alt="Primera Página" onclick="sorter.move(-1,true)" />
-                            <img src="<?php echo BASE_URL ?>lib/img/previous.gif" width="16" height="16" alt="Página Anterior" onclick="sorter.move(-1)" />
-                            <img src="<?php echo BASE_URL ?>lib/img/next.gif" width="16" height="16" alt="Página Siguiente" onclick="sorter.move(1)" />
-                            <img src="<?php echo BASE_URL ?>lib/img/last.gif" width="16" height="16" alt="Última Página" onclick="sorter.move(1,true)" />
-                        </div>
-                        <div id="text">Página <span id="currentpage"></span> de <span id="pagelimit"></span></div>
-                    </div>
+                    
                 </div>
             </form>
         </div>

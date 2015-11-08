@@ -17,11 +17,17 @@ $(function() {
         buscarMembresia();
         $("#VtnBuscarMembresia").show();
     });
-    $("#socio_sel").focus(function() {
+    $("#servicio_sel").focus(function() {
+        if(!validar_servicios()){
+            return false;
+        }
         buscarServicio();
         $("#VtnBuscarServicio").show();
     });
     $("#AbrirVtnBuscarServicio").click(function() {
+        if(!validar_servicios()){
+            return false;
+        }
         buscarServicio();
         $("#VtnBuscarServicio").show();
     });
@@ -30,15 +36,18 @@ $(function() {
         bval = true;
         bval = bval && $("#socio").required();
         bval = bval && $("#membresia").required();
+        
         if (bval) {
-            if ($(".row_tmp").length) {
+            if ($(".id_serv").length==$("#numero_servicios").val()) {
                 bootbox.confirm("¿Está seguro que desea guardar la compra?", function(result) {
                     if (result) {
                         $("#frm").submit();
                     }
                 });
             } else {
-                bootbox.alert("Agregue Servicios a la Matricula");
+                $("#servicio_sel").required();
+                bootbox.alert("Elimine o Agrege servicios");
+                return false;
             }
         }
         return false;
@@ -174,11 +183,6 @@ function sel_servicio(id_s,s,a) {
             bootbox.alert("Este servicio ya fue agregado");
             return false;
         }
-    if ($(".id_serv").length+1 >$("#numero_servicios").val()) {
-            bootbox.alert("Maximos Servicios Inlcuidos");
-            $('#modalServicio').modal('hide');
-            return false;
-        }
         var html = '<tr class="row_tmp">';
         html += '<td>';
         html +=  $(".id_serv").length+1;       
@@ -198,14 +202,24 @@ function sel_servicio(id_s,s,a) {
         
     
 }
-function limpiar() {
-    $("#id_socio,#id_membresia,#socio,#dni,#precio,#numero_servicios").val('');
-    $("#cantidad,#precio").attr('disabled', true);
-}
-
 $(".delete").live('click', function() {
     var i = $(this).parent().parent().index();
     var importe = $("#tblDetalle tr:eq(" + i + ") td .importe").val();
     $("#tblDetalle tr:eq(" + i + ")").remove();
     setTotal(importe, 0);
 });
+
+function limpiar() {
+    $("#id_socio,#id_membresia,#socio,#dni,#precio,#numero_servicios").val('');
+    $("#cantidad,#precio").attr('disabled', true);
+}
+
+function validar_servicios() {
+    if ($(".id_serv").length+1 >$("#numero_servicios").val()) {
+        bootbox.alert("Servicios completos");
+        return false;
+    }else{
+        return true;
+    }
+    
+}

@@ -1,6 +1,6 @@
 $(function() {
-    $("#socio").focus();
-    $("#socio").click(function(){
+    $("#cliente").focus();
+    $("#cliente").click(function(){
         buscarSocio();
         $("#VtnBuscarSocio").show();
     });
@@ -25,14 +25,19 @@ $(function() {
     $("#sel_venta").change(function(){
         if($(this).val()==2){
             $("#celda_matricula").hide();
-            $("#celda_producto").show();    
+            $("#celda_producto").show();
+            limpiar_membresia();
+            
         }else if($(this).val()==1){
             $("#celda_producto").hide();
             $("#celda_matricula").show();
+            limpiar_producto();
         }else{
             $("#celda_producto").hide();
             $("#celda_matricula").hide();
+            limpiar();
         }
+        
     });
     //  \/-\/-\/-\/-\/------PRODUCTOS--------\/-\/-\/-\/-\/-------//
     $("#producto").click(function() {
@@ -67,13 +72,16 @@ $(function() {
             }
             var html = '<tr class="row_tmp">';
             html += '<td>';
-            html += '   <input type="hidden" name="id_producto[]" class="id_prod" value="' + $("#id_producto").val() + '" />' + $("#producto").val();
+            html += '   <input type="hidden" name="id_tipo[]" value="p" />Producto' ;
             html += '</td>';
             html += '<td>';
-            html += '   <input type="hidden" name="id_almacen[]" class="id_alm" value="' + $("#id_almacen").val() + '" />' + $("#almacen").val();
+            html += '   <input type="hidden" name="id_vendido[]" class="id_prod" value="' + $("#id_producto").val() + '" />' + $("#producto").val();
             html += '</td>';
             html += '<td>';
-            html += '   <input type="hidden" name="cantidad[]" value="' + $("#cantidad").val() + '" />' + $("#cantidad").val();
+            html += '   <input type="hidden" name="id_campo2[]" class="id_alm" value="' + $("#id_almacen").val() + '" />' + $("#almacen").val();
+            html += '</td>';
+            html += '<td>';
+            html += '   <input type="hidden" name="numero[]" value="' + $("#cantidad").val() + '" />' + $("#cantidad").val();
             html += '</td>';
             html += '<td>';
             html += '   <input type="hidden" name="precio[]" value="' + $("#precio").val() + '" />' + $("#precio").val();
@@ -82,25 +90,74 @@ $(function() {
             html += '   <input type="hidden" name="importe[]" class="importe" value="' + $("#importe").val() + '" />' + $("#importe").val();
             html += '</td>';
             html += '<td>';
-            html += '   <a id="delete_producto" class="btn btn-danger delete"><i class="icon-trash icon-white"></i></a>';
+            html += '   <a class="btn btn-danger delete"><i class="icon-trash icon-white"></i></a>';
             html += '</td>';
             html += '</tr>';
 
-            $("#tblDetalleProductos").append(html);
+            $("#tblDetalle").append(html);
             setTotal($("#importe").val(), 1);
             limpiar_producto();
         }
     });
-    
-    $("#delete_producto").live('click', function() {
-        alert('Producto eliminado de la Lista');
-        var i = $(this).parent().parent().index();
-        var importe = $("#tblDetalleProductos tr:eq("+i+") td .importe").val();
-        $("#tblDetalleProductos tr:eq("+i+")").remove();
-        setTotal(importe,0);
-    });
     // /\-/\-/\-/\-/\-/\---PRODUCTOS--------/\-/\-/\-/\-/\-/\------//
+    // 
+     //  \/-\/-\/-\/-\/------MEMBRESIA--------\/-\/-\/-\/-\/-------//
+    $("#membresia").click(function() {
+        buscarMembresia();
+        $("#VtnBuscarMembresia").show();
+    });
+    $("#AbrirVtnBuscarMembresia").click(function() {
+        buscarMembresia();
+        $("#VtnBuscarMembresia").show();
+    });
+    $("#addDetalleMembresia").click(function(){
+        bval = true;   
+        bval = bval && $("#membresia").required();
+        bval = bval && $("#fecha_ini").required();
+        bval = bval && $("#precio_m").required();
+         if (bval) {
+            if ($(".id_mat[value=" + $("#id_matricula").val() + "]").length ) {
+                bootbox.alert("Esta matricula ya fue agregado");
+                return false;
+            }
+            var html = '<tr class="row_tmp">';
+            html += '<td>';
+            html += '   <input type="hidden" name="id_tipo[]" value="m" />Membresia' ;
+            html += '</td>';
+            html += '<td>';
+            html += '   <input type="hidden" name="id_vendido[]" class="id_mat" value="' + $("#id_matricula").val() + '" />' + $("#membresia").val();
+            html += '</td>';
+            html += '<td>';
+            html += '   <input type="hidden" name="id_campo2[]"  value="' + $("#id_membresia").val() + '" />' + $("#socio").val();
+            html += '</td>';
+            html += '<td>';
+            html += '   <input type="hidden" name="numero[]" value="' + $("#fecha_ini").val() + '" />' + $("#fecha_ini").val();
+            html += '</td>';
+            html += '<td>';
+            html += '   <input type="hidden" name="precio[]" value="' + $("#precio_m").val() + '" />' + $("#precio_m").val();
+            html += '</td>';
+            html += '<td>';
+            html += '   <input type="hidden" name="importe[]" class="importe" value="' + $("#precio_m").val() + '" />' + $("#precio_m").val();
+            html += '</td>';
+            html += '<td>';
+            html += '   <a  class="btn btn-danger delete"><i class="icon-trash icon-white"></i></a>';
+            html += '</td>';
+            html += '</tr>';
+
+            $("#tblDetalle").append(html);
+            setTotal($("#precio_m").val(), 1);
+            limpiar_membresia();
+        }
+    });
     
+    // /\-/\-/\-/\-/\-/\---MEMBRESIA--------/\-/\-/\-/\-/\-/\------//
+    
+    $(".delete").live('click', function() {
+        var i = $(this).parent().parent().index();
+        var importe = $("#tblDetalle tr:eq(" + i + ") td .importe").val();
+        $("#tblDetalle tr:eq(" + i + ")").remove();
+        setTotal(importe, 0);
+    });
     $("#subtotal,#total,#igv").val('0.00');
     
     $("#chbx_igv").click(function(){
@@ -117,28 +174,16 @@ $(function() {
     $("input:text[readonly=readonly]").css('cursor','pointer');
     
     limpiar();
-    $("#fechaventa,#fechainicio").datepicker({dateFormat:'yy-mm-dd',changeMonth:true,changeYear:true});
+    $("#fecha_ini").datepicker({dateFormat:'yy-mm-dd',changeMonth:true,changeYear:true});
     
-    $( "#save" ).click(function(){
+    $("#save").click(function(){
         bval = true;   
         bval = bval && $("#cliente").required();
-        bval = bval && $("#id_tipocomprobante").required();
+        bval = bval && $("#sel_tipo_documento").required();
         bval = bval && $("#id_tipopago").required();
         if(bval && $("#id_tipopago").val()==2){
-            bval = bval && $("#fecha_vencimiento").required();
-            bval = bval && $("#intervalo_dias").required();
-            var aceptacredito = $("#aceptacredito").val();
-            if(bval && aceptacredito == '1'){
-                var total = parseFloat($("#total").val());
-                var maximocredito = parseFloat($("#maximocredito").val());
-                if(bval && total > maximocredito){
-                    bootbox.alert("No puede otorgarle un crédito mayor de S/. "+maximocredito);
-                    bval = false;
-                }
-            } else{
-                bootbox.alert("Límite de crédito superado");
-                bval = false;
-            }
+            bval = bval && $("#cuotas").required();
+            bval = bval && $("#intervalo").required();
         }
         if (bval) {
             if( $(".row_tmp").length ) {
@@ -154,38 +199,7 @@ $(function() {
         return false;
     });
     
-    $("#selectServicio").click(function(){
-        buscarServicio();
-        $("#buscarServicio").focus();
-        $("#VtnBuscarServicio").show();
-    });
-    $("#servicio").click(function(){
-        buscarServicio();
-        $("#buscarServicio").focus();
-        $("#VtnBuscarServicio").show();
-        $("#buscarServicio").focus();
-    });
-    $("#AbrirVtnBuscarServicio").click(function(){
-        buscarServicio();
-        $("#buscarServicio").focus();
-        $("#VtnBuscarServicio").show();
-        $("#buscarServicio").focus();
-    });
     
-    $("#buscarServicio").keypress(function(event){
-        if(event.which == 13){
-            event.preventDefault();
-            buscarServicio();
-        } 
-    });
-    $("#btn_buscarServicio").click(function(){
-        buscarServicio();
-        $("#buscarServicio").focus();
-    });
-    $("#btn_buscarCliente").click(function(){
-        buscarCliente();
-        $("#buscarCliente").focus();
-    });
     $("#cantidad").keyup(function(){
         setImporte();
     });
@@ -193,6 +207,13 @@ $(function() {
         setImporte();
     });
     $("#precio").blur(function(){
+        var precio = parseFloat($(this).val());
+        if (isNaN(precio)) {
+            precio = 0;
+        }
+        $(this).val(precio.toFixed(2));
+    });
+    $("#precio_m").blur(function(){
         var precio = parseFloat($(this).val());
         if (isNaN(precio)) {
             precio = 0;
@@ -241,7 +262,8 @@ function setTotal(importe,aumenta){
 }
 
 function buscarSocio() {
-    $("#grillaServicio").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+    $("#grillaProducto").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+    $("#grillaMembresia").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
     $("#grillaSocio").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
     $.post(url + 'socio/buscador','matricula=1', function(datos) {
         var HTML = '<table id="table2" class="display" cellspacing="0" width="100%">' +
@@ -273,8 +295,9 @@ function buscarSocio() {
 }
 function buscarProducto() {
     $("#title_almacen").html('<h4>'+$( "#sel_almacen option:selected" ).text()+'</h4>');
-    $("#grillaSocio").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
     $("#grillaProducto").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+    $("#grillaMembresia").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+    $("#grillaSocio").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
     $.post(url + 'producto/buscador','id_almacen=' + $("#sel_almacen").val(), function(datos) {
         var HTML = '<table id="table2" class="display" cellspacing="0" width="100%">' +
                 '<thead>' +
@@ -314,37 +337,52 @@ function buscarProducto() {
     }, 'json');
 }
 
-function buscarMembresia(){
-    $("#grillaServicio").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
-    $("#grillaCliente").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
-    $("#modalServicio").modal('show');
-    $.post(url+'servicio/buscador','descripcion='+$("#buscarServicio").val()+'&filtro='+$("#filtroServicio").val(),function(datos){
-        HTML = '<table id="table" class="table table-striped table-bordered table-hover sortable">'+
-        '<thead>'+
-        '<tr>'+
-        '<th>Item</th>'+
-        '<th>Descripcion</th>'+
-        '<th>Tipo Servicio</th>'+
-        '<th>Acciones</th>'+
-        '</tr>'+
-        '</thead>'+
-        '<tbody>';
+function buscarMembresia() {
+    $("#title_almacen").html('<h4>'+$( "#sel_almacen option:selected" ).text()+'</h4>');
+    $("#grillaProducto").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+    $("#grillaMembresia").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+    $("#grillaSocio").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+    $.post(url + 'matricula/buscador', function(datos) {
+        var HTML = '<table id="table2" class="display" cellspacing="0" width="100%">' +
+                '<thead>' +
+                '<tr>' +
+                '<th>Item</th>'+
+                '<th>Descripcion</th>'+
+                '<th>Socio</th>'+
+                '<th>Fecha Registro</th>'+
+                '<th>Costo</th>'+
+                '<th>Acciones</th>'+
+                '</tr>' +
+                '</thead>' +
+                '<tbody>';
 
-        for(var i=0;i<datos.length;i++){
-            var idservicio = datos[i].ID_SERVICIO;
-            var descripcion = datos[i].DESCRIPCION;
+        for (var i = 0; i < datos.length; i++) {
             HTML = HTML + '<tr>';
             HTML = HTML + '<td>'+(i+1)+'</td>';
-            HTML = HTML + '<td>'+descripcion+'</td>';
-            HTML = HTML + '<td>'+datos[i].TTIPOSERVICIO+'</td>';
-            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_servicio(\''+idservicio+'\',\''+descripcion+'\')" class="btn btn-success btn-minier"><i class="icon-ok icon-white"></i> </a>';
+            HTML = HTML + '<td>'+datos[i].DESCRIPCION+' '+datos[i].DURACION+' '+datos[i].VIGENCIA +'</td>';
+            HTML = HTML + '<td>'+datos[i].NOMBRE+' '+datos[i].APELLIDO_PATERNO+'</td>';
+            HTML = HTML + '<td>'+datos[i].FECHA_REGISTRO+'</td>';
+            HTML = HTML + '<td>'+datos[i].COSTO+'</td>';
+            var id_matricula = datos[i].ID_MATRICULA;
+            var descripcion = datos[i].DESCRIPCION+' '+datos[i].DURACION+' '+datos[i].VIGENCIA;
+            var socio = datos[i].NOMBRE+' '+datos[i].APELLIDO_PATERNO;
+            var precio_m = datos[i].COSTO;
+            var id_membresia = datos[i].ID_TIPO_MEMBRESIA;
+            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_membresia(\'' + id_matricula + '\',\'' + descripcion + '\',\'' + socio + '\',\'' + precio_m +'\',\'' + id_membresia +  '\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
             HTML = HTML + '</td>';
             HTML = HTML + '</tr>';
         }
-        HTML = HTML + '</tbody></table>';
-        $("#grillaServicio").html(HTML);
-        $("#jsfoot").html('<script src="'+url+'vista/web/js/scriptgrilla.js"></script>');
-    },'json');
+        HTML = HTML + '</tbody></table>'
+        $("#grillaMembresia").html(HTML);
+        $("#jsfoot").html('<script src="' + url + 'vista/venta/js/run_table.js"></script>');
+    }, 'json');
+}
+
+function sel_socio(id_s,soc){
+    $("#id_cliente").val(id_s);
+    $("#cliente").val(soc);
+    $('#modalSocio').modal('hide');
+    $("#sel_tipo_documento").focus();
 }
 function sel_producto(id_p,id_a,a, p, s, pc) {
     $("#cantidad,#precio").attr('disabled', false);
@@ -358,31 +396,27 @@ function sel_producto(id_p,id_a,a, p, s, pc) {
     $("#cantidad").focus();
     setImporte()
 }
-
-function sel_servicio(id_s,s){
-    getUnidadesServicio(id_s);
-    $("#cantidad, #precio").val('');
-    $("#cantidad, #precio").attr('disabled',false);
-    $("#id_servicio").val(id_s);
-    $("#servicio").val(s);
-    $('#modalServicio').modal('hide');
-    $("#cantidad").focus();
-}
-
-
-function sel_socio(id_s,soc){
-    $("#id_socio").val(id_s);
-    $("#socio").val(soc);
-    $('#modalSocio').modal('hide');
-    $("#sel_tipo_documento").focus();
+function sel_membresia(id_m,d,s,p,memb){
+    $("#fecha_ini, #precio_m").val('');
+    $("#fecha_ini, #precio_m").attr('disabled',false);
+    $("#id_matricula").val(id_m);
+    $("#id_membresia").val(memb);
+    $("#membresia").val(d);
+    $("#socio").val(s);
+    $("#precio_m").val(p);
+    $('#modalMembresia').modal('hide');
+    $("#fecha_ini").val( $("#fechaventa").val());
 }
 
 function limpiar_producto(){
     $("#id_producto,#producto,#id_almacen,#stockactual,#producto,#cantidad,#precio,#importe").val('');
     $("#cantidad,#precio").attr('disabled',true);
 }
+function limpiar_membresia(){
+    $("#id_matricula,#id_membresia,#membresia,#socio,#fecha_ini,#precio_m").val('');
+    $("#fecha_ini,#precio_m").attr('disabled',true);
+}
 function limpiar(){
-    $("#id_servicio,#servicio,#cantidad,#cantidadub,#precio,#importe").val('');
-    $("#cantidad,#precio").attr('disabled',true);
-    $("#id_unidadmedida").html('<option value="0">Unid. Med.:</option>');
+    limpiar_producto();
+    limpiar_membresia();
 }

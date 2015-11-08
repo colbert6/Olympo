@@ -58,6 +58,7 @@ class web_Controlador extends controller {
         $this->_vista->renderiza_web('servicios','servicios',true);
     }    
     public function contactenos(){
+        
         $this->_vista->renderiza_web('contactenos','contactenos',false);
     }
 
