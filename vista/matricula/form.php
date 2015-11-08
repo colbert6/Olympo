@@ -7,24 +7,30 @@
         
         <?php if(isset ($this->datos[0]['ID_MATRICULA'])) {?>
         <div class="row"  style="border-bottom: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
-            <div class="form-group">
-                <label class="control-label col-sm-6" >Item:</label>
-                <div class="col-sm-6">
-                    <input name="id_matricula" id="id_matricula" class="form-control"  readonly="readonly"
-                       value="<?php echo $this->datos[0]['ID_MATRICULA'];?>">
+            <div class="col-md-7 " >
+                <div class="form-group" style="margin: 5px auto 5px auto">
+                    <label class=" col-md-4 control-label " >Item:</label>
+                    <div class="col-md-6">
+                        <input name="id_matricula" id="id_matricula" class="form-control"  readonly="readonly"
+                           value="<?php echo $this->datos[0]['ID_MATRICULA'];?>" >
+                    </div>
                 </div>
             </div> 
         </div> 
         <?php } ?>  
            
         <div class="row"  style="border-bottom: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
-             <div class="col-md-7 ">
+            <div class="col-md-7 ">
                 <div class="form-group" style="margin: 5px auto 5px auto">
                 <label class="col-md-4 control-label" >Socio:</label>
-                    <div >
-                        <input type="hidden" name="id_socio" id="id_socio"/>
-                        <input type="text" name="socio" id="socio" readonly="readonly" placeholder="Socio" data-toggle="modal" data-target="#modalSocio" class="form-control"  style="width: 60%;margin-left: 13px;" />
+                    <div>
+                        <input type="hidden" name="id_socio" id="id_socio"
+                               value="<?php if(isset($this->datos[0]['ID_SOCIO'])) echo $this->datos[0]['ID_SOCIO'] ?>"/>
+                        <input type="text" name="socio" id="socio" readonly="readonly" placeholder="Socio" data-toggle="modal" data-target="#modalSocio" 
+                               class="form-control"  style="width: 60%;margin-left: 13px;" value="<?php if(isset ($this->datos[0]['ID_SOCIO'])) echo $this->datos[0].['NOMBRE'].' '.$this->datos[0].['APELLIDO_PATERNO'].' '. $this->datos[0].['APELLIDO_MATERNO'];?>"/>
+                        <?php if(!isset ($this->datos[0]['ID_SOCIO'])){?>
                         <button data-toggle="modal" data-target="#modalSocio" type="button" class="btn btn-primary btn-sm" title="Buscar Socio" id="AbrirVtnBuscarSocio"><i class="icon-search icon-white"></i></button>
+                        <?php   } ?>
                         <!--button style="margin-right: 10px" data-toggle="modal" data-target="#modalNuevoProveedor" type="button" class="btn btn-primary btn-sm" title="Insertar Socio"><i class="icon-plus icon-white"></i></button-->
                     </div>
                 </div>
@@ -33,7 +39,8 @@
                 <div class="form-group" style="margin: 5px auto 5px auto">
                 <label class="col-md-4 control-label" >DNI:</label>
                     <div class="col-md-7 ">
-                    <input type="text" name="dni" id="dni" readonly="readonly" placeholder="DNI"  class="form-control"/>
+                        <input type="text" name="dni" id="dni" readonly="readonly" placeholder="DNI" class="form-control"
+                               value="<?php if(isset ($this->datos[0]['DNI'])) echo $this->datos[0]['DNI'];?>"/>
                     </div>
                 </div>
             </div>      
@@ -44,8 +51,9 @@
                 <div class="form-group" style="margin: 5px auto 5px auto">
                 <label class="col-md-4 control-label" >Membresia:</label>
                     <div >
-                        <input type="hidden" name="id_membresia" id="id_membresia"/>
-                        <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Membresia" data-toggle="modal" data-target="#modalMembresia" class="form-control"  style="width: 60%;margin-left: 13px;" />
+                        <input type="hidden" name="id_membresia" id="id_membresia" value="<?php if(isset ($this->datos[0]['ID_TIPO_MEMBRESIA'])) echo $this->datos[0]['ID_TIPO_MEMBRESIA'];?>"/>
+                        <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Membresia" data-toggle="modal" data-target="#modalMembresia" class="form-control" 
+                               value="<?php if(isset ($this->datos[0]['ID_TIPO_MEMBRESIA'])) echo $this->datos[0].['DESCRIPCION'].' '.$this->datos[0].['DURACION'].' '. $this->datos[0].['VIGENCIA'];?>" style="width: 60%;margin-left: 13px;" />
                         <button data-toggle="modal" data-target="#modalMembresia" type="button" class="btn btn-primary btn-sm" title="Buscar Membresia" id="AbrirVtnBuscarMembresia"><i class="icon-search icon-white"></i></button>
                         <!--button style="margin-right: 10px" data-toggle="modal" data-target="#modalNuevoProveedor" type="button" class="btn btn-primary btn-sm" title="Insertar Socio"><i class="icon-plus icon-white"></i></button-->
                     </div>
@@ -76,7 +84,8 @@
                     <div class="form-group" style="margin: 5px auto 6px auto">
                     <label class="col-md-6 control-label" >Cantidad:</label>
                         <div class="col-md-5 ">
-                            <input type="text" readonly="readonly" name="numero_servicios" id="numero_servicios" class="form-control" />
+                            <input type="text" readonly="readonly" name="numero_servicios" id="numero_servicios" class="form-control" 
+                                   value="<?phpif(isset ($this->datos[0]['NUMERO_SERVICIOS'])) echo $this->datos[0]['NUMERO_SERVICIOS'];?>"/>
                         </div>
                     </div>
                 </div> 
@@ -85,14 +94,15 @@
                     <div class="form-group" style="margin: 5px auto 5px auto">
                     <label class="col-md-6 control-label" >Precio:</label>
                         <div class="col-md-5 ">
-                            <input type="" name="precio" id="precio" placeholder="Precio" class="form-control" value=""/>
+                            <input readonly="readonly" name="precio"  id="precio" placeholder="Precio" class="form-control" 
+                                   value="<?phpif(isset ($this->datos[0]['COSTO'])) echo $this->datos[0]['COSTO'];?>"/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="row" style="border-TOP: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
+        <div class="row" style="border-top: solid 1px #D8D8D8;margin: 0px 0px 0px 0px;">
             <div class="col-md-12" >
                 <table class="table table-bordered" id="tblDetalle" style="margin-right: 10px;margin-top: 5px;">
                     <th>Item</th>
