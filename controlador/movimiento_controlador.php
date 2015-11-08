@@ -6,6 +6,7 @@ class movimiento_controlador extends controller {
     private $_sesion_caja;
     private $_amortizacion_compra;
     private $_cronograma_pago;
+    private $_compra;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -16,6 +17,7 @@ class movimiento_controlador extends controller {
         $this->_sesion_caja = $this->cargar_modelo('sesion_caja');
         $this->_amortizacion_compra = $this->cargar_modelo('amortizacion_compra');
         $this->_cronograma_pago = $this->cargar_modelo('cronograma_pago');
+        $this->_compra = $this->cargar_modelo('compra');
     } 
 
     public function index() {
@@ -55,6 +57,7 @@ class movimiento_controlador extends controller {
                 $referencia = $_POST['referencia'];
                 $id_accion = $_POST['id_accion'];
                 $deuda_total = $_POST['deuda'];
+                $pago_total = $_POST['pago'];
                 $fecha = date("Y-m-d H:i:s");
                 //-------------------------------------------------------------
                 //------------INSERTAR MOVIMIENTO------------------------------
@@ -120,9 +123,15 @@ class movimiento_controlador extends controller {
                             }
                         }
                     }
-
+                    if($pago_total!=0){
+                        $this->_compra->id_compra = $cuotas[0]["ID_COMPRA"];
+                        $this->_compra->estado_pago = '1';
+                        $this->_compra->actualizar_estado();
+                    }
                     if($deuda_total == 0){
-
+                        $this->_compra->id_compra = $cuotas[0]["ID_COMPRA"];
+                        $this->_compra->estado_pago = '2';
+                        $this->_compra->actualizar_estado();
                     }
                 }
 
