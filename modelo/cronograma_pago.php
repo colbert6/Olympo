@@ -83,6 +83,11 @@ class cronograma_pago extends Main{
         }
       
     }
+<<<<<<< HEAD
+=======
+    
+
+>>>>>>> 2e5fce50249d112946477ad49919fccea21f3b0b
 }
 
 
