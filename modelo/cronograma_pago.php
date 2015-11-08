@@ -64,15 +64,6 @@ class cronograma_pago extends Main{
         return $error;
     }
     
-
-    public function elimina() {
-        $datos = array($this->id_almacen);
-        $r = $this->get_consulta("pa_d_cuco", $datos);
-        $error = $r[1];
-        $r = null;
-        return $error;
-    }
-
     public function cuota_x_compra() {
         $datos = array($this->id_compra);
         
@@ -93,7 +84,6 @@ class cronograma_pago extends Main{
       
     }
     
-
 }
 
 ?>
