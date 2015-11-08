@@ -5,48 +5,34 @@
         <?php if (isset($this->datos_servicio) && count($this->datos_servicio)) {?>
                                 
             
-             <div class="col-md-11">
+        <div class="col-md-12">
         
         <?php if (!$this->informacion) { //saber si se ha pedido informacion de algun servicio?> 
                        
                  
         <?php  for ($i = 0; $i < count($this->datos_servicio); $i++) { ?>
-                 <div class="row">
-                    <div class="row carousel-holder">
-                        
-                        <div id="<?php echo "carousel-".$this->datos_servicio[$i]['nombre']; ?>" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide-to="0" class="active"></li>
-                                <li data-target="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide-to="1"></li>
-                                <li data-target="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide-to="2"></li>
-                            </ol>
-                           
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img class="slide-image" src="<?php echo $_webParams['ruta_img']; ?>web/1.png" alt="">
-                                                                       
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="<?php echo $_webParams['ruta_img']; ?>web/2.png" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="<?php echo $_webParams['ruta_img']; ?>web/3.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="carousel-caption">
-                                 <a class="link-servicios" href="<?php echo BASE_URL.'web/servicios/'.$this->datos_servicio[$i]['nombre']; ?>" ><?php echo $this->datos_servicio[$i]['nombre']; ?></a>
-                            </div>
-                               
-                            <a class="left carousel-control" href="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                            
+               
+                <div class="row well well-sm"  style="margin-top:10px; ">
+                        <div class="col-sm-4 col-lg-3 col-md-4">
+                            <img class="img-thumbnail"src="<?php echo $_webParams['ruta_img_ser']; ?><?php if(isset ($this->datos_servicio[$i]['IMAGEN']))echo $this->datos_servicio[$i]['IMAGEN']?>"  alt="">
+                        </div>
+                    <div class="col-md-8">
+                        <div class="row text-center">
+                            <h3 style="font-family: 'Lobster, cursive';font-size: 25px;    font-weight: 500;
+                                    margin: 0.67em 0;animation-name: zoomIn;
+                                color: #0C9CF2;"><?php if(isset ($this->datos_servicio[$i]['TITULO']))echo $this->datos_servicio[$i]['TITULO']?>
+                            </h3>
+                        </div>
+                        <div class="row">
+                                <p class="text-justify" style="margin-left:80px;">
+                                <?php if(isset ($this->datos_servicio[$i]['DESCRIPCION']))echo $this->datos_servicio[$i]['DESCRIPCION']?>
+                                </p>
                         </div>
                     </div>
+
                 </div>
+
+
          <?php /*?>        
                 <div class="row">
                     <div class="row carousel-holder">
@@ -104,7 +90,7 @@
                     
                 }    
                 if($flag_servicio_informacion){ ?>
-                 <div class="row">
+                 <!--<div class="row">
                         <div class="col-lg-12">
                             <div class="col-lg-12">
                                 <ol class="breadcrumb">
@@ -118,70 +104,10 @@
 
                         </div>
 
-                    </div>       
+                    </div>    -->   
                         
-                 <div class="row">
-                    <div class="row carousel-holder">
-                        
-                        <div id="<?php echo "carousel-".$this->datos_servicio[$i]['nombre']; ?>" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide-to="0" class="active"></li>
-                                <li data-target="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide-to="1"></li>
-                                <li data-target="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide-to="2"></li>
-                            </ol>
-                           
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img class="slide-image" src="<?php echo $_webParams['ruta_img']; ?>web/1.png" alt="">
-                                                                       
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="<?php echo $_webParams['ruta_img']; ?>web/2.png" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="<?php echo $_webParams['ruta_img']; ?>web/3.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="carousel-caption">
-                                
-                                <h2 class="informacion-servicio" ><?php echo $this->datos_servicio[$i]['nombre']; ?></h2>
-                                
-                            </div>
-                               
-                            <a class="left carousel-control" href="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12" >
-                        <div class="bs-callout bs-callout-info">
-                            <h3 style="text-transform: uppercase;" >SERVICIO DE <?php echo $this->datos_servicio[$i]['nombre']; ?></h3>
-                            <p>El servicio de cardio ayuda a las personas con padecias en enfermedades cardio vasculares,
-                                ademas de mejorar la presion sanguinea</p>
-                        </div>
-                        <div class="bs-callout bs-callout-primary">
-                            <h3>HORARIOS</h3>
-                           <p>LUNES MARTES MIERCOLES JUEVES VIERNES SABADO 
-                           <br>
-                           8:00 AM a 7:00 PM</p>
-                        </div>
-                        <div class="bs-callout bs-callout-warning">
-                            <h3>CONSEJOS</h3>
-                            <ul>
-                                <li>Consumir Alimentos bajos en grasa</li>
-                                <li>Practicar deporte</li>
-                                <li>No consumir Bebidas Alcoholicas</li>
-                            </ul>
-                        </div>
-                        
-                    </div>
-                </div>  
+                
+               
         <?php   }else{
                     echo "<h1>No existe el servicio solicitado</h1>";
             
