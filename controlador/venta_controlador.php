@@ -175,6 +175,11 @@ class venta_controlador extends controller {
         $this->_param->id_param = $_POST['id_param'];
         echo json_encode($this->_param->selecciona());
     }
+
+    public function getVentasCliente(){
+        $this->_venta->id_cliente = $_POST['id_c'];
+        echo json_encode($this->_venta->ventas_x_cliente());
+    }
     
 }
 

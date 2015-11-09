@@ -41,6 +41,7 @@ class movimiento_controlador extends controller {
                 $emp_existente = true;
                 $fecha_sesion = $sesiones[$i]["FECHA_ENTRADA"];
                 $id_sesion_caja = $sesiones[$i]["ID_SESION_CAJA"];
+                $monto_caja = $sesiones[$i]["MONTO_CIERRE"];
             }
         }
         if($emp_existente){
@@ -50,10 +51,18 @@ class movimiento_controlador extends controller {
             }
             if($_POST['guardar']==1){
                 //--------VARIABLES--------------------------------------------
-                $id_concepto_movimiento = $_POST['id_concepto_movimiento'];
-                $tipo_movimiento = $_POST['tipo_movimiento'];
-                $id_forma_pago = $_POST['id_forma_pago'];
                 $monto = $_POST['importe'];
+                $tipo_movimiento = $_POST['tipo_movimiento'];
+
+                if($tipo_movimiento == "EGRESO"){
+                    if(($monto_caja - $monto) < 50){
+                        echo '<script>alert("No hay suficiente saldo para ejecutar el pago")</script>';
+                        $this->redireccionar('sesion_caja');
+                    }
+                }
+
+                $id_concepto_movimiento = $_POST['id_concepto_movimiento'];
+                $id_forma_pago = $_POST['id_forma_pago'];
                 $referencia = $_POST['referencia'];
                 $id_accion = $_POST['id_accion'];
                 $deuda_total = $_POST['deuda'];

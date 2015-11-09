@@ -76,6 +76,32 @@ class venta extends Main{
         return $error;
     }
 
+    public function actualizar_estado() {
+        $datos = array($this->id_venta,$this->estado_pago);
+        $r = $this->get_consulta("", $datos);
+        $error = $r[1];
+        $r = null;
+        return $error;
+    }
+    public function ventas_x_cliente(){
+        $datos=array($this->id_cliente);
+        $r = $this->get_consulta("pa_socxvent", $datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'oci') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+
+    }
+
 }
 
 ?>
