@@ -15,17 +15,6 @@ class producto_controlador extends controller {
         $this->_marcas = $this->cargar_modelo('marca');
         $this->_cat_productos = $this->cargar_modelo('categoria_producto');
     }
-    
-    public function buscador(){
-        if (isset($_POST['id_almacen'])){
-            $this->_model->id_almacen = $_POST['id_almacen'];
-            $datos=$this->_model->selecciona_almacen();
-        }else{
-            $datos=$this->_model->selecciona();
-        }
-        
-        echo json_encode($datos);
-    }
     public function index() {
         $this->_vista->titulo = 'Lista de Productos';
         $this->_vista->datos = $this->_model->selecciona();
@@ -33,8 +22,7 @@ class producto_controlador extends controller {
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('index');
-    }
-        
+    }   
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
             $this->_model->id_marca = $_POST['id_marca'];
@@ -55,7 +43,6 @@ class producto_controlador extends controller {
         $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('form');
     }
-
     public function editar($id) {
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('producto');
@@ -84,7 +71,6 @@ class producto_controlador extends controller {
         $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('form');
     }
-
     public function eliminar($id) {
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('producto');
@@ -92,7 +78,18 @@ class producto_controlador extends controller {
         $this->_model->id_producto = $this->filtrarInt($id);
         $this->_model->elimina();
         $this->redireccionar('producto');
+    }          
+    public function buscador(){
+        if (isset($_POST['id_almacen'])){
+            $this->_model->id_almacen = $_POST['id_almacen'];
+            $datos=$this->_model->selecciona_almacen();
+        }else{
+            $datos=$this->_model->selecciona();
+        }
+        
+        echo json_encode($datos);
     }
+
 
 }
 

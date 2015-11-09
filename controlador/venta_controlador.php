@@ -121,8 +121,7 @@ class venta_controlador extends controller {
                 $this->_cronograma_cobro->num_cuota=1;
                 $this->_cronograma_cobro->inserta();
             }
-            exit;
-            //$this->redireccionar('venta');
+            $this->redireccionar('venta');
         }
         
         $this->_vista->titulo = 'Registrar Venta';
