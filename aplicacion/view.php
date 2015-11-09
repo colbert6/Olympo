@@ -147,7 +147,9 @@ class view {
         $_webParams = array(
             'ruta_css' => BASE_URL . 'vista/web/css/',
             'ruta_js' => BASE_URL . 'vista/web/js/',
-            'ruta_img' => BASE_URL . 'lib/img/web/',            
+            'ruta_img' => BASE_URL . 'lib/img/web/',//
+            'ruta_img_ser' => BASE_URL . 'lib/img/servicio/',
+            'ruta_img_pro' => BASE_URL . 'lib/img/producto/', //agrege el url servicio          
             'menu'=>$menu,
             'js' => $js,
             'css' => $css

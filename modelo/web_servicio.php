@@ -2,12 +2,14 @@
 
 class web_servicio extends Main{
 
-    public $id_almacen;
+    public $id_web_servicio;
+    public $imagen;
+    public $titulo;
     public $descripcion;
     public $estado;
     
     public function selecciona() {
-        $r = $this->get_consulta("pa_m1_img_ser",null);
+        $r = $this->get_consulta("pa_m1_weser",null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -26,9 +28,9 @@ class web_servicio extends Main{
     public function selecciona_id() {
         
       
-        $datos = array($this->id_almacen);
+        $datos = array($this->id_web_servicio);
         
-        $r = $this->get_consulta("pa_m2_img_ser",$datos);
+        $r = $this->get_consulta("pa_m2_weser",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -46,8 +48,8 @@ class web_servicio extends Main{
     }
     
     public function inserta() {
-        $datos = array($this->descripcion);
-        $r = $this->get_consulta("pa_i_img_ser", $datos);
+        $datos = array($this->imagen,$this->titulo,$this->descripcion);
+        $r = $this->get_consulta("pa_i_weser", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -55,9 +57,9 @@ class web_servicio extends Main{
 
     public function actualiza() {
        
-        $datos = array($this->id_almacen, $this->descripcion);
+        $datos = array($this->id_web_servicio,$this->imagen,$this->titulo, $this->descripcion);
         
-        $r = $this->get_consulta("pa_u_img_ser", $datos);
+        $r = $this->get_consulta("pa_u_weser", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -66,8 +68,8 @@ class web_servicio extends Main{
     
 
     public function elimina() {
-        $datos = array($this->id_almacen);
-        $r = $this->get_consulta("pa_d_img_ser", $datos);
+        $datos = array($this->id_web_servicio);
+        $r = $this->get_consulta("pa_d_weser", $datos);
         $error = $r[1];
         $r = null;
         return $error;

@@ -36,7 +36,7 @@
             <div class="thumbnail">
                 <div class="hover-bg img-thumbnail">
                     <div class="hover-text">
-                        <a href="<?php echo BASE_URL.'productos' ; ?>"> <h4 >Productos</h4>
+                        <a href="<?php echo BASE_URL.'web/productos' ; ?>"> <h4 >Productos</h4>
                         <h5>Ofrecemos productos pensado en sus objetivos, cardio,
                             tonificacion,etc. ademas de asesoria por expertos </h5>
                         <div class="clearfix"></div>
@@ -54,7 +54,7 @@
             <div class="thumbnail">
                <div class="hover-bg img-thumbnail">
                 <div class="hover-text">
-                       <a href="<?php echo BASE_URL.'nosotros' ; ?>"> <h4>Quienes Somos</h4>
+                       <a href="<?php echo BASE_URL.'web/nosotros' ; ?>"> <h4>Quienes Somos</h4>
                         <h5><p class="text-center">
                                 La familia <strong>Olimpo Ginevra & Company Fitness</strong> 
                                 te da la bienvenida a nuestra página web y al mismo tiempo te 
@@ -74,7 +74,7 @@
             <div class="thumbnail">
                <div class="hover-bg img-thumbnail">
                 <div class="hover-text">
-                       <a href="<?php echo BASE_URL.'servicios' ; ?>"> <h4>Servicio</h4>
+                       <a href="<?php echo BASE_URL.'web/servicios' ; ?>"> <h4>Servicio</h4>
                         <h5>Ofrecemos servicios pensado en sus objetivos, cardio,
                             tonificacion,etc. ademas de asesoria por expertos </h5>
                         <div class="clearfix"></div>

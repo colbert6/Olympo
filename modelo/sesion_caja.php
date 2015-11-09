@@ -10,6 +10,7 @@ class sesion_caja extends Main{
     public $monto_inicio;
     public $monto_cierre;
     public $estado;
+    public $aumenta;
     
     public function sesiones_caja() {
         $datos = array($this->id_caja);
@@ -80,11 +81,9 @@ class sesion_caja extends Main{
         return $error;
     }
 
-    
-
-    public function elimina() {
-        $datos = array($this->id_almacen);
-        $r = $this->get_consulta("pa_d_almacen", $datos);
+    public function actualiza_saldo() {
+        $datos = array($this->id_sesion_caja,$this->monto_cierre,$this->aumenta);
+        $r = $this->get_consulta("act_saldo", $datos);
         $error = $r[1];
         $r = null;
         return $error;

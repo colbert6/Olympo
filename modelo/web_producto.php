@@ -1,16 +1,15 @@
 <?php
 
-class cronograma_cobro extends Main{
+class web_producto extends Main{
 
-    public $id_cuota_venta;
-    public $id_venta;
-    public $fecha_venc;
-    public $monto_cuota;
-    public $num_cuota;
-    public $monto_pagado;
+    public $id_web_producto;
+    public $imagen;
+    public $titulo;
+    public $descripcion;
+    public $estado;
     
     public function selecciona() {
-        $r = $this->get_consulta("pa_m1_cuve",null);
+        $r = $this->get_consulta("pa_m1_wepro",null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -26,10 +25,12 @@ class cronograma_cobro extends Main{
         }
         
     }
-    public function selecciona_cuota() {
-        $datos = array($this->id_compra);
+    public function selecciona_id() {
         
-        $r = $this->get_consulta("pa_m2_cuve",$datos);
+      
+        $datos = array($this->id_web_producto);
+        
+        $r = $this->get_consulta("pa_m2_wepro",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -47,8 +48,8 @@ class cronograma_cobro extends Main{
     }
     
     public function inserta() {
-        $datos = array($this->id_venta,$this->fecha_venc,$this->num_cuota,$this->monto_cuota);
-        $r = $this->get_consulta("pa_i_cuve", $datos);
+        $datos = array($this->imagen,$this->titulo,$this->descripcion);
+        $r = $this->get_consulta("pa_i_wepro", $datos);
         $error = $r[1];
         $r = null;
         return $error;
@@ -56,22 +57,27 @@ class cronograma_cobro extends Main{
 
     public function actualiza() {
        
-        $datos = array($this->id_almacen, $this->descripcion);
+        $datos = array($this->id_web_producto,$this->imagen,$this->titulo, $this->descripcion);
         
-        $r = $this->get_consulta("pa_u_cuve", $datos);
-        $error = $r[1];
-        $r = null;
-        return $error;
-    }   
-
-    public function elimina() {
-        $datos = array($this->id_almacen);
-        $r = $this->get_consulta("pa_d_cuco", $datos);
+        $r = $this->get_consulta("pa_u_wepro", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
 
+    
+
+    public function elimina() {
+        $datos = array($this->id_web_producto);
+        $r = $this->get_consulta("pa_d_wepro", $datos);
+        $error = $r[1];
+        $r = null;
+        return $error;
+    }
+    
+
 }
 
 ?>
+
+

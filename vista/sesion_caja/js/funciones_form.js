@@ -5,6 +5,7 @@ $(function() {
     	bval = bval && $("#monto_apertura").required();
         if (bval) 
         {
+            alert("Desde este Momento Ud. es responsable de todo lo que suceda en esta Caja");
             enviarApertura($('#id_caja').val(),$('#monto_apertura').val());	
         }
         return false;
