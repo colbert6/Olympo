@@ -76,7 +76,7 @@
                     <div class="col-md-7">
                         <select id="sel_venta" name="sel_venta" class="form-control">
                             <option value="0"></option>
-                            <option value="1">Servicio</option>
+                            <option selected value="1">Servicio</option>
                             <option value="2">Producto</option>
                         </select>
                     </div>
@@ -94,7 +94,7 @@
         
         <div id="celda_producto" style="display:none;margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
             <div class="row"  style="margin: 0px 0px 0px 0px;">
-                <div class="col-md-4 " style="padding-right: 0px;">
+                <div class="col-md-5 " style="padding-right: 0px;">
                     <div class="form-group" style="margin: 5px 0px 0px auto" style="padding-right: 0px;">
                         <label class="col-md-5 control-label" >Almacen:</label>
                         <div class="col-md-7" style="padding-right: 0px;">
@@ -112,6 +112,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group" style="margin: 5px auto 5px auto">
+                        <label class=" col-md-4 control-label" style="width: 150px" >Stock en Almacen:</label>
+                        <div class="col-md-3">
+                            <input type="text" name="stockactual" id="stockactual" class="form-control" readonly/>
+                        </div>
+                    </div>
+                </div>
+                
+                            
             </div>
             <div class="row"  style="margin: 0px 0px 0px 0px;">    
                 <div class="col-md-6">
@@ -121,7 +131,6 @@
                             <input type="hidden" name="id_producto" id="id_producto"/>
                             <input type="hidden" name="id_almacen" id="id_almacen"/>
                             <input type="hidden" name="almacen" id="almacen"/>
-                            <input type="hidden" name="stockactual" id="stockactual"/>
                             <input type="text" name="producto" id="producto" readonly="readonly" placeholder="Seleccione Producto" class="form-control" data-toggle="modal" data-target="#modalProducto"  style="width: 170px"/>
                             <button type="button" data-toggle="modal" data-target="#modalProducto" class="btn btn-primary btn-sm" title="Buscar Producto" id="AbrirVtnBuscarProducto"><i class="icon-search icon-white"></i></button>
                         </div>
@@ -136,7 +145,7 @@
             </div> 
         </div>
         
-        <div class="row" id="celda_matricula" style="display:none;margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
+        <div class="row" id="celda_matricula" style="margin: 0px 0px 0px 0px;border-bottom: solid 1px #D8D8D8;" >
             <div class="col-md-5" style="padding-right: 0px;">
                 <div class="form-group" style="margin: 5px 0px 5px 0px">
                     <label class=" col-md-4 control-label" >Membresia:</label>
@@ -151,7 +160,7 @@
             </div>
             
             <div class="col-md-7" style="margin: 3px auto 5px auto">
-                    <input type="text" name="fecha_ini" id="fecha_ini" placeholder="Fecha Inicio" class="form-control" style="width: 140px" />
+                <input type="text" name="fecha_ini" id="fecha_ini" placeholder="Fecha Inicio" class="form-control" maxlength="10    " style="width: 140px" />
                     <input type="text" name="precio_m" id="precio_m" placeholder="Precio" class="form-control" onkeypress="return dosDecimales(event,this)" style="width: 110px" />  
                     <button type="button" class="btn btn-primary btn-sm" title="Agregar al Detalle" id="addDetalleMembresia"><i class="icon-hand-down icon-white"></i></button>
             </div> 
