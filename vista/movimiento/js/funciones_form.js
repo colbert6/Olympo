@@ -214,7 +214,7 @@ function mostrarCompras(id_p){
             HTML += '   <td class=\'text-center\'>0</td>';
             HTML += '   <td class=\'text-center\'>' + proveedor[i].NUM_DOCUMENTO + '</td>';
             HTML += '   <td class=\'text-center\'>' + proveedor[i].MODALIDAD_TRANSACCION + '</td>';
-            HTML += '   <td class=\'text-center\'>' + proveedor[i].MONTO + '</td>';
+            HTML += '   <td class=\'text-center\'>' + (proveedor[i].MONTO*(1+proveedor[i].IGV)) + '</td>';
             HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+proveedor[i].ID_COMPRA+'\'></td>';
             HTML += '</tr>';
         }
