@@ -229,7 +229,7 @@ function mostrarCompras(id_p){
 function mostrarVentas(id_c){
     $("#acciones").show();
     
-    //alert(id_p);
+   alert('id_p');
     $.post(url + 'venta/getVentasCliente',"id_c="+id_c, function(cliente) {
         $("#num_opc").val(cliente.length);
         HTML ="";
