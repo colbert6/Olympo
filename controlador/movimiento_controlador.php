@@ -5,8 +5,11 @@ class movimiento_controlador extends controller {
     private $_movimiento;
     private $_sesion_caja;
     private $_amortizacion_compra;
+    private $_amortizacion_venta;
     private $_cronograma_pago;
+    private $_cronograma_cobro;
     private $_compra;
+    private $_venta;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -17,7 +20,10 @@ class movimiento_controlador extends controller {
         $this->_sesion_caja = $this->cargar_modelo('sesion_caja');
         $this->_amortizacion_compra = $this->cargar_modelo('amortizacion_compra');
         $this->_cronograma_pago = $this->cargar_modelo('cronograma_pago');
+        $this->_cronograma_cobro = $this->cargar_modelo('cronograma_cobro');
+        $this->_amortizacion_venta = $this->cargar_modelo('amortizacion_venta');
         $this->_compra = $this->cargar_modelo('compra');
+        $this->_venta = $this->cargar_modelo('venta');
     } 
 
     public function index() {
@@ -92,8 +98,56 @@ class movimiento_controlador extends controller {
                 //-------------------------------------------------------------
                 //----------------INSERTAR TABLA AMORTIZACIONES----------------
                 if($tipo_movimiento == "INGRESO"){
+                    
+                    $this->_cronograma_cobro->id_venta = $id_accion;
+                    $cuotas = $this->_cronograma_cobro->cuota_x_venta();
+                    print_r($cuotas);
+                    for ($i = 0; $i < count($cuotas); $i++) {
+                        if ($cuotas[$i]['MONTO_CUOTA'] > $cuotas[$i]['MONTO_PAGADO']) {
+                            $monto_restantexcuota = $cuotas[$i]['MONTO_CUOTA'] - $cuotas[$i]['MONTO_PAGADO'];
+                            if ($monto != 0) {
+                                if ($monto_restantexcuota >= $monto) {
+                                    //---------ACTUALIZAMOS TABLA CUOTA VENTAS-----------------------
+                                    $this->_cronograma_cobro->id_cuota_venta = $cuotas[$i]['ID_CUOTA_VENTA'];
+                                    $this->_cronograma_cobro->monto_pagado = $monto + $cuotas[$i]['MONTO_PAGADO'];
+                                    if($monto_restantexcuota == $monto){
+                                        $this->_cronograma_cobro->fecha_cancelacion = $fecha;      
+                                    }else{
+                                        $this->_cronograma_cobro->fecha_cancelacion = '1990-01-01';
+                                    }
+                                    $this->_cronograma_cobro->actualiza();
+                                    //---------INSERTAMOS EN LA TABLA AMORTIZACINO-----------------------
+                                    $this->_amortizacion_venta->id_cuota_venta = $cuotas[$i]['ID_CUOTA_VENTA'];
+                                    $this->_amortizacion_venta->id_movimiento = $id_movimiento;
+                                    $this->_amortizacion_venta->monto = $monto;
+                                    $this->_amortizacion_venta->inserta();
+                                    $monto = 0;
+                                } else {
 
+                                    $this->_cronograma_cobro->id_cuota_venta = $cuotas[$i]['ID_CUOTA_VENTA'];
+                                    $this->_cronograma_cobro->monto_pagado = $cuotas[$i]['MONTO_CUOTA'];
+                                    $this->_cronograma_cobro->fecha_cancelacion = $fecha; 
+                                    $this->_cronograma_cobro->actualiza();
+                                    //---------INSERTAMOS EN LA TABLA AMORTIZACINO-----------------------
+                                    $this->_amortizacion_venta->id_cuota_venta = $cuotas[$i]['ID_CUOTA_VENTA'];
+                                    $this->_amortizacion_venta->id_movimiento = $id_movimiento;
+                                    $this->_amortizacion_venta->monto = $monto_restantexcuota;
+                                    $this->_amortizacion_venta->inserta();
+                                    $monto = $monto - $monto_restantexcuota;
+                                }
+                            }
+                        }
+                    }
+                    
+                    $this->_venta->id_venta = $cuotas[0]['ID_VENTA'];
+                    
+                    if($pago_total!=0){  $this->_venta->estado_pago = '1';      }
+                    if($deuda_total == 0){ $this->_venta->estado_pago = '2';    }
+                    
+                    $this->_venta->actualizar_estado();
+                    
                 }else if($tipo_movimiento == "EGRESO"){
+                    
                     $this->_cronograma_pago->id_compra = $id_accion;
                     $cuotas = $this->_cronograma_pago->cuota_x_compra();
                     for ($i = 0; $i < count($cuotas); $i++) {

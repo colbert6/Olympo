@@ -229,7 +229,6 @@ function mostrarCompras(id_p){
 function mostrarVentas(id_c){
     $("#acciones").show();
     
-   alert('id_p');
     $.post(url + 'venta/getVentasCliente',"id_c="+id_c, function(cliente) {
         $("#num_opc").val(cliente.length);
         HTML ="";
@@ -256,7 +255,7 @@ function mostrarVentas(id_c){
             HTML += '   <td class=\'text-center\'>' + cliente[i].NUM_DOCUMENTO + '</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].MODALIDAD_TRANSACCION + '</td>';
             HTML += '   <td class=\'text-center\'>' + (cliente[i].MONTO*(1+parseFloat(cliente[i].IGV))).toFixed(2) + '</td>';
-            HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+proveedor[i].ID_COMPRA+'\'></td>';
+            HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+cliente[i].ID_VENTA+'\'></td>';
             HTML += '</tr>';
         }
         HTML += '</tbody></table>';
@@ -420,7 +419,7 @@ function mostrarCronogramaCompra(id){
                 HTML += '   <td class=\'text-center\'>0</td>';
                 HTML += '   <td class=\'text-center\'><input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_cuota[]\' id=\'monto_cuota'+(i+1)+'\' value=\''+cuotas[i].MONTO_CUOTA+'\'/></td>';
                 HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_pagado[]\' id=\'monto_pagado'+(i+1)+'\' value=\''+cuotas[i].MONTO_PAGADO+'\'/></td>';
-                HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_restante[]\' id=\'monto_restante'+(i+1)+'\' value=\''+cuotas[i].MONTO_RESTANTE+'\'/></td>';
+                HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_restante[]\' id=\'monto_restante'+(i+1)+'\' value=\''+(parseFloat(cuotas[i].MONTO_CUOTA)-parseFloat(cuotas[i].MONTO_PAGADO)).toFixed(2)+'\'/></td>';
                 HTML += '   <td class=\'text-center\' >';
                 HTML += '<input type=\'hidden\' name=\'estado[]\' id=\'estado'+(i+1)+'\' value=\''+estado+'\'/>';
                 HTML += '<input readonly  style=\'text-align:center;border:none; background:none\' name=\'text_estado[]\' id=\'text_estado'+(i+1)+'\' value=\''+text_estado+'\'/></td>';
@@ -448,7 +447,7 @@ function mostrarCronogramaVenta(id){
     $("#cronograma").show();
     $("#id_accion").val(id);
     $.post(url + 'cronograma_cobro/getCuotasVenta',"id_c="+id, function(cuotas) {
-//        alert(cuotas.length);
+       //alert(cuotas.length);
         var total_pagado = 0;
         var tot_restante = 0;
         var total = 0;
@@ -523,7 +522,7 @@ function mostrarCronogramaVenta(id){
                 HTML += '   <td class=\'text-center\'>0</td>';
                 HTML += '   <td class=\'text-center\'><input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_cuota[]\' id=\'monto_cuota'+(i+1)+'\' value=\''+cuotas[i].MONTO_CUOTA+'\'/></td>';
                 HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_pagado[]\' id=\'monto_pagado'+(i+1)+'\' value=\''+cuotas[i].MONTO_PAGADO+'\'/></td>';
-                HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_restante[]\' id=\'monto_restante'+(i+1)+'\' value=\''+cuotas[i].MONTO_RESTANTE+'\'/></td>';
+                HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_restante[]\' id=\'monto_restante'+(i+1)+'\' value=\''+(parseFloat(cuotas[i].MONTO_CUOTA)-parseFloat(cuotas[i].MONTO_PAGADO)).toFixed(2)+'\'/></td>';
                 HTML += '   <td class=\'text-center\' >';
                 HTML += '<input type=\'hidden\' name=\'estado[]\' id=\'estado'+(i+1)+'\' value=\''+estado+'\'/>';
                 HTML += '<input readonly  style=\'text-align:center;border:none; background:none\' name=\'text_estado[]\' id=\'text_estado'+(i+1)+'\' value=\''+text_estado+'\'/></td>';

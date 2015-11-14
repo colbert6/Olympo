@@ -8,6 +8,7 @@ class cronograma_cobro extends Main{
     public $monto_cuota;
     public $num_cuota;
     public $monto_pagado;
+    public $fecha_cancelacion;
     
     public function selecciona() {
         $r = $this->get_consulta("pa_m1_cuve",null);
@@ -55,14 +56,12 @@ class cronograma_cobro extends Main{
     }
 
     public function actualiza() {
-       
-        $datos = array($this->id_almacen, $this->descripcion);
-        
+        $datos = array($this->id_cuota_venta, $this->monto_pagado,$this->fecha_cancelacion);
         $r = $this->get_consulta("pa_u_cuve", $datos);
         $error = $r[1];
         $r = null;
         return $error;
-    }   
+    }
 
     public function elimina() {
         $datos = array($this->id_almacen);
@@ -70,6 +69,24 @@ class cronograma_cobro extends Main{
         $error = $r[1];
         $r = null;
         return $error;
+    }
+    public function cuota_x_venta() {
+        $datos = array($this->id_venta);
+        $r = $this->get_consulta("pa_cuotas_venta",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
     }
 
 }

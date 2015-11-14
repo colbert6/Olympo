@@ -78,7 +78,7 @@ class venta extends Main{
 
     public function actualizar_estado() {
         $datos = array($this->id_venta,$this->estado_pago);
-        $r = $this->get_consulta("", $datos);
+        $r = $this->get_consulta("act_est_venta", $datos);
         $error = $r[1];
         $r = null;
         return $error;
