@@ -41,9 +41,10 @@ class web_Controlador extends controller {
     public function productos($categoria=false,$id=false){
         $this->_vista->datos_producto = $this->_productos->selecciona();
 
-        //$this->_vista->setCss(array('productos'));
+        $this->_vista->setCss(array('servicios'));
         
-        $this->_vista->renderiza_web('productos','productos',true); 
+        $this->_vista->renderiza_web('productos','productos',false);
+
         /*
         $this->_vista->categoria = $categoria; 
         $this->_vista->setCss(array('productos'));
@@ -63,8 +64,8 @@ class web_Controlador extends controller {
     public function servicios($servicio=false){
         
         $this->_vista->datos_servicio = $this->_servicios->selecciona();//
-        
-        $this->_vista->renderiza_web('servicios','servicios',true);
+        $this->_vista->setCss(array('servicios'));
+        $this->_vista->renderiza_web('servicios','servicios',false);
     }    
     public function contactenos(){
 
