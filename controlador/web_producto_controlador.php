@@ -82,8 +82,8 @@ class web_producto_controlador extends controller {
                 if ($handle->uploaded) {
                     $handle->file_new_name_body = 'producto_' . uniqid();
                     $handle->image_resize = true;
-                    $handle->image_x = 250;
-                    $handle->image_y = 250;
+                    $handle->image_x = 370;
+                    $handle->image_y = 372;
                     $handle->Process($dir_dest);
                     $imagen = $handle->file_dst_name;
                   //  print_r($imagen);exit();

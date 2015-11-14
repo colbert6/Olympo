@@ -1,6 +1,6 @@
 
 
-<div class="col-md-9">
+<div class="col-md-12">
     
         <?php if (isset($this->datos_servicio) && count($this->datos_servicio)) {?>
                                 
@@ -11,8 +11,30 @@
                        
                  
         <?php  for ($i = 0; $i < count($this->datos_servicio); $i++) { ?>
+
+        <div class="col-md-4">
+            
+                                 <div class="">
+                                     <div class="" >
+
+                                         <div class="text-center " >
+                                             <div class="sombra" > 
+                                              <div class="text-justify" >
+                                                <img class="img-circle img-thumbnail text-cente sombra-img" src="<?php echo $_webParams['ruta_img_ser']; ?><?php if(isset ($this->datos_servicio[$i]['IMAGEN']))echo $this->datos_servicio[$i]['IMAGEN']?>" alt="">
+                                                <h4 class="text-center sombra-titulo">
+                                           <?php if(isset ($this->datos_servicio[$i]['TITULO']))echo $this->datos_servicio[$i]['TITULO']?></h4>
+                                             <h5 class="descripcion"><?php if(isset ($this->datos_servicio[$i]['DESCRIPCION']))echo $this->datos_servicio[$i]['DESCRIPCION']?></h5>
+                                             <div class="clearfix"></div>
+                                             </div>
+                                             </div>
+                                         </div>    
+                                          
+                                         
+                                     </div>
+                                 </div>
+            </div>
                
-                <div class="row well well-sm"  style="margin-top:10px; ">
+               <!-- <div class="row well well-sm"  style="margin-top:10px; ">
                         <div class="col-sm-4 col-lg-3 col-md-4">
                             <img class="img-thumbnail"src="<?php echo $_webParams['ruta_img_ser']; ?><?php if(isset ($this->datos_servicio[$i]['IMAGEN']))echo $this->datos_servicio[$i]['IMAGEN']?>"  alt="">
                         </div>
@@ -30,7 +52,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div>-->
 
 
          <?php /*?>        
