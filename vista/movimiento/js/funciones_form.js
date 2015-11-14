@@ -169,7 +169,7 @@ function sel_actor(id_actor,tipo_actor,razon_social,nro_doc) {
     if(tipo_actor == 's'){
         $("#tipo_movimiento").val("INGRESO");
         $("#id_concepto_movimiento").val("2");
-       // mostrarVentas();
+        mostrarVentas(id_actor);
 
     }else{
         $("#tipo_movimiento").val("EGRESO");
@@ -214,7 +214,7 @@ function mostrarCompras(id_p){
             HTML += '   <td class=\'text-center\'>0</td>';
             HTML += '   <td class=\'text-center\'>' + proveedor[i].NUM_DOCUMENTO + '</td>';
             HTML += '   <td class=\'text-center\'>' + proveedor[i].MODALIDAD_TRANSACCION + '</td>';
-            HTML += '   <td class=\'text-center\'>' + proveedor[i].MONTO + '</td>';
+            HTML += '   <td class=\'text-center\'>' + (proveedor[i].MONTO*(1+parseFloat(proveedor[i].IGV))).toFixed(2) + '</td>';
             HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+proveedor[i].ID_COMPRA+'\'></td>';
             HTML += '</tr>';
         }
@@ -226,13 +226,46 @@ function mostrarCompras(id_p){
     
 }
 
+function mostrarVentas(id_c){
+    $("#acciones").show();
+    
+    //alert(id_p);
+    $.post(url + 'venta/getVentasCliente',"id_c="+id_c, function(cliente) {
+        $("#num_opc").val(cliente.length);
+        HTML ="";
+        HTML +="<legend>Ventas Pendientes de Pago</legend>";
+        HTML += '<table class=\'table table-striped table-bordered table-hover sortable\'>' +
+                '<thead>' +
+                    '<tr>' +
+                    '<th class=\'text-center\'>ITEM</th>' +
+                    '<th class=\'text-center\'>FECHA</th>' +
+                    '<th class=\'text-center\'>RETRASO</th>' +
+                    '<th class=\'text-center\'>DOCUMENTO</th>' +
+                    '<th class=\'text-center\'>MODALIDAD</th>' +
+                    '<th class=\'text-center\'>MONTO</th>' +
+                    '<th class=\'text-center\'>VER CRONOGRAMA</th>' +
+                    '</tr>' +
+                '</thead>' +
+                '<tbody>';
 
-/*function mostrarVentas(){
-    $("#acciones").show();   
-    HTML="";
-    HTML+="<legend>Compras Pendientes de Pago</legend>";
-    $("#acciones").html(HTML);
-}*/
+        for (var i = 0; i < cliente.length; i++) {
+            HTML += '<tr>';
+            HTML += '   <td class=\'text-center\'>' + (i + 1) + '</td>';
+            HTML += '   <td class=\'text-center\'>' + cliente[i].FECHA + '</td>';
+            HTML += '   <td class=\'text-center\'>0</td>';
+            HTML += '   <td class=\'text-center\'>' + cliente[i].NUM_DOCUMENTO + '</td>';
+            HTML += '   <td class=\'text-center\'>' + cliente[i].MODALIDAD_TRANSACCION + '</td>';
+            HTML += '   <td class=\'text-center\'>' + (cliente[i].MONTO*(1+parseFloat(cliente[i].IGV))).toFixed(2) + '</td>';
+            HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+proveedor[i].ID_COMPRA+'\'></td>';
+            HTML += '</tr>';
+        }
+        HTML += '</tbody></table>';
+
+        $("#acciones").html(HTML);
+    }, 'json');
+
+    
+}
 
 
 function validaCheckBox(check){
@@ -259,7 +292,7 @@ function validaCheckBox(check){
             $("#importe").attr('readonly',false);
             $("#amortizar").attr('disabled',false);
             if($("#tipo_actor").val()=='s'){
-
+                mostrarCronogramaVenta(check.value);
             }else{
                 mostrarCronogramaCompra(check.value);
             }
@@ -281,7 +314,7 @@ function validaCheckBox(check){
             $("#importe").attr('readonly',false);
             $("#amortizar").attr('disabled',false);
             if($("#tipo_actor").val()=='s'){
-
+                mostrarCronogramaVenta(check.value);
             }else{
                 mostrarCronogramaCompra(check.value);
             } 
@@ -297,7 +330,7 @@ function borrar(){
         var elemento = document.getElementById("cronograma"+i);
         if(elemento.checked){
             if($("#tipo_actor").val()=='s'){
-
+                mostrarCronogramaVenta(elemento.value);
             }else{
                 mostrarCronogramaCompra(elemento.value);
             }
@@ -321,8 +354,109 @@ function mostrarCronogramaCompra(id){
                 total_pagado+= parseFloat(cuotas[i].MONTO_PAGADO);        
         }
         var resto = total - total_pagado;
-       
+
+        //$.post(url + 'cronograma_pago/getSaldoCompra',"id_c="+id, function(saldo) {
+            HTML ="";
         
+            HTML +="<legend>Cronograma de Pagos</legend>";
+            HTML+="<div class=\'row\'>";
+            HTML+="    <div class=\'col-md-4\'>";
+            HTML+="     <strong> MONTO:</strong>";
+            HTML+="         <input type=\"text\" name=\"importe\" id=\"importe\" onkeypress=\"return dosDecimales(event,this)\" placeholder=\"Importe\" class=\"form-control\"  style=\"width: 80px\" />";
+            HTML+="         <button type=\"button\" class=\"btn btn-primary btn-sm\"  id=\"amortizar\" onclick='validaDistribucion()'>Distribuir</button>";
+            HTML+="         <button type=\"button\" class=\"btn btn-warning btn-sm\"  id=\"deshacer\" onclick='borrar()'><i class=\"icon-repeat icon-white\"></i></button>";
+            HTML+="     </div>";
+            HTML+="    <div class=\'col-md-4\'>";
+            HTML+="        <div class=\'form-group\'>";
+            HTML+="            <label class=\'col-md-3 control-label\' >PAGO TOTAL</label>";              
+            HTML+="            <div class=\'col-md-8\'>";
+            HTML+="                <input name=\'pago\' id=\'pago\' class=\'form-control\'  readonly=\'readonly\' value=\'"+total_pagado.toFixed(2)+"\'>";
+            HTML+="            </div>";
+            HTML+="        </div>";
+            HTML+="    </div>";
+            HTML+="    <div class=\'col-md-4 \'>";
+            HTML+="        <div class=\'form-group\'>";
+            HTML+="            <label class=\'col-md-3 control-label\' > DEUDA TOTAL</label>";              
+            HTML+="            <div class=\'col-md-8\'>";
+            HTML+="                <input name=\'deuda\' id=\'deuda\' class=\'form-control\'  readonly=\'readonly\' value=\'"+resto.toFixed(2)+"\'>";
+            HTML+="            </div>";
+            HTML+="        </div>";
+            HTML+="    </div>";
+            HTML+="</div>";
+            HTML+= '<table class=\'table table-striped table-bordered table-hover sortable\'>' +
+                    '<thead>' +
+                        '<tr>' +
+                        '<th class=\'text-center\'># CUOTA</th>' +
+                        '<th class=\'text-center\'>FECHA VENC.</th>' +
+                        '<th class=\'text-center\'>RETRASO</th>' +
+                        '<th class=\'text-center\'>MONTO</th>' +
+                        '<th class=\'text-center\'>MONTO PAGADO</th>' +
+                        '<th class=\'text-center\'>MONTO RESTANTE</th>' +
+                        '<th class=\'text-center\'>ESTADO</th>' +
+                        '</tr>' +
+                    '</thead>' +
+                    '<tbody>';
+    //style="border:none; background:none"
+            for (var i = 0; i < cuotas.length; i++) {
+                if(parseFloat(cuotas[i].MONTO_PAGADO) == 0){
+                    clase = 'danger';
+                    text_estado = 'PENDIENTE';
+                    estado = '0';
+                }
+                else if(parseFloat(cuotas[i].MONTO_PAGADO)>0 && parseFloat(cuotas[i].MONTO_PAGADO)<parseFloat(cuotas[i].MONTO_CUOTA)){
+                    clase = 'warning';
+                    text_estado = 'PENDIENTE';
+                    estado = '0';
+                }else if(parseFloat(cuotas[i].MONTO_PAGADO)==parseFloat(cuotas[i].MONTO_CUOTA)) {
+                    clase = 'success';
+                    text_estado = 'CANCELADO';
+                    estado = '1';
+                }else{
+                    clase = 'default';
+                }
+                HTML += '<tr id=\'fila'+(i+1)+'\' class=\''+clase+'\'>';
+                HTML += '   <td class=\'text-center\'>' + cuotas[i].NUM_CUOTA  + '</td>';
+                HTML += '   <td class=\'text-center\'>' + cuotas[i].FECHA_VENC + '</td>';
+                HTML += '   <td class=\'text-center\'>0</td>';
+                HTML += '   <td class=\'text-center\'><input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_cuota[]\' id=\'monto_cuota'+(i+1)+'\' value=\''+cuotas[i].MONTO_CUOTA+'\'/></td>';
+                HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_pagado[]\' id=\'monto_pagado'+(i+1)+'\' value=\''+cuotas[i].MONTO_PAGADO+'\'/></td>';
+                HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_restante[]\' id=\'monto_restante'+(i+1)+'\' value=\''+cuotas[i].MONTO_RESTANTE+'\'/></td>';
+                HTML += '   <td class=\'text-center\' >';
+                HTML += '<input type=\'hidden\' name=\'estado[]\' id=\'estado'+(i+1)+'\' value=\''+estado+'\'/>';
+                HTML += '<input readonly  style=\'text-align:center;border:none; background:none\' name=\'text_estado[]\' id=\'text_estado'+(i+1)+'\' value=\''+text_estado+'\'/></td>';
+                HTML += '</tr>';
+            }
+            HTML += '</tbody></table>';
+            HTML+=" <div class=\'row\'>";
+            HTML+="    <div class=\'col-md-2\'>";
+            HTML+="            <label class=\'control-label\' >REFERENCIA:</label>";              
+            HTML+="    </div>";
+            HTML+="    <div class=\'col-md-10\'>";
+            HTML+="                <textarea name=\'referencia\' id=\'referencia\' class=\'form-control\' ></textarea>";
+            HTML+="    </div>";
+            HTML+=" </div> <br>";
+      
+            $("#num_cuotas").val(cuotas.length);
+            $("#cronograma").html(HTML);
+            $("#deshacer").attr('disabled',true);
+
+       // }, 'json');
+    }, 'json');
+}
+
+function mostrarCronogramaVenta(id){
+    $("#cronograma").show();
+    $("#id_accion").val(id);
+    $.post(url + 'cronograma_cobro/getCuotasVenta',"id_c="+id, function(cuotas) {
+//        alert(cuotas.length);
+        var total_pagado = 0;
+        var tot_restante = 0;
+        var total = 0;
+        for (var i = 0; i < cuotas.length; i++) {
+                total+= parseFloat(cuotas[i].MONTO_CUOTA);
+                total_pagado+= parseFloat(cuotas[i].MONTO_PAGADO);        
+        }
+        var resto = total - total_pagado;
 
         //$.post(url + 'cronograma_pago/getSaldoCompra',"id_c="+id, function(saldo) {
             HTML ="";

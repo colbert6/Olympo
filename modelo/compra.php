@@ -11,7 +11,7 @@ class compra extends Main{
     public $estado;
     public $num_documento;
     public $igv;
-    public $estadopago;
+    public $estado_pago;
 
     public function selecciona() {
   
@@ -75,7 +75,14 @@ class compra extends Main{
         $r = null;
         return $error;
     }
-
+    //act_est_compra
+     public function actualizar_estado() {
+        $datos = array($this->id_compra,$this->estado_pago);
+        $r = $this->get_consulta("act_est_compra", $datos);
+        $error = $r[1];
+        $r = null;
+        return $error;
+    }
     public function compras_x_proveedor() {
         $datos=array($this->id_proveedor);
         $r = $this->get_consulta("pa_proxcomp", $datos);

@@ -201,19 +201,28 @@ $(function() {
     
     
     $("#cantidad").keyup(function(){
+        resta=$("#stockactual").val()-$("#cantidad").val();
+        if (resta<0) {
+            bootbox.alert("Stock Insuficiente");
+            $("#cantidad").val('1');
+            $("#cantidad").focus();
+            return false;
+        }
+        if (resta<=5 && resta>=0) {
+            bootbox.alert("Llegando Stock Minimo");
+            return false;
+        }
         setImporte();
+    });
+    $("#cantidad").blur(function(){
+        var resta;
+        
+        
     });
     $("#precio").keyup(function(){
         setImporte();
     });
     $("#precio").blur(function(){
-        var precio = parseFloat($(this).val());
-        if (isNaN(precio)) {
-            precio = 0;
-        }
-        $(this).val(precio.toFixed(2));
-    });
-    $("#precio_m").blur(function(){
         var precio = parseFloat($(this).val());
         if (isNaN(precio)) {
             precio = 0;

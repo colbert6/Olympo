@@ -121,8 +121,7 @@ class venta_controlador extends controller {
                 $this->_cronograma_cobro->num_cuota=1;
                 $this->_cronograma_cobro->inserta();
             }
-            exit;
-            //$this->redireccionar('venta');
+            $this->redireccionar('venta');
         }
         
         $this->_vista->titulo = 'Registrar Venta';
@@ -175,6 +174,11 @@ class venta_controlador extends controller {
     public function getParam(){
         $this->_param->id_param = $_POST['id_param'];
         echo json_encode($this->_param->selecciona());
+    }
+
+    public function getVentasCliente(){
+        $this->_venta->id_cliente = $_POST['id_c'];
+        echo json_encode($this->_venta->ventas_x_cliente());
     }
     
 }
