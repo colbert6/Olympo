@@ -280,8 +280,10 @@ class movimiento_controlador extends controller {
         }
             
     }
+    public function extornar($id){
+        
 
-    
+    }
     public function getActores(){
         $datos = $this->_movimiento->actores();
         echo json_encode($datos);
