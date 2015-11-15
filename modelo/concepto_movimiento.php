@@ -44,6 +44,27 @@ class concepto_movimiento extends Main{
         }
       
     }
+
+     public function selecciona_x_tipo() {
+        
+        $datos = array($this->id_tipo_movimiento);
+        
+        $r = $this->get_consulta("pa_m3_como",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
     
     public function inserta() {
         
