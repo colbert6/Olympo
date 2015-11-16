@@ -26,13 +26,18 @@ function validarMovimiento(){
     bval = bval && $("#id_forma_pago").required();
     bval = bval && $("#importe").required();
     if (bval){
-        $("#frm").submit();
+         bootbox.confirm("¿Está seguro de efectuar el movimiento?", function(result) {
+                    if (result) {
+                        $("#frm").submit();
+                    }
+                });
     }else{
         alert("Complete los campos Necesarios");    
     }
     return false;
 }
 function validarCancelar(id,total){
+    
     $("#id_accion").val(id);
     $("#num_cuotas").val('1');
     $("#monto_contado").val(total);
@@ -42,7 +47,11 @@ function validarCancelar(id,total){
     bval = true;   
     bval = bval && $("#id_forma_pago").required();
     if (bval){
-        $("#frm").submit();
+        bootbox.confirm("¿Está seguro de efectuar el movimiento?", function(result) {
+                    if (result) {
+                        $("#frm").submit();
+                    }
+                });
     }else{
         alert("Complete los campos Necesarios");    
     }
