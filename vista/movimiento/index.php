@@ -26,8 +26,8 @@
                 <td><?php echo $this->datos[$i]['DESCRIPCION'] ?></td>
                 <td><?php echo $this->datos[$i]['MONTO'] ?></td>
                 <td>
-                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>concepto_triaje/editar/<?php echo $this->datos[$i]['ID_CONCEPTO_TRIAJE'] ?>')" class="btn btn-success btn-minier"><i class="icon-eye-open icon-white"></i></a>
-                    <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>concepto_triaje/eliminar/<?php echo $this->datos[$i]['ID_CONCEPTO_TRIAJE'] ?>')" class="btn btn-danger btn-minier"><i class="icon-repeat icon-white"></i></a>
+                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>movimiento/vermas/<?php echo $this->datos[$i]['ID_MOVIMIENTO'] ?>')" class="btn btn-success btn-minier"><i class="icon-eye-open icon-white"></i></a>
+                    <a href="javascript:void(0)" onclick="extornar('<?php echo BASE_URL?>movimiento/extornar/<?php echo $this->datos[$i]['ID_MOVIMIENTO'] ?>')" class="btn btn-danger btn-minier"><i class="icon-repeat icon-white"></i></a>
                 </td>
             </tr>
         <?php } ?>

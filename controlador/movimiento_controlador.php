@@ -35,6 +35,7 @@ class movimiento_controlador extends controller {
         //print_r($this->_vista->datos);exit;
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
+        $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('index');
     }
 
@@ -281,7 +282,37 @@ class movimiento_controlador extends controller {
             
     }
     public function extornar($id){
-        
+        $this->_movimiento->id_movimiento = $this->filtrarInt($id);
+        $movimiento = $this->_movimiento->selecciona_id();
+        if($movimiento[0]["ID_TIPO_MOVIMIENTO"]==1){
+            $this->_amortizacion_compra->id_movimiento = $this->filtrarInt($id);
+            $amortizacion_compra = $this->_amortizacion_compra->amortizacion_x_movimiento();
+            for ($i=0; $i <count($amortizacion_compra) ; $i++) { 
+                //--------------DATOS TABLA AMORTIZACION COMPRA ---------------------------
+                $id_cuota_compra = $amortizacion_compra[$i]["ID_CUOTA_COMPRA"];
+                $monto_amortizacion = $amortizacion_compra[$i]["MONTO"];
+                //---------------------DATOS TABLA CUOTA COMPRA ---------------------------
+                $this->_cronograma_pago->id_cuota_compra = $id_cuota_compra;
+                $cronog = $this->_cronograma_pago->selecciona_id();
+                print_r($cronog); exit;
+                if($cronog[0]["MONTO_CUOTA"] == $cronog[0]["MONTO_PAGADO"]){
+
+                }else{
+
+                }
+
+
+                $id_compra = $cronog[0]["ID_COMPRA"];    
+                
+
+                //echo $amortizacion_compra[$i]["ID_CUOTA_COMPRA"]."/".$amortizacion_compra[$i]["MONTO"]."<br>";    
+
+            }
+            exit;
+        }else if($movimiento[0]["ID_TIPO_MOVIMIENTO"]==2){
+
+        }
+
 
     }
     public function getActores(){
