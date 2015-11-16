@@ -2,9 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
+
         <group/>
-=======
+
         <group>
 
             <file>file:/C:/xampp/htdocs/Olympo/vista/web/access.php</file>
@@ -23,6 +23,6 @@
             <file>file:/C:/xampp/htdocs/Olympo/controlador/venta_controlador.php</file>
 
         </group>
->>>>>>> 071341dcd03e8a5d2480e58b5f460fc6060f39b4
+
     </open-files>
 </project-private>
