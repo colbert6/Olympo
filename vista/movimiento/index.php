@@ -36,11 +36,13 @@
 </div>
 
 <div class="navbar-inner">
-    <a href="<?php echo BASE_URL?>movimiento/nuevo" class="btn btn-primary">Nuevo</a>
+    <a href="<?php echo BASE_URL?>movimiento/nuevo" class="btn btn-warning">Compras y Ventas</a>
+    <a href="<?php echo BASE_URL?>movimiento/otros_movimientos" class="btn btn-success">Otros Movimientos</a>
 </div>
     <?php } else { ?>
 <div class="navbar-inner">
         <p>NO SE ENCONTRARON DATOS</p>
-<a href="<?php echo BASE_URL?>movimiento/nuevo" class="btn btn-primary">Nuevo</a>
+    <a href="<?php echo BASE_URL?>movimiento/nuevo" class="btn btn-warning">Compras y Ventas</a>
+    <a href="<?php echo BASE_URL?>movimiento/otros_movimientos" class="btn btn-success">Otros Movimientos</a>
 </div>
     <?php } ?>

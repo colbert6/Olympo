@@ -206,10 +206,12 @@ $(function() {
             bootbox.alert("Stock Insuficiente");
             $("#cantidad").val('1');
             $("#cantidad").focus();
+            setImporte();
             return false;
         }
         if (resta<=5 && resta>=0) {
             bootbox.alert("Llegando Stock Minimo");
+            setImporte();
             return false;
         }
         setImporte();

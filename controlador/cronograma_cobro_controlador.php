@@ -43,25 +43,7 @@ class cronograma_cobro_controlador extends controller {
         $this->_vista->renderizar('form');
     }
 
-    public function editar($id) {
-        if (!$this->filtrarInt($id)) {
-            $this->redireccionar('almacen');
-        }
-
-        if ($_POST['guardar'] == 1) {
-            $this->_model->id_almacen = $_POST['id_almacen'];
-            $this->_model->descripcion = $_POST['descripcion'];
-            $this->_model->actualiza();
-            $this->redireccionar('almacen');
-        }
-        $this->_model->id_almacen = $this->filtrarInt($id);
-        $this->_vista->datos = $this->_model->selecciona_id();
-        
-        $this->_vista->titulo = 'Actualizar Almacen';
-        $this->_vista->action = BASE_URL . 'almacen/editar/'.$id;
-        $this->_vista->setJs(array('funciones_form'));
-        $this->_vista->renderizar('form');
-    }
+    
 
     public function eliminar($id) {
         if (!$this->filtrarInt($id)) {
@@ -72,6 +54,7 @@ class cronograma_cobro_controlador extends controller {
         $this->redireccionar('almacen');
     }
 
+    
     public function getCuotasVenta(){
         $this->_model->id_venta = $_POST["id_c"];
         $datos = $this->_model->cuota_x_venta();
