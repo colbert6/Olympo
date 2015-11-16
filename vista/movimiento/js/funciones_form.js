@@ -131,13 +131,29 @@ function buscarActores(){
                 '</thead>' +
                 '<tbody>';
 
+
+            var id_actor = 0;
+            var tipo_actor ='s';
+            var razon_social = 'Otros';
+            var nro_doc = '0';
+            HTML = HTML + '<tr>';
+            HTML = HTML + '<td>1</td>';
+            HTML = HTML + '<td>Otros</td>';
+            HTML = HTML + '<td>0</td>';
+            HTML = HTML + '<td>';
+            HTML = HTML + 'Cliente';
+            HTML = HTML + '</td>';
+            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_actor(\'' + id_actor + '\',\'' + tipo_actor + '\',\'' + razon_social + '\',\'' + nro_doc + '\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
+            HTML = HTML + '</td>';
+            HTML = HTML + '</tr>';
+
         for (var i = 0; i < datos.length; i++) {
         	var id_actor = datos[i].ID;
         	var tipo_actor = datos[i].FLAG;
             var razon_social = $.trim(datos[i].RAZON_SOCIAL);
             var nro_doc = datos[i].NRO_DOC;
             HTML = HTML + '<tr>';
-            HTML = HTML + '<td>' + (i + 1) + '</td>';
+            HTML = HTML + '<td>' + (i + 2) + '</td>';
             HTML = HTML + '<td>' + datos[i].RAZON_SOCIAL + '</td>';
             HTML = HTML + '<td>' + datos[i].NRO_DOC + '</td>';
             HTML = HTML + '<td>';
@@ -544,4 +560,9 @@ function mostrarCronogramaVenta(id){
 
        // }, 'json');
     }, 'json');
+}
+function extornar(url){
+    if(confirm("¿Esta Seguro de Extornar este Movimiento?")){
+        window.location = url;
+    }
 }

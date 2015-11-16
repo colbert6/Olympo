@@ -66,6 +66,10 @@ class concepto_movimiento_controlador extends controller {
         $this->_model->elimina();
         $this->redireccionar('concepto_movimiento');
     }
+    public function getConceptoMovimiento(){
+        $this->_model->id_tipo_movimiento=$_POST["id"];
+        echo json_encode($this->_model->selecciona_x_tipo());
+    }
 
 }
 

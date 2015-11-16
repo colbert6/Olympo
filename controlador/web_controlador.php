@@ -17,20 +17,21 @@ class web_Controlador extends controller {
         $this->_servicios = $this->cargar_modelo('web_servicio');
         $this->_productos = $this->cargar_modelo('web_producto');
         $this->_contacto = $this->cargar_modelo('contacto');//
-        /*$this->_web_img_servicios = $this->loadModel('imagen_servicio');
-        $this->_web_categoria_productos =  $this->loadModel('cat_producto');
-        $this->_web_productos = $this->loadModel('producto');
-      */  
-        //$this->$_datos_olympo = $this->loadModel('articulos');
- 
+        $this->_evento = $this->cargar_modelo('evento');//
+         
     }
     
     public function index() {
+
+        $this->_vista->evento = $this->_evento->selecciona();
+        //print_r($this->_vista->evento);exit();
         $this->_vista->renderiza_web('index',false,true);
         
     }
     
     public function inicio(){
+        $this->_vista->evento = $this->_evento->selecciona();
+        //print_r($this->_vista->evento);exit();
         $this->_vista->renderiza_web('inicio','inicio',true);
     }
     public function nosotros(){
@@ -45,21 +46,6 @@ class web_Controlador extends controller {
         
         $this->_vista->renderiza_web('productos','productos',false);
 
-        /*
-        $this->_vista->categoria = $categoria; 
-        $this->_vista->setCss(array('productos'));
-        if(!$categoria && !$id){
-            $this->_vista->datos = $this->_web_categoria_productos->getCategoria_Productos();
-            $this->_vista->renderiza_web('pro_categoria',true,'productos');
-        }else if($categoria && !$id) {
-            $this->_vista->datos = $this->_web_productos->getProductosxCategoria($categoria);
-            $this->_vista->renderiza_web('pro_lista',true,'productos');
-        }else if($categoria && $id){
-            $this->_vista->datos = $this->_web_productos->getProducto($id);
-            $this->_vista->renderiza_web('pro_detalle',true,'productos');  
-        }
-        
-        */
     }
     public function servicios($servicio=false){
         
@@ -77,7 +63,7 @@ class web_Controlador extends controller {
             $this->_contacto->email = $_POST['email'];
             $this->_contacto->mensaje = $_POST['mensaje'];
             $datos = $this->_contacto->inserta();
-            //$this->redireccionar('almacen');
+            
         }
     }
 
