@@ -7,34 +7,82 @@
                         <div class="panel-heading" > 
                             
                             <span class="glyphicon glyphicon-calendar "></span>
-                            
-                                <strong >EVENTOS</strong>
+                            <?php if (isset($this->evento) && count($this->evento)){ ?>
+                             <?php for($i = 0; $i < count($this->evento); $i++){
+                              
+                                $dia=explode("-",$this->evento[$i]['FECHA_INICIO']);
                                 
-                            
+                             ?>   
+                              <?php } ?>  
+                                <strong >EVENTOS &nbsp;<?php echo $dia[0]?></strong>
+                            <?php } ?> 
                             
                         </div> 
 
                         <div class="panel-body" id="inner-content-div" >  
                             
                             <ul class="media-list">
-                                
-                            <?php for($i = 0; $i < 8; $i++): ?>   
+                          <?php if (isset($this->evento) && count($this->evento)){ ?>
+                            <?php for($i = 0; $i < count($this->evento); $i++){
+
+                                $dia=explode("-",$this->evento[$i]['FECHA_INICIO']);
+//print_r($dia);exit();
+                                $mes=" ";
+                                switch ($dia[1]) {
+                                   case 01:
+                                       $mes="ENE";
+                                       break;
+                                   case 02:
+                                       $mes="FEB";
+                                       break;
+                                   case 03:
+                                       $mes="MAR";
+                                       break;
+                                   case 04:
+                                       $mes="ABR";
+                                       break;
+                                   case 05:
+                                       $mes="MAY";
+                                       break;
+                                   case 06:
+                                       $mes="JUN";
+                                       break;
+                                   case 07:
+                                       $mes="JUL";
+                                       break;
+                                   case 08:
+                                       $mes="AGO";
+                                       break;
+                                   case 09:
+                                       $mes="SET";
+                                       break;
+                                   case 10:
+                                       $mes="OCT";
+                                       break;
+                                   case 11:
+                                       $mes="NOV";
+                                       break;
+                                   case 12:
+                                       $mes="DIC";
+                                       break;
+                               }
+                             ?>   
                                 <li class="media" >
                                     <div class="pull-left" >
                                       <div type="button" class="media-object" >
-                                        <div class="lista_eventos"> 15</br>OCT</div>
+                                        <div class="lista_eventos"><?php echo $dia[2]?></br><?php echo $mes?></div>
                                       </div>
                                     </div>
                                     <div class="media-body">
                                       <h5 class="media-heading"><strong><u>Comp. Fitness</u></strong></h5>
-                                      <small><strong>Lugar:</strong> IPD Morales</small> </br>
+                                      <small><strong>Lugar:</strong> <?php if(isset ($this->evento[$i]['LUGAR']))echo $this->evento[$i]['LUGAR']?></small> </br>
                                       <small><strong>Hora:</strong> 3:00 pm</small>
                                     </div>
                                 </li>
                                 
-                            <?php endfor; ?>  
+                            <?php } ?>  
                                 
-                                
+                    <?php } ?>      
                             </ul>
                         
                         </div>

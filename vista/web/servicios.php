@@ -34,71 +34,7 @@
                                  </div>
             </div>
                
-               <!-- <div class="row well well-sm"  style="margin-top:10px; ">
-                        <div class="col-sm-4 col-lg-3 col-md-4">
-                            <img class="img-thumbnail"src="<?php echo $_webParams['ruta_img_ser']; ?><?php if(isset ($this->datos_servicio[$i]['IMAGEN']))echo $this->datos_servicio[$i]['IMAGEN']?>"  alt="">
-                        </div>
-                    <div class="col-md-8">
-                        <div class="row text-center">
-                            <h3 style="font-family: 'Lobster, cursive';font-size: 25px;    font-weight: 500;
-                                    margin: 0.67em 0;animation-name: zoomIn;
-                                color: #0C9CF2;"><?php if(isset ($this->datos_servicio[$i]['TITULO']))echo $this->datos_servicio[$i]['TITULO']?>
-                            </h3>
-                        </div>
-                        <div class="row">
-                                <p class="text-justify" style="margin-left:80px;">
-                                <?php if(isset ($this->datos_servicio[$i]['DESCRIPCION']))echo $this->datos_servicio[$i]['DESCRIPCION']?>
-                                </p>
-                        </div>
-                    </div>
-
-                </div>-->
-
-
-         <?php /*?>        
-                <div class="row">
-                    <div class="row carousel-holder">
-                        
-                    
-                        
-                        <div id="<?php echo "carousel-".$this->datos_servicio[$i]['nombre']; ?>" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                            <?php for ($j = 0; $j < count($this->img_servicio); $j++): ?>
-                                
-                           
-                            <li data-target="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide-to="<?php echo $j ?>" class=" <?php  if($j==0) echo "active"; ?>"></li>    
-                            
-                            <?php endfor;     ?>
-                            
-                            </ol>
-                           
-                            <div class="carousel-inner">
-                            <?php for ($j = 0; $j < count($this->img_servicio); $j++) { ?>
-                            <?php  if($this->datos_servicio[$i]['id_servicio']==$this->img_servicio[$j]['id_servicio']) { ?>
-                            <?php  if($j==0){ echo "<div class='item active'>"; }
-                                   else {echo "<div class='item'>";} ?>
-                                
-                                            <img class="slide-image" src="<?php echo $_webParams['ruta_img']."servicio/".$this->img_servicio[$j]['direccion']; ?>" alt="">
-                                        </div>   
-                            <?php   } //verificar ?>     
-                            <?php }  //    ?> 
-                                
-                            </div>
-                            <div class="carousel-caption">
-                                <a class="link-servicios" href="<?php echo BASE_URL.'web/servicios/'.$this->datos_servicio[$i]['nombre']; ?>" ><?php echo $this->datos_servicio[$i]['nombre']; ?></a>
-                            </div>
-                               
-                            <a class="left carousel-control" href="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="<?php echo "#carousel-".$this->datos_servicio[$i]['nombre']; ?>" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                            
-                        </div>   
-                    </div>
-                </div>
-          <?php */ ?> 
+               
           
         <?php }  //lista de Servicios   ?>
         <?php }else { //saber si se ha pedido informacion de algun servicio
