@@ -8,7 +8,8 @@ class compra_controlador extends controller {
     private $_almacen_producto;
     private $_cronograma_pago;
     private $_proveedor;
-    private $_param;
+    private $_param;       
+    private $_sesion_caja;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -22,6 +23,7 @@ class compra_controlador extends controller {
         $this->_cronograma_pago = $this->cargar_modelo('cronograma_pago');
         $this->_almacen_producto = $this->cargar_modelo('almacen_producto');
         $this->_param = $this->cargar_modelo('param');
+        $this->_sesion_caja = $this->cargar_modelo('sesion_caja');
     }
 
     public function index() {
@@ -46,6 +48,23 @@ class compra_controlador extends controller {
     }
     
     public function nuevo() {
+        $sesiones =  $this->_sesion_caja->cajas_activas();
+        $emp_existente = false;
+        $fecha_sesion = "";
+        $id_sesion_caja = "";
+        for ($i=0; $i <count($sesiones); $i++) { 
+            if($sesiones[$i]["ID_EMPLEADO"] == session::get('id_empleado')){
+                $emp_existente = true;
+                $fecha_sesion = $sesiones[$i]["FECHA_ENTRADA"];
+                $id_sesion_caja = $sesiones[$i]["ID_SESION_CAJA"];
+                $monto_caja = $sesiones[$i]["MONTO_CIERRE"];
+            }
+        }
+        
+        if(!$emp_existente){
+            echo "<script>alert('Aperture una Caja antes de Realizar cualquier Venta');</script>";
+            $this->redireccionar('sesion_caja'); 
+        }
         if ($_POST['guardar'] == 1) {
             //echo '<pre>';print_r($_POST);exit;
             $this->_compra->id_proveedor = $_POST['id_proveedor'];

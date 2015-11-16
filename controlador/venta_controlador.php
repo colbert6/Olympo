@@ -8,7 +8,9 @@ class venta_controlador extends controller {
     private $_param;
     private $_venta_membresia;
     private $_venta_producto;
-    private $_cronograma_cobro;
+    private $_cronograma_cobro;    
+    private $_sesion_caja;
+    private $_movimiento;
     
     public function __construct() {
         if (!$this->acceso()) {
@@ -21,7 +23,9 @@ class venta_controlador extends controller {
         $this->_param = $this->cargar_modelo('param');
         $this->_venta_membresia = $this->cargar_modelo('venta_membresia');
         $this->_venta_producto = $this->cargar_modelo('venta_producto');
-        $this->_cronograma_cobro = $this->cargar_modelo('cronograma_cobro');
+        $this->_cronograma_cobro = $this->cargar_modelo('cronograma_cobro');        
+        $this->_sesion_caja = $this->cargar_modelo('sesion_caja');        
+        $this->_movimiento = $this->cargar_modelo('movimiento');
     }
 
     public function index() {
@@ -34,6 +38,23 @@ class venta_controlador extends controller {
     }
      
     public function nuevo() {
+        $sesiones =  $this->_sesion_caja->cajas_activas();
+        $emp_existente = false;
+        $fecha_sesion = "";
+        $id_sesion_caja = "";
+        for ($i=0; $i <count($sesiones); $i++) { 
+            if($sesiones[$i]["ID_EMPLEADO"] == session::get('id_empleado')){
+                $emp_existente = true;
+                $fecha_sesion = $sesiones[$i]["FECHA_ENTRADA"];
+                $id_sesion_caja = $sesiones[$i]["ID_SESION_CAJA"];
+                $monto_caja = $sesiones[$i]["MONTO_CIERRE"];
+            }
+        }
+        
+        if(!$emp_existente){
+            echo "<script>alert('Aperture una Caja antes de Realizar cualquier Venta');</script>";
+            $this->redireccionar('sesion_caja'); 
+        }
         if ($_POST['guardar'] == 1) {
            //echo '<pre>';print_r($_POST);exit;
             $this->_venta->id_cliente = $_POST['id_cliente'];
@@ -85,6 +106,7 @@ class venta_controlador extends controller {
             
             //insertamos cronograma de pago
             if($_POST['id_tipopago']==2){
+                //---------------CRONOGRAMA AL CREDITO
                 $fecha_compra = $_POST['fechaventa'];
                 $intervalo_dias = $_POST['intervalo'];
                 $letras=$_POST['cuotas'];
@@ -114,12 +136,14 @@ class venta_controlador extends controller {
                     $fecha_temp = date("Y-m-d", strtotime("$fecha_temp +$intervalo_dias day"));
                 }
                 
-            }else{         
+            }else{
+                //------------- CRONOGRAMA AL CONTADO--------------------------
                 $this->_cronograma_cobro->id_venta=$dato_venta[0]['MAX_VENTA'];
-                $this->_cronograma_cobro->fecha_venc=$_POST['fechaventa6'];
+                $this->_cronograma_cobro->fecha_venc=$_POST['fechaventa'];
                 $this->_cronograma_cobro->monto_cuota=$_POST['total'];
                 $this->_cronograma_cobro->num_cuota=1;
-                $this->_cronograma_cobro->inserta();
+                $this->_cronograma_cobro->inserta();                
+                
             }
             $this->redireccionar('venta');
         }
