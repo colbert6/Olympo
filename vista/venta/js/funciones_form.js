@@ -292,7 +292,7 @@ function buscarSocio() {
             HTML = HTML + '<td>'+(1)+'</td>';
             HTML = HTML + '<td>Otros</td>';
             HTML = HTML + '<td>0</td>';
-           HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_socio(\'0\',\'Otros\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
+            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_socio(\'0\',\'Otros\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
             HTML = HTML + '</td>';
             HTML = HTML + '</tr>';
                 

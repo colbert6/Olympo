@@ -123,8 +123,25 @@ class movimiento_controlador extends controller {
                 $this->redireccionar('sesion_caja');
             }
             if($_POST['guardar']==1){
+                //echo '<pre>';print_r($_POST);exit;
                 //--------VARIABLES--------------------------------------------
-                $monto = $_POST['importe'];
+                
+                if ($_POST['id_modalidad_t']=='CONTADO'){
+                    $monto = $_POST['monto_contado'];
+                    $deuda_total = $monto;
+                    $pago_total = $monto;
+                    if($_POST['id_concepto_movimiento']==1){
+                        $referencia = 'COMPRA AL CONTADO';
+                    }else{
+                        $referencia = 'VENTA AL CONTADO';
+                    }
+                }else{
+                    $monto = $_POST['importe'];
+                    $referencia = $_POST['referencia'];
+                    $deuda_total = $_POST['deuda'];
+                    $pago_total = $_POST['pago'];
+                }
+                
                 $tipo_movimiento = $_POST['tipo_movimiento'];
 
                 if($tipo_movimiento == "EGRESO"){
@@ -136,11 +153,11 @@ class movimiento_controlador extends controller {
 
                 $id_concepto_movimiento = $_POST['id_concepto_movimiento'];
                 $id_forma_pago = $_POST['id_forma_pago'];
-                $referencia = $_POST['referencia'];
                 $id_accion = $_POST['id_accion'];
-                $deuda_total = $_POST['deuda'];
-                $pago_total = $_POST['pago'];
                 $fecha = date("Y-m-d H:i:s");
+                
+                
+                
                 //-------------------------------------------------------------
                 //------------INSERTAR MOVIMIENTO------------------------------
                 $this->_movimiento->id_sesion_caja = $id_sesion_caja;
@@ -210,6 +227,7 @@ class movimiento_controlador extends controller {
                     
                     if($pago_total!=0){  $this->_venta->estado_pago = '1';      }
                     if($deuda_total == 0){ $this->_venta->estado_pago = '2';    }
+                    if ($_POST['id_modalidad_t']=='CONTADO'){ $this->_venta->estado_pago = '2'; }
                     
                     $this->_venta->actualizar_estado();
                     
@@ -253,16 +271,13 @@ class movimiento_controlador extends controller {
                             }
                         }
                     }
-                    if($pago_total!=0){
-                        $this->_compra->id_compra = $cuotas[0]["ID_COMPRA"];
-                        $this->_compra->estado_pago = '1';
-                        $this->_compra->actualizar_estado();
-                    }
-                    if($deuda_total == 0){
-                        $this->_compra->id_compra = $cuotas[0]["ID_COMPRA"];
-                        $this->_compra->estado_pago = '2';
-                        $this->_compra->actualizar_estado();
-                    }
+                    $this->_compra->id_compra = $cuotas[0]["ID_COMPRA"];
+                    
+                    if($pago_total!=0){   $this->_compra->estado_pago = '1';   }
+                    if($deuda_total == 0){  $this->_compra->estado_pago = '2'; }
+                    if ($_POST['id_modalidad_t']=='CONTADO'){ $this->_compra->estado_pago = '2'; }
+                    
+                    $this->_compra->actualizar_estado();
                 }
 
                 $this->redireccionar('movimiento');     

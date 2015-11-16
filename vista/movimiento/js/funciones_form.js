@@ -32,6 +32,22 @@ function validarMovimiento(){
     }
     return false;
 }
+function validarCancelar(id,total){
+    $("#id_accion").val(id);
+    $("#num_cuotas").val('1');
+    $("#monto_contado").val(total);
+    $("#id_modalidad_t").val('CONTADO');
+    
+    
+    bval = true;   
+    bval = bval && $("#id_forma_pago").required();
+    if (bval){
+        $("#frm").submit();
+    }else{
+        alert("Complete los campos Necesarios");    
+    }
+    return false;
+}
 
 function validaDistribucion(){
     if($("#importe").val()!=''){
@@ -131,29 +147,13 @@ function buscarActores(){
                 '</thead>' +
                 '<tbody>';
 
-
-            var id_actor = 0;
-            var tipo_actor ='s';
-            var razon_social = 'Otros';
-            var nro_doc = '0';
-            HTML = HTML + '<tr>';
-            HTML = HTML + '<td>1</td>';
-            HTML = HTML + '<td>Otros</td>';
-            HTML = HTML + '<td>0</td>';
-            HTML = HTML + '<td>';
-            HTML = HTML + 'Cliente';
-            HTML = HTML + '</td>';
-            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_actor(\'' + id_actor + '\',\'' + tipo_actor + '\',\'' + razon_social + '\',\'' + nro_doc + '\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
-            HTML = HTML + '</td>';
-            HTML = HTML + '</tr>';
-
         for (var i = 0; i < datos.length; i++) {
         	var id_actor = datos[i].ID;
         	var tipo_actor = datos[i].FLAG;
             var razon_social = $.trim(datos[i].RAZON_SOCIAL);
             var nro_doc = datos[i].NRO_DOC;
             HTML = HTML + '<tr>';
-            HTML = HTML + '<td>' + (i + 2) + '</td>';
+            HTML = HTML + '<td>' + (i + 1) + '</td>';
             HTML = HTML + '<td>' + datos[i].RAZON_SOCIAL + '</td>';
             HTML = HTML + '<td>' + datos[i].NRO_DOC + '</td>';
             HTML = HTML + '<td>';
@@ -224,6 +224,7 @@ function mostrarCompras(id_p){
                 '<tbody>';
 
         for (var i = 0; i < proveedor.length; i++) {
+            var importe= (proveedor[i].MONTO*(1+parseFloat(proveedor[i].IGV))).toFixed(2);
             HTML += '<tr>';
             HTML += '   <td class=\'text-center\'>' + (i + 1) + '</td>';
             HTML += '   <td class=\'text-center\'>' + proveedor[i].FECHA + '</td>';
@@ -231,8 +232,12 @@ function mostrarCompras(id_p){
             HTML += '   <td class=\'text-center\'>' + proveedor[i].NUM_DOCUMENTO + '</td>';
             HTML += '   <td class=\'text-center\'>' + proveedor[i].MODALIDAD_TRANSACCION + '</td>';
             HTML += '   <td class=\'text-center\'>' + (proveedor[i].MONTO*(1+parseFloat(proveedor[i].IGV))).toFixed(2) + '</td>';
-            HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+proveedor[i].ID_COMPRA+'\'></td>';
-            HTML += '</tr>';
+            if(proveedor[i].MODALIDAD_TRANSACCION=='CREDITO'){
+              HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+proveedor[i].ID_COMPRA+'\'></td>'; 
+            }else{
+              HTML += '   <td class=\'text-center\'><a style="margin-right:4px" href="javascript:void(0)" onclick="validarCancelar(\'' + proveedor[i].ID_COMPRA + '\',\'' + importe + '\')" class="btn btn-danger"><i class="icon-ok icon-white"></i>Cancelar </a></td>';    
+            }
+           HTML += '</tr>';
         }
         HTML += '</tbody></table>';
 
@@ -264,14 +269,19 @@ function mostrarVentas(id_c){
                 '<tbody>';
 
         for (var i = 0; i < cliente.length; i++) {
+            var importe= (cliente[i].MONTO*(1+parseFloat(cliente[i].IGV))).toFixed(2);
             HTML += '<tr>';
             HTML += '   <td class=\'text-center\'>' + (i + 1) + '</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].FECHA + '</td>';
             HTML += '   <td class=\'text-center\'>0</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].NUM_DOCUMENTO + '</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].MODALIDAD_TRANSACCION + '</td>';
-            HTML += '   <td class=\'text-center\'>' + (cliente[i].MONTO*(1+parseFloat(cliente[i].IGV))).toFixed(2) + '</td>';
-            HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+cliente[i].ID_VENTA+'\'></td>';
+            HTML += '   <td class=\'text-center\'>' + importe + '</td>';
+            if(cliente[i].MODALIDAD_TRANSACCION=='CREDITO'){
+              HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+cliente[i].ID_VENTA+'\'></td>';  
+            }else{
+              HTML += '   <td class=\'text-center\'><a style="margin-right:4px" href="javascript:void(0)" onclick="validarCancelar(\'' + cliente[i].ID_VENTA + '\',\'' + importe + '\')" class="btn btn-danger"><i class="icon-ok icon-white"></i>Cancelar </a></td>';    
+            }
             HTML += '</tr>';
         }
         HTML += '</tbody></table>';
