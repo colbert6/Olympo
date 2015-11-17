@@ -65,7 +65,13 @@ class movimiento extends Main{
         }
     }
 
-
+    public function extorna(){
+        $datos = array($this->id_movimiento);
+        $r = $this->get_consulta("pa_u_movimiento", $datos);
+        $error = $r[1];
+        $r = null;
+        return $error;
+    }
     public function actores() {
         $r = $this->get_consulta("pa_actores",null);
         if ($r[1] == '') {

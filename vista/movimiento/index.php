@@ -2,7 +2,7 @@
 <?php if (isset($this->datos) && count($this->datos)) { ?>
 <div class="navbar-inner text-center">
    
-    <table name="table" id="table" class="display" cellspacing="0" width="100%">
+    <table name="table" id="table3" class="display" cellspacing="0" width="100%">
         <thead>
         <tr>
             <th>FECHA</th>
@@ -26,9 +26,10 @@
                 <td><?php echo $this->datos[$i]['DESCRIPCION'] ?></td>
                 <td><?php echo $this->datos[$i]['MONTO'] ?></td>
                 <td>
-                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>movimiento/vermas/<?php echo $this->datos[$i]['ID_MOVIMIENTO'] ?>')" class="btn btn-success btn-minier"><i class="icon-eye-open icon-white"></i></a>
-                    <a href="javascript:void(0)" onclick="extornar('<?php echo BASE_URL?>movimiento/extornar/<?php echo $this->datos[$i]['ID_MOVIMIENTO'] ?>')" class="btn btn-danger btn-minier"><i class="icon-repeat icon-white"></i></a>
+                    
+                    <a href="javascript:void(0)" onclick="ValidaExtorno('<?php echo $this->datos[$i]['ID_MOVIMIENTO'] ?>')" class="btn btn-danger btn-minier"><i class="icon-repeat icon-white"></i></a>
                 </td>
+
             </tr>
         <?php } ?>
         </tbody>
@@ -46,3 +47,37 @@
     <a href="<?php echo BASE_URL?>movimiento/otros_movimientos" class="btn btn-success">Otros Movimientos</a>
 </div>
     <?php } ?>
+
+    <style>
+        #myModal .modal-content {
+            width: 300px;
+            margin: 0 auto;
+        }
+    </style>
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Extornar Movimiento</h3>
+            <small>Usuario y Contraseña de Administrador</small>
+        </div>
+        <div class="modal-body">
+
+                    <input readonly  type='hidden' name="id_movimiento" id="id_movimiento" >
+                    <div id='alerta'>
+                    </div>
+                    <div class="form-group">
+                      <input name="user" id="user" class="form-control" type='text' autofocus placeholder="Usuario" value="">
+                    </div> 
+                    <div class="form-group">
+                      <input  name="pass" id="pass" class="form-control"  type='password' placeholder="Contraseña" value="">
+                    </div> 
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+            <button class="btn btn-success" data-dismiss="modal" id='extornar' aria-hidden="true">Extornar</button>
+        </div>
+        </div>
+        </div>
+    </div>

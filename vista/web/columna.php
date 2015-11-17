@@ -26,6 +26,7 @@
                             <?php for($i = 0; $i < count($this->evento); $i++){
 
                                 $dia=explode("-",$this->evento[$i]['FECHA_INICIO']);
+                                $dia1=explode("-",$this->evento[$i]['FECHA_FIN']);
 //print_r($dia);exit();
                                 $mes=" ";
                                 switch ($dia[1]) {
@@ -66,6 +67,45 @@
                                        $mes="DIC";
                                        break;
                                }
+                               $mes1=" ";
+                               switch ($dia1[1]) {
+                                   case 01:
+                                       $mes1="ENE";
+                                       break;
+                                   case 02:
+                                       $mes1="FEB";
+                                       break;
+                                   case 03:
+                                       $mes1="MAR";
+                                       break;
+                                   case 04:
+                                       $mes1="ABR";
+                                       break;
+                                   case 05:
+                                       $mes1="MAY";
+                                       break;
+                                   case 06:
+                                       $mes1="JUN";
+                                       break;
+                                   case 07:
+                                       $mes1="JUL";
+                                       break;
+                                   case 08:
+                                       $mes1="AGO";
+                                       break;
+                                   case 09:
+                                       $mes1="SET";
+                                       break;
+                                   case 10:
+                                       $mes1="OCT";
+                                       break;
+                                   case 11:
+                                       $mes1="NOV";
+                                       break;
+                                   case 12:
+                                       $mes1="DIC";
+                                       break;
+                               }
                              ?>   
                                 <li class="media" >
                                     <div class="pull-left" >
@@ -77,6 +117,7 @@
                                       <h5 class="media-heading"><strong><u>Comp. Fitness</u></strong></h5>
                                       <small><strong>Lugar:</strong> <?php if(isset ($this->evento[$i]['LUGAR']))echo $this->evento[$i]['LUGAR']?></small> </br>
                                       <small><strong>Hora:</strong> 3:00 pm</small>
+                                      <small><strong>Hasta:</strong><?php echo $dia1[2]?>&nbsp;<?php echo $mes1?></small>
                                     </div>
                                 </li>
                                 

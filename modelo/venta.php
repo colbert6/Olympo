@@ -15,7 +15,7 @@ class venta extends Main{
     public $cliente;
     public $empleado;
 
-    public function selecciona() {
+    public function selecciona(){
          $r = $this->get_consulta("pa_m1_venta", null);
         if ($r[1] == '') {
             $stmt = $r[0];
