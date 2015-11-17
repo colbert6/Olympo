@@ -2,31 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
-
-        <group/>
-
         <group>
-
-            <file>file:/C:/xampp/htdocs/Olympo/vista/web/access.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/vista/web/servicios.php</file>
-
-            <file>file:/C:/xampp/htdocs/Olympo/vista/web/productos.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/vista/web/servicios.php</file>
-
-            <file>file:/C:/xampp/htdocs/Olympo/vista/venta/js/funciones_form.js</file>
-            <file>file:/C:/xampp/htdocs/Olympo/modelo/venta_producto.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/modelo/venta_membresia.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/modelo/serie_comprobante.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/modelo/venta.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/vista/venta/form.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/vista/venta/index.php</file>
-            <file>file:/C:/xampp/htdocs/Olympo/controlador/venta_controlador.php</file>
-
+            <file>file:/C:/xampp/htdocs/Olympo/vista/socio/form.php</file>
+            <file>file:/C:/xampp/htdocs/Olympo/vista/socio/js/funciones_form.js</file>
         </group>
-
->>>>>>> 753bb8b655c797f268beff81b659ccf80de413e9
     </open-files>
 </project-private>

@@ -109,12 +109,20 @@ class matricula extends Main{
         }
     }
     public function elimina() {
-        $datos = array($this->id_almacen);
+        $datos = array($this->id_matricula);
         $r = $this->get_consulta("pa_d_matricula", $datos);
         $error = $r[1];
         $r = null;
         return $error;
     }
+    public function reinicio_estado_pago() {
+        $datos = array($this->id_matricula);
+        $r = $this->get_consulta("pa_d2_matricula", $datos);
+        $error = $r[1];
+        $r = null;
+        return $error;
+    }
+    
     
 
 }

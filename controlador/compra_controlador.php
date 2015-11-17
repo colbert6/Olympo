@@ -156,7 +156,7 @@ class compra_controlador extends controller {
                 $this->_almacen_producto->id_almacen = $dato_compra[$i]['ID_ALMACEN'];
                 $this->_almacen_producto->id_producto = $dato_compra[$i]['ID_PRODUCTO'];
                 $this->_almacen_producto->cantidad = $cantidad;
-                $this->_almacen_producto->quitar_stock();
+                $this->_almacen_producto->actualizar_stock();
             }
             $this->_compra->id_compra = $id;
             $this->_compra->elimina();

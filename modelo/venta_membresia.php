@@ -8,9 +8,10 @@ class venta_membresia extends Main{
     public $fecha;
     public $precio;
     
-    public function selecciona_id() {
+    
+    public function selecciona_id_venta() {
         
-        $datos = array($this->id_almacen);
+        $datos = array($this->id_venta);
         
         $r = $this->get_consulta("pa_m2_vema",$datos);
         if ($r[1] == '') {

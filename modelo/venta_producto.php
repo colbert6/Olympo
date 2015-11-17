@@ -8,11 +8,12 @@ class venta_producto extends Main{
     public $cantidad;
     public $precio;
     
-    public function selecciona_id() {
+    
+    public function selecciona_id_venta() {
         
-        $datos = array($this->id_almacen);
+        $datos = array($this->id_venta);
         
-        $r = $this->get_consulta("pa_m2_vema",$datos);
+        $r = $this->get_consulta("pa_m2_vepr",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {

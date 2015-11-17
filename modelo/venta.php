@@ -70,7 +70,7 @@ class venta extends Main{
 
     public function elimina() {
         $datos = array($this->id_venta);
-        $r = $this->get_consulta("elim_venta", $datos);
+        $r = $this->get_consulta("pa_d_venta", $datos);
         $error = $r[1];
         $r = null;
         return $error;

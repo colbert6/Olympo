@@ -88,7 +88,7 @@ class matricula_controlador extends controller {
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('matricula');
         }
-        $this->_model->id_almacen = $this->filtrarInt($id);
+        $this->_model->id_matricula = $this->filtrarInt($id);
         $this->_model->elimina();
         $this->redireccionar('matricula');
     }

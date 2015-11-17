@@ -11,6 +11,9 @@ class venta_controlador extends controller {
     private $_cronograma_cobro;    
     private $_sesion_caja;
     private $_movimiento;
+    private $_almacen_producto;
+    private $_matricula;
+    
     
     public function __construct() {
         if (!$this->acceso()) {
@@ -26,6 +29,8 @@ class venta_controlador extends controller {
         $this->_cronograma_cobro = $this->cargar_modelo('cronograma_cobro');        
         $this->_sesion_caja = $this->cargar_modelo('sesion_caja');        
         $this->_movimiento = $this->cargar_modelo('movimiento');
+        $this->_almacen_producto = $this->cargar_modelo('almacen_producto');
+        $this->_matricula = $this->cargar_modelo('matricula');
     }
 
     public function index() {
@@ -163,14 +168,40 @@ class venta_controlador extends controller {
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('venta');
         }
-        $this->_venta->id_venta = $this->filtrarInt($id);
+        
+        
+        //---reponemos el stock
+        $this->_venta_producto->id_venta=$id;
+        $producto_venta= $this->_venta_producto->selecciona_id_venta();
+        for($i=0;$i<count($producto_venta);$i++){
+            
+            $cantidad=$producto_venta[$i]['STOCK_ACTUAL']+$producto_venta[$i]['CANT_VENTA'];
+            $this->_almacen_producto->id_almacen = $producto_venta[$i]['ID_ALMACEN'];
+            $this->_almacen_producto->id_producto = $producto_venta[$i]['ID_PRODUCTO'];
+            $this->_almacen_producto->cantidad = $cantidad;
+            $this->_almacen_producto->actualizar_stock();
+            
+        }
+        
+        //---reponemos el estado de matricula
+        $this->_venta_membresia->id_venta=$id;
+        $matricula_venta= $this->_venta_membresia->selecciona_id_venta();
+        
+        for($i=0;$i<count($matricula_venta);$i++){
+            $this->_matricula->id_matricula= $matricula_venta[$i]['ID_MATRICULA'];
+            $this->_matricula->reinicio_estado_pago();
+        }
+        
+        $this->_venta->id_venta = $id;
         $this->_venta->elimina();
         $this->redireccionar('venta');
     }
+    
     public function ver(){
         $this->_venta->id_venta=$_POST['id_venta'];
         echo json_encode($this->_venta->selecciona_id());
     }
+    
     public function getCorrelativo() {
         
         if($_POST['id_tipo_documento']==1||$_POST['id_tipo_documento']==2){

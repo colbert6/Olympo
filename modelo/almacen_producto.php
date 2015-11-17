@@ -8,7 +8,7 @@ class almacen_producto extends Main{
     
   
 
-    public function quitar_stock() {
+    public function actualizar_stock() {
         $datos = array($this->id_almacen, $this->id_producto,$this->cantidad);
         $r = $this->get_consulta("pa_u_alpr", $datos);
         $error = $r[1];
