@@ -89,7 +89,7 @@
                     <option value='' >Selecciona...</option>
                     <?php for($i=0;$i<count($this->distrito);$i++){ ?> 
                      <?php if( strcmp($this->distrito[$i]['CODIGO_DISTRITO'], $this->ubigeo[0]['CODIGO_DISTRITO']) == 0){?>
-                          <option selected value="<?php echo $this->distrito[$i]['ID_UBIGEO'];?>"><?php echo $this->distrito[$i]['DESCRIPCION']?></option>
+                          <option selected value="<?php echo $this->distrito[$i]['IDUBIGEO'];?>"><?php echo $this->distrito[$i]['DESCRIPCION']?></option>
                      <?php }else{?>
                           <option value="<?php echo $this->distrito[$i]['IDUBIGEO'];?>"><?php echo $this->distrito[$i]['DESCRIPCION']?></option>
                      <?php } ?>

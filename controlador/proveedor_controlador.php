@@ -58,6 +58,8 @@ class proveedor_controlador extends controller {
             $this->_model->actualiza();
             $this->redireccionar('proveedor');
         }
+        
+        
         $this->_model->id_proveedor = $this->filtrarInt($id);
         $this->_vista->datos = $this->_model->selecciona_id();
         
@@ -73,12 +75,12 @@ class proveedor_controlador extends controller {
         $this->_vista->region =  $this->_ubigeo->selecciona_departamento();
         $this->_vista->provincia = $this->_ubigeo->selecciona_provincia();
         $this->_vista->distrito = $this->_ubigeo->selecciona_distrito();
-        $this->_vista->tipo_socio = $this->_tipo_socio->selecciona();
         
         $this->_vista->titulo = 'Actualizar Proveedor';
         $this->_vista->action = BASE_URL . 'proveedor/editar/'.$id;
         $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('form');
+        
     }
 
     public function eliminar($id) {
