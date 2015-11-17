@@ -16,21 +16,26 @@ class web_Controlador extends controller {
         $this->_model = $this->cargar_modelo('informacion');
         $this->_servicios = $this->cargar_modelo('web_servicio');
         $this->_productos = $this->cargar_modelo('web_producto');
-        $this->_contacto = $this->cargar_modelo('contacto');//
-        $this->_evento = $this->cargar_modelo('evento');//
+        $this->_contacto = $this->cargar_modelo('contacto');
+        $this->_evento = $this->cargar_modelo('evento');
+        $this->_inicio = $this->cargar_modelo('img_inicio');
+        $this->_publicidad = $this->cargar_modelo('img_publicidad');
          
     }
     
     public function index() {
 
+        $this->_vista->datos = $this->_model->selecciona();
         $this->_vista->evento = $this->_evento->selecciona();
+        $this->_vista->inicio = $this->_inicio->selecciona();
+        $this->_vista->publicidad = $this->_publicidad->selecciona();
         //print_r($this->_vista->evento);exit();
         $this->_vista->renderiza_web('index',false,true);
         
     }
     
     public function inicio(){
-        $this->_vista->evento = $this->_evento->selecciona();
+       // $this->_vista->evento = $this->_evento->selecciona();
         //print_r($this->_vista->evento);exit();
         $this->_vista->renderiza_web('inicio','inicio',true);
     }

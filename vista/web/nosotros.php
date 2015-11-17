@@ -11,6 +11,9 @@
                     <p class="text-justify">
                     <?php if(isset ($this->datos[0]['HISTORIA']))echo $this->datos[0]['HISTORIA']?>
                     </p>
+                    <img 
+                    style="width: 635px; height: 90px;"
+                    src="<?php echo $_webParams['ruta_img']; ?>10.jpg" alt=""> 
              </div>
 
         </div>
