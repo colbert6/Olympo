@@ -26,8 +26,7 @@
                             <?php for($i = 0; $i < count($this->evento); $i++){
 
                                 $dia=explode("-",$this->evento[$i]['FECHA_INICIO']);
-                                $dia1=explode("-",$this->evento[$i]['FECHA_FIN']);
-//print_r($dia);exit();
+                               /* $dia1=explode("-",$this->evento[$i]['FECHA_FIN']);*/
                                 $mes=" ";
                                 switch ($dia[1]) {
                                    case 01:
@@ -67,7 +66,7 @@
                                        $mes="DIC";
                                        break;
                                }
-                               $mes1=" ";
+                              /* $mes1=" ";
                                switch ($dia1[1]) {
                                    case 01:
                                        $mes1="ENE";
@@ -105,7 +104,7 @@
                                    case 12:
                                        $mes1="DIC";
                                        break;
-                               }
+                               }*/
                              ?>   
                                 <li class="media" >
                                     <div class="pull-left" >
@@ -117,10 +116,10 @@
                                       <h5 class="media-heading"><strong><u>Comp. Fitness</u></strong></h5>
                                       <small><strong>Lugar:</strong> <?php if(isset ($this->evento[$i]['LUGAR']))echo $this->evento[$i]['LUGAR']?></small> </br>
                                       <small><strong>Hora:</strong> 3:00 pm</small>
-                                      <small><strong>Hasta:</strong><?php echo $dia1[2]?>&nbsp;<?php echo $mes1?></small>
+                                      <!--<small><strong>Hasta:</strong><?php echo $dia1[2]?>&nbsp;<?php echo $mes1?></small>-->
                                     </div>
                                 </li>
-                                
+                              
                             <?php } ?>  
                                 
                     <?php } ?>      
