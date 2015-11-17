@@ -561,8 +561,3 @@ function mostrarCronogramaVenta(id){
        // }, 'json');
     }, 'json');
 }
-function extornar(url){
-    if(confirm("¿Esta Seguro de Extornar este Movimiento?")){
-        window.location = url;
-    }
-}

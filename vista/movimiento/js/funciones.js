@@ -1,5 +1,4 @@
 $(document).ready(function() {    
-
     $("#save").click(function() {
         bval = true;   
         bval = bval && $("#id_tipo_movimiento").required();
@@ -32,5 +31,40 @@ $(document).ready(function() {
 
     });
 
+    $("#extornar").click(function() {
+        bval = true;   
+        bval = bval && $("#user").required();
+        bval = bval && $("#pass").required();
+        if (bval){
+
+            $.post(url+'movimiento/validaAdmin',{user:$("#user").val(),pass:$("#pass").val()},function(datos){
+                //alert(datos.length);
+                if(datos.length>0){
+                    window.location = url+'movimiento/extornar/'+$("#id_movimiento").val();
+
+                }else{
+                    HTML="<div class=\"alert alert-danger alert-dismissable\">";
+                    HTML+="<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>";
+                    HTML+="<strong>¡Error!</strong> Datos Incorrectos.";
+                    HTML+="</div>";
+                    $("#alerta").html(HTML);
+                }
+            },'json');
+        
+        }
+        return false;
+    });
+
 
 });
+
+function ValidaExtorno(id){
+     $('#user').val("");
+     $('#pass').val("");
+     $("#alerta").html("");
+    if(confirm("¿Esta Seguro de Extornar este Movimiento?")){
+        $('#id_movimiento').val(id);
+         $('#myModal').modal('show');
+         
+    }
+}

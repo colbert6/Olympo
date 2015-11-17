@@ -11,6 +11,7 @@ class movimiento_controlador extends controller {
     private $_compra;
     private $_venta;
     private $_tipo_movimiento;
+    private $_empleado;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -26,6 +27,7 @@ class movimiento_controlador extends controller {
         $this->_amortizacion_venta = $this->cargar_modelo('amortizacion_venta');
         $this->_compra = $this->cargar_modelo('compra');
         $this->_venta = $this->cargar_modelo('venta');
+        $this->_empleado = $this->cargar_modelo('empleado');
     } 
 
     public function index() {
@@ -34,8 +36,8 @@ class movimiento_controlador extends controller {
         $this->_vista->datos = $this->_movimiento->selecciona();
         //print_r($this->_vista->datos);exit;
         $this->_vista->setCss_public(array('jquery.dataTables'));
-        $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
-        $this->_vista->setJs(array('funciones_form'));
+        $this->_vista->setJs_public(array('jquery.dataTables.min'));
+        $this->_vista->setJs(array('funciones','run_table2'));
         $this->_vista->renderizar('index');
     }
 
@@ -282,42 +284,167 @@ class movimiento_controlador extends controller {
             
     }
     public function extornar($id){
-        $this->_movimiento->id_movimiento = $this->filtrarInt($id);
-        $movimiento = $this->_movimiento->selecciona_id();
-        if($movimiento[0]["ID_TIPO_MOVIMIENTO"]==1){
-            $this->_amortizacion_compra->id_movimiento = $this->filtrarInt($id);
-            $amortizacion_compra = $this->_amortizacion_compra->amortizacion_x_movimiento();
-            for ($i=0; $i <count($amortizacion_compra) ; $i++) { 
-                //--------------DATOS TABLA AMORTIZACION COMPRA ---------------------------
-                $id_cuota_compra = $amortizacion_compra[$i]["ID_CUOTA_COMPRA"];
-                $monto_amortizacion = $amortizacion_compra[$i]["MONTO"];
-                //---------------------DATOS TABLA CUOTA COMPRA ---------------------------
-                $this->_cronograma_pago->id_cuota_compra = $id_cuota_compra;
-                $cronog = $this->_cronograma_pago->selecciona_id();
-                print_r($cronog); exit;
-                if($cronog[0]["MONTO_CUOTA"] == $cronog[0]["MONTO_PAGADO"]){
-
-                }else{
-
-                }
-
-
-                $id_compra = $cronog[0]["ID_COMPRA"];    
-                
-
-                //echo $amortizacion_compra[$i]["ID_CUOTA_COMPRA"]."/".$amortizacion_compra[$i]["MONTO"]."<br>";    
-
+        $sesiones =  $this->_sesion_caja->cajas_activas();
+        $emp_existente = false;
+        $fecha_sesion = "";
+        $id_sesion_caja = "";
+        for ($i=0; $i <count($sesiones); $i++) { 
+            if($sesiones[$i]["ID_EMPLEADO"] == session::get('id_empleado')){
+                $emp_existente = true;
+                $fecha_sesion = $sesiones[$i]["FECHA_ENTRADA"];
+                $id_sesion_caja = $sesiones[$i]["ID_SESION_CAJA"];
+                $monto_caja = $sesiones[$i]["MONTO_CIERRE"];
             }
-            exit;
-        }else if($movimiento[0]["ID_TIPO_MOVIMIENTO"]==2){
-
         }
+        if($emp_existente){
+            $this->_movimiento->id_movimiento = $this->filtrarInt($id);
+            $movimiento = $this->_movimiento->selecciona_id();
+            
+            if($movimiento[0]["ID_SESION_CAJA"]==$id_sesion_caja){
+                
+                if($movimiento[0]["TIPO_MOVIMIENTO"]=="EGRESO"){
+                    if($movimiento[0]["ID_CONCEPTO_MOVIMIENTO"]==1){
+                        $this->_amortizacion_compra->id_movimiento = $this->filtrarInt($id);
+                        $amortizacion_compra = $this->_amortizacion_compra->amortizacion_x_movimiento();
+                        $total_amortizacion = 0;
+                        $total_pagado = 0;
+                        //---------------------DATOS TABLA CUOTA COMPRA ---------------------------
+                        $this->_cronograma_pago->id_cuota_compra = $amortizacion_compra[0]["ID_CUOTA_COMPRA"];
+                        $cronog = $this->_cronograma_pago->selecciona_id();
+                        $id_compra = $cronog[0]["ID_COMPRA"];
+                        //---------------------SACARMONTO PAGADO -----------------------------------
+                        $this->_cronograma_pago->id_compra = $id_compra;
+                        $compras = $this->_cronograma_pago->selecciona_cuota();
+                        for ($i=0; $i < count($compras); $i++) { 
+                            $total_pagado+=$compras[$i]["MONTO_PAGADO"];
+                        }
+                        // DISMINUIR MONTO PAGADO POR CUOTA
+                        for ($i=0; $i <count($amortizacion_compra) ; $i++) { 
+
+                            //--------------DATOS TABLA AMORTIZACION COMPRA ---------------------------
+                            $id_cuota_compra = $amortizacion_compra[$i]["ID_CUOTA_COMPRA"];
+                            $monto_amortizacion = $amortizacion_compra[$i]["MONTO"];
+                            $total_amortizacion +=  $monto_amortizacion;
+                            //-------------------------------------------------------------------------
+                            $this->_cronograma_pago->id_cuota_compra = $id_cuota_compra;
+                            $cuota = $this->_cronograma_pago->selecciona_id();
+                            // -------- ACTUALIZA MONTO PAGADO POR CUOTA ------------------------------                
+                            $this->_cronograma_pago->id_cuota_compra = $id_cuota_compra ;
+                            $this->_cronograma_pago->monto_pagado = $cuota[0]['MONTO_PAGADO']-$monto_amortizacion;
+                            $this->_cronograma_pago->fecha_cancelacion = '1990-01-01';
+                            $this->_cronograma_pago->actualiza();
+                        }
+                        // ACTUALIZA ESTADO DE COMPRA
+                        if(($total_pagado - $total_amortizacion)==0){
+                            //echo "<script>alert('Monto == 0')</script>";
+                            $this->_compra->id_compra = $id_compra;
+                            $this->_compra->estado_pago = '0';
+                            $this->_compra->actualizar_estado();
+                        }else if(($total_pagado - $total_amortizacion)!=0){
+                            //echo "<script>alert('Monto != 0')</script>";
+                            $this->_compra->id_compra = $id_compra;
+                            $this->_compra->estado_pago = '1';
+                            $this->_compra->actualizar_estado();
+                        }
+
+                        //ELIMINA AMORTIZACIONES
+                        $this->_amortizacion_compra->id_movimiento = $this->filtrarInt($id);
+                        $this->_amortizacion_compra->elimina();    
+                    }
+                           
+                    //-----------------ACTUALIZO SALDO DE CAJA-------------
+                    $this->_sesion_caja->aumenta=1;
+                    $this->_sesion_caja->id_sesion_caja = $id_sesion_caja;
+                    $this->_sesion_caja->monto_cierre=$movimiento[0]["MONTO"];
+                    $this->_sesion_caja->actualiza_saldo();
+
+                    //ACTUALIZO ESTADO DE MOVIMIENTO
+                    $this->_movimiento->id_movimiento = $this->filtrarInt($id);
+                    $this->_movimiento->extorna();
+
+                    $this->redireccionar('movimiento');    
+
+                }else if($movimiento[0]["TIPO_MOVIMIENTO"]=="INGRESO"){
 
 
+                    if($movimiento[0]["ID_CONCEPTO_MOVIMIENTO"]==2){
+                        $this->_amortizacion_venta->id_movimiento = $this->filtrarInt($id);
+                        $amortizacion_venta = $this->_amortizacion_venta->amortizacion_x_movimiento();
+                        $total_amortizacion = 0;
+                        $total_pagado = 0;
+
+                        //---------------------DATOS TABLA CUOTA COMPRA ---------------------------
+                        $this->_cronograma_cobro->id_cuota_venta = $amortizacion_venta[0]["ID_CUOTA_VENTA"];
+                        $cronog = $this->_cronograma_cobro->selecciona_id();
+                        $id_venta = $cronog[0]["ID_VENTA"];
+
+                        //---------------------SACARMONTO PAGADO -----------------------------------
+                        $this->_cronograma_cobro->id_venta = $id_venta;
+                        $ventas = $this->_cronograma_cobro->selecciona_cuota();
+                        
+                        for ($i=0; $i < count($ventas); $i++) { 
+                            $total_pagado+=$ventas[$i]["MONTO_PAGADO"];
+                        }
+
+
+                        for ($i=0; $i <count($amortizacion_venta) ; $i++) { 
+
+                            //--------------DATOS TABLA AMORTIZACION VENTA ---------------------------
+                            $id_cuota_venta = $amortizacion_venta[$i]["ID_CUOTA_VENTA"];
+                            $monto_amortizacion = $amortizacion_venta[$i]["MONTO"];
+                            $total_amortizacion +=  $monto_amortizacion;
+                            //---------------------DATOS TABLA CUOTA VENTA ---------------------------
+                            $this->_cronograma_cobro->id_cuota_venta = $id_cuota_venta;
+                            $cuota = $this->_cronograma_cobro->selecciona_id();
+                            // -------- ACTUALIZA MONTO PAGADO POR CUOTA ------------------------------                
+                            $this->_cronograma_cobro->id_cuota_venta = $id_cuota_venta;
+                            $this->_cronograma_cobro->monto_pagado = $cuota[0]['MONTO_PAGADO']-$monto_amortizacion;
+                            $this->_cronograma_cobro->fecha_cancelacion = '1990-01-01';
+                            $this->_cronograma_cobro->actualiza();
+                        }
+                        // ACTUALIZA ESTADO DE VENTA
+                        
+                        if(($total_pagado - $total_amortizacion)==0){
+                            $this->_venta->id_venta = $id_venta;
+                            $this->_venta->estado_pago = '0';
+                            $this->_venta->actualizar_estado();
+                        }else if(($total_pagado - $total_amortizacion)!=0){
+                            $this->_venta->id_compra = $id_compra;
+                            $this->_venta->estado_pago = '1';
+                            $this->_venta->actualizar_estado();
+                        }
+                        //ELIMINA AMORTIZACIONES
+                        $this->_amortizacion_venta->id_movimiento = $this->filtrarInt($id);
+                        $this->_amortizacion_venta->elimina();    
+                    }
+                           
+                    //-----------------ACTUALIZO SALDO DE CAJA-------------
+                    $this->_sesion_caja->aumenta=0;
+                    $this->_sesion_caja->id_sesion_caja = $id_sesion_caja;
+                    $this->_sesion_caja->monto_cierre=$movimiento[0]["MONTO"];
+                    $this->_sesion_caja->actualiza_saldo();
+
+                    //ACTUALIZO ESTADO DE MOVIMIENTO
+                    $this->_movimiento->id_movimiento = $this->filtrarInt($id);
+                    $this->_movimiento->extorna();
+
+                    $this->redireccionar('movimiento'); 
+                }
+            }else{
+                echo "<script>alert('Este Movimiento Pertenece a una Caja ya Cerrada');</script>";
+                $this->redireccionar('movimiento');        
+            }
+        }else{
+            echo "<script>alert('Aperture una Caja antes de Realizar cualquier Movimiento');</script>";
+            $this->redireccionar('sesion_caja');    
+        }
     }
     public function getActores(){
         $datos = $this->_movimiento->actores();
         echo json_encode($datos);
+    }
+    public function validaAdmin(){
+        echo json_encode($this->_empleado->validaAdmin($_POST["user"],md5($_POST["pass"])));
     }
 
 

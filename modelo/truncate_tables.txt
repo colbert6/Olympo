@@ -1,0 +1,8 @@
+truncate table movimiento;
+truncate table amortizacion_venta;
+truncate table amortizacion_compra;
+truncate table compra;
+truncate table venta;
+truncate table cuota_compra;
+truncate table cuota_venta;
+truncate table sesion_caja;

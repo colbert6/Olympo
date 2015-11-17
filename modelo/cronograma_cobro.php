@@ -28,7 +28,7 @@ class cronograma_cobro extends Main{
         
     }
     public function selecciona_cuota() {
-        $datos = array($this->id_compra);
+        $datos = array($this->id_venta);
         
         $r = $this->get_consulta("pa_m2_cuve",$datos);
         if ($r[1] == '') {
@@ -45,6 +45,25 @@ class cronograma_cobro extends Main{
             return $stmt->fetchall();
         }
       
+    }
+     public function selecciona_id(){
+        
+        $datos = array($this->id_cuota_venta);
+        $r = $this->get_consulta("pa_m3_cuve",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+        
     }
     
     public function inserta() {
