@@ -9,7 +9,8 @@ class proveedor_controlador extends controller {
             $this->redireccionar('error/access/5050');
         }
         parent::__construct();
-        $this->_model = $this->cargar_modelo('proveedor');
+        $this->_model = $this->cargar_modelo('proveedor');        
+        $this->_ubigeo = $this->cargar_modelo('ubigeo');
     }
 
     public function index() {
@@ -32,6 +33,8 @@ class proveedor_controlador extends controller {
             $datos = $this->_model->inserta();
             $this->redireccionar('proveedor');
         }
+        $this->_vista->region = $this->_ubigeo->selecciona_departamento();
+        
         $this->_vista->titulo = 'Registrar Proveedor';
         $this->_vista->action = BASE_URL . 'proveedor/nuevo';
         $this->_vista->setJs(array('funciones_form'));
@@ -58,6 +61,20 @@ class proveedor_controlador extends controller {
         $this->_model->id_proveedor = $this->filtrarInt($id);
         $this->_vista->datos = $this->_model->selecciona_id();
         
+        // SACANDO OTRAS PARTES DE UBIGEO
+        $this->_ubigeo->idubigeo = $this->_vista->datos[0]["ID_UBIGEO"];
+        $this->_vista->ubigeo = $this->_ubigeo->selecciona_id();
+
+        $this->_ubigeo->codigo_region =$this->_vista->ubigeo[0]["CODIGO_REGION"];
+        $this->_ubigeo->codigo_provincia =$this->_vista->ubigeo[0]["CODIGO_PROVINCIA"];
+        $this->_ubigeo->codigo_distrito =$this->_vista->ubigeo[0]["CODIGO_DISTRITO"];
+
+        
+        $this->_vista->region =  $this->_ubigeo->selecciona_departamento();
+        $this->_vista->provincia = $this->_ubigeo->selecciona_provincia();
+        $this->_vista->distrito = $this->_ubigeo->selecciona_distrito();
+        $this->_vista->tipo_socio = $this->_tipo_socio->selecciona();
+        
         $this->_vista->titulo = 'Actualizar Proveedor';
         $this->_vista->action = BASE_URL . 'proveedor/editar/'.$id;
         $this->_vista->setJs(array('funciones_form'));
@@ -74,7 +91,13 @@ class proveedor_controlador extends controller {
     }
     
      public function buscador(){
-        echo json_encode($this->_model->selecciona());
+        if(isset($_POST['dni'])){
+            $this->_model->dni=$_POST['dni'];
+            echo json_encode($this->_model->selecciona_dni());
+        } else{
+            echo json_encode($this->_model->selecciona());
+        }
+        
     }
 
 }

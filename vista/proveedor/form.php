@@ -52,13 +52,52 @@
             </div>
         </div>
         
-        <div class="form-group">
-            <label class="control-label col-sm-6" >Ubigeo:</label>
+        <div class="form-group" >
+            <label class="control-label col-sm-6" >Departamento:</label>
             <div class="col-sm-6">
-                <input name="id_ubigeo" id="id_ubigeo" class="form-control"  placeholder="Ubigeo" autofocus
-                 value="<?php if(isset ($this->datos[0]['ID_UBIGEO']))echo $this->datos[0]['ID_UBIGEO']?>">
+                <select  class="form-control glyphicon" name='region' id='region'>
+                    <option value='' >Selecciona...</option>
+                        <?php for($i=0;$i<count($this->region);$i++){ ?> 
+                         <?php if( strcmp($this->region[$i]['CODIGO_REGION'], $this->ubigeo[0]['CODIGO_REGION']) == 0){?>
+                              <option selected value="<?php echo $this->region[$i]['CODIGO_REGION'];?>"><?php echo $this->region[$i]['DESCRIPCION']?></option>
+                         <?php }else{?>
+                              <option value="<?php echo $this->region[$i]['CODIGO_REGION'];?>"><?php echo $this->region[$i]['DESCRIPCION']?></option>
+                         <?php } ?>
+                        <?php } ?>
+                </select>
+            </div>    
+        </div>
+        <div class="form-group" >
+            <label class="control-label col-sm-6" >Provincia:</label>
+            <div class="col-sm-6">
+                <select class="form-control glyphicon" name='provincia' id='provincia'>
+                    <option value='' >Selecciona...</option>
+                    <?php for($i=0;$i<count($this->provincia);$i++){ ?> 
+                     <?php if( strcmp($this->provincia[$i]['CODIGO_PROVINCIA'], $this->ubigeo[0]['CODIGO_PROVINCIA']) == 0){?>
+                          <option selected value="<?php echo $this->provincia[$i]['CODIGO_PROVINCIA'];?>"><?php echo $this->provincia[$i]['DESCRIPCION']?></option>
+                     <?php }else{?>
+                          <option value="<?php echo $this->provincia[$i]['CODIGO_PROVINCIA'];?>"><?php echo $this->provincia[$i]['DESCRIPCION']?></option>
+                     <?php } ?>
+                    <?php } ?>
+                </select>
             </div>
         </div>
+        <div class="form-group" style="margin-right: 0px;">
+            <label class="control-label col-sm-6" >Distrito:</label>
+            <div class="col-sm-6">
+                <select class="form-control glyphicon" name='id_ubigeo' id='id_ubigeo'>
+                    <option value='' >Selecciona...</option>
+                    <?php for($i=0;$i<count($this->distrito);$i++){ ?> 
+                     <?php if( strcmp($this->distrito[$i]['CODIGO_DISTRITO'], $this->ubigeo[0]['CODIGO_DISTRITO']) == 0){?>
+                          <option selected value="<?php echo $this->distrito[$i]['ID_UBIGEO'];?>"><?php echo $this->distrito[$i]['DESCRIPCION']?></option>
+                     <?php }else{?>
+                          <option value="<?php echo $this->distrito[$i]['IDUBIGEO'];?>"><?php echo $this->distrito[$i]['DESCRIPCION']?></option>
+                     <?php } ?>
+                    <?php } ?>
+                </select>
+             </div>
+        </div>
+
        
         <div class="form-group" style="margin-top: 8%"> 
             <div class="col-sm-offset-3 col-sm-8">
