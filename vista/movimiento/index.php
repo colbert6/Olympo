@@ -68,10 +68,10 @@
                     <div id='alerta'>
                     </div>
                     <div class="form-group">
-                      <input name="user" id="user" class="form-control" type='text'  placeholder="Usuario" value="">
+                      <input name="user" id="user" class="form-control" type='text' autofocus placeholder="Usuario" value="">
                     </div> 
                     <div class="form-group">
-                      <input  name="pass" id="pass" class="form-control"  type='password' placeholder="Contraseña" autofocus value="">
+                      <input  name="pass" id="pass" class="form-control"  type='password' placeholder="Contraseña" value="">
                     </div> 
         </div>
         <div class="modal-footer">

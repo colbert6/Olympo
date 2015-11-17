@@ -1,4 +1,5 @@
 $(document).ready(function() {    
+
     $("#save").click(function() {
         bval = true;   
         bval = bval && $("#id_tipo_movimiento").required();
@@ -65,6 +66,7 @@ function ValidaExtorno(id){
     if(confirm("¿Esta Seguro de Extornar este Movimiento?")){
         $('#id_movimiento').val(id);
          $('#myModal').modal('show');
+
          
     }
 }
