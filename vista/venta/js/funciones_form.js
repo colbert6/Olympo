@@ -287,10 +287,19 @@ function buscarSocio() {
                 '</tr>' +
                 '</thead>' +
                 '<tbody>';
+        
+            HTML = HTML + '<tr>';
+            HTML = HTML + '<td>'+(1)+'</td>';
+            HTML = HTML + '<td>Otros</td>';
+            HTML = HTML + '<td>0</td>';
+            HTML = HTML + '<td><a style="margin-right:4px" href="javascript:void(0)" onclick="sel_socio(\'0\',\'Otros\')" class="btn btn-success"><i class="icon-ok icon-white"></i> </a>';
+            HTML = HTML + '</td>';
+            HTML = HTML + '</tr>';
+                
 
         for (var i = 0; i < datos.length; i++) {
             HTML = HTML + '<tr>';
-            HTML = HTML + '<td>'+(i+1)+'</td>';
+            HTML = HTML + '<td>'+(i+2)+'</td>';
             HTML = HTML + '<td>' + datos[i].NOMBRE +' '+ datos[i].APELLIDO_PATERNO +' '+  datos[i].APELLIDO_MATERNO +'</td>';
             HTML = HTML + '<td>' + datos[i].DNI + '</td>';
             var id_socio = datos[i].ID_SOCIO;

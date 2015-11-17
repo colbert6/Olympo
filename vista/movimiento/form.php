@@ -9,6 +9,8 @@
         <input type="hidden" name="num_cuotas" id="num_cuotas"/>
         <input type="hidden" name="id_concepto_movimiento" id="id_concepto_movimiento"/>
         <input type="hidden" name="id_accion" id="id_accion"/>
+        <input type="hidden" name="id_modalidad_t" id="id_modalidad_t"/>
+        <input type="hidden" name="monto_contado" id="monto_contado"/>
          
          <div class="row">
             <div class="col-md-4"></div>

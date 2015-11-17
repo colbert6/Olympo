@@ -1,5 +1,6 @@
 <link href="<?php echo $_params['ruta_css']; ?>jquery-ui.custom.css" rel="stylesheet" />
 <script src="<?php echo $_params['ruta_js']; ?>bootbox.min.js"></script>
+<?php $hoy=  date("Y")."-".date("m")."-".date("d");?>
 <div class="navbar-inner">
    
     <form method="post"  action="<?php if (isset($this->action)) echo $this->action ?>" id="frm" class="form-horizontal" >
@@ -21,7 +22,7 @@
                 <div class="form-group" style="margin: 5px auto 5px auto">
                     <label class="col-md-7 control-label" > Fecha:</label>
                     <div class="col-md-5">
-                        <input name="fechacompra" id="fechacompra" class="form-control"  placeholder="Fecha" readonly="readonly" >
+                        <input name="fechacompra" id="fechacompra" class="form-control"  placeholder="Fecha" readonly="readonly" value="<?php echo $hoy; ?>">
                     </div>
                 </div>
             </div>

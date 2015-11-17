@@ -2,11 +2,44 @@
     <div class="col-md-9">
         <div class="row carousel-holder">
             <div class="col-md-12">
+                <?php if (isset($this->publicidad) && count($this->publicidad)){?>
+                  
+                   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <?php for($i = 0; $i < count($this->publicidad); $i++){ ?>
+                        <li data-target="#carousel-example-generic" data-slide-to="$i" class="active"></li>
+                        <?php } ?>
+                    </ol> 
+                     <div class="carousel-inner">
+                        <?php for($e = 0; $e < count($this->publicidad); $e++){ 
+                        
+                        if($e==0){
+                           echo '<div class="item active">' ;
+                        }else{
+                            echo '<div class="item">' ;
+                        }       
+                            ?>
+                            <img class="slide-image"  src="<?php echo $_webParams['ruta_img']; ?><?php if(isset ($this->publicidad[$e]['IMAGEN']))echo $this->publicidad[$e]['IMAGEN']?>" alt="">
+                            
+                        </div>
+                        <?php } ?>
+                    </div>
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+                   
+                <?php } ?>
+                <!--
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
@@ -18,6 +51,9 @@
                         <div class="item">
                             <img class="slide-image " src="<?php echo $_webParams['ruta_img']; ?>2.png" alt="">
                         </div>
+                        <div class="item">
+                            <img class="slide-image " src="<?php echo $_webParams['ruta_img']; ?>10.jpg" alt="">
+                        </div>
                     </div>
                     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -25,14 +61,37 @@
                     <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
-                </div>
+                </div>-->
             </div>
 
                                  
                     
         </div>
+
+        <?php if (isset($this->inicio) && count($this->inicio)){ ?>
+                <?php for($i = 0; $i < count($this->inicio); $i++){?> 
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                     <div class="thumbnail">
+                        <div class="hover-bg img-thumbnail">
+                          <div class="hover-text">
+                            <a href="<?php echo BASE_URL.'web/productos' ; ?>"> <h4 ><?php if(isset ($this->inicio[$i]['TITULO']))echo $this->inicio[$i]['TITULO']?></h4>
+                              <h5><?php if(isset ($this->inicio[$i]['DESCRIPCION']))echo $this->inicio[$i]['DESCRIPCION']?></h5>
+                                <div class="clearfix"></div>
+                                <i class="fa fa-plus"></i></a>
+                          </div>    
+                         <img src="<?php echo $_webParams['ruta_img']; ?><?php if(isset ($this->inicio[$i]['IMAGEN']))echo $this->inicio[$i]['IMAGEN']?>" alt=""> 
+                        <div class="caption">
+                           <h4><a href="#"><?php if(isset ($this->inicio[$i]['TITULO']))echo $this->inicio[$i]['TITULO']?></a></h4>  
+                        </div>
+                      </div>
+                   </div>
+               </div>
+
+                <?php } ?> 
+        <?php } ?> 
+                            
         
-        <div class="col-sm-4 col-lg-4 col-md-4">
+   <!--     <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <div class="hover-bg img-thumbnail">
                     <div class="hover-text">
@@ -86,7 +145,7 @@
                 </div>
                </div>
             </div>
-        </div>
+        </div>-->
  
         
         <div class="row">
