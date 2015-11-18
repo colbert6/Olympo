@@ -24,6 +24,7 @@
                     
                 </div>  
             </div> 
+            
             <div class="col-md-4">
             <div class="form-group" style="margin-right: 0px;">
                 <label class="col-md-6 control-label" for="apellido_paterno" style="width: 180px;">APELLIDO PATERNO:  &nbsp;&nbsp;&nbsp;&nbsp;*</label>
