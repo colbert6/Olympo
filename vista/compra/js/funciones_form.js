@@ -137,7 +137,6 @@ $(function() {
         dir = $("#direccionprov").val();
         tel = $("#telefmovilprov").val();
         email = $("#emailprov").val();
-        ciu = $("#ciudadprov").val();
         if (rs == "") {
             alert("Ingrese Razon Social");
             $("#razonsocialprov").focus();
@@ -163,11 +162,6 @@ $(function() {
                             $("#emailprov").focus();
                         }
                         else {
-                            if (ciu == "") {
-                                alert("Ingrese Ciudad");
-                                $("#ciudadprov").focus();
-                            }
-                            else {
                                 $.post(url + 'compra/inserta_prov', 'dir=' + $("#direccionprov").val() + '&rs=' + $("#razonsocialprov").val() +
                                         '&em=' + $("#emailprov").val() + '&ciu=' + $("#ciudadprov").val() + '&ruc=' + $("#rucprov").val() + '&tel=' + $("#telefmovilprov").val(), function(datos) {
                                     $("#id_proveedor").val(datos.id_proveedor);
@@ -176,7 +170,7 @@ $(function() {
                                     $('#modalNuevoProveedor').modal('hide');
                                     $("#razonsocialprov,#rucprov,#direccionprov,#telefmovilprov,#emailprov,#ciudadprov").val('');
                                 }, 'json')
-                            }
+                            
                         }
                     }
                 }

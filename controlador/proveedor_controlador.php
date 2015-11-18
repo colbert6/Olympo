@@ -93,9 +93,9 @@ class proveedor_controlador extends controller {
     }
     
      public function buscador(){
-        if(isset($_POST['dni'])){
-            $this->_model->dni=$_POST['dni'];
-            echo json_encode($this->_model->selecciona_dni());
+        if(isset($_POST['ruc'])){
+            $this->_model->ruc=$_POST['ruc'];
+            echo json_encode($this->_model->selecciona_ruc());
         } else{
             echo json_encode($this->_model->selecciona());
         }

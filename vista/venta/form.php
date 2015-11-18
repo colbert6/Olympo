@@ -195,7 +195,7 @@
             <div class="span12 text-center">
                 <p>
                     <button type="button" class="btn btn-primary" id="save">Guardar</button>
-                    <a href="<?php echo BASE_URL ?>venta" class="btn btn-info">Cancelar</a>
+                    <a href="<?php echo BASE_URL ?>venta" class="btn btn-danger">Cancelar</a>
                 </p>
             </div>
         </div>
