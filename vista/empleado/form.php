@@ -1,24 +1,31 @@
 <div class="navbar-inner">
   </script>
-    <div class="col-md-2"></div>
-    <div class="col-md-7" style="color:#000">
+    <div class="col-md-1"></div>
+    <div class="col-md-10" style="color:#000">
     <form  role="form" id="frm" method="post" action="<?php echo $this->action; ?>">
         <input name="guardar" id="guardar" type="hidden" value="1">
-
+    <div class="row">
          <?php 
-        if(isset ($this->datos[0]['ID_EMPLEADO'])) {?>  
-              <div class="form-group">
-                <label class="control-label" >IDENTIFICADOR:</label>
+        if(isset ($this->datos[0]['ID_EMPLEADO'])) {?> 
+        <div class="col-md-4"> 
+              <div class="form-group" style="margin-right: 0px;">
+                <label class="control-label">IDENTIFICADOR:</label>
                 
                     <input name="id_empleado" id="id_empleado" class="form-control"  readonly="readonly"
                            value="<?php echo $this->datos[0]['ID_EMPLEADO'];?>">
-        
+                
               </div>  
+        </div>
         <?php } ?> 
 
-        <div class="row">
-         <div class="col-md-12">
-                <div class="form-group">
+        <?php if(isset ($this->datos[0]['ID_EMPLEADO'])) {
+                           echo '<div class="col-md-4">' ;
+              }else{
+                            echo '<div class="col-md-6">' ;
+              } ?>
+
+         
+                <div class="form-group" style="margin-right: 0px;">
                         <label class="control-label" >CATEGORIA EMPLEADO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                        <select s class="form-control glyphicon" name='id_categoria_empleado' id='id_categoria_empleado' autofocus>
                            <option value='' >Selecciona...</option>
@@ -32,11 +39,31 @@
                       </select>
                 </div>
             </div>
+
+          <?php if(isset ($this->datos[0]['ID_EMPLEADO'])) {
+                           echo '<div class="col-md-4">' ;
+              }else{
+                            echo '<div class="col-md-6">' ;
+              } ?>
+                <div class="form-group" style="margin-right: 0px;">
+                        <label class="control-label" >PERFIL USUARIO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                       <select class="form-control glyphicon" name='id_perfil_usuario' id='id_perfil_usuario'>
+                           <option value='' >Selecciona...</option>
+                           <?php for($i=0;$i<count($this->perfil);$i++){ ?> 
+                            <?php if( strcmp($this->datos[0]['ID_PERFIL_USUARIO'], $this->perfil[$i]['ID_PERFIL_USUARIO']) == 0){?>
+                                 <option selected value="<?php echo $this->perfil[$i]['ID_PERFIL_USUARIO'];?>"><?php echo $this->perfil[$i]['DESCRIPCION']?></option>
+                            <?php }else{?>
+                                 <option value="<?php echo $this->perfil[$i]['ID_PERFIL_USUARIO'];?>"><?php echo $this->perfil[$i]['DESCRIPCION']?></option>
+                            <?php } ?>
+                           <?php } ?>
+                      </select>
+                </div>
+            </div>
        </div>
 
         <div class="row"  >
-            <div class="col-md-12">
-            <div class="form-group">
+            <div class="col-md-4">
+                <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label "  for="nombre" > NOMBRE:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                       <input  onKeyPress="return soloLetras(event);" maxlength='30' name="nombre" id="nombre" class="form-control"  placeholder="Nombre(s)"
                             value="<?php if(isset ($this->datos[0]['NOMBRE']))echo $this->datos[0]['NOMBRE']?>">
@@ -44,8 +71,8 @@
                 </div>  
             </div>
 
-            <div class="col-md-12">
-            <div class="form-group">
+            <div class="col-md-4">
+            <div class=class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="apellido_paterno" >APELLIDO PATERNO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                       <input onKeyPress="return soloLetras(event);" maxlength='30'  name="apellido_paterno" id="apellido_paterno" class="form-control"  placeholder="Apellido Paterno" 
                             value="<?php if(isset ($this->datos[0]['APELLIDO_PATERNO']))echo $this->datos[0]['APELLIDO_PATERNO']?>">
@@ -53,8 +80,8 @@
                   </div>
             </div>
 
-            <div class="col-md-12">
-            <div class="form-group">
+            <div class="col-md-4">
+            <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="apellido_materno" >APELLIDO MATERNO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                 
                       <input  onKeyPress="return soloLetras(event);"  maxlength='30' name="apellido_materno" id="apellido_materno" class="form-control"  placeholder="Apellido Materno" 
@@ -67,8 +94,8 @@
     
         
         <div class="row" >
-            <div class="col-md-12">
-                <div class="form-group">
+            <div class="col-md-4">
+                <div class="form-group" style="margin-right: 0px;">
                 <label class="control-label" for="dni" >DNI:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                 
                   <input onKeyPress="return soloNumeros(event);" maxlength='8'  name="dni" id="dni" class="form-control"  placeholder="DNI" 
@@ -77,8 +104,8 @@
               </div>
             </div>
              
-             <div class="col-md-12">
-                 <div class="form-group">
+             <div class="col-md-4">
+                 <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="email" >E-MAIL:</label>
             
                       <input  id="email" class="form-control"  placeholder="E-mail"  name='email'
@@ -86,8 +113,8 @@
                   
                   </div>
             </div>
-            <div class="col-md-12">
-                <div class="form-group">
+            <div class="col-md-4">
+                <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label " for="telefono" >TELEFONO:&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     
                       <input  onKeyPress="return soloNumeros(event);" maxlength='9'  name="telefono" id="telefono" class="form-control"  placeholder="Telefono" 
@@ -95,8 +122,8 @@
                 
                   </div>
             </div>
-            <div class="col-md-12">
-                <div class="form-group">
+            <div class="col-md-4">
+                <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="celular" >CELULAR:&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     
                       <input  onKeyPress="return soloNumeros(event);" maxlength='9'   name="celular" id="celular" class="form-control" placeholder="Celular" 
@@ -105,8 +132,8 @@
                   </div>
             </div>
 
-            <div class="col-md-12">
-                 <div class="form-group">
+            <div class="col-md-4">
+                 <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="sexo" >SEXO:</label>
                     
                       <select  class="form-control glyphicon" name='sexo' id='sexo'>
@@ -125,6 +152,15 @@
                    
                   </div>
             </div>
+
+            <div class="col-md-4">
+                <div class="form-group" style="margin-right: 0px;">
+                <label class="control-label" for="numero_hijo" >NUMERO DE HIJOS:</label>
+               
+                  <input onKeyPress="return soloNumeros(event);" maxlength='9' s name="numero_hijo" id="numero_hijo" class="form-control"   placeholder="Numero de Hijos" 
+                        value="<?php if(isset ($this->datos[0]['NUMERO_HIJO'])) echo $this->datos[0]['NUMERO_HIJO']?>">
+            
+              </div>
 
            <!-- <div class="col-md-12">
             <div class="form-group">
@@ -170,8 +206,8 @@
         </div-->
 
         <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
+            <div class="col-md-4">
+                <div class="form-group" style="margin-right: 0px;margin-left: 15px;">
                     <label  class="control-label" for="direccion" >DIRECION:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
                       <input  name="direccion" id="direccion" class="form-control"  placeholder="Direccion" 
@@ -179,8 +215,8 @@
                     </div>
             </div>
 
-            <div class="col-md-12">
-                 <div class="form-group">
+            <div class="col-md-4">
+                 <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="fecha_nacimiento" >FECHA NACIMIENTO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                    
                       <input  readonly name="fecha_nacimiento" id="fecha_nacimiento" class="form-control"   placeholder="Fecha Nacimiento" 
@@ -188,27 +224,19 @@
                     
                   </div>
             </div>
-            
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label class="control-label" for="estado_civil" >ESTADO CIVIL:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
-                  
-                      <select  class="form-control glyphicon" name='estado_civil' id='estado_civil'>
-                           <option value='' >Selecciona...</option>
-                           <?php 
-                           $estado_civil = array('soltero','casado','divorciado','viudo');
-                            for($i=0;$i<count($estado_civil);$i++){ ?> 
-                            <?php if(strcmp($this->datos[0]['ESTADO_CIVIL'], $estado_civil[$i])==0){?>
-                                 <option selected value="<?php echo $estado_civil[$i];?>"><?php echo strtoupper($estado_civil[$i]);?></option>
-                            <?php }else{?>
-                                 <option value="<?php echo $estado_civil[$i];?>"><?php echo strtoupper($estado_civil[$i]);?></option>
-                            <?php } ?>
-                           <?php } ?>
-                          
-                      </select>
-                
-                  </div>
+
+            <div class="col-md-4">
+                 <div class="form-group" style="margin-right: 10px;">
+                        <label class="control-label" for="grado_estudio" >GRADO DE ESTUDIO:</label>
+
+                          <input s name="grado_estudio" id="grado_estudio" class="form-control" placeholder="Grado de Estudio" 
+                                value="<?php if(isset ($this->datos[0]['GRADO_ESTUDIO'])) echo $this->datos[0]['GRADO_ESTUDIO']?>">
+
+                      </div>
+
             </div>
+            
+            
 
         </div>
 
@@ -304,14 +332,7 @@
             
               </div>
             </div-->
-            <div class="col-md-12">
-                <div class="form-group">
-                <label class="control-label" for="numero_hijo" >NUMERO DE HIJOS:</label>
-               
-                  <input onKeyPress="return soloNumeros(event);" maxlength='9' s name="numero_hijo" id="numero_hijo" class="form-control"   placeholder="Numero de Hijos" 
-                        value="<?php if(isset ($this->datos[0]['NUMERO_HIJO'])) echo $this->datos[0]['NUMERO_HIJO']?>">
             
-              </div>
 
             </div>
            <!-- <div class="col-md-12">
@@ -327,19 +348,30 @@
         </div>
 
         <div class="row" >
-            <div class="col-md-12">
-                 <div class="form-group">
-                        <label class="control-label" for="grado_estudio" >GRADO DE ESTUDIO:</label>
-
-                          <input s name="grado_estudio" id="grado_estudio" class="form-control" placeholder="Grado de Estudio" 
-                                value="<?php if(isset ($this->datos[0]['GRADO_ESTUDIO'])) echo $this->datos[0]['GRADO_ESTUDIO']?>">
-
-                      </div>
-
+            
+            <div class="col-md-4">
+                <div class="form-group" style="margin-right: 0px;">
+                    <label class="control-label" for="estado_civil" >ESTADO CIVIL:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                  
+                      <select  class="form-control glyphicon" name='estado_civil' id='estado_civil'>
+                           <option value='' >Selecciona...</option>
+                           <?php 
+                           $estado_civil = array('soltero(a)','casado(a)','divorciado(a)','viudo(a)');
+                            for($i=0;$i<count($estado_civil);$i++){ ?> 
+                            <?php if(strcmp($this->datos[0]['ESTADO_CIVIL'], $estado_civil[$i])==0){?>
+                                 <option selected value="<?php echo $estado_civil[$i];?>"><?php echo strtoupper($estado_civil[$i]);?></option>
+                            <?php }else{?>
+                                 <option value="<?php echo $estado_civil[$i];?>"><?php echo strtoupper($estado_civil[$i]);?></option>
+                            <?php } ?>
+                           <?php } ?>
+                          
+                      </select>
+                
+                  </div>
             </div>
             
-            <div class="col-md-12">
-                 <div class="form-group">
+            <div class="col-md-4">
+                 <div class="form-group" style="margin-right: 0px;">
                         <label class="control-label" for="usuario" >USUARIO:</label>
 
                           <input  name="usuario" id="usuario" class="form-control" placeholder="Usuario" 
@@ -349,8 +381,8 @@
 
             </div>
             
-            <div class="col-md-12">
-                 <div class="form-group">
+            <div class="col-md-4">
+                 <div class="form-group" style="margin-right: 0px;">
                         <label class="control-label" for="clave" >CLAVE:</label>
 
                           <input type="password" name="clave" id="clave" class="form-control" placeholder="Clave" 
@@ -360,21 +392,7 @@
 
             </div>
             
-            <div class="col-md-12">
-                <div class="form-group">
-                        <label class="control-label" >PERFIL USUARIO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
-                       <select class="form-control glyphicon" name='id_perfil_usuario' id='id_perfil_usuario'>
-                           <option value='' >Selecciona...</option>
-                           <?php for($i=0;$i<count($this->perfil);$i++){ ?> 
-                            <?php if( strcmp($this->datos[0]['ID_PERFIL_USUARIO'], $this->perfil[$i]['ID_PERFIL_USUARIO']) == 0){?>
-                                 <option selected value="<?php echo $this->perfil[$i]['ID_PERFIL_USUARIO'];?>"><?php echo $this->perfil[$i]['DESCRIPCION']?></option>
-                            <?php }else{?>
-                                 <option value="<?php echo $this->perfil[$i]['ID_PERFIL_USUARIO'];?>"><?php echo $this->perfil[$i]['DESCRIPCION']?></option>
-                            <?php } ?>
-                           <?php } ?>
-                      </select>
-                </div>
-            </div>
+            
             <!--div class="col-md-12">
                 <div class="form-group">
                     <label class="control-label" for="ingreso" >INGRESO:</label>
