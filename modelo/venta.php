@@ -11,9 +11,10 @@ class venta extends Main{
     public $igv;
     public $id_tipocomprobante;
     public $nrodoc;
-    public $estadopago;
+    public $estado_pago;
     public $cliente;
     public $empleado;
+    public $retraso;
 
     public function selecciona(){
          $r = $this->get_consulta("pa_m1_venta", null);
@@ -79,6 +80,13 @@ class venta extends Main{
     public function actualizar_estado() {
         $datos = array($this->id_venta,$this->estado_pago);
         $r = $this->get_consulta("act_est_venta", $datos);
+        $error = $r[1];
+        $r = null;
+        return $error;
+    }
+    public function actualizar_retraso() {
+        $datos = array($this->id_venta,$this->retraso);
+        $r = $this->get_consulta("act_ret_venta", $datos);
         $error = $r[1];
         $r = null;
         return $error;

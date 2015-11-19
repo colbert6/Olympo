@@ -12,6 +12,7 @@ class compra extends Main{
     public $num_documento;
     public $igv;
     public $estado_pago;
+    public $retraso;
 
     public function selecciona() {
   
@@ -79,6 +80,13 @@ class compra extends Main{
      public function actualizar_estado() {
         $datos = array($this->id_compra,$this->estado_pago);
         $r = $this->get_consulta("act_est_compra", $datos);
+        $error = $r[1];
+        $r = null;
+        return $error;
+    }
+    public function actualizar_retraso() {
+        $datos = array($this->id_compra,$this->retraso);
+        $r = $this->get_consulta("act_ret_compra", $datos);
         $error = $r[1];
         $r = null;
         return $error;

@@ -232,6 +232,22 @@ class movimiento_controlador extends controller {
                     if ($_POST['id_modalidad_t']=='CONTADO'){ $this->_venta->estado_pago = '2'; }
                     
                     $this->_venta->actualizar_estado();
+
+                    //-------------CALCULAR RETRASO MAXIMO-----------------
+                    $this->_cronograma_cobro->id_venta = $id_accion;
+                    $cuotas = $this->_cronograma_cobro->cuota_x_venta();
+                    $max = 0;
+                    for ($i=0; $i < count($cuotas); $i++) { 
+                        $dato = $cuotas[$i]["RETRASO"];
+                        if($dato>$max){
+                            $max = $dato;
+                        }
+                    }
+
+                    //-------------ACTUALIZAR CAMPO RETRASO ----------------
+                    $this->_venta->id_venta = $cuotas[0]['ID_VENTA'];
+                    $this->_venta->retraso = $max;
+                    $this->_venta->actualizar_retraso();
                     
                 }else if($tipo_movimiento == "EGRESO"){
                     
@@ -280,6 +296,23 @@ class movimiento_controlador extends controller {
                     if ($_POST['id_modalidad_t']=='CONTADO'){ $this->_compra->estado_pago = '2'; }
                     
                     $this->_compra->actualizar_estado();
+                     //-------------CALCULAR RETRASO MAXIMO-----------------
+                    $this->_cronograma_pago->id_compra = $id_accion;
+                    $cuotas = $this->_cronograma_pago->cuota_x_compra();
+                    $max = 0;
+                    for ($i=0; $i < count($cuotas); $i++) { 
+                        $dato = $cuotas[$i]["RETRASO"];
+                        if($dato>$max){
+                            $max = $dato;
+                        }
+                    }
+
+                    //-------------ACTUALIZAR CAMPO RETRASO ----------------
+                    $this->_compra->id_compra = $cuotas[0]["ID_COMPRA"];
+                    $this->_compra->retraso = $max;
+                    $this->_compra->actualizar_retraso();
+
+
                 }
 
                 $this->redireccionar('movimiento');     
@@ -355,11 +388,35 @@ class movimiento_controlador extends controller {
                             $this->_compra->id_compra = $id_compra;
                             $this->_compra->estado_pago = '0';
                             $this->_compra->actualizar_estado();
+                            //--------- ACTUALIZAR RETRAZO ----------------
+
+                            $this->_compra->id_compra = $id_compra;
+                            $this->_compra->retraso = 0;
+                            $this->_compra->actualizar_retraso();
+
                         }else if(($total_pagado - $total_amortizacion)!=0){
                             //echo "<script>alert('Monto != 0')</script>";
                             $this->_compra->id_compra = $id_compra;
                             $this->_compra->estado_pago = '1';
                             $this->_compra->actualizar_estado();
+                            //--------- ACTUALIZAR RETRAZO ----------------
+                            $this->_cronograma_pago->id_compra = $id_compra;
+                            $cuotas = $this->_cronograma_pago->cuota_x_compra();
+                            $max = 0;
+                            for ($i=0; $i < count($cuotas); $i++) { 
+                                $dato = $cuotas[$i]["RETRASO"];
+                                if($cuotas[$i]["FECHA_CANCELACION"]!='1990-01-01'){
+                                    if($dato>$max){
+                                        $max = $dato;
+                                    }
+                                }
+                            }
+
+                            //-------------ACTUALIZAR CAMPO RETRASO ----------------
+                            $this->_compra->id_compra = $id_compra;
+                            $this->_compra->retraso = $max;
+                            $this->_compra->actualizar_retraso();
+
                         }
 
                         //ELIMINA AMORTIZACIONES

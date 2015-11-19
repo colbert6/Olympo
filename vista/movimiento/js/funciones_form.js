@@ -21,6 +21,7 @@ $(document).ready(function() {
 
 
 });
+var retraso = 0;
 function validarMovimiento(){
     bval = true;   
     bval = bval && $("#id_forma_pago").required();
@@ -210,47 +211,74 @@ function sel_actor(id_actor,tipo_actor,razon_social,nro_doc) {
     $("#id_forma_pago").append(new Option('Tarjeta','2'));
 }
 
+function maxCompra(id,callback){
+    $.ajaxSetup({
+        async: false
+    });
+    $.post(url + 'cronograma_pago/getCuotasCompra',"id_c="+id, function(cuotas) {
+        var max=0;
+        for (var i = 0; i < cuotas.length; i++) {
+            var dato = cuotas[i].RETRASO;
+            if(dato>max){
+                max = dato;
+            }
+
+        }
+        callback(max);
+    },'json');
+    $.ajaxSetup({
+        async: true
+    });
+}
+function asignarMaximo(max){
+    retraso = max;
+}
 function mostrarCompras(id_p){
     $("#acciones").show();
     
     //alert(id_p);
+    
     $.post(url + 'compra/getComprasProveedor',"id_p="+id_p, function(proveedor) {
-        $("#num_opc").val(proveedor.length);
-        HTML ="";
-        HTML +="<legend>Compras Pendientes de Pago</legend>";
-        HTML += '<table class=\'table table-striped table-bordered table-hover sortable\'>' +
-                '<thead>' +
-                    '<tr>' +
-                    '<th class=\'text-center\'>ITEM</th>' +
-                    '<th class=\'text-center\'>FECHA</th>' +
-                    '<th class=\'text-center\'>RETRASO</th>' +
-                    '<th class=\'text-center\'>DOCUMENTO</th>' +
-                    '<th class=\'text-center\'>MODALIDAD</th>' +
-                    '<th class=\'text-center\'>MONTO</th>' +
-                    '<th class=\'text-center\'>VER CRONOGRAMA</th>' +
-                    '</tr>' +
-                '</thead>' +
-                '<tbody>';
 
-        for (var i = 0; i < proveedor.length; i++) {
-            var importe= (proveedor[i].MONTO*(1+parseFloat(proveedor[i].IGV))).toFixed(2);
-            HTML += '<tr>';
-            HTML += '   <td class=\'text-center\'>' + (i + 1) + '</td>';
-            HTML += '   <td class=\'text-center\'>' + proveedor[i].FECHA + '</td>';
-            HTML += '   <td class=\'text-center\'>0</td>';
-            HTML += '   <td class=\'text-center\'>' + proveedor[i].NUM_DOCUMENTO + '</td>';
-            HTML += '   <td class=\'text-center\'>' + proveedor[i].MODALIDAD_TRANSACCION + '</td>';
-            HTML += '   <td class=\'text-center\'>' + (proveedor[i].MONTO*(1+parseFloat(proveedor[i].IGV))).toFixed(2) + '</td>';
-            if(proveedor[i].MODALIDAD_TRANSACCION=='CREDITO'){
-              HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+proveedor[i].ID_COMPRA+'\'></td>'; 
-            }else{
-              HTML += '   <td class=\'text-center\'><a style="margin-right:4px" href="javascript:void(0)" onclick="validarCancelar(\'' + proveedor[i].ID_COMPRA + '\',\'' + importe + '\')" class="btn btn-danger"><i class="icon-ok icon-white"></i>Cancelar </a></td>';    
+            $("#num_opc").val(proveedor.length);
+            HTML ="";
+            HTML +="<legend>Compras Pendientes de Pago</legend>";
+            HTML += '<table class=\'table table-striped table-bordered table-hover sortable\'>' +
+                    '<thead>' +
+                        '<tr>' +
+                        '<th class=\'text-center\'>ITEM</th>' +
+                        '<th class=\'text-center\'>FECHA</th>' +
+                        '<th class=\'text-center\'>RETRASO</th>' +
+                        '<th class=\'text-center\'>DOCUMENTO</th>' +
+                        '<th class=\'text-center\'>MODALIDAD</th>' +
+                        '<th class=\'text-center\'>MONTO</th>' +
+                        '<th class=\'text-center\'>ACCION</th>' +
+                        '</tr>' +
+                    '</thead>' +
+                    '<tbody>';
+
+            for (var i = 0; i < proveedor.length; i++) {
+                var importe= (proveedor[i].MONTO*(1+parseFloat(proveedor[i].IGV))).toFixed(2);
+                maxCompra(proveedor[i].ID_COMPRA,asignarMaximo);
+                HTML += '<tr>';
+                HTML += '   <td class=\'text-center\'>' + (i + 1) + '</td>';
+                HTML += '   <td class=\'text-center\'>' + proveedor[i].FECHA + '</td>';
+                HTML += '   <td class=\'text-center\'>' + retraso +'</td>';
+                HTML += '   <td class=\'text-center\'>' + proveedor[i].NUM_DOCUMENTO + '</td>';
+                HTML += '   <td class=\'text-center\'>' + proveedor[i].MODALIDAD_TRANSACCION + '</td>';
+                HTML += '   <td class=\'text-center\'>' + (proveedor[i].MONTO*(1+parseFloat(proveedor[i].IGV))).toFixed(2) + '</td>';
+                if(proveedor[i].MODALIDAD_TRANSACCION=='CREDITO'){
+                  HTML += '   <td class=\'text-center\'><a style="margin-right:4px" href="javascript:void(0)" onclick="mostrarCronogramaCompra(\'' + proveedor[i].ID_COMPRA + '\')" class="btn btn-success"><i class="icon-list-alt icon-white"></i>&nbsp;&nbsp;&nbsp;Cronograma &nbsp;</a></td>';    
+                }else{
+                  HTML += '   <td class=\'text-center\'><a style="margin-right:4px" href="javascript:void(0)" onclick="validarCancelar(\'' + proveedor[i].ID_COMPRA + '\',\'' + importe + '\')" class="btn btn-danger"><i class="icon-ok icon-white"></i>&nbsp;&nbsp;Realizar Pago</a></td>';    
+                }
+               HTML += '</tr>';
             }
-           HTML += '</tr>';
-        }
-        HTML += '</tbody></table>';
+            HTML += '</tbody></table>';
 
-        $("#acciones").html(HTML);
+            $("#acciones").html(HTML);
+
+      
     }, 'json');
 
     
@@ -272,7 +300,7 @@ function mostrarVentas(id_c){
                     '<th class=\'text-center\'>DOCUMENTO</th>' +
                     '<th class=\'text-center\'>MODALIDAD</th>' +
                     '<th class=\'text-center\'>MONTO</th>' +
-                    '<th class=\'text-center\'>VER CRONOGRAMA</th>' +
+                    '<th class=\'text-center\'>ACCION</th>' +
                     '</tr>' +
                 '</thead>' +
                 '<tbody>';
@@ -282,14 +310,15 @@ function mostrarVentas(id_c){
             HTML += '<tr>';
             HTML += '   <td class=\'text-center\'>' + (i + 1) + '</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].FECHA + '</td>';
-            HTML += '   <td class=\'text-center\'>0</td>';
+            HTML += '   <td class=\'text-center\'>' + cliente[i].RETRASO +'</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].NUM_DOCUMENTO + '</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].MODALIDAD_TRANSACCION + '</td>';
             HTML += '   <td class=\'text-center\'>' + importe + '</td>';
             if(cliente[i].MODALIDAD_TRANSACCION=='CREDITO'){
-              HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+cliente[i].ID_VENTA+'\'></td>';  
+              //HTML += '   <td class=\'text-center\'> <input type=\'checkbox\' onchange=\'validaCheckBox(this)\' name=\'cronograma\' id=\'cronograma'+(i+1)+'\' value=\''+cliente[i].ID_VENTA+'\'></td>';  
+              HTML += '   <td class=\'text-center\'><a style="margin-right:4px" href="javascript:void(0)" onclick="mostrarCronogramaVenta(\'' + cliente[i].ID_VENTA + '\')" class="btn btn-success"><i class="icon-list-alt icon-white"></i>&nbsp;&nbsp;&nbsp;Cronograma &nbsp;</a></td>';    
             }else{
-              HTML += '   <td class=\'text-center\'><a style="margin-right:4px" href="javascript:void(0)" onclick="validarCancelar(\'' + cliente[i].ID_VENTA + '\',\'' + importe + '\')" class="btn btn-danger"><i class="icon-ok icon-white"></i>Cancelar </a></td>';    
+              HTML += '   <td class=\'text-center\'><a style="margin-right:4px" href="javascript:void(0)" onclick="validarCancelar(\'' + cliente[i].ID_VENTA + '\',\'' + importe + '\')" class="btn btn-danger"><i class="icon-ok icon-white"></i>&nbsp;&nbsp;Realizar Pago</a></td>';    
             }
             HTML += '</tr>';
         }
@@ -302,78 +331,19 @@ function mostrarVentas(id_c){
 }
 
 
-function validaCheckBox(check){
-    var total = parseInt($("#num_opc").val());
-    var contador = 0;
-    for (var i = 1; i <= total; i++) {
-        var val = document.getElementById("cronograma"+i);
-        if(val.checked){
-            contador++;
-        }
-    }
-    if(contador>=2){
-        if(confirm("¿Estas Segura de Cambiar de Cronograma?\nOJO!!! Se Perderan los Cambios")){
-            for (var i = 1; i <= total; i++) {
-                var id = "cronograma"+i;
-                
-                if(id!=check.getAttribute("id")){
-                        var elemento = document.getElementById("cronograma"+i);
-                        elemento.checked = false;
-                        elemento.disabled = false;
-                }
-            }
-            check.disabled = true;
-            $("#importe").attr('readonly',false);
-            $("#amortizar").attr('disabled',false);
-            if($("#tipo_actor").val()=='s'){
-                mostrarCronogramaVenta(check.value);
-            }else{
-                mostrarCronogramaCompra(check.value);
-            }
-             
-        }else{
-            check.checked = false;
-        }
-    }else{
-         for (var i = 1; i <= total; i++) {
-                var id = "cronograma"+i;
-                
-                if(id!=check.getAttribute("id")){
-                        var elemento = document.getElementById("cronograma"+i);
-                        elemento.checked = false;
-                        elemento.disabled = false;
-                }
-            }
-            check.disabled = true;
-            $("#importe").attr('readonly',false);
-            $("#amortizar").attr('disabled',false);
-            if($("#tipo_actor").val()=='s'){
-                mostrarCronogramaVenta(check.value);
-            }else{
-                mostrarCronogramaCompra(check.value);
-            } 
-    }
-    
-     
-}
-
-function borrar(){
+function borrar(id){
+    //alert(id);
     $("#save").attr("disabled",true);
-    var total = parseInt($("#num_opc").val());
-    for (var i = 1; i <= total; i++) {
-        var elemento = document.getElementById("cronograma"+i);
-        if(elemento.checked){
-            if($("#tipo_actor").val()=='s'){
-                mostrarCronogramaVenta(elemento.value);
-            }else{
-                mostrarCronogramaCompra(elemento.value);
-            }
-            $("#amortizar").attr('disabled',false);
-            $("#deshacer").attr('disabled',true);
-            $("#importe").attr('readonly',false);
-            break;        
-        }
-    } 
+    if($("#tipo_actor").val()=='s'){
+        mostrarCronogramaVenta(id);
+    }else{
+        mostrarCronogramaCompra(id);
+    }
+    $("#amortizar").attr('disabled',false);
+    $("#deshacer").attr('disabled',true);
+    $("#importe").attr('readonly',false);
+                
+
 }
 function mostrarCronogramaCompra(id){
     $("#cronograma").show();
@@ -398,7 +368,7 @@ function mostrarCronogramaCompra(id){
             HTML+="     <strong> MONTO:</strong>";
             HTML+="         <input type=\"text\" name=\"importe\" id=\"importe\" onkeypress=\"return dosDecimales(event,this)\" placeholder=\"Importe\" class=\"form-control\"  style=\"width: 80px\" />";
             HTML+="         <button type=\"button\" class=\"btn btn-primary btn-sm\"  id=\"amortizar\" onclick='validaDistribucion()'>Distribuir</button>";
-            HTML+="         <button type=\"button\" class=\"btn btn-warning btn-sm\"  id=\"deshacer\" onclick='borrar()'><i class=\"icon-repeat icon-white\"></i></button>";
+            HTML+="         <button type=\"button\" class=\"btn btn-warning btn-sm\"  id=\"deshacer\" onclick='borrar("+id+")'><i class=\"icon-repeat icon-white\"></i></button>";
             HTML+="     </div>";
             HTML+="    <div class=\'col-md-4\'>";
             HTML+="        <div class=\'form-group\'>";
@@ -451,7 +421,26 @@ function mostrarCronogramaCompra(id){
                 HTML += '<tr id=\'fila'+(i+1)+'\' class=\''+clase+'\'>';
                 HTML += '   <td class=\'text-center\'>' + cuotas[i].NUM_CUOTA  + '</td>';
                 HTML += '   <td class=\'text-center\'>' + cuotas[i].FECHA_VENC + '</td>';
-                HTML += '   <td class=\'text-center\'>0</td>';
+                HTML += '   <td class=\'text-center\'>' + cuotas[i].RETRASO +'</td>';    
+                //CAMPTURAMOS FECHAS
+                /*var fecha_vencimiento = cuotas[i].FECHA_VENC;
+
+                var hoy = new Date();
+                //CONFERTIMOS A UN FORMATO DE COMPARACION
+                var fechaVenc = new Date(fecha_vencimiento);
+                if(cuotas[i].FECHA_CANCELACION=='1990-01-01'){
+                    if(hoy<=fechaVenc){
+                        HTML += '   <td class=\'text-center\'>0</td>';    
+                    }else{
+                        var diasDif = hoy.getTime() - fechaVenc.getTime();
+                        var dias = Math.round(diasDif/(1000 * 60 * 60 * 24));
+                        HTML += '   <td class=\'text-center\'>'+dias+'</td>';    
+                    }
+                }else{
+                    var diasDif = cuotas[i].FECHA_CANCELACION.getTime() - fechaVenc.getTime();
+                    var dias = Math.round(diasDif/(1000 * 60 * 60 * 24));
+                    HTML += '   <td class=\'text-center\'>'+dias+'</td>';    
+                }*/
                 HTML += '   <td class=\'text-center\'><input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_cuota[]\' id=\'monto_cuota'+(i+1)+'\' value=\''+cuotas[i].MONTO_CUOTA+'\'/></td>';
                 HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_pagado[]\' id=\'monto_pagado'+(i+1)+'\' value=\''+cuotas[i].MONTO_PAGADO+'\'/></td>';
                 HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_restante[]\' id=\'monto_restante'+(i+1)+'\' value=\''+(parseFloat(cuotas[i].MONTO_CUOTA)-parseFloat(cuotas[i].MONTO_PAGADO)).toFixed(2)+'\'/></td>';
@@ -501,7 +490,7 @@ function mostrarCronogramaVenta(id){
             HTML+="     <strong> MONTO:</strong>";
             HTML+="         <input type=\"text\" name=\"importe\" id=\"importe\" onkeypress=\"return dosDecimales(event,this)\" placeholder=\"Importe\" class=\"form-control\"  style=\"width: 80px\" />";
             HTML+="         <button type=\"button\" class=\"btn btn-primary btn-sm\"  id=\"amortizar\" onclick='validaDistribucion()'>Distribuir</button>";
-            HTML+="         <button type=\"button\" class=\"btn btn-warning btn-sm\"  id=\"deshacer\" onclick='borrar()'><i class=\"icon-repeat icon-white\"></i></button>";
+            HTML+="         <button type=\"button\" class=\"btn btn-warning btn-sm\"  id=\"deshacer\" onclick='borrar("+id+")'><i class=\"icon-repeat icon-white\"></i></button>";
             HTML+="     </div>";
             HTML+="    <div class=\'col-md-4\'>";
             HTML+="        <div class=\'form-group\'>";
@@ -554,7 +543,7 @@ function mostrarCronogramaVenta(id){
                 HTML += '<tr id=\'fila'+(i+1)+'\' class=\''+clase+'\'>';
                 HTML += '   <td class=\'text-center\'>' + cuotas[i].NUM_CUOTA  + '</td>';
                 HTML += '   <td class=\'text-center\'>' + cuotas[i].FECHA_VENC + '</td>';
-                HTML += '   <td class=\'text-center\'>0</td>';
+                HTML += '   <td class=\'text-center\'>' + cuotas[i].RETRASO +'</td>';    
                 HTML += '   <td class=\'text-center\'><input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_cuota[]\' id=\'monto_cuota'+(i+1)+'\' value=\''+cuotas[i].MONTO_CUOTA+'\'/></td>';
                 HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_pagado[]\' id=\'monto_pagado'+(i+1)+'\' value=\''+cuotas[i].MONTO_PAGADO+'\'/></td>';
                 HTML += '   <td class=\'text-center\' > <input readonly  style=\'text-align:center;border:none; background:none\' name=\'monto_restante[]\' id=\'monto_restante'+(i+1)+'\' value=\''+(parseFloat(cuotas[i].MONTO_CUOTA)-parseFloat(cuotas[i].MONTO_PAGADO)).toFixed(2)+'\'/></td>';

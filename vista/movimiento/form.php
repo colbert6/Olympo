@@ -5,7 +5,6 @@
    
     <form method="post" action="<?php if (isset($this->action)) echo $this->action ?>" id="frm" class="form-horizontal" >
         <input type="hidden" name="guardar" id="guardar" value="1"/>
-        <input type="hidden" name="num_opc" id="num_opc"/>
         <input type="hidden" name="num_cuotas" id="num_cuotas"/>
         <input type="hidden" name="id_concepto_movimiento" id="id_concepto_movimiento"/>
         <input type="hidden" name="id_accion" id="id_accion"/>
