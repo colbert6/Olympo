@@ -242,10 +242,6 @@
                         <td><label>Email:</label></td>
                         <td><input type="email" name="emailprov" id="emailprov" /></td>
                     </tr>
-                    <tr>
-                        <td><label>Ciudad:</label></td>
-                        <td><input type="text" name="ciudadprov" id="ciudadprov" /></td>
-                    </tr>
                 </table>
             </form>
         </div>

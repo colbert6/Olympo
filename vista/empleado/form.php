@@ -72,7 +72,7 @@
             </div>
 
             <div class="col-md-4">
-            <div class=class="form-group" style="margin-right: 0px;">
+            <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="apellido_paterno" >APELLIDO PATERNO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                       <input onKeyPress="return soloLetras(event);" maxlength='30'  name="apellido_paterno" id="apellido_paterno" class="form-control"  placeholder="Apellido Paterno" 
                             value="<?php if(isset ($this->datos[0]['APELLIDO_PATERNO']))echo $this->datos[0]['APELLIDO_PATERNO']?>">

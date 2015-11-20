@@ -6,3 +6,30 @@ truncate table venta;
 truncate table cuota_compra;
 truncate table cuota_venta;
 truncate table sesion_caja;
+
+
+//////////////////////////////////
+
+truncate venta;
+truncate venta_producto;
+truncate venta_matricula;
+truncate cuota_venta;
+update serie_documento set numero = 0;
+
+
+update matricula set estado_pago = 0;
+
+truncate compra;
+truncate compra_producto;
+truncate cuota_compra;
+truncate almacen_producto;
+
+
+
+truncate movimiento;
+truncate cuota_venta;
+truncate cuota_compra;
+truncate amortizacion_venta;
+truncate amortizacion_compra;
+truncate sesion_caja;
+
