@@ -60,7 +60,7 @@ body .scrollpanel .sp-scrollbar.active .sp-thumb {
   text-decoration: none;
 }
 .caption {
-    height: 80px;
+    height: 20%;
     overflow: hidden;
 }
 
@@ -70,6 +70,7 @@ body .scrollpanel .sp-scrollbar.active .sp-thumb {
 
 .thumbnail img {
     width: 100%;
+    height: 100%;
 }
 
 .ratings {
@@ -80,9 +81,10 @@ body .scrollpanel .sp-scrollbar.active .sp-thumb {
 
 .thumbnail {
     padding: 0;
+    
 }
 
-.thumbnail .caption-full {
+.thumbnail .caption {
     padding: 9px;
     color: #333;
 }
@@ -97,28 +99,31 @@ body .scrollpanel .sp-scrollbar.active .sp-thumb {
 	margin: 0 auto;
 	color: #ffffff;
 	background: rgba(0, 0, 0, 0.66);
-	padding: 10% 0;
+	padding: 10% 4% 0 4%;
 	height: 100%;
 	width: 100%;
 	opacity: 0;
     transition: all 0.7s;
 }
 
-.hover-bg a{ color: #FCAC45;}
+.hover-bg a{ 
+  color: #FCAC45;
+}
 .hover-bg :hover a{
 	text-decoration: none;
 	color: white;
 }
 .hover-bg .hover-text>h4{
         text-transform: lowercase;
-	opacity: 0;
-	-webkit-transform: translateY(100%);
-            transform: translateY(100%);
-            transition: all 0.3s;
+	     opacity: 0;
+
+	     -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+        transition: all 0.3s;
 }
 .hover-bg:hover .hover-text>h4{
-    text-transform: lowercase;
-	opacity: 1;
+      text-transform: lowercase;
+	   opacity: 1;
     -webkit-backface-visibility:hidden;
     -webkit-transform: translateY(0);
             transform: translateY(0);
