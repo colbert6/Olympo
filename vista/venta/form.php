@@ -11,8 +11,9 @@
                     <label class="col-md-4 control-label" > Cliente:</label>
                     <div class="col-md-9">
                         
-                    <input type="hidden" name="id_cliente" id="id_cliente"/>
-                    <input type="text" name="cliente" id="cliente" readonly="readonly" data-toggle="modal" data-target="#modalSocio" class="form-control" style="width: 70%" />
+                    <input type="hidden" name="id_cliente" id="id_cliente" value="<?php if(isset ($this->matricula[0]['ID_SOCIO']))echo $this->matricula[0]['ID_SOCIO']?>"/>
+                    <input type="text" name="cliente" id="cliente" readonly="readonly" data-toggle="modal" data-target="#modalSocio" class="form-control" style="width: 70%" 
+                           value="<?php if(isset ($this->matricula[0]['NOMBRE']))echo $this->matricula[0]['NOMBRE']." ".$this->matricula[0]['APELLIDO_PATERNO']." ".$this->matricula[0]['APELLIDO_MATERNO'];?>" />
                     <button data-toggle="modal" data-target="#modalSocio" type="button" class="btn btn-sm btn-primary" title="Buscar Cliente" id="AbrirVtnBuscarSocio"><i class="icon-search icon-white"></i></button>
                     <!--button style="margin-right: 5px" data-toggle="modal" data-target="#modalNuevoCliente" type="button" class="btn btn-primary btn-sm" title="Insertar Cliente"><i class="icon-plus icon-white"></i></button-->
                     </div>
@@ -86,7 +87,7 @@
                 <div class="form-group" style="margin: 5px auto 5px auto">
                     <label class="col-md-7 control-label" style="padding-top: 0px;"> Fecha Actual:</label>
                     <div class="col-md-5">
-                        <input name="fechaventa" id="fechaventa" class="form-control"  placeholder="Fecha" readonly="readonly" value="<?php echo date('Y-m-d') ?>">
+                        <input name="fechaventa" id="fechaventa" class="form-control"  placeholder="Fecha" readonly="readonly" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                 </div>
             </div>
@@ -150,18 +151,21 @@
                 <div class="form-group" style="margin: 5px 0px 5px 0px">
                     <label class=" col-md-4 control-label" >Membresia:</label>
                     <div class="col-md-8" style="padding-right: 0px;">
-                        <input type="hidden" name="id_matricula" id="id_matricula"/>
-                        <input type="hidden" name="id_membresia" id="id_membresia"/>
-                        <input type="hidden" name="socio" id="socio"/>
-                        <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Seleccione Membresia" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 150px"/>
+                        <input type="hidden" name="id_matricula" id="id_matricula" value="<?php if(isset ($this->matricula[0]['ID_MATRICULA']))echo $this->matricula[0]['ID_MATRICULA'];?>"/>
+                        <input type="hidden" name="id_membresia" id="id_membresia" value="<?php if(isset ($this->matricula[0]['ID_TIPO_MEMBRESIA']))echo $this->matricula[0]['ID_TIPO_MEMBRESIA'];?>"/>
+                        <input type="hidden" name="socio" id="socio" value="<?php if(isset ($this->matricula[0]['NOMBRE']))echo $this->matricula[0]['NOMBRE']." ".$this->matricula[0]['APELLIDO_PATERNO'];?>"/>
+                        <input type="text" name="membresia" id="membresia" readonly="readonly" placeholder="Seleccione Membresia" class="form-control" data-toggle="modal" data-target="#modalMembresia"  style="width: 150px"
+                               value="<?php if(isset ($this->matricula[0]['DESCRIPCION']))echo $this->matricula[0]['DESCRIPCION']." ".$this->matricula[0]['DURACION']." ".$this->matricula[0]['VIGENCIA'];?>"/>
                         <button type="button" data-toggle="modal" data-target="#modalMembresia" class="btn btn-primary btn-sm" title="Buscar Membresia" id="AbrirVtnBuscarMembresia"><i class="icon-search icon-white"></i></button>
                     </div>
                 </div>
             </div>
             
             <div class="col-md-7" style="margin: 3px auto 5px auto">
-                <input type="text" name="fecha_ini" id="fecha_ini" placeholder="Fecha Inicio" class="form-control" maxlength="10    " style="width: 140px" />
-                    <input type="text" name="precio_m" id="precio_m" placeholder="Precio" class="form-control" onkeypress="return dosDecimales(event,this)" style="width: 110px" />  
+                <input type="text" name="fecha_ini" id="fecha_ini" placeholder="Fecha Inicio" class="form-control" maxlength="10" style="width: 140px" 
+                       value="<?php if(isset ($this->matricula[0]['ID_MATRICULA']))echo date('Y-m-d');?>"/>
+                <input type="text" name="precio_m" id="precio_m" placeholder="Precio" class="form-control" onkeypress="return dosDecimales(event,this)" style="width: 110px" 
+                       value="<?php if(isset ($this->matricula[0]['COSTO'])) echo $this->matricula[0]['COSTO'];?>"/>  
                     <button type="button" class="btn btn-primary btn-sm" title="Agregar al Detalle" id="addDetalleMembresia"><i class="icon-hand-down icon-white"></i></button>
             </div> 
              

@@ -30,6 +30,7 @@
                 } ?></td>
                 <td><?php if($this->datos[$i]['ESTADO_PAGO']=='0'){?>
                     <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>matricula/eliminar/<?php echo $this->datos[$i]['ID_MATRICULA'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
+                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>venta/nuevo_membresia/<?php echo $this->datos[$i]['ID_MATRICULA'] ?>')" class="btn btn-success btn-minier"><i class="icon-shopping-cart icon-white"></i></a>
                     <?php }?>
                 </td>
             </tr>

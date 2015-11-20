@@ -193,7 +193,8 @@ class venta_controlador extends controller {
         $this->_vista->almacen = $this->_almacen->selecciona();
         
         $this->_matricula->id_matricula=$this->filtrarInt($id);
-        $this->_vista->almacen = $this->_almacen->selecciona();
+        $this->_vista->matricula = $this->_matricula->selecciona_id();
+        //echo '<pre>';print_r($this->_vista->matricula);exit;
         
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
