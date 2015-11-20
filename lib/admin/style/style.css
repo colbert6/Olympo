@@ -1,11 +1,13 @@
 @media(min-width: 1100px){
     #headerSection {
 	width: 1100px;
+        height: 62px;
 	margin: 0 auto;
 	-webkit-box-shadow:0 5px 15px rgba(0,0,0,0.5);box-shadow:0 5px 15px rgba(0,0,0,0.5);
     }
     #cuerpo {
 	width: 1100px;
+        height: 780px;
 	margin: 4px auto;
 	-webkit-box-shadow:0 5px 15px rgba(0,0,0,0.5);box-shadow:0 5px 15px rgba(0,0,0,0.5);
     }
@@ -22,7 +24,7 @@ body{
 	color: #666;
 	border-top: 3px solid #eee;
 	background:#E2E2DB;//#343434 url("../img/back.png") repeat;  
-	padding-top: 52px;
+	padding-top: 56px;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -942,7 +944,7 @@ border: 1px solid transparent;
 .mainbar .matter{
 	border-top: 1px solid #ddd;
 	padding: 15px 0px;
-	min-height: 500px;
+	min-height: 670px;
 }
 
 /* Widget */
