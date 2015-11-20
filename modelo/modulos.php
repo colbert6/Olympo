@@ -33,8 +33,9 @@ class modulos extends Main{
         }
     }
     public function selecciona_menu() {
-        //        echo '<pre>';print_r($datos);exit;
+              
         $datos = array($this->id_perfil_usuario);
+        //echo '<pre>';print_r($datos);exit;
         $r = $this->get_consulta("pa_menu", $datos);
         if ($r[1] == '') {
             $stmt = $r[0];
