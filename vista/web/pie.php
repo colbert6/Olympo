@@ -12,11 +12,16 @@
             <div align="center" id="footer" style="padding-top: 10px">
                     <div class="col-md-6">
 
-                        <a href="https://www.facebook.com/OlympoFitness?fref=ts" target="_blank"><img alt="siguenos en facebook" height="40" 
-                        src="<?php echo $_webParams['ruta_img']; ?>facebook.png" title="siguenos en facebook" width="40" /></a>
-                        <a href="https://twitter.com/" target="_blank"><img alt="siguenos en Twitter" height="40" 
-                        src="<?php echo $_webParams['ruta_img']; ?>twiter.png" title="siguenos en Twitter" width="40" /></a>
-
+                        <a href="https://www.facebook.com/OlympoFitness?fref=ts" target="_blank"><img class="img-pie" alt="F"  
+                        src="<?php echo $_webParams['ruta_img']; ?>facebook.png" title="siguenos en facebook"/></a>
+                        <a href="https://twitter.com/" target="_blank"><img class="img-pie" alt="T"  
+                        src="<?php echo $_webParams['ruta_img']; ?>twiter.png" title="siguenos en Twitter"  /></a>
+                        <a href="https://instagram.com/" target="_blank"><img class="img-pie" alt="I"  
+                        src="<?php echo $_webParams['ruta_img']; ?>instagram.png" title="siguenos en Instagram"  /></a>
+                        <a href="https://plus.google.com/" target="_blank"><img class="img-pie" alt="G"  
+                        src="<?php echo $_webParams['ruta_img']; ?>gmas.png" title="siguenos en Google +"  /></a>
+                        
+                        
                     </div>
                     <div id="txtFooter">
                            <p>Copyright &copy; OLYMPO FITNNES 2014</p>

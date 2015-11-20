@@ -9,12 +9,15 @@ abstract class controller {
 
     //aqui ya tenemos el objeto vista disponible en el controlador
     public function __construct() {
+        
+           
         $this->_modelo = $this->cargar_modelo('modulos');
         $this->_modeloalert = $this->cargar_modelo('alertas');
-        
+         
         if(session::get('autenticado')){
             $this->_modelo->id_perfil_usuario = session::get('idperfil');
         }
+        
         $menu = $this->_modelo->selecciona_menu();
         $alerta = $this->_modeloalert->selecciona();
         

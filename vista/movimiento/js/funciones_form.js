@@ -304,6 +304,7 @@ function mostrarCompras(id_p){
 }
 
 function mostrarVentas(id_c){
+    
     $("#acciones").show();
     
     $.post(url + 'venta/getVentasCliente',"id_c="+id_c, function(cliente) {
@@ -488,13 +489,16 @@ function mostrarCronogramaCompra(id){
 }
 
 function mostrarCronogramaVenta(id){
+    
     $("#cronograma").show();
     $("#id_accion").val(id);
+    
     $.post(url + 'cronograma_cobro/getCuotasVenta',"id_c="+id, function(cuotas) {
        //alert(cuotas.length);
         var total_pagado = 0;
         var tot_restante = 0;
         var total = 0;
+        
         for (var i = 0; i < cuotas.length; i++) {
                 total+= parseFloat(cuotas[i].MONTO_CUOTA);
                 total_pagado+= parseFloat(cuotas[i].MONTO_PAGADO);        

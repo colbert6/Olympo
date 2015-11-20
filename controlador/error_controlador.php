@@ -56,9 +56,13 @@ class error_controlador extends controller
     }
     
     public function error_bd($url){
+        echo  $this->_vista->titulo." " .$url;
+        exit;
         $this->_vista->titulo = 'Error';
         $url=str_replace('_', ' ', $url);
         $this->_vista->mensaje = $url;
+        
+        //
         $this->_vista->renderizar('index');
     }
     

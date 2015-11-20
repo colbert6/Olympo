@@ -66,6 +66,9 @@ body .scrollpanel .sp-scrollbar.active .sp-thumb {
 
 .caption h4 {
     white-space: nowrap;
+    color: #333333;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-align: center;
 }
 
 .thumbnail img {
@@ -93,6 +96,7 @@ body .scrollpanel .sp-scrollbar.active .sp-thumb {
 	overflow: hidden;
 	position: relative;
 }
+ 
 .hover-bg .hover-text {
 	position: absolute;
 	text-align: center;
@@ -103,20 +107,21 @@ body .scrollpanel .sp-scrollbar.active .sp-thumb {
 	height: 100%;
 	width: 100%;
 	opacity: 0;
-    transition: all 0.7s;
+    transition: all 1.6s;
 }
 
 .hover-bg a{ 
-  color: #FCAC45;
+  text-decoration: none ;
+  color: white ;
 }
 .hover-bg :hover a{
-	text-decoration: none;
-	color: white;
+	text-decoration: none ;
+	color: white ;
 }
 .hover-bg .hover-text>h4{
-        text-transform: lowercase;
-	     opacity: 0;
-
+      text-transform: lowercase;
+	    opacity: 0;
+     
 	     -webkit-transform: translateY(100%);
         transform: translateY(100%);
         transition: all 0.3s;
@@ -190,11 +195,18 @@ footer {
         padding: 10px;
 	color:#FFF;
 }
-#footer a{
-        text-decoration: none;
-        color:#FFF;
+.img-pie{
+        border-radius: 8px;
+        height: 40px;
+        width: 40px;
 }
-#footer a:hover{
-        text-decoration: underline;
-        color: #EEE;
+.nostros_colum{
+        width: 270px;
+        background:#f5f5f5;
+        border-radius: 8px;
+        margin-left: 40px;
+        padding-left:15px ;
+        padding-right: 15px ;
+        
+        
 }
