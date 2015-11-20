@@ -37,6 +37,7 @@ class modulos extends Main{
             $this->id_perfil_usuario=NULL;
         }       
         $datos = array($this->id_perfil_usuario);
+        //echo '<pre>';print_r($datos);exit;
         $r = $this->get_consulta("pa_menu", $datos);
         if ($r[1] == '') {
             $stmt = $r[0];

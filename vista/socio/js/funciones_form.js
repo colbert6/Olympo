@@ -13,8 +13,6 @@ $(document).ready(function() {
         bval = bval && $("#direccion").required();
         bval = bval && $("#sexo").required();
         bval = bval && $("#estado_civil").required();
-        bval = bval && $("#telefono").required();
-        bval = bval && $("#celular").required();
         bval = bval && $("#fecha_nacimiento").required();
         
         
