@@ -24,7 +24,7 @@
                 <td><?php echo $this->datos[$i]['DNI']//orden ?></td>
                 
                 <td>
-                    <a href="#myModal" role="button" data-toggle="modal" onclick="ver('<?php echo $this->datos[$i]['ID_SOCIO'] ?>')" class="btn btn-warning btn-minier"><i class="icon-eye-open icon-white"></i></a>
+                    <a href="#myModal" role="button" data-toggle="modal" onclick="ver('<?php echo $this->datos[$i]['ID_SOCIO'] ?>')" class="btn btn-warning btn-minier"><i class="icon-user icon-white"></i></a>
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>socio/editar/<?php echo $this->datos[$i]['ID_SOCIO'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
                     <!--a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>socio/eliminar/<?php echo $this->datos[$i]['ID_SOCIO'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a-->
                 </td>

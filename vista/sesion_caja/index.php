@@ -25,6 +25,7 @@
                     <?php }?>
                     
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>sesion_caja/historial/<?php echo $this->e_caja[$i]['ID_CAJA'] ?>')" class="btn btn-danger btn-minier"><i class="icon-th-list icon-white"></i>&nbsp;&nbsp;&nbsp;Historial</a>
+                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>sesion_caja/reporte_movimientos/<?php echo $this->e_caja[$i]['ID_CAJA'] ?>')" class="btn btn-success btn-minier"><i class="icon-th-list icon-white"></i>&nbsp;&nbsp;&nbsp;Movimientos</a>
                 </td>
             </tr>
         <?php } ?>

@@ -19,36 +19,36 @@
             <label class="control-label col-sm-6" >Razon Social:</label>
             <div class="col-sm-6">
                 <input name="razon_social" id="razon_social" class="form-control"  placeholder="Razon social" autofocus
-                maxlength="50"  value="<?php if(isset ($this->datos[0]['RAZON_SOCIAL']))echo $this->datos[0]['RAZON_SOCIAL']?>">
+                maxlength="30"  value="<?php if(isset ($this->datos[0]['RAZON_SOCIAL']))echo $this->datos[0]['RAZON_SOCIAL']?>">
             </div>
         </div>
         
         <div class="form-group">
             <label class="control-label col-sm-6" >RUC:</label>
             <div class="col-sm-6">
-                <input name="ruc" id="ruc" class="form-control"  placeholder="RUC" autofocus
+                <input name="ruc" id="ruc" class="form-control"  placeholder="RUC" autofocus onkeypress="return soloNumeros(event)"
                 maxlength="11"  value="<?php if(isset ($this->datos[0]['RUC']))echo $this->datos[0]['RUC']?>">
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-6" >Telefono:</label>
             <div class="col-sm-6">
-                <input name="telefono" id="telefono" class="form-control"  placeholder="Telefono" autofocus
-                maxlength="15"  value="<?php if(isset ($this->datos[0]['TELEFONO']))echo $this->datos[0]['TELEFONO']?>">
+                <input name="telefono" id="telefono" class="form-control"  placeholder="Telefono" autofocus onkeypress="return soloNumeros(event)"
+                maxlength="10"  value="<?php if(isset ($this->datos[0]['TELEFONO']))echo $this->datos[0]['TELEFONO']?>">
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-6" >Email:</label>
             <div class="col-sm-6">
-                <input name="email" id="email" class="form-control"  placeholder="Email" autofocus
-                maxlength="50"  value="<?php if(isset ($this->datos[0]['EMAIL']))echo $this->datos[0]['EMAIL']?>">
+                <input type="email" name="email" id="email" class="form-control"  placeholder="Email" autofocus required=""
+                maxlength="40"  value="<?php if(isset ($this->datos[0]['EMAIL']))echo $this->datos[0]['EMAIL']?>">
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-6" >Direccion:</label>
             <div class="col-sm-6">
                 <input name="direccion" id="direccion" class="form-control"  placeholder="Direccion" autofocus
-                maxlength="50"  value="<?php if(isset ($this->datos[0]['DIRECCION']))echo $this->datos[0]['DIRECCION']?>">
+                maxlength="30"  value="<?php if(isset ($this->datos[0]['DIRECCION']))echo $this->datos[0]['DIRECCION']?>">
             </div>
         </div>
         

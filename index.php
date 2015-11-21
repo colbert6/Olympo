@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 define('DS', DIRECTORY_SEPARATOR); // guardamos '/' 
 define('ROOT', realpath(dirname(__FILE__)) . DS); //ruta raiz de nuestra aplicacion
 define('APP_PATH', ROOT . 'aplicacion' . DS); // ruta del directorio de las aplicaciones
@@ -16,6 +16,7 @@ try {
     require_once APP_PATH . 'session.php';
     
     require_once LIB.'movil/Mobile_Detect.php';
+    
     
     require_once BASE_DATOS . 'BaseDatos.php';
     require_once BASE_DATOS . 'BaseDatosfactory.php';

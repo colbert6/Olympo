@@ -4,12 +4,15 @@ class sesion_caja_controlador extends controller {
 
     private $_sesion_caja;
     private $_caja;
+    private $_pdf;
 
     public function __construct() {
         if (!$this->acceso()) {
             $this->redireccionar('error/access/5050');
         }
         parent::__construct();
+        $this->get_Libreria('fpdf/fpdf2');
+        $this->_pdf = new FPDF('P','mm','A4');
         $this->_sesion_caja = $this->cargar_modelo('sesion_caja');
         $this->_caja = $this->cargar_modelo('caja');
     }
@@ -58,6 +61,43 @@ class sesion_caja_controlador extends controller {
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('historial');
+    }
+
+    public function reporte_movimientos($id){
+        $this->_pdf->AddPage();
+
+        $this->_pdf->SetFont('Arial', 'B', 12);
+        $this->_pdf->SetY(27);
+        $this->_pdf->SetX(15);
+        $this->_pdf->Cell(270, 5, utf8_decode('MOVIMIENTOS DE LA FECHA:'), 0, 0, 'C');
+        $this->_pdf->SetFillColor(96,197,253);
+        $this->_pdf->SetFont('Arial', 'B', 10);
+        $this->_pdf->SetY(35);
+        $this->_pdf->SetX(15);
+        $this->_pdf->Cell(135, 6, utf8_decode('INGRESOS'), 'BTLR', 0, 'C', 1);
+        $this->_pdf->SetX(150);
+        $this->_pdf->Cell(135, 6, utf8_decode('EGRESOS'), 'BTLR', 0, 'C', 1);
+        $this->_pdf->SetY(41);
+        $this->_pdf->SetX(15);
+        $this->_pdf->Cell(20, 6, utf8_decode('Hora'), 'BTLR', 0, 'R', 1);
+        $this->_pdf->SetX(35);
+        $this->_pdf->Cell(55, 6, utf8_decode('Concepto'), 'BTLR', 0, 'L', 1);
+        $this->_pdf->SetX(90);
+        $this->_pdf->Cell(40, 6, utf8_decode('Forma de Pago'), 'BTLR', 0, 'L', 1);
+        $this->_pdf->SetX(130);
+        $this->_pdf->Cell(20, 6, utf8_decode('Monto'), 'BTLR', 0, 'R', 1);
+        $this->_pdf->SetX(150);
+        $this->_pdf->Cell(20, 6, utf8_decode('Hora'), 'BTLR', 0, 'R', 1);
+        $this->_pdf->SetX(170);
+        $this->_pdf->Cell(55, 6, utf8_decode('Concepto'), 'BTLR', 0, 'L', 1);
+        $this->_pdf->SetX(225);
+        $this->_pdf->Cell(40, 6, utf8_decode('Forma de Pago'), 'BTLR', 0, 'L', 1);
+        $this->_pdf->SetX(265);
+        $this->_pdf->Cell(20, 6, utf8_decode('Monto'), 'BTLR', 0, 'R', 1);
+
+
+
+        $this->_pdf->Output();
     }
 
 }

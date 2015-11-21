@@ -77,7 +77,7 @@ class Main {
                      <div class="row" style="width: 800; margin:0 auto;">
                          <h3> Se requiere informacion sobre la Base de Datos</h3>
                     </div>
-                    <div class="row" >
+                    <div class="row">
                         <div class="col-md-12" style="width: 800; margin:0 auto;"> 
                         <form method="post" action="#"  class="form-horizontal" >
                            
@@ -148,7 +148,7 @@ class Main {
 
     public static function get_servidor() {
         switch (BaseDatos::$_driver) {
-            case 'mssql': $_servidor = "SQL Server ";
+            case 'sqlsrv': $_servidor = "SQL Server ";
                 break;
             case 'mysql': $_servidor = "MySql ";
                 break;
@@ -166,6 +166,7 @@ class Main {
     }
 
     protected static function get_consulta($pa, $datos) {
+        
         if (BaseDatos::$_servidor != 'OCI') {
             self::$db->exec("SET CHARACTER SET utf8");
             self::$db->setAttribute(PDO::ATTR_CASE, PDO::CASE_UPPER);
@@ -257,9 +258,11 @@ class Main {
     private function procedimientoAlmacenado($pa, $datos) {
         //arreglar archivo
         //$config = parse_ini_file('config.ini', TRUE);
+        
         $driver = BaseDatos::$_driver;
+        
         switch ($driver) {
-            case 'mssql': $sql = "execute ";
+            case 'sqlsrv': $sql = "execute ";
                 break;
             case 'mysql': $sql = "call ";
                 break;
@@ -269,7 +272,7 @@ class Main {
                 break;
         }
         $sql = $sql . $pa . " ";
-        if ($driver != 'mssql') {
+        if ($driver != 'sqlsrv') {
             $sql = $sql . "(";
         }
 
@@ -279,16 +282,17 @@ class Main {
                 if ($i < count($datos)) {
                     $sql = $sql . ",";
                 } else {
-                    if ($driver != 'mssql') {
+                    if ($driver != 'sqlsrv') {
                         $sql = $sql . ")";
                     }
                 }
             }
         } else {
-            if ($driver != 'mssql') {
+            if ($driver != 'sqlsrv') {
                 $sql = $sql . ")";
             }
         }
+        
 //        die($sql);
         try {
 
@@ -318,8 +322,9 @@ class Main {
             }
             $stmt->execute();
             $error = $stmt->errorInfo();
-            if ($driver == 'mssql') {
-                if ($error[2] == '(null) [0] (severity 0) [(null)]') {
+            if ($driver == 'sqlsrv') {
+                //if ($error[2] == '(null) [0] (severity 0) [(null)]') {
+                if ($error[2] == '') {
                     return array($stmt, '');
                 } else {
                     $url=str_replace(' ', '_', $error[2]);

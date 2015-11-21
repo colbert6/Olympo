@@ -35,15 +35,16 @@
             <label class="control-label col-sm-6" >NOMBRE:</label>
             <div class="col-sm-6">
                 <input name="nombre" id="nombre" class="form-control"  placeholder="Nombre" 
-                maxlength="30"  value="<?php if(isset ($this->datos[0]['NOMBRE']))echo $this->datos[0]['NOMBRE']?>">
+                maxlength="25"  value="<?php if(isset ($this->datos[0]['NOMBRE']))echo $this->datos[0]['NOMBRE']?>">
             </div>
         </div>
         
         <div class="form-group">
             <label class="control-label col-sm-6" >DESCRIPCION:</label>
             <div class="col-sm-6">
-                <input name="descripcion" id="descripcion" class="form-control"  placeholder="Descripcion" 
-                maxlength="30"  value="<?php if(isset ($this->datos[0]['DESCRIPCION']))echo $this->datos[0]['DESCRIPCION']?>">
+                 <textarea name="descripcion" id="descripcion" class="form-control"  placeholder="Descripcion" autofocus
+                maxlength="50" ><?php if(isset ($this->datos[0]['DESCRIPCION']))echo $this->datos[0]['DESCRIPCION']?></textarea>
+            
             </div>
         </div>
        
