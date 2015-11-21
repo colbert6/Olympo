@@ -82,6 +82,8 @@
                 </div>
             </div>
             <div class="col-md-5" style="padding:0px 0px 0px 5px ;">
+                <input name="CronogramaAbierto" id="CronogramaAbierto" type="hidden" value="0">
+                <div id="celda_cronograma"></div>
                 <div id="celda_credito" style="float:left;display: none;" >
                     <div class="form-group"  style="float:left;margin: 5px auto 5px auto;">
                         <label class="col-md-4 control-label" style="width: 50px;margin-right: 15px;"> Cuotas:</label>
@@ -115,7 +117,7 @@
             </div>
             <div class="col-md-6" style="margin: 3px auto 5px auto">
             <input type="text" name="cantidad" id="cantidad" placeholder="Cantidad" class="form-control" onkeypress="return soloNumeros(event)" maxlength="3" style="width: 110px" />
-            <input type="text" name="precio" id="precio" placeholder="Precio" class="form-control" onkeypress="return dosDecimales(event,this)" style="width: 110px" />  
+            <input type="text" name="precio" id="precio" placeholder="Precio" class="form-control" maxlength="6"  onkeypress="return dosDecimales(event,this)" style="width: 110px" />  
             <input type="text" name="importe" id="importe" placeholder="Importe" class="form-control" readonly="readonly" style="width: 110px" />
             <button type="button" class="btn btn-primary btn-sm" title="Agregar al Detalle" id="addDetalle"><i class="icon-hand-down icon-white"></i></button>
             </div> 
@@ -145,13 +147,26 @@
         </div>
         <div class="row-fluid">
             <div class="span12 text-center">
-                <p>
+                <p> 
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalCuotas" id="verCuotas" style="display:;">Cronograma</button>
                     <button type="button" class="btn btn-primary" id="save">Guardar</button>
                     <a href="<?php echo BASE_URL ?>compra" class="btn btn-danger">Cancelar</a>
                 </p>
             </div>
         </div>
     </form>
+    
+    <!-- Modal -->
+    <style>
+        #modalProveedor .modal-content,#modalInsumo .modal-content {
+            width: 800px;
+            left: -18%;
+        }
+        #modalCuotas .modal-content{
+            width: 500px;
+            left: 10%;
+        }
+    </style>
     <div id="modalInsumo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -177,13 +192,6 @@
         </div>
         </div>
     </div>
-    <!-- Modal -->
-    <style>
-        #modalProveedor .modal-content,#modalInsumo .modal-content {
-            width: 800px;
-            left: -18%;
-        }
-    </style>
     <div id="modalProveedor" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -248,6 +256,32 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="reg_proveedor">Registrar Proveedor</button>
             <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+        </div>
+        </div>
+        </div>
+    </div>
+    <div id="modalCuotas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Cronograma de Pago</h3>
+            <h4>Fecha: <?php echo $hoy; ?></h4>
+        </div>
+        <div class="modal-body">
+            <form id="VtnCuotas">
+                <div class="navbar-inner text-center">
+                    <div id="grillaCuotas">
+                        <div class="page-header" >
+                            <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
         </div>
         </div>
         </div>
