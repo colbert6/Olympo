@@ -45,7 +45,6 @@
             <div class="col-md-4">
                 <strong>FORMA PAGO</strong>
                 <select name='id_forma_pago' id='id_forma_pago'>
-                    <option value=''>Seleccione...</option>
                     <!--option value='1'>Efectivo</option>
                     <option value='2'>Tarjeta</option-->
                 </select>

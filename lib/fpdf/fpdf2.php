@@ -376,12 +376,12 @@ function Header()
         $this->Image(ROOT . 'lib' . DS . 'img' . DS .'logo'. DS .'logo.png', 10, 8, 09);
         $this->SetFont('Arial', 'B', 11);
         $this->SetY(8);
-        $this->Cell(190, 5, utf8_decode('Módulo de Reportes'), 0, 0, 'R');
+        $this->Cell(275, 5, utf8_decode('Reporte de Caja'), 0, 0, 'R');
         $this->SetFont('Arial', '', 11);
         $this->SetY($this->GetY() + 5);
-        $this->Cell(190, 5, date("d/m/Y H:i:s"), 0, 0, 'R');
+        $this->Cell(275, 5, date("d/m/Y H:i:s"), 0, 0, 'R');
         $this->SetY($this->GetY() + 5);
-        $this->Cell(190, 5, utf8_decode('Página ') . $this->PageNo(), 0, 0, 'R');
+        $this->Cell(275, 5, utf8_decode('Página ') . $this->PageNo(), 0, 0, 'R');
         $this->SetFont('Arial', 'B', 12);
 }
 

@@ -208,7 +208,6 @@ function sel_actor(id_actor,tipo_actor,razon_social,nro_doc) {
 
     //$("#id_tipo_movimiento").focus();
     $("#id_forma_pago").append(new Option('Efectivo','1'));
-    $("#id_forma_pago").append(new Option('Tarjeta','2'));
 }
 
 function maxCompra(id,callback){
