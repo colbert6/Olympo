@@ -26,7 +26,9 @@
                 <td><?php echo $this->datos[$i]['DESCRIPCION'];//nombre ?></td>
                 <td>
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>proveedor/editar/<?php echo $this->datos[$i]['ID_PROVEEDOR'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
+                <?php if($this->datos[$i]['ESTADO']=='0'){ ?>
                     <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>proveedor/eliminar/<?php echo $this->datos[$i]['ID_PROVEEDOR'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
+                <?php }?>
                 </td>
             </tr>
         <?php } ?>

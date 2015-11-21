@@ -37,7 +37,7 @@ class compra_controlador extends controller {
     }
     
     public function inserta_prov(){
-         $this->_proveedor->direccion=$_POST['dir'];
+        $this->_proveedor->direccion=$_POST['dir'];
         $this->_proveedor->razon_social=$_POST['rs'];
         $this->_proveedor->email=$_POST['em'];
         $this->_proveedor->id_ubigeo=1939;
