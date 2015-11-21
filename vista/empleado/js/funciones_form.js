@@ -7,6 +7,7 @@ $(document).ready(function() {
         bval = bval && $("#apellido_paterno").required();
         bval = bval && $("#apellido_materno").required();
         bval = bval && $("#dni").required();
+        bval = bval && $("#email").required();
         bval = bval && $("#direccion").required();
         bval = bval && $("#sexo").required();
         bval = bval && $("#estado_civil").required();
