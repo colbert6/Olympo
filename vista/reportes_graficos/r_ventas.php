@@ -25,12 +25,12 @@ $chart->plotOptions->line->pointPadding = 0.2;
 $chart->plotOptions->line->borderWidth = 0;
 
 $chart->series[] = array('name' => "Dinero Por Ventas por Mes",
-                         'data' => array((float)$this->datos[0]['CANTIDAD'],(float)$this->datos[1]['CANTIDAD'], 
-                             (float)$this->datos[2]['CANTIDAD'], (float)$this->datos[3]['CANTIDAD'], 
-                             (float)$this->datos[4]['CANTIDAD'], (float)$this->datos[5]['CANTIDAD'],
-                             (float)$this->datos[6]['CANTIDAD'], (float)$this->datos[7]['CANTIDAD'], 
-                             (float)$this->datos[8]['CANTIDAD'], (float)$this->datos[9]['CANTIDAD'], 
-                             (float)$this->datos[10]['CANTIDAD'], (float)$this->datos[11]['CANTIDAD']));
+                         'data' => array((float)$this->datos[0]['TOTAL'],(float)$this->datos[1]['TOTAL'], 
+                             (float)$this->datos[2]['TOTAL'], (float)$this->datos[3]['TOTAL'], 
+                             (float)$this->datos[4]['TOTAL'], (float)$this->datos[5]['TOTAL'],
+                             (float)$this->datos[6]['TOTAL'], (float)$this->datos[7]['TOTAL'], 
+                             (float)$this->datos[8]['TOTAL'], (float)$this->datos[9]['TOTAL'], 
+                             (float)$this->datos[10]['TOTAL'], (float)$this->datos[11]['TOTAL']));
 
 ?>
 

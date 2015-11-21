@@ -4,11 +4,11 @@ $chart->chart->renderTo = "container";
 $chart->chart->type = "column";
 $chart->title->text = utf8_decode("Servicios Más Vendidos");
 
-$chart->xAxis->categories = array($this->datos[0]['XPRODUCTO'],$this->datos[1]['XPRODUCTO'],
-        $this->datos[2]['XPRODUCTO'],$this->datos[3]['XPRODUCTO'],$this->datos[4]['XPRODUCTO']);
+$chart->xAxis->categories = array($this->datos[0]['NOMBRE'],$this->datos[1]['NOMBRE'],
+        $this->datos[2]['NOMBRE'],$this->datos[3]['NOMBRE'],$this->datos[4]['NOMBRE']);
 
 $chart->yAxis->min = 0;
-$chart->yAxis->title->text = "Ventas en S/.";
+$chart->yAxis->title->text = "Cantidad de Servicios";
 $chart->legend->layout = "vertical";
 $chart->legend->backgroundColor = "#FFFFFF";
 $chart->legend->align = "left";
@@ -19,15 +19,15 @@ $chart->legend->floating = 1;
 $chart->legend->shadow = 1;
 
 $chart->tooltip->formatter = new HighchartJsExpr("function() {
-    return '' + this.x +': S/. '+ this.y +'';}");
+    return '' + this.x +' '+ this.y +' Servicios';}");
 
 $chart->plotOptions->column->pointPadding = 0.2;
 $chart->plotOptions->column->borderWidth = 0;
 
-$chart->series[] = array('name' => "Dinero Por Ventas de Servicios",
-                         'data' => array((float)$this->datos[0]['VALOR'],(float)$this->datos[1]['VALOR'], 
-                             (float)$this->datos[2]['VALOR'], (float)$this->datos[3]['VALOR'], 
-                             (float)$this->datos[4]['VALOR']));
+$chart->series[] = array('name' => "Servicios mas solicitados",
+                         'data' => array((float)$this->datos[0]['CANTIDAD'],(float)$this->datos[1]['CANTIDAD'], 
+                             (float)$this->datos[2]['CANTIDAD'], (float)$this->datos[3]['CANTIDAD'], 
+                             (float)$this->datos[4]['CANTIDAD']));
 
 ?>
 

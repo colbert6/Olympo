@@ -33,6 +33,7 @@ class reportes_graficos_controlador extends controller {
     
     public function r_prod() {
         $this->_vista->datos= $this->_reportes_graficos->reporte_prod();
+       // print_r($this->_vista->datos);exit();
         $this->_vista->renderizar_reporte('r_prod');
     }
 
