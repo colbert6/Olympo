@@ -7,6 +7,7 @@
         <tr>
             <th>ITEM</th>
             <th>TITULO</th>
+            <th>URL</th>
             <th>ESTADO</th>
             <th>ACCIONES</th>
         </tr>
@@ -16,6 +17,7 @@
             <tr>
                 <td><?php echo $i+1 ?></td>
                 <td><?php echo $this->datos[$i]['TITULO'] ?></td>
+                <td><?php echo $this->datos[$i]['URL'] ?></td>
                 <td><?php if($this->datos[$i]['ESTADO']=='1'){
                     echo 'Activo';
                 } else{

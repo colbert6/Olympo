@@ -12,6 +12,15 @@
                 value="<?php if(isset ($this->datos[0]['TITULO']))echo $this->datos[0]['TITULO']?>"/>
             </td>
         </tr>
+
+        <tr>
+            <td><label>Url</label></td>
+            <td>
+                <input type="text" id="url" name="url" class="form-control" style="width: 300px"
+                value="<?php if(isset ($this->datos[0]['URL']))echo $this->datos[0]['URL']?>"/>
+            </td>
+        </tr>
+
         <tr>             
                  <td><label  >Descripcion:</label></td>
                     <td>
@@ -20,6 +29,7 @@
                         </textarea>
                     </td>
         </tr>
+        
         <tr>
             <?php if(isset ($this->datos[0]['IMAGEN']) && $this->datos[0]['IMAGEN']!=''){?>
             <td><label>Imagen Subida</label></td>
