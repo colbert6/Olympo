@@ -299,7 +299,7 @@ class view {
 
         $ruta_vista = ROOT . 'vista' . DS . $this->_controlador . DS . $vista . '.php';
         //comprobamos si el archivo existe y es legible
-
+//print_r($ruta_vista);exit;
         if (is_readable($ruta_vista)) {
             //incluimos los layout
             include_once $ruta_vista;

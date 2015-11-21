@@ -8,6 +8,7 @@ $(function(){
     $( "#save" ).click(function(){
         bval = true;        
         bval = bval && $( "#titulo" ).required();
+        bval = bval && $( "#url" ).required();
         bval = bval && $( "#descripcion" ).required();
         bval = bval && $( "#imagen" ).required();
         
