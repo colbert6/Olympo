@@ -5,6 +5,8 @@ class sesion_caja_controlador extends controller {
     private $_sesion_caja;
     private $_caja;
     private $_pdf;
+    private $_movimiento;
+    private $_sesion;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -12,9 +14,11 @@ class sesion_caja_controlador extends controller {
         }
         parent::__construct();
         $this->get_Libreria('fpdf/fpdf2');
-        $this->_pdf = new FPDF('P','mm','A4');
+        $this->_pdf = new FPDF('L','mm','A4');
         $this->_sesion_caja = $this->cargar_modelo('sesion_caja');
         $this->_caja = $this->cargar_modelo('caja');
+        $this->_movimiento = $this->cargar_modelo('movimiento');
+        $this->_sesion = $this->cargar_modelo('sesion_caja');
     }
 
     public function index() {
@@ -64,36 +68,88 @@ class sesion_caja_controlador extends controller {
     }
 
     public function reporte_movimientos($id){
-        $this->_pdf->AddPage();
+        $caja = $this->_sesion->cajas_activas();
+        for ($i=0; $i < count($caja) ; $i++) { 
+            if($caja[$i]["ID_SESION_CAJA"]==$id){
+                $id_caja = $caja[$i]["ID_CAJA"];
+                $monto_inicio = $caja[$i]["MONTO_INICIO"];
+                $nombre_caja = $caja[$i]["CAJA"];
+            }
+        }
+        // --------------EXTRER MOVIMIENTOS--------------
+        $this->_movimiento->id_sesion_caja = $this->filtrarInt($id);
+        $mov = $this->_movimiento->selecciona_reporte(); 
 
+
+        $this->_pdf->AddPage();
+        $s = array(20,30,100,33,33,33,25);
         $this->_pdf->SetFont('Arial', 'B', 12);
-        $this->_pdf->SetY(27);
-        $this->_pdf->SetX(15);
-        $this->_pdf->Cell(270, 5, utf8_decode('MOVIMIENTOS DE LA FECHA:'), 0, 0, 'C');
+        $this->_pdf->SetY(30);
+        $this->_pdf->SetX(30);
+        $this->_pdf->Cell(240, 5, utf8_decode('MOVIMIENTOS DE HOY: '.strtoupper($nombre_caja)), 0, 0, 'C');
+        $this->_pdf->SetY(31);
+        $this->_pdf->Cell(280, 5, utf8_decode('______________________________'), 0, 0, 'C');
+        $this->_pdf->ln(6);
+        $this->_pdf->SetFont('Arial', 'B', 10);
+        $this->_pdf->Cell(280, 5, utf8_decode('FORMA PAGO: Efectivo '), 0, 0, 'C');
         $this->_pdf->SetFillColor(96,197,253);
         $this->_pdf->SetFont('Arial', 'B', 10);
-        $this->_pdf->SetY(35);
-        $this->_pdf->SetX(15);
-        $this->_pdf->Cell(135, 6, utf8_decode('INGRESOS'), 'BTLR', 0, 'C', 1);
-        $this->_pdf->SetX(150);
-        $this->_pdf->Cell(135, 6, utf8_decode('EGRESOS'), 'BTLR', 0, 'C', 1);
-        $this->_pdf->SetY(41);
-        $this->_pdf->SetX(15);
-        $this->_pdf->Cell(20, 6, utf8_decode('Hora'), 'BTLR', 0, 'R', 1);
-        $this->_pdf->SetX(35);
-        $this->_pdf->Cell(55, 6, utf8_decode('Concepto'), 'BTLR', 0, 'L', 1);
-        $this->_pdf->SetX(90);
-        $this->_pdf->Cell(40, 6, utf8_decode('Forma de Pago'), 'BTLR', 0, 'L', 1);
-        $this->_pdf->SetX(130);
-        $this->_pdf->Cell(20, 6, utf8_decode('Monto'), 'BTLR', 0, 'R', 1);
-        $this->_pdf->SetX(150);
-        $this->_pdf->Cell(20, 6, utf8_decode('Hora'), 'BTLR', 0, 'R', 1);
-        $this->_pdf->SetX(170);
-        $this->_pdf->Cell(55, 6, utf8_decode('Concepto'), 'BTLR', 0, 'L', 1);
-        $this->_pdf->SetX(225);
-        $this->_pdf->Cell(40, 6, utf8_decode('Forma de Pago'), 'BTLR', 0, 'L', 1);
-        $this->_pdf->SetX(265);
-        $this->_pdf->Cell(20, 6, utf8_decode('Monto'), 'BTLR', 0, 'R', 1);
+        $this->_pdf->ln(10);
+        $this->_pdf->Cell($s[0], 6, utf8_decode('HORA'), 1, 0, 'C', 1);
+        $this->_pdf->Cell($s[1], 6, utf8_decode('MOVIMIENTO'), 1, 0, 'C', 1);
+        $this->_pdf->Cell($s[2], 6, utf8_decode('CONCEPTO'), 1, 0, 'C', 1);
+        $this->_pdf->Cell($s[3], 6, utf8_decode('ENTRADA'), 1, 0, 'C', 1);
+        $this->_pdf->Cell($s[4], 6, utf8_decode('SALIDA'), 1, 0, 'C', 1);
+        $this->_pdf->Cell($s[5], 6, utf8_decode('SALDO (S/.)'), 1, 0, 'C', 1);
+        $this->_pdf->Cell($s[6], 6, utf8_decode('OBSER.'), 1, 0, 'C', 1);
+        $this->_pdf->ln();
+        //AQUI EMPIEZAAAAAAA
+        $this->_pdf->Cell($s[0], 6, utf8_decode(''), 1, 0, 'C', 0);
+        $this->_pdf->Cell($s[1], 6, utf8_decode(''), 1, 0, 'C', 0);
+        $this->_pdf->Cell($s[2], 6, utf8_decode('MONTO DE APERTURA'), 1, 0, 'L', 0);
+        $this->_pdf->Cell($s[3], 6, utf8_decode(''), 1, 0, 'C', 0);
+        $this->_pdf->Cell($s[4], 6, utf8_decode(''), 1, 0, 'C', 0);
+        $this->_pdf->Cell($s[5], 6, utf8_decode($monto_inicio), 1, 0, 'C', 0);
+        $this->_pdf->Cell($s[6], 6, utf8_decode(''), 1, 0, 'C', 0);
+        $this->_pdf->ln();
+        //--------------------------------------------------------------------------------------
+        $saldo = $monto_inicio;
+        $this->_pdf->SetFillColor(245,208,051);
+        for ($i=0; $i < count($mov) ; $i++) { 
+            if($mov[$i]["EXTORNADO"]==1){$color=1;}else{$color=0;}
+            $date = new DateTime($mov[$i]["FECHA"]);
+            $this->_pdf->Cell($s[0], 6, utf8_decode($date->format('H:i:s')), 1, 0, 'C', $color);
+            $this->_pdf->Cell($s[1], 6, utf8_decode($mov[$i]["TIPO_MOVIMIENTO"]), 1, 0, 'C', $color);
+            $this->_pdf->Cell($s[2], 6, utf8_decode($mov[$i]["CONCEPTO_MOVIMIENTO"]), 1, 0, 'L', $color);
+            if($mov[$i]["ID_TIPO_MOVIMIENTO"]==2){
+                $this->_pdf->Cell($s[3], 6, utf8_decode($mov[$i]["MONTO"]), 1, 0, 'C', $color);
+                if($mov[$i]["EXTORNADO"]==0){$saldo += $mov[$i]["MONTO"];}
+            }else{
+                $this->_pdf->Cell($s[3], 6, utf8_decode(''), 1, 0, 'C', $color);
+            }
+            if($mov[$i]["ID_TIPO_MOVIMIENTO"]==1){
+                $this->_pdf->Cell($s[4], 6, utf8_decode($mov[$i]["MONTO"]), 1, 0, 'C', $color);
+                if($mov[$i]["EXTORNADO"]==0){$saldo -= $mov[$i]["MONTO"];}
+            }else{
+                $this->_pdf->Cell($s[4], 6, utf8_decode(''), 1, 0, 'C', $color);
+            }
+            $this->_pdf->Cell($s[5], 6, utf8_decode($saldo), 1, 0, 'C', $color);
+            if($mov[$i]["EXTORNADO"]==1){
+                $this->_pdf->Cell($s[6], 6, utf8_decode('EXTORNADO'), 1, 0, 'C', $color);
+            }else{
+                $this->_pdf->Cell($s[6], 6, utf8_decode(''), 1, 0, 'C', $color);
+            }
+            $this->_pdf->ln();
+        }
+        //PARA TERMINAR
+        $this->_pdf->Cell($s[0], 6, utf8_decode(''), 0, 0, 'C', 0);
+        $this->_pdf->Cell($s[1], 6, utf8_decode(''), 0, 0, 'C', 0);
+        $this->_pdf->Cell($s[2], 6, utf8_decode(''), 0, 0, 'L', 0);
+        $this->_pdf->Cell($s[3], 6, utf8_decode(''), 0, 0, 'C', 0);
+        $this->_pdf->Cell($s[4], 6, utf8_decode('SALDO ACTUAL'), 1, 0, 'C', 0);
+        $this->_pdf->Cell($s[5], 6, utf8_decode('S/.'.$saldo), 1, 0, 'C', 0);
+        $this->_pdf->Cell($s[6], 6, utf8_decode(''), 0, 0, 'C', 0);
+        $this->_pdf->ln();
 
 
 

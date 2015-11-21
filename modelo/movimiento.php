@@ -44,7 +44,23 @@ class movimiento extends Main{
             return $stmt->fetchall();
         }
     }
-
+    public function selecciona_reporte() {
+        $datos = array($this->id_sesion_caja);
+        $r = $this->get_consulta("pa_m3_movimiento", $datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'oci') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+    }
     public function inserta() {
         $datos = array($this->id_sesion_caja,$this->id_concepto_movimiento, $this->id_forma_pago,
                       $this->monto,$this->descripcion,$this->fecha);

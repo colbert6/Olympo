@@ -33,8 +33,11 @@ function enviarApertura(id,monto){
   	$.post(url+'sesion_caja/aperturar',{id:id,monto:monto});
     window.location = url+'sesion_caja/';
 }
-function cerrarCaja(url){
+function cerrarCaja(url,reporte){
     if(confirm("¿Esta seguro de Cerrar esta Caja?")){
+        if(confirm("¿Desea Generar el Reporte de Movimientos de esta Sesion?")){
+            window.open(reporte,'_blank');
+        }
         href = url;
         window.location = href;
     }
