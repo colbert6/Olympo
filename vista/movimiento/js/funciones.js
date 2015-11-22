@@ -28,7 +28,7 @@ $(document).ready(function() {
         },'json');
 
         $("#id_forma_pago").append(new Option("EFECTIVO","1"));
-        $("#id_forma_pago").append(new Option("TARJETA","2"));
+        
 
     });
 

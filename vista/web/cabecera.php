@@ -24,6 +24,7 @@
     <script src="<?php echo $_webParams['ruta_js']; ?>extras/menu_pegajoso.js"></script>
     <script src="<?php echo $_webParams['ruta_js']; ?>fastclick.min.js"></script>
     <script src="<?php echo $_webParams['ruta_js']; ?>bootstrap.min.js"></script>
+    <script src="<?php echo BASE_URL?>lib/js/validaciones.js"></script>
     <!--Facebook-->
     <div id="fb-root"></div>
         <script>(function(d, s, id) {
