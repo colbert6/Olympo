@@ -6,6 +6,7 @@ class img_inicio extends Main{
     public $imagen;
     public $titulo;
     public $descripcion;
+    public $url1;
     public $estado;
     
     public function selecciona() {
@@ -48,7 +49,7 @@ class img_inicio extends Main{
     }
     
     public function inserta() {
-        $datos = array($this->imagen,$this->titulo,$this->descripcion);
+        $datos = array($this->imagen,$this->titulo,$this->descripcion,$this->url1);
         $r = $this->get_consulta("pa_i_ii", $datos);
         $error = $r[1];
         $r = null;
@@ -57,7 +58,7 @@ class img_inicio extends Main{
 
     public function actualiza() {
        
-        $datos = array($this->id_imagen_inicio,$this->imagen,$this->titulo, $this->descripcion);
+        $datos = array($this->id_imagen_inicio,$this->imagen,$this->titulo, $this->descripcion,$this->url1);
         
         $r = $this->get_consulta("pa_u_ii", $datos);
         $error = $r[1];

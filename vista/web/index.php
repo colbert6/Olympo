@@ -74,7 +74,7 @@
                     <div class="thumbnail">
                         <div class="hover-bg">
                             <div class="hover-text">
-                              <a href="<?php echo BASE_URL.'web/productos' ; ?>"> <h4 ><?php if(isset ($this->inicio[$i]['TITULO']))echo $this->inicio[$i]['TITULO']?></h4>
+                              <a href="<?php if(isset ($this->inicio[$i]['URL']))echo BASE_URL.$this->inicio[$i]['URL'] ; ?>"> <h4 ><?php if(isset ($this->inicio[$i]['TITULO']))echo $this->inicio[$i]['TITULO']?></h4>
                                 <h5><?php if(isset ($this->inicio[$i]['DESCRIPCION']))echo $this->inicio[$i]['DESCRIPCION']?></h5>
                                   <div class="clearfix"></div>
                                   <i class="fa fa-plus"></i>

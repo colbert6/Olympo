@@ -23,11 +23,11 @@
                               <input type="hidden" name="guardar" id="guardar" value="1"/>
                                 <div class="col-md-12 form-group">
                                     <label for="nombre" class="control-label">Nombres:<span>*</span></label>
-                                    <input type="text" id="nombre" class="form-control input-sm" name="nombre" required>
+                                    <input type="text" onKeyPress="return soloLetras(event);" id="nombre" class="form-control input-sm" name="nombre" placeholder="nombre" required>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="telefono" class="control-label">Teléfono:</label>
-                                    <input type="tel" id="telefono" class="form-control input-sm" name="telefono">
+                                    <input type="tel" onkeypress="return soloNumeros(event)" id="telefono" class="form-control input-sm" name="telefono" placeholder="Telefono" required>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="email" class="control-label">Correo electrónico:<span>*</span></label>

@@ -2,8 +2,10 @@ $(function() {
     $("#id_tipopago").change(function() {
         if ($(this).val() == 2) {
             $("#celda_credito").show();
+            $("#verCuotas").show();
         } else {
             $("#celda_credito").hide();
+            $("#verCuotas").hide();
         }
     });
     $("#sel_almacen").change(function() {
@@ -77,6 +79,27 @@ $(function() {
         buscarProveedor();
         $("#VtnBuscarProveedor").show();
     });
+    
+    $("#verCuotas").click(function() {
+       
+        if($("#id_tipopago").val()!='2'){
+            return false;
+        }
+        if($("#CronogramaAbierto").val()==0){
+            bval = true;
+            bval = bval && $("#cuotas").required();
+            bval = bval && $("#intervalo").required();
+            if (!bval) {
+                return false;
+            }
+        }             
+        if($("#cuotas").val()==0 || $("#intervalo").val()==0){
+            return false;
+        }
+        crearCuotas();
+        $("#VtnCuotas").show();
+    });
+    
 
     $("#cantidad").keyup(function() {
         setImporte();
@@ -289,6 +312,76 @@ function buscarProveedor() {
         $("#grillaProveedor").html(HTML);
         $("#jsfoot").html('<script src="' + url + 'vista/compra/js/run_table.js"></script>');
     }, 'json');
+}
+function crearCuotas() {
+        
+        
+        $("#grillaInsumo").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+        $("#grillaProveedor").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');   
+        $("#grillaCuotas").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+        
+        var HTML = '<table id="table" class="table table-bordered"  width="100%">' +
+            '<thead>' +
+            '<tr>' +
+            '<th>Nro</th>' +
+            '<th>Fecha Vencimiento</th>' +
+            '<th>Monto</th>'
+            '</tr>' +
+            '</thead>' +
+            '<tbody>';
+        
+        
+        var fecha_compra =  new Date();
+        var intervalo_dias = $("#intervalo").val();
+        var letras = $("#cuotas").val();
+        var monto = $("#total").val();
+        alert(fecha_compra+intervalo_dias+monto+letras);
+        
+        var c=letras;      
+        var fecha_temp = new Date();
+        var mayor = true;
+        var monto_pagado = 0;
+        var cuota = [];
+        var pago_mensual = parseInt(monto / c);
+        
+                
+        for(var i=1;i<=c;i++){
+            cuota[i]=pago_mensual;
+            monto_pagado = monto_pagado + pago_mensual;  
+        }
+        if(monto_pagado != monto){
+            cuota[c]=	cuota[c] + (monto- monto_pagado);
+        }
+        
+        fecha_temp.setDate (fecha_temp.getDate() + intervalo_dias);
+        var month ;
+        var day ;
+        var year;
+        
+        for (var i = 1; i<=c; i++) {
+            
+            month = fecha_temp.getMonth()+1;
+            day = fecha_temp.getDate();
+            year = fecha_temp.getFullYear();
+            
+            alert(year  + '-' + month + '-' +day );
+            
+            HTML = HTML + '<tr>';
+            HTML = HTML + '<td>' + i + '</td>';
+            HTML = HTML + '<td>';
+            HTML = HTML + '   <input type="date" name="id_fecha[]" class="id_fecha" value"'+year  + '-' + month + '-' +day +'" />';
+            HTML = HTML + '</td>';
+            HTML = HTML + '<td>';
+            HTML = HTML + '   <input type="number" value"'+cuota[i]+'" maxlength="6"  name="id_monto_cuota[]" class="id_monto_cuota" />';
+            HTML = HTML + '</td>';
+            HTML = HTML + '</tr>';
+  
+            fecha_temp.setDate (fecha_temp.getDate() + intervalo_dias);
+            
+        }
+        
+        $("#grillaCuotas").html(HTML);   
+       
 }
 
 function sel_insumo(id_p,id_a,a, d, s, pc) {
