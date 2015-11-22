@@ -19,7 +19,7 @@
                                        <div class="text-center " >
                                            <div class="sombra" > 
                                             <div class="text-justify" >
-                                              <img class="img-circle img-thumbnail text-cente sombra-img" src="<?php echo $_webParams['ruta_img_ser']; ?><?php if(isset ($this->datos_servicio[$i]['IMAGEN']))echo $this->datos_servicio[$i]['IMAGEN']?>" alt="">
+                                              <img class="img-circle img-thumbnail text-center sombra-img" src="<?php echo $_webParams['ruta_img_ser']; ?><?php if(isset ($this->datos_servicio[$i]['IMAGEN']))echo $this->datos_servicio[$i]['IMAGEN']?>" alt="">
                                               <h4 class="text-center sombra-titulo">
                                          <?php if(isset ($this->datos_servicio[$i]['TITULO']))echo $this->datos_servicio[$i]['TITULO']?></h4>
                                            <h5 class="descripcion"><?php if(isset ($this->datos_servicio[$i]['DESCRIPCION']))echo $this->datos_servicio[$i]['DESCRIPCION']?></h5>
