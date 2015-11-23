@@ -12,18 +12,15 @@
                  
         <?php  for ($i = 0; $i < count($this->datos_servicio); $i++) { ?>
 
-        <div class="col-md-4">
-            
-                             <div class="">
+        <div class="col-md-12">
+            <div class"row">
+                             <div class=" col-md-4">
                                    <div class="" >
                                        <div class="text-center " >
-                                           <div class="sombra" > 
+                                           <div class=""  > 
                                             <div class="text-justify" >
-                                              <img class="img-circle img-thumbnail text-center sombra-img" src="<?php echo $_webParams['ruta_img_ser']; ?><?php if(isset ($this->datos_servicio[$i]['IMAGEN']))echo $this->datos_servicio[$i]['IMAGEN']?>" alt="">
-                                              <h4 class="text-center sombra-titulo">
-                                         <?php if(isset ($this->datos_servicio[$i]['TITULO']))echo $this->datos_servicio[$i]['TITULO']?></h4>
-                                           <h5 class="descripcion"><?php if(isset ($this->datos_servicio[$i]['DESCRIPCION']))echo $this->datos_servicio[$i]['DESCRIPCION']?></h5>
-                                           <div class="clearfix"></div>
+                                              <img class="img-circle img-thumbnail  " style='-webkit-box-shadow: 2px 2px 5px #999;-moz-box-shadow: 2px 2px 5px #999;filter: shadow(color=#999999, direction=135, strength=2);'src="<?php echo $_webParams['ruta_img_ser']; ?><?php if(isset ($this->datos_servicio[$i]['IMAGEN']))echo $this->datos_servicio[$i]['IMAGEN']?>" alt="">
+                                              
                                            </div>
                                            </div>
                                        </div>    
@@ -31,6 +28,13 @@
                                          
                                   </div>
                                 </div>
+                                <div class="col-md-8">
+                                <h4 class="text-center sombra-titulo">
+                                         <?php if(isset ($this->datos_servicio[$i]['TITULO']))echo $this->datos_servicio[$i]['TITULO']?></h4>
+                                           <h5 class="descripcion text-center"><?php if(isset ($this->datos_servicio[$i]['DESCRIPCION']))echo $this->datos_servicio[$i]['DESCRIPCION']?></h5>
+                                           <div class="clearfix"></div>
+                                </div>
+                    </div>
             </div>
                
                
