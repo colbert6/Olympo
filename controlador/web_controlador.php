@@ -5,6 +5,10 @@ class web_Controlador extends controller {
     private $_model;
     private $_servicios;
     private $_productos;
+    private $_inicio;
+    private $_publicidad;
+    private $_evento;
+    private $_contacto;
     
     public function __construct() {
         
