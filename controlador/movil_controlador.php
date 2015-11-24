@@ -2,11 +2,7 @@
 
 class movil_Controlador extends controller {
     
-    private $_web_servicios;
-    private $_web_img_servicios;
-    private $_web_categoria_productos;
-    private $_web_productos;
-    private $_datos_olympo;
+    private $_publicidad;
     
     public function __construct() {
         
@@ -15,16 +11,12 @@ class movil_Controlador extends controller {
         }*/
         
         parent::__construct();
-      /*  $this->_web_servicios = $this->loadModel('servicio');
-        $this->_web_img_servicios = $this->loadModel('imagen_servicio');
-        $this->_web_categoria_productos =  $this->loadModel('cat_producto');
-        $this->_web_productos = $this->loadModel('producto');
-      */  
-        //$this->$_datos_olympo = $this->loadModel('articulos');
+        $this->_publicidad = $this->cargar_modelo('img_publicidad');
  
     }
     
     public function index() {
+        $this->_vista->publicidad = $this->_publicidad->selecciona();
         $this->_vista->renderiza_movil('index',false,true);
     }
     

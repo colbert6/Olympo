@@ -61,7 +61,7 @@ class venta_controlador extends controller {
             $this->redireccionar('sesion_caja'); 
         }
         if ($_POST['guardar'] == 1) {
-           //echo '<pre>';print_r($_POST);exit;
+            echo '<pre>';print_r($_POST);exit;
             $this->_venta->id_cliente = $_POST['id_cliente'];
             $this->_venta->id_empleado = session::get('id_empleado');
             $this->_venta->id_tipopago = $_POST['id_tipopago'];
