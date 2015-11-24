@@ -47,7 +47,7 @@ class web_Controlador extends controller {
     public function productos($categoria=false,$id=false){
         $this->_vista->datos_producto = $this->_productos->selecciona();
 
-        $this->_vista->setCss(array('servicios'));
+        $this->_vista->setCss(array('productos'));
         
         $this->_vista->renderiza_web('productos','productos',false);
 

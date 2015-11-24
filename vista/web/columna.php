@@ -66,47 +66,9 @@
                                        $mes="DIC";
                                        break;
                                }
-                              /* $mes1=" ";
-                               switch ($dia1[1]) {
-                                   case 01:
-                                       $mes1="ENE";
-                                       break;
-                                   case 02:
-                                       $mes1="FEB";
-                                       break;
-                                   case 03:
-                                       $mes1="MAR";
-                                       break;
-                                   case 04:
-                                       $mes1="ABR";
-                                       break;
-                                   case 05:
-                                       $mes1="MAY";
-                                       break;
-                                   case 06:
-                                       $mes1="JUN";
-                                       break;
-                                   case 07:
-                                       $mes1="JUL";
-                                       break;
-                                   case 08:
-                                       $mes1="AGO";
-                                       break;
-                                   case 09:
-                                       $mes1="SET";
-                                       break;
-                                   case 10:
-                                       $mes1="OCT";
-                                       break;
-                                   case 11:
-                                       $mes1="NOV";
-                                       break;
-                                   case 12:
-                                       $mes1="DIC";
-                                       break;
-                               }*/
+                              
                              ?>   
-                                <li class="media" >
+                                <li class="media">
                                     <div class="pull-left" >
                                       <div type="button" class="media-object" >
                                         <div class="lista_eventos"><?php echo $dia[2]?></br><?php echo $mes?></div>
