@@ -212,6 +212,7 @@ class view {
             'ruta_css' => BASE_URL . 'vista/movil/css/',
             'ruta_js' => BASE_URL . 'vista/movil/js/',
             'ruta_img' => BASE_URL . 'lib/img/web_movil/',
+            'ruta_img_web' => BASE_URL . 'lib/img/web/',
             'menu'=>$menu,            
             'js' => $js,
             'css' => $css

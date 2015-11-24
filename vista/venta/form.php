@@ -55,18 +55,27 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5" style="padding-left: 0px;padding-right:0px;">
+            <div class="col-md-5" style="padding:0px 0px 0px 5px ;">
+                <input type="hidden" name="estado_cronograma"  id="estado_cronograma" value="0" >
+                <div id="celda_cronograma" style="display: none;"></div>
                 <div id="celda_credito" style="float:left;display: none;" >
-                    <div class="form-group"  style="float:left;margin: 5px 0px 5px 0px;">
-                        <label class="col-md-4 control-label" style="width: 70px;"> Cuotas:</label>
+                    <div class="form-group" style="float:left;margin: 5px auto 5px auto;">
+                        <label class="col-md-4 control-label" style="width: 50px;margin-right: 15px;"> Cuotas:</label>
                         <input name="cuotas" id="cuotas" class="form-control"  placeholder="Cuotas" onkeypress="return soloNumeros(event)"
                                 style="width: 70px"  maxlength="2"  >
                     </div>
-                    <div class="form-group"  style="float:left;margin: 5px 0px 5px 30px;">
-                        <label class="col-md-4 control-label" style="width: 70px;margin-right: 10px;padding-top: 0px;"> Intervalo Dias:</label>
-                        <input name="intervalo" id="intervalo" class="form-control"  placeholder="Intervalo" onkeypress="return soloNumeros(event)"
-                                style="width: 90px"  maxlength="3"  >
+                    <div class="form-group"  style="float:left;margin: 5px auto 5px 0px;">
+                        <label class="col-md-4 control-label" style="width: 55px;margin-right: 15px;padding-top: 0px;">Intervalo Dias:</label>
+                        <input name="intervalo" id="intervalo" class="form-control"  onkeypress="return soloNumeros(event)"
+                                style="width: 60px"  maxlength="3"  >
                     </div>
+                    <div class="form-group" style="float:left;margin: 5px 0px auto 10px; ">
+                        <label>
+                            C.A
+                            <input type="checkbox" name="CronogramaAbierto"  id="CronogramaAbierto" style="width: 15px;margin: 5px;" >
+                            
+                        </label>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -162,7 +171,7 @@
             </div>
             
             <div class="col-md-7" style="margin: 3px auto 5px auto">
-                <input type="text" name="fecha_ini" id="fecha_ini" placeholder="Fecha Inicio" class="form-control" maxlength="10" style="width: 140px" 
+                <input type="text" name="fecha_ini" id="fecha_ini" placeholder="Fecha Inicio" class="form-control" maxlength="10" style="width: 140px" readonly
                        value="<?php if(isset ($this->matricula[0]['ID_MATRICULA']))echo date('Y-m-d');?>"/>
                 <input type="text" name="precio_m" id="precio_m" placeholder="Precio" class="form-control" onkeypress="return dosDecimales(event,this)" style="width: 110px" 
                        value="<?php if(isset ($this->matricula[0]['COSTO'])) echo $this->matricula[0]['COSTO'];?>"/>  
@@ -198,6 +207,7 @@
         <div class="row-fluid">
             <div class="span12 text-center">
                 <p>
+                    <button type="button" class="btn btn-info" id="verCuotas" style="display:none;">Ver Cronograma</button>
                     <button type="button" class="btn btn-primary" id="save">Guardar</button>
                     <a href="<?php echo BASE_URL ?>venta" class="btn btn-danger">Cancelar</a>
                 </p>
@@ -287,6 +297,33 @@
             </form>
         </div>
         <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        </div>
+        </div>
+        </div>
+    </div>
+    <div id="modalCuotas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Cronograma de Pago</h3>
+            <h4>Fecha: <?php echo $hoy; ?></h4>
+        </div>
+        <div class="modal-body">
+            <div id="VtnCuotas">
+                <div class="navbar-inner text-center">
+                    <div id="grillaCuotas">
+                        <div class="page-header" >
+                            <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="guardar_cuotas" name="guardar_cuotas" class="btn btn-success" data-dismiss="modal" aria-hidden="true" style="display:none;" >Guardar</button>
             <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
         </div>
         </div>

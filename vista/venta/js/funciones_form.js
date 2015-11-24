@@ -14,6 +14,7 @@ $(function() {
             $("#celda_credito").show();
         }else{
             $("#celda_credito").hide();
+            limpiar_tipo_pago();
         }
     });
     $("#sel_tipo_documento").change(function(){
@@ -97,6 +98,7 @@ $(function() {
             $("#tblDetalle").append(html);
             setTotal($("#importe").val(), 1);
             limpiar_producto();
+            quitar_cronograma_abierto()
         }
     });
     // /\-/\-/\-/\-/\-/\---PRODUCTOS--------/\-/\-/\-/\-/\-/\------//
@@ -147,6 +149,7 @@ $(function() {
             $("#tblDetalle").append(html);
             setTotal($("#precio_m").val(), 1);
             limpiar_membresia();
+            quitar_cronograma_abierto()
         }
     });
     
@@ -187,11 +190,24 @@ $(function() {
         }
         if (bval) {
             if( $(".row_tmp").length ) {
+                if($("#id_tipopago").val()==2){
+                    if (!$("#CronogramaAbierto").is(':checked')) {
+                        crearCuotas();
+                    }
+                    if ($("#restante_cuota").val()!=0 && $("#restante_cuota").val()!='0.00') {
+                        mostrar_ver_cuotas();
+                        return false;
+                    }
+                }
+                
                 bootbox.confirm("¿Está seguro que desea guardar la venta?", function(result) {
-                    if(result){
+                    if (result) {
+                        
+                        $("#celda_cronograma").html($("#grillaCuotas").html()); 
                         $("#frm").submit();
                     }
                 });
+                
             }else{
                 bootbox.alert("Agregue los servicios al detalle");
             }
@@ -218,8 +234,34 @@ $(function() {
     });
     $("#cantidad").blur(function(){
         var resta;
+    });
+    $("#verCuotas").click(function() {
+        mostrar_ver_cuotas();
+    });
+    
+    $("#CronogramaAbierto").click(function() {
+        if ($("#CronogramaAbierto").is(':checked')) {
+            var completo= mostrar_ver_cuotas();
+            if(completo){
+                $("#verCuotas").show();
+                limpiar_cuotas();
+            }
+            
+            
+        } else {
+            quitar_cronograma_abierto()
+        }
+    });
+    
+    $("#guardar_cuotas").click(function() {    
+        $("#estado_cronograma").val('1');
+    });
+    $("#cuotas").keyup(function() {
+        quitar_cronograma_abierto()
         
-        
+    });
+    $("#intervalo").keyup(function() {
+        quitar_cronograma_abierto()
     });
     $("#precio").keyup(function(){
         setImporte();
@@ -398,6 +440,104 @@ function buscarMembresia() {
     }, 'json');
 }
 
+function crearCuotas() {
+                
+    $("#grillaInsumo").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');
+    $("#grillaProveedor").html('<div class="page-header"><img src="'+url+'lib/img/loading.gif" /></div>');   
+        
+        var HTML = '<table id="table" class="table table-bordered"  width="100%">' +
+            '<thead>' +
+            '<tr>' +
+            '<th>Nro</th>' +
+            '<th>Fecha Vencimiento</th>' +
+            '<th>Monto</th>'
+            '</tr>' +
+            '</thead>' +
+            '<tbody>';
+    
+        var letras = $("#cuotas").val();
+        var c=letras;   
+    
+        if($("#estado_cronograma").val()==0){
+            
+            var monto = $("#total").val();
+            var intervalo_dias = $("#intervalo").val();
+
+               
+            var nueva_fecha = new Date();
+                month = nueva_fecha.getMonth()+1;
+                day = nueva_fecha.getDate();
+                year = nueva_fecha.getFullYear();
+
+                month = (month < 10) ? ("0" + month) : month;
+                day = (day < 10) ? ("0" + day) : day;   
+            var fecha_actual=  year + '-' + month + '-' +day  ;
+            
+            var fecha_temp = new Date();
+            var monto_pagado = 0;
+            var cuota = [];
+            var pago_mensual = parseInt(monto / c);
+
+            for(var i=1;i<=c;i++){
+                cuota[i]=pago_mensual;
+                monto_pagado = monto_pagado + pago_mensual;  
+            }
+            if(monto_pagado !== monto){
+                cuota[c]=(cuota[c] + (monto- monto_pagado)).toFixed(2);
+            }
+
+            fecha_temp.setDate (fecha_temp.getDate() + parseInt(intervalo_dias));
+            var month ;
+            var day ;
+            var year;
+
+            for (var i = 1; i<=c; i++) {
+
+                month = fecha_temp.getMonth()+1;
+                day = fecha_temp.getDate();
+                year = fecha_temp.getFullYear();
+
+                month = (month < 10) ? ("0" + month) : month;
+                day = (day < 10) ? ("0" + day) : day;            
+                
+                var valor= parseFloat(cuota[i]).toFixed(2)
+                
+                HTML = HTML + '<tr>';
+                HTML = HTML + '<td>' + i + '</td>';
+                HTML = HTML + '<td>';
+                HTML = HTML + '   <input type="date" name="fecha_cuota[]" id="fecha_cuota'+i+'" readonly class="fecha_cuota" value="'+year + '-' + month + '-' +day+'"  min="'+fecha_actual+'"  max="3500-12-31" />';
+                HTML = HTML + '</td>';
+                HTML = HTML + '<td>';
+                HTML = HTML + '   <input type="text" value="'+valor+'" maxlength="10"  name="monto_cuota[]" id="monto_cuota'+i+'" class="monto_cuotas" onkeypress="return dosDecimales(event,this)" onblur="montoCuota('+i+')" />';
+                HTML = HTML + '</td>';
+                HTML = HTML + '</tr>';
+
+                fecha_temp.setDate (fecha_temp.getDate() + parseInt(intervalo_dias));
+
+            }
+            HTML = HTML + '</tbody></table>';
+            HTML = HTML+'<div class="form-group col-md-6 style="float:left;" >'+
+                           '<label class="control-label col-md-4">Restante:</label>'+
+                           '<div class="col-md-7">'+    
+                               '<input id="restante_cuota" name="restante_cuota" readonly class="form-control" value="0.00" >'+
+                           '</div>'+
+                        '</div>' ;
+            HTML = HTML+'<div class="form-group col-md-6 " style="float:left;" >'+
+                           '<label class="control-label col-md-3">Total:</label>'+
+                           '<div class="col-md-8">'+    
+                               '<input id="total_en_cuotas" name="total_en_cuotas" readonly class="form-control" value="'+$("#total").val()+'" >'+
+                           '</div>'+
+                        '</div>'+
+                        '<br>'
+                        ;
+            
+            $("#grillaCuotas").html(HTML);
+            $("#guardar_cuotas").show(); 
+            
+        
+        }
+          
+}
 function sel_socio(id_s,soc){
     $("#id_cliente").val(id_s);
     $("#cliente").val(soc);
@@ -436,7 +576,86 @@ function limpiar_membresia(){
     $("#id_matricula,#id_membresia,#membresia,#socio,#fecha_ini,#precio_m").val('');
     $("#fecha_ini,#precio_m").attr('disabled',true);
 }
+function limpiar_tipo_pago() {
+    $("#intervalo,#cuotas").val('');
+    $("#estado_cronograma").val('0');
+    document.getElementById("CronogramaAbierto").checked=false;
+    
+}
 function limpiar(){
     limpiar_producto();
     limpiar_membresia();
+}
+function mostrar_ver_cuotas() {
+    if($("#id_tipopago").val()=='2'){
+                bval = true;
+                bval = bval && $("#cuotas").required();
+                bval = bval && $("#intervalo").required();
+                if (bval) {
+                    if($("#cuotas").val()<=0 || $("#intervalo").val()<=0){
+                        return false;
+                    }
+                    var total=$("#total").val();
+                    if($("#cuotas").val()>= parseInt(total)){
+                        bootbox.alert("Numero de cuotas invalido, por ser Mayor al total ");
+                        $("#cuotas").focus();
+                        return false;
+                    }
+                    crearCuotas();
+                    $("#modalCuotas").modal('show');
+                    $("#VtnCuotas").show();
+                    return true
+
+                }else{
+                    return false;
+                }
+
+    }
+}
+function quitar_cronograma_abierto() {
+    $("#estado_cronograma").val('0');
+    document.getElementById("CronogramaAbierto").checked=false;
+     $("#verCuotas").hide();
+    
+}
+function limpiar_cuotas() {
+    for(var i=1;i<=$("#cuotas").val();i++){
+        $("#monto_cuota"+i).val('0.00');
+    }
+    $("#restante_cuota").val($("#total").val());
+    
+}
+
+function montoCuota(num) {
+    var restante,
+        suma_monto_cuotas=0,
+        total=$("#total").val();
+    
+    if (isNaN($("#monto_cuota"+num).val()) || $("#monto_cuota"+num).val()=='') {
+        $("#monto_cuota"+num).val('0.00');
+    }else{
+         var valor=(parseFloat($("#monto_cuota"+num).val()).toFixed(2));
+        $("#monto_cuota"+num).val(valor);
+    }
+
+    for(var i=1;i<=$("#cuotas").val();i++){
+        suma_monto_cuotas=(parseFloat(suma_monto_cuotas)+parseFloat($("#monto_cuota"+i).val())).toFixed(2);
+    }
+    restante=(parseFloat(total)-parseFloat(suma_monto_cuotas)).toFixed(2);
+    
+    if(restante<0){
+       var exceso= (parseFloat($("#monto_cuota"+num).val())+parseFloat(restante)).toFixed(2);
+       $("#monto_cuota"+num).val(exceso)
+       $("#restante_cuota").val(0);
+       $("#guardar_cuotas").show();
+    }else{
+       $("#restante_cuota").val(restante);
+       if(restante==0){
+           $("#guardar_cuotas").show();
+       }else{
+          $("#guardar_cuotas").hide();
+       }
+       
+    }
+    
 }

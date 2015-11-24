@@ -42,11 +42,25 @@ $(function() {
         }
         if (bval) {
             if ($(".row_tmp").length) {
+                if($("#id_tipopago").val()==2){
+                    if (!$("#CronogramaAbierto").is(':checked')) {
+                        crearCuotas();
+                    }
+                    if ($("#restante_cuota").val()!=0 && $("#restante_cuota").val()!='0.00') {
+                        mostrar_ver_cuotas();
+                        return false;
+                    }
+                }
+                
                 bootbox.confirm("¿Está seguro que desea guardar la compra?", function(result) {
                     if (result) {
+                        
+                        $("#celda_cronograma").html($("#grillaCuotas").html()); 
                         $("#frm").submit();
                     }
                 });
+                
+                                
             } else {
                 bootbox.alert("Agregue los Productos al detalle");
             }
@@ -83,35 +97,18 @@ $(function() {
     });
     
     $("#verCuotas").click(function() {
-        
-        if($("#id_tipopago").val()=='2'){
-            bval = true;
-            bval = bval && $("#cuotas").required();
-            bval = bval && $("#intervalo").required();
-            if (bval) {
-                if($("#cuotas").val()<=0 || $("#intervalo").val()<=0){
-                    return false;
-                }
-                var total=$("#total").val();
-                if($("#cuotas").val()>= parseInt(total)){
-                    bootbox.alert("Numero de cuotas invalido, mayor al total ");
-                    $("#cuotas").focus();
-                    return false;
-                }
-                crearCuotas();
-                $("#VtnCuotas").show();
-                     
-            }else{
-                return false;
-            }
-            
-        }
-               
+        mostrar_ver_cuotas();
     });
     
     $("#CronogramaAbierto").click(function() {
         if ($("#CronogramaAbierto").is(':checked')) {
-            $("#verCuotas").show();
+            var completo= mostrar_ver_cuotas();
+            if(completo){
+                $("#verCuotas").show();
+                limpiar_cuotas();
+            }
+            
+            
         } else {
             quitar_cronograma_abierto()
         }
@@ -119,7 +116,14 @@ $(function() {
     
     $("#guardar_cuotas").click(function() {    
         $("#estado_cronograma").val('1');
-    });   
+    });
+    $("#cuotas").keyup(function() {
+        quitar_cronograma_abierto()
+        
+    });
+    $("#intervalo").keyup(function() {
+        quitar_cronograma_abierto()
+    });
 
     $("#cantidad").keyup(function() {
         setImporte();
@@ -127,6 +131,13 @@ $(function() {
     
     $("#precio").keyup(function() {
         setImporte();
+    });
+    $("#precio").blur(function(){
+        var precio = parseFloat($(this).val());
+        if (isNaN(precio)) {
+            precio = 0;
+        }
+        $(this).val(precio.toFixed(2));
     });
 
     $("#addDetalle").click(function() {
@@ -425,7 +436,8 @@ function crearCuotas() {
                         '<br>'
                         ;
             
-            $("#grillaCuotas").html(HTML); 
+            $("#grillaCuotas").html(HTML);
+            $("#guardar_cuotas").show(); 
             
         
         }
@@ -443,14 +455,6 @@ function sel_insumo(id_p,id_a,a, d, s, pc) {
     $('#modalInsumo').modal('hide');
     $("#cantidad").focus();
     setImporte()
-}
-
-function sel_cuota(id_p, d,ruc) {
-    $("#id_proveedor").val(id_p);
-    $("#proveedor").val(d);
-    $("#ruc_prov").val(ruc);
-    $('#modalProveedor').modal('hide');
-    $("#id_tipopago").focus();
 }
 
 function sel_proveedor(id_p, d,ruc) {
@@ -472,12 +476,46 @@ function limpiar_tipo_pago() {
     document.getElementById("CronogramaAbierto").checked=false;
     
 }
+function mostrar_ver_cuotas() {
+    if($("#id_tipopago").val()=='2'){
+                bval = true;
+                bval = bval && $("#cuotas").required();
+                bval = bval && $("#intervalo").required();
+                if (bval) {
+                    if($("#cuotas").val()<=0 || $("#intervalo").val()<=0){
+                        return false;
+                    }
+                    var total=$("#total").val();
+                    if($("#cuotas").val()>= parseInt(total)){
+                        bootbox.alert("Numero de cuotas invalido, por ser Mayor al total ");
+                        $("#cuotas").focus();
+                        return false;
+                    }
+                    crearCuotas();
+                    $("#modalCuotas").modal('show');
+                    $("#VtnCuotas").show();
+                    return true
+
+                }else{
+                    return false;
+                }
+
+    }
+}
 function quitar_cronograma_abierto() {
     $("#estado_cronograma").val('0');
     document.getElementById("CronogramaAbierto").checked=false;
      $("#verCuotas").hide();
     
 }
+function limpiar_cuotas() {
+    for(var i=1;i<=$("#cuotas").val();i++){
+        $("#monto_cuota"+i).val('0.00');
+    }
+    $("#restante_cuota").val($("#total").val());
+    
+}
+
 function montoCuota(num) {
     var restante,
         suma_monto_cuotas=0,
@@ -499,6 +537,7 @@ function montoCuota(num) {
        var exceso= (parseFloat($("#monto_cuota"+num).val())+parseFloat(restante)).toFixed(2);
        $("#monto_cuota"+num).val(exceso)
        $("#restante_cuota").val(0);
+       $("#guardar_cuotas").show();
     }else{
        $("#restante_cuota").val(restante);
        if(restante==0){

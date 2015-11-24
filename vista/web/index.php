@@ -7,7 +7,7 @@
                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <?php for($i = 0; $i < count($this->publicidad); $i++){ ?>
-                        <li data-target="#carousel-example-generic" data-slide-to="$i" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i ?>" class="active"></li>
                         <?php } ?>
                     </ol> 
                      <div class="carousel-inner">
@@ -23,17 +23,18 @@
                             
                         </div>
                         <?php } ?>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
                     </div>
-                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
+                    <?php } ?>
                 </div>
                    
                 <?php } ?>
-                
+
             </div>
 
                                  
