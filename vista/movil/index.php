@@ -3,27 +3,30 @@
     <div class="row">
 
         <div class="col-md-12">
+            <?php if (isset($this->publicidad) && count($this->publicidad)){?>
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                <?php for($i = 0; $i < count($this->publicidad); $i++){ ?>
+                <?php if($i==0){ $clase = "class='active'";}else{$clase = "";}?>
+                    <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i;?>" <?php echo $clase;?>></li>
+                <?php } ?>
                 </ol>
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                    <div class="item active">
-                        <img class="img-responsive" src="http://placehold.it/1480x900" alt="">
+                <?php for($i = 0; $i < count($this->publicidad); $i++){ ?>
+                <?php if($i==0){ $clase = "class='item active'";}else{$clase = "class='item'";}?>
+                    <div <?php echo $clase; ?> >
+                        <img class='img-responsive' src="<?php echo $_movilParams['ruta_img']."web/".$this->publicidad[$i]['IMAGEN'];  ?>" alt="">
                     </div>
-                    <div class="item">
-                        <img class="img-responsive" src="http://placehold.it/1480x900" alt="">
-                    </div>
-                    <div class="item">
-                        <img class="img-responsive" src="http://placehold.it/1480x900" alt="">
-                    </div>
+                <?php } ?>
                 </div>
-
+                <style type="text/css">
+                    #img-tam{
+                        height: 180px;
+                    }
+                </style>
                 <!-- Controls -->
                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left"></span>
@@ -32,6 +35,7 @@
                     <span class="glyphicon glyphicon-chevron-right"></span>
                 </a>
             </div>
+            <?php } ?>
         </div>
 
     
