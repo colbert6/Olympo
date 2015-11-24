@@ -161,33 +161,7 @@
                 </p>
             </div>
         </div>
-        <div id="modalCuotas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">Cronograma de Pago</h3>
-                <h4>Fecha: <?php echo $hoy; ?></h4>
-            </div>
-            <div class="modal-body">
-                <div id="VtnCuotas">
-                    <div class="navbar-inner text-center">
-                        <div id="grillaCuotas">
-                            <div class="page-header" >
-                                <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="guardar_cuotas" name="guardar_cuotas" class="btn btn-success" data-dismiss="modal" aria-hidden="true" style="display:none;" >Guardar</button>
-                <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
-            </div>
-            </div>
-            </div>
-        </div>
+        
     
     </form>
     
@@ -296,4 +270,30 @@
         </div>
     </div>
     
-    
+    <div id="modalCuotas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Cronograma de Pago</h3>
+            <h4>Fecha: <?php echo $hoy; ?></h4>
+        </div>
+        <div class="modal-body">
+            <div id="VtnCuotas">
+                <div class="navbar-inner text-center">
+                    <div id="grillaCuotas">
+                        <div class="page-header" >
+                            <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="guardar_cuotas" name="guardar_cuotas" class="btn btn-success" data-dismiss="modal" aria-hidden="true" style="display:none;" >Guardar</button>
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        </div>
+        </div>
+        </div>
+    </div>

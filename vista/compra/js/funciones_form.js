@@ -42,15 +42,24 @@ $(function() {
         }
         if (bval) {
             if ($(".row_tmp").length) {
-                if ($("#restante_cuota").val()!=0) {
-                    mostrar_ver_cuotas();
-                }else{
-                    bootbox.confirm("¿Está seguro que desea guardar la compra?", function(result) {
-                        if (result) {
-                            $("#frm").submit();
-                        }
-                    });
+                if($("#id_tipopago").val()==2){
+                    if (!$("#CronogramaAbierto").is(':checked')) {
+                        crearCuotas();
+                    }
+                    if ($("#restante_cuota").val()!=0 && $("#restante_cuota").val()!='0.00') {
+                        mostrar_ver_cuotas();
+                        return false;
+                    }
                 }
+                
+                bootbox.confirm("¿Está seguro que desea guardar la compra?", function(result) {
+                    if (result) {
+                        
+                        $("#celda_cronograma").html($("#grillaCuotas").html()); 
+                        $("#frm").submit();
+                    }
+                });
+                
                                 
             } else {
                 bootbox.alert("Agregue los Productos al detalle");
@@ -110,6 +119,7 @@ $(function() {
     });
     $("#cuotas").keyup(function() {
         quitar_cronograma_abierto()
+        
     });
     $("#intervalo").keyup(function() {
         quitar_cronograma_abierto()
@@ -121,6 +131,13 @@ $(function() {
     
     $("#precio").keyup(function() {
         setImporte();
+    });
+    $("#precio").blur(function(){
+        var precio = parseFloat($(this).val());
+        if (isNaN(precio)) {
+            precio = 0;
+        }
+        $(this).val(precio.toFixed(2));
     });
 
     $("#addDetalle").click(function() {
@@ -419,7 +436,7 @@ function crearCuotas() {
                         '<br>'
                         ;
             
-            $("#grillaCuotas").html(HTML); 
+            $("#grillaCuotas").html(HTML);
             $("#guardar_cuotas").show(); 
             
         
@@ -438,14 +455,6 @@ function sel_insumo(id_p,id_a,a, d, s, pc) {
     $('#modalInsumo').modal('hide');
     $("#cantidad").focus();
     setImporte()
-}
-
-function sel_cuota(id_p, d,ruc) {
-    $("#id_proveedor").val(id_p);
-    $("#proveedor").val(d);
-    $("#ruc_prov").val(ruc);
-    $('#modalProveedor').modal('hide');
-    $("#id_tipopago").focus();
 }
 
 function sel_proveedor(id_p, d,ruc) {
