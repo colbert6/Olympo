@@ -61,7 +61,7 @@ class venta_controlador extends controller {
             $this->redireccionar('sesion_caja'); 
         }
         if ($_POST['guardar'] == 1) {
-            echo '<pre>';print_r($_POST);exit;
+            //echo '<pre>';print_r($_POST);exit;
             $this->_venta->id_cliente = $_POST['id_cliente'];
             $this->_venta->id_empleado = session::get('id_empleado');
             $this->_venta->id_tipopago = $_POST['id_tipopago'];
@@ -111,34 +111,13 @@ class venta_controlador extends controller {
             
             //insertamos cronograma de pago
             if($_POST['id_tipopago']==2){
-                //---------------CRONOGRAMA AL CREDITO
-                $fecha_compra = $_POST['fechaventa'];
-                $intervalo_dias = $_POST['intervalo'];
-                $letras=$_POST['cuotas'];
-                $monto = $_POST['total'];
-                $c=$letras;
-                $fecha_temp = $fecha_compra;
-                $mayor = true;
-                $cuota = array();
                 
-                $monto_pagado = 0;
-                $pago_mensual = (int)($monto / $c);
-
-                for($i=1;$i<=$c;$i++){
-                    $cuota[$i]=$pago_mensual;
-                    $monto_pagado = $monto_pagado + $pago_mensual;  
-                }
-                if($monto_pagado != $monto){
-                    $cuota[$c]=	$cuota[$c] + ($monto- $monto_pagado);
-                }
-                $fecha_temp = date("Y-m-d", strtotime("$fecha_compra +$intervalo_dias day"));
-                for($i=1;$i<=$c;$i++){
-                    $this->_cronograma_cobro->id_venta=$dato_venta[0]['MAX_VENTA'];
-                    $this->_cronograma_cobro->fecha_venc=$fecha_temp;
-                    $this->_cronograma_cobro->num_cuota=$i;
-                    $this->_cronograma_cobro->monto_cuota=$cuota[$i];
-                    $this->_cronograma_cobro->inserta();
-                    $fecha_temp = date("Y-m-d", strtotime("$fecha_temp +$intervalo_dias day"));
+                for($i=0;$i<$_POST['cuotas'];$i++){
+                    $this->_cronograma_pago->id_venta=$dato_venta[0]['MAX_VENTA'];
+                    $this->_cronograma_pago->fecha_venc=$_POST['fecha_cuota'][$i];
+                    $this->_cronograma_pago->num_cuota=$i+1;
+                    $this->_cronograma_pago->monto_cuota=$_POST['monto_cuota'][$i];
+                    $this->_cronograma_pago->inserta();
                 }
                 
             }else{
