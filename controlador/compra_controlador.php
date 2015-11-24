@@ -66,7 +66,7 @@ class compra_controlador extends controller {
             $this->redireccionar('sesion_caja'); 
         }
         if ($_POST['guardar'] == 1) {
-            //echo '<pre>';print_r($_POST);exit;
+            echo '<pre>';print_r($_POST);exit;
             $this->_compra->id_proveedor = $_POST['id_proveedor'];
             $this->_compra->id_empleado = session::get('id_empleado');
             $this->_compra->id_modalidad_transaccion= $_POST['id_tipopago'];

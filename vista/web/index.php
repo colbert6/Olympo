@@ -54,7 +54,7 @@
                             </div>    
                             <img src="<?php echo $_webParams['ruta_img']; ?><?php if(isset ($this->inicio[$i]['IMAGEN']))echo $this->inicio[$i]['IMAGEN']?>" alt="" style="height: 90%;"> 
                             <div class="caption">
-                                <h4 ><?php if(isset ($this->inicio[$i]['TITULO']))echo $this->inicio[$i]['TITULO']?></h4>  
+                                <h4 ><strong><?php if(isset ($this->inicio[$i]['TITULO']))echo $this->inicio[$i]['TITULO']?></strong></h4>  
                             </div>
                         </div>
                     </div>

@@ -6,27 +6,20 @@
                      
                     <div class="col-md-12">
                     <?php for ($i = 0; $i < count($this->datos_producto); $i++) {?>
-                         <div class="col-md-4">
-            
-                                 <div class="">
-                                     <div class="" >
-
-                                         <div class="text-center " >
-                                             <div class="sombra" > 
-                                              <div class="text-justify" >
-                                                <img class="img-circle img-thumbnail text-cente sombra-img" src="<?php echo $_webParams['ruta_img_pro']; ?><?php if(isset ($this->datos_producto[$i]['IMAGEN']))echo $this->datos_producto[$i]['IMAGEN']?>" alt="">
-                                                <h4 class="text-center sombra-titulo">
-                                           <?php if(isset ($this->datos_producto[$i]['TITULO']))echo $this->datos_producto[$i]['TITULO']?></h4>
-                                             <h5 class="descripcion"><?php if(isset ($this->datos_producto[$i]['DESCRIPCION']))echo $this->datos_producto[$i]['DESCRIPCION']?></h5>
-                                             <div class="clearfix"></div>
-                                             </div>
-                                             </div>
-                                         </div>    
-                                          
-                                         
-                                     </div>
-                                 </div>
+                         <div class="col-md-3 col-sm-6">
+                <div class="thumbnail" style='-webkit-box-shadow: 2px 2px 5px #999;-moz-box-shadow: 2px 2px 5px #999;filter: shadow(color=#999999, direction=135, strength=2);'>
+                    <img  src="<?php echo $_webParams['ruta_img_pro'].$this->datos_producto[$i]["IMAGEN"];?>" alt="">
+                    <div class="caption">
+                        <h3 class='text-center'><strong><?php echo $this->datos_producto[$i]["TITULO"] ?></strong></h3>
+                        <p class='text-center'><?php echo $this->datos_producto[$i]["DESCRIPCION"] ?></p>
+                        <p class='text-center'>
+                            <!--a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a-->
+                        </p>
+                    </div>
+                </div>
             </div>
+
+
                    <?php } ?>
                     </div> 
                  

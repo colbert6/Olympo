@@ -12,6 +12,7 @@ class movimiento_controlador extends controller {
     private $_venta;
     private $_tipo_movimiento;
     private $_empleado;
+    private $_param;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -28,6 +29,7 @@ class movimiento_controlador extends controller {
         $this->_compra = $this->cargar_modelo('compra');
         $this->_venta = $this->cargar_modelo('venta');
         $this->_empleado = $this->cargar_modelo('empleado');
+        $this->_param = $this->cargar_modelo('param');
     } 
 
     public function index() {
@@ -62,12 +64,19 @@ class movimiento_controlador extends controller {
             if ($_POST['guardar'] == 1) {
                 $id_tipo_movimiento = $_POST["id_tipo_movimiento"];
                 $monto = $_POST["monto"];
+
+                $this->_param->id_param = "CAJA MINIMA";
+                $parametro = $this->_param->selecciona();
+                $minimo_caja = $parametro[0]['VALOR'];
+
+
                 if($id_tipo_movimiento==1){
-                    if(($monto_caja - $monto) < 50){
-                        echo '<script>alert("No hay suficiente saldo para ejecutar el pago")</script>';
-                        $this->redireccionar('sesion_caja');
+                    if(($monto_caja - $monto) < $minimo_caja){
+                        echo '<script>alert("Monto Minimo de Caja: S/. '.$minimo_caja.' \nNo se Puede Realizar el Pago")</script>';
+                        $this->redireccionar('movimiento');
                     }
                 }
+                
                 $id_concepto_movimiento = $_POST["id_concepto_movimiento"];
                 $id_forma_pago = $_POST["id_forma_pago"]; 
                 $descripcion = $_POST["descripcion"];
@@ -145,11 +154,14 @@ class movimiento_controlador extends controller {
                 }
                 
                 $tipo_movimiento = $_POST['tipo_movimiento'];
+                $this->_param->id_param = "CAJA MINIMA";
+                $parametro = $this->_param->selecciona();
+                $minimo_caja = $parametro[0]['VALOR'];
 
                 if($tipo_movimiento == "EGRESO"){
-                    if(($monto_caja - $monto) < 50){
-                        echo '<script>alert("No hay suficiente saldo para ejecutar el pago")</script>';
-                        $this->redireccionar('sesion_caja');
+                    if(($monto_caja - $monto) < $minimo_caja){
+                        echo '<script>alert("Monto Minimo de Caja: S/. '.$minimo_caja.' \nNo se Puede Realizar el Pago")</script>';
+                        $this->redireccionar('movimiento');
                     }
                 }
 
