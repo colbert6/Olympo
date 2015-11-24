@@ -34,12 +34,16 @@ class reportes_controlador extends controller {
 //        print_r($almacenes);
 //        echo "</pre>";exit;
         $n_almacenes = count($almacenes);
+ //       print_r($n_almacenes);exit();
         $opp = 47;
         $contapag = 1;
         $abs = 1;
         for ($x = 0; $x < $n_almacenes; $x++) {
-            $this->_reportes->idalmacen = $almacenes[$x]['ID_ALMACEN'];
+         //   print_r($x);exit();
+            $this->_reportes->id_almacen = $almacenes[$x]['ID_ALMACEN'];
+           // print_r($this->_reportes->id_almacen);exit();
             $datos = $this->_reportes->selecciona_stock_total();
+          //  print_r($datos);exit();
             $datacount = count($datos);
             $contaobj = 0;
             $c_codigo[$contapag] = "";
@@ -50,9 +54,9 @@ class reportes_controlador extends controller {
             $c_stock[$contapag] = "";
             for ($i = 0; $i < $datacount; $i++) {
                 $c_codigo[$contapag] = $c_codigo[$contapag] . ($i+1) . "\n";
-                $c_descripcion[$contapag] = $c_descripcion[$contapag] . substr(utf8_decode($datos[$i]['XINSUMO']), 0, 45) . "\n";
-                $c_unidad_medida[$contapag] = $c_unidad_medida[$contapag] . substr($datos[$i]['UNIDAD_MEDIDA'], 0, 30) . "\n";
-                $c_stock[$contapag] = $c_stock[$contapag] . number_format($datos[$i]['XSTOCK'],0) . "\n";
+                $c_descripcion[$contapag] = $c_descripcion[$contapag] . substr(utf8_decode($datos[$i]['PRODUCTO']), 0, 45) . "\n";
+                $c_unidad_medida[$contapag] = $c_unidad_medida[$contapag] . substr($datos[$i]['PPRESENTACION'], 0, 30) . "\n";
+                $c_stock[$contapag] = $c_stock[$contapag] . number_format($datos[$i]['SSTOCK'],0) . "\n";
                 $contaobj = $contaobj + 1;
                 if ($contaobj == $opp) {
                     $contaobj = 0;
@@ -77,7 +81,7 @@ class reportes_controlador extends controller {
                 $this->_pdf->SetX(28);
                 $this->_pdf->Cell(92,6,utf8_decode('Insumo'),'BT',0,'L',1);
                 $this->_pdf->SetX(120);
-                $this->_pdf->Cell(50,6,utf8_decode('Unidad Medidad'),'BT',0,'L',1);
+                $this->_pdf->Cell(50,6,utf8_decode('Presentacion'),'BT',0,'L',1);
                 $this->_pdf->SetX(170);
                 $this->_pdf->Cell(25,6,utf8_decode('Stock'),'BT',0,'R',1);
                 //MARGEN TOTAL: HASTA=195 (ULTIMO SETX + ANCHO DE ULTIMO CELL)

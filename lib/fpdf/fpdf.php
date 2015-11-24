@@ -373,7 +373,7 @@ function AddPage($orientation='', $size='')
 
 function Header()
 {
-        $this->Image(ROOT . 'lib' . DS . 'img' . DS . 'logo.jpg', 10, 8, 09);
+        $this->Image(ROOT . 'lib' . DS . 'img' . DS . 'logo'. DS .'logo.png', 10, 8, 09);
         $this->SetFont('Arial', 'B', 11);
         $this->SetY(8);
         $this->Cell(185, 5, utf8_decode('Módulo de Reportes'), 0, 0, 'R');

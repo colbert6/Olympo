@@ -2,7 +2,7 @@
 $chart = new Highchart();
 $chart->chart->renderTo = "container";
 $chart->chart->type = "column";
-$chart->title->text = utf8_decode("Servicios Más Vendidos");
+$chart->title->text = utf8_decode("Servicios Más Vendidos de Olympo Finess");
 
 $chart->xAxis->categories = array($this->datos[0]['NOMBRE'],$this->datos[1]['NOMBRE'],
         $this->datos[2]['NOMBRE'],$this->datos[3]['NOMBRE'],$this->datos[4]['NOMBRE']);
