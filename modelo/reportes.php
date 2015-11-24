@@ -4,9 +4,9 @@ class reportes extends Main{
     
     public function selecciona_stock_total() {
         $datos = array($this->id_almacen);
-        
-        $r = $this->get_consulta("pa_m2_almacen",$datos);
-        print_r($r);exit();
+      //  print_r($datos);exit();
+        $r = $this->get_consulta("pa_rep_stock_almacen",$datos);
+      //  print_r($r);exit();
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {

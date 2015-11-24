@@ -5,7 +5,10 @@ class reportes_graficos extends Main{
     public $anio;
 
     public function reporte_ventas() {
-         $r = $this->get_consulta("pa_m1_re_venta",null);
+        $datos = array($this->anio);
+
+         $r = $this->get_consulta("pa_m1_re_venta",$datos);
+      //   print_r($r);exit();
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
@@ -22,7 +25,9 @@ class reportes_graficos extends Main{
     }
     
     public function reporte_compras() {
-         $r = $this->get_consulta("pa_m1_re_compra",null);
+        $datos = array($this->anio);
+        //print_r($datos);exit();
+         $r = $this->get_consulta("pa_m1_re_compra",$datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {

@@ -27,6 +27,7 @@ class reportes_graficos_controlador extends controller {
 
     public function r_compras() {
         $this->_reportes_graficos->anio=date("Y");
+       // print_r($this->_reportes_graficos->anio);exit();
         $this->_vista->datos= $this->_reportes_graficos->reporte_compras();
         $this->_vista->renderizar_reporte('r_compras');
     }
