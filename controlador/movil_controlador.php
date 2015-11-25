@@ -7,9 +7,9 @@ class movil_Controlador extends controller {
     
     public function __construct() {
         
-       /* if(!$this->web_movil()){
+       if(!$this->web_movil()){
             $this->redireccionar('web');
-        }*/
+        }
         
         parent::__construct();
         $this->_publicidad = $this->cargar_modelo('img_publicidad');
