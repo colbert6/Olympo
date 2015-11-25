@@ -36,7 +36,7 @@ class img_inicio_controlador extends controller {
             $handle->file_new_name_body = 'web_' . uniqid();
             $handle->image_resize = true;
             $handle->image_x = 317;
-            $handle->image_y = 152;
+            $handle->image_y = 190;
             $handle->Process($dir_dest);
             $imagen = $handle->file_dst_name;
             //echo "<pre>"; print_r($handle);exit;
@@ -76,14 +76,21 @@ class img_inicio_controlador extends controller {
          //   print_r($_POST['modificar_imagen']);exit();
             if($_POST['modificar_imagen'] == 1){
                 //echo '<pre>';print_r($_POST['modificar_imagen');exit;
-                $this->get_Libreria('upload' . DS . 'class.upload');
+                $this->_model->id_imagen_inicio = $this->filtrarInt($id);
+                $datos_img = $this->_model->selecciona_id();
+                $imagen2 = $datos_img[0]["IMAGEN"];
                 $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'web' . DS;
+
+                unlink($dir_dest.$imagen2);
+
+                $this->get_Libreria('upload' . DS . 'class.upload');
+                
                 $handle = new Upload($_FILES['archivo'], 'es_ES');
                 if ($handle->uploaded) {
                     $handle->file_new_name_body = 'web_' . uniqid();
                     $handle->image_resize = true;
                     $handle->image_x = 317;
-                    $handle->image_y = 152;
+                    $handle->image_y = 190;
                     $handle->Process($dir_dest);
                     $imagen = $handle->file_dst_name;
                 }else {
@@ -123,6 +130,14 @@ class img_inicio_controlador extends controller {
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('img_inicio');
         }
+
+        $this->_model->id_imagen_inicio = $this->filtrarInt($id);
+        $datos_img = $this->_model->selecciona_id();
+        $imagen2 = $datos_img[0]["IMAGEN"];
+        $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'web' . DS;
+
+        unlink($dir_dest.$imagen2);
+
         $this->_model->id_imagen_inicio = $this->filtrarInt($id);
         $this->_model->elimina();
         $this->redireccionar('img_inicio');
