@@ -20,7 +20,6 @@
                 <td><?php echo $this->datos[$i]['DESCRIPCION'];//nombre ?></td>
                 <td>
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>param/editar/<?php echo $this->datos[$i]['ID_PARAM'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
-                    <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>param/eliminar/<?php echo $this->datos[$i]['ID_PARAM'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
                 </td>
             </tr>
         <?php } ?>

@@ -7,14 +7,14 @@
                 <th>ITEM</th>
                 <th>NRO COMPROBANTE</th>
                 <th>PROVEEDOR</th>
-                <th>FECHA COMPRA</th>
+                <th>FECHA VENTA</th>
                 <th>TOTAL</th>
                 <th>PAGADO</th>
                 <th>RESTANTE</th>
                 <th>ACCIONES</th>
             </tr>
         </thead>
-         <tbody>
+        <tbody>
             <?php for ($i = 0; $i < count($this->datos); $i++) { ?>
             <?php $var = 0; 
         if (isset($this->datos) && count($this->datos)){ 
@@ -55,6 +55,6 @@
             </tr>
         <?php } ?>
         </tbody>
-    </table>  
+    </table>      
     <?php } ?>
         
