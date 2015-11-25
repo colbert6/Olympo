@@ -22,11 +22,7 @@
                     </div>
                 <?php } ?>
                 </div>
-                <style type="text/css">
-                    #img-tam{
-                        height: 180px;
-                    }
-                </style>
+
                 <!-- Controls -->
                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left"></span>
@@ -50,21 +46,23 @@
         <div class="col-lg-12">
             <hr>
         </div>
-        <div class="col-xs-6 col-sm-6 " >
-            <div class="panel panel-default text-center">
-                <div class="panel-heading">
-                    <span class="fa-stack fa-3x">
-                          <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                          <i class="fa fa-tree fa-stack-1x fa-inverse"></i>
-                    </span>
+        <?php if (isset($this->inicio) && count($this->inicio)){ ?>
+            <?php for($i = 0; $i < count($this->inicio); $i++){?> 
+                <div class="col-xs-6 col-sm-6 " >
+                    <div class="panel panel-default text-center">
+                        <div class="hover-text">
+                            <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web'].$this->inicio[$i]['IMAGEN'];  ?>" alt="">
+                        </div>
+                        <div class="panel-body ">
+                            <h4>Service One</h4>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body ">
-                    <h4>Service One</h4>
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-6">
+
+            <?php } ?> 
+        <?php } ?> 
+        <!--div class="col-xs-6 col-sm-6">
             <div class="panel panel-default text-center">
                 <div class="panel-heading">
                     <span class="fa-stack fa-3x">
@@ -105,7 +103,7 @@
                     <a href="#" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
-        </div>
+        </div-->
     </div>
 
 </div>
