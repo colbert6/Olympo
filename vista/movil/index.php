@@ -54,8 +54,8 @@
                             <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web'].$this->inicio[$i]['IMAGEN'];  ?>" alt="">
                         </div>
                         <div class="panel-body ">
-                            <h4>Service One</h4>
-                            <a href="#" class="btn btn-primary">Learn More</a>
+                            <h4><?php echo $this->inicio[$i]['TITULO'];?></h4>
+                            <a href="#" class="btn btn-warning">Ver Mas</a>
                         </div>
                     </div>
                 </div>
