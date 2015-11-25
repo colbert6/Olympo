@@ -43,7 +43,7 @@ $(function() {
         if (bval) {
             if ($(".row_tmp").length) {
                 if($("#id_tipopago").val()==2){
-                    if (!$("#CronogramaAbierto").is(':checked')) {
+                    if (!$("#CronogramaAbierto").is(':checked') || $("#estado_cronograma").val()=='0') {
                         crearCuotas();
                     }
                     if ($("#restante_cuota").val()!=0 && $("#restante_cuota").val()!='0.00') {

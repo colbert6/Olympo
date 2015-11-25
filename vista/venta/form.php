@@ -1,4 +1,4 @@
-
+<?php $hoy=  date("Y")."-".date("m")."-".date("d");?>
 <link href="<?php echo $_params['ruta_css']; ?>jquery-ui.custom.css" rel="stylesheet" />
 <script src="<?php echo $_params['ruta_js']; ?>bootbox.min.js"></script>
 <div class="navbar-inner">
@@ -218,7 +218,7 @@
     
     <!-- Modal -->
     <style>
-        #modalSocio .modal-content,#modalProducto .modal-content,#modalMembresia .modal-content{
+        #modalSocio .modal-content,#modalProducto .modal-content,#modalMembresia .modal-content,#modalCuotas .modal-content{
             width: 800px;
             left: -18%;
         }
@@ -308,10 +308,11 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Cronograma de Pago</h3>
-            <h4>Fecha: <?php echo new Date(); ?></h4>
+             
+            <h4>Fecha: <?php echo  $hoy;?> </h4>
         </div>
         <div class="modal-body">
-            <div id="VtnCuotas">
+            <form id="VtnCuotas">
                 <div class="navbar-inner text-center">
                     <div id="grillaCuotas">
                         <div class="page-header" >
@@ -320,7 +321,7 @@
                     </div>
 
                 </div>
-            </div>
+            </form>
         </div>
         <div class="modal-footer">
             <button id="guardar_cuotas" name="guardar_cuotas" class="btn btn-success" data-dismiss="modal" aria-hidden="true" style="display:none;" >Guardar</button>

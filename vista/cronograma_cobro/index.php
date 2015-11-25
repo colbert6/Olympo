@@ -56,5 +56,8 @@
         <?php } ?>
         </tbody>
     </table>      
+    <?php } else { ?>
+    <p>NO SE ENCONTRARON DATOS</p>
+       
     <?php } ?>
         
