@@ -21,13 +21,12 @@ class cronograma_cobro_controlador extends controller {
         $this->_vista->renderizar('index');
     }
     
-    public function cronograma($idcompra, $monto_restante) {
-        $this->_model->id_compra = $idcompra;
+    public function cronograma($idventa, $monto_restante) {
+        $this->_model->id_venta = $idventa;
         $this->_vista->datos = $this->_model->selecciona_cuota();
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
-        $this->_vista->titulo = 'Cronograma de Pagos';
-        $this->_vista->btn_action = BASE_URL . 'cronograma_pago/amortizar/' . $idcompra . '/' . $monto_restante;
+        $this->_vista->titulo = 'Cronograma de Cobros';
         $this->_vista->renderizar('cronograma');
     }
     

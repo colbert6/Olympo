@@ -218,7 +218,7 @@
     
     <!-- Modal -->
     <style>
-        #modalSocio .modal-content,#modalProducto .modal-content,#modalMembresia .modal-content,#modalCuotas .modal-content{
+        #modalSocio .modal-content,#modalProducto .modal-content,#modalMembresia .modal-content{
             width: 800px;
             left: -18%;
         }

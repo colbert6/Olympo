@@ -182,13 +182,13 @@ class view {
             array(
                 'id' => 'inicio',
                 'titulo' => 'INICIO',
-                'enlace' => BASE_URL.'web/'
+                'enlace' => BASE_URL.'movil/'
                 ),
             
             array(
                 'id' => 'nosotros',
                 'titulo' => 'NOSOTROS',
-                'enlace' => BASE_URL . 'web/nosotros'
+                'enlace' => BASE_URL.'movil/nosotros/'
                 ),
             array(
                 'id' => 'servicios',
@@ -199,6 +199,11 @@ class view {
                 'id' => 'productos',
                 'titulo' => 'PRODUCTOS',
                 'enlace' => BASE_URL. 'web/productos'
+                ),
+            array(
+                'id' => 'eventos',
+                'titulo' => 'EVENTOS',
+                'enlace' => '#'
                 ),
             array(
                 'id' => 'contactenos',
