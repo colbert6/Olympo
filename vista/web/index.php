@@ -81,7 +81,7 @@
                                 </a>
                                 <div class="media-body">
                                     <p class="text-justify">
-                                        La familia <strong>Olimpo Ginevra & Company Fitness</strong> te da la bienvenida a nuestra página web 
+                                        La familia <strong>Olympo Ginevra & Company Fitness</strong> te da la bienvenida a nuestra página web 
                                         y al mismo tiempo te invita a formar parte de nuestra gran familia en donde te ayudaremos a cumplir 
                                         tus metas y objetivos para mejorar tu estilo de vida de forma sana haciendo lo que más nos gusta,
                                         <strong> ¡DEPORTE!</strong>.

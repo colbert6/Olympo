@@ -23,6 +23,7 @@ $(function() {
             $("#igv").val('0.00');
         }
         setTotal(0, 1);
+        quitar_cronograma_abierto();
     });
     
     $("input:text[readonly=readonly]").css('cursor', 'pointer');
