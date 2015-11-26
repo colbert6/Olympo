@@ -51,27 +51,25 @@
                             <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web'].$this->inicio[$i]['IMAGEN'];  ?>" alt="">
                         </div>
                         <div class="panel-body">
-                            <h4><?php echo $this->inicio[$i]['TITULO'];?></h4>
+                            <h4 style='font-family: fantasy'><?php echo $this->inicio[$i]['TITULO'];?></h4>
                             <a href="#" class="btn btn-warning">Ver Mas</a>
                         </div>
                     </div>
                 </div>
 
-            <?php } 
-                if(count($this->inicio)%2!=0){?>
+            <?php } ?>
                     <div class="col-xs-6 col-sm-6 " >
                         <div class="panel panel-default text-center">
                             <div class="hover-text">
-                                <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web']."salud.jpg"  ?>" alt="">
+                                <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web']."eventos.png"  ?>" alt="">
                             </div>
                             <div class="panel-body">
-                                <h4><?php echo "Consejos Saludables";?></h4>
+                                <h4 style='font-family: fantasy'><?php echo "Eventos Importantes";?></h4>
                                 <a href="#" class="btn btn-warning">Ver Mas</a>
                             </div>
                         </div>
                     </div>
-            <?php }
-            ?> 
+            
         <?php } ?> 
 
     
@@ -104,8 +102,8 @@
                                     <p class="text-justify">
                                         <strong>¡No lo pienses más!</strong> y únete a la familia <strong>Olimpo Ginevra & Company Fitness </strong>.
                                     </p>
-                                    <p>
-                                        <a type="button" class="btn btn-default btn-lg" href="<?php echo BASE_URL.'web/contactenos' ; ?>">
+                                    <p class='text-center'>
+                                        <a type="button" class="btn btn-warning btn-lg" href="<?php echo BASE_URL.'web/contactenos' ; ?>">
                                             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contactenos
                                         </a>
                                     </p>
