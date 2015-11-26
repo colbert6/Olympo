@@ -208,7 +208,7 @@
                  <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="email" >E-MAIL:</label>
             
-                      <input   id="email" class="form-control"  placeholder="E-mail"  name='email'
+                      <input type="email"   id="email" class="form-control"  placeholder="E-mail"  name='email'
                             value="<?php if(isset ($this->datos[0]['EMAIL'])) echo $this->datos[0]['EMAIL']?>">
                   
                   </div>
