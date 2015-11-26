@@ -33,9 +33,6 @@
             </div>
             <?php } ?>
         </div>
-
-    
-
     </div>
     <!-- /.row -->
 
@@ -53,57 +50,69 @@
                         <div class="hover-text">
                             <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web'].$this->inicio[$i]['IMAGEN'];  ?>" alt="">
                         </div>
-                        <div class="panel-body ">
-                            <h4><?php echo $this->inicio[$i]['TITULO'];?></h4>
+                        <div class="panel-body">
+                            <h4 style='font-family: fantasy'><?php echo $this->inicio[$i]['TITULO'];?></h4>
                             <a href="#" class="btn btn-warning">Ver Mas</a>
                         </div>
                     </div>
                 </div>
 
-            <?php } ?> 
+            <?php } ?>
+                    <div class="col-xs-6 col-sm-6 " >
+                        <div class="panel panel-default text-center">
+                            <div class="hover-text">
+                                <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web']."eventos.png"  ?>" alt="">
+                            </div>
+                            <div class="panel-body">
+                                <h4 style='font-family: fantasy'><?php echo "Eventos Importantes";?></h4>
+                                <a href="#" class="btn btn-warning">Ver Mas</a>
+                            </div>
+                        </div>
+                    </div>
+            
         <?php } ?> 
-        <!--div class="col-xs-6 col-sm-6">
-            <div class="panel panel-default text-center">
-                <div class="panel-heading">
-                    <span class="fa-stack fa-3x">
-                          <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                          <i class="fa fa-car fa-stack-1x fa-inverse"></i>
-                    </span>
-                </div>
-                <div class="panel-body">
-                    <h4>Service Two</h4>
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-6">
-            <div class="panel panel-default text-center">
-                <div class="panel-heading">
-                    <span class="fa-stack fa-3x">
-                          <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                          <i class="fa fa-support fa-stack-1x fa-inverse"></i>
-                    </span>
-                </div>
-                <div class="panel-body ">
-                    <h4>Service Three</h4>
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-6">
-            <div class="panel panel-default text-center">
-                <div class="panel-heading">
-                    <span class="fa-stack fa-3x">
-                          <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                          <i class="fa fa-database fa-stack-1x fa-inverse"></i>
-                    </span>
-                </div>
-                <div class="panel-body">
-                    <h4>Service Four</h4>
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                </div>
-            </div>
-        </div-->
+
+    
     </div>
+
+    <div class="row">
+            <div class="col-sm-12 col-lg-12 col-md-12" >
+                 
+                <ul class="nav nav-tabs" >
+                    <li class="active"><a data-toggle="tab" href="#bienvenida">BIENVENIDA</a></li>
+                </ul>
+
+
+                <div class="tab-content">
+                    <div id="bienvenida" class="tab-pane fade in active">
+                        <br>
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                  <img class="" src="<?php echo $_movilParams['ruta_img_web']; ?>bienvenida.jpg" alt="">
+                                </a>
+
+                                <div class="media-body">
+                                    <p class="text-justify">
+                                        <br>
+                                        La familia <strong>Olimpo Ginevra & Company Fitness</strong> te da la bienvenida a nuestra página web 
+                                        y al mismo tiempo te invita a formar parte de nuestra gran familia en donde te ayudaremos a cumplir 
+                                        tus metas y objetivos para mejorar tu estilo de vida de forma sana haciendo lo que más nos gusta,
+                                        <strong> ¡DEPORTE!</strong>.
+                                    </p>
+                                    <p class="text-justify">
+                                        <strong>¡No lo pienses más!</strong> y únete a la familia <strong>Olimpo Ginevra & Company Fitness </strong>.
+                                    </p>
+                                    <p class='text-center'>
+                                        <a type="button" class="btn btn-warning btn-lg" href="<?php echo BASE_URL.'web/contactenos' ; ?>">
+                                            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contactenos
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                       <br>                                 
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </div>

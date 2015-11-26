@@ -4,14 +4,16 @@ class movil_Controlador extends controller {
     
     private $_publicidad;
     private $_inicio;
+    private $_model;
     
     public function __construct() {
         
-       /* if(!$this->web_movil()){
+       /*if(!$this->web_movil()){
             $this->redireccionar('web');
         }*/
         
         parent::__construct();
+        $this->_model = $this->cargar_modelo('informacion');
         $this->_publicidad = $this->cargar_modelo('img_publicidad');
         $this->_inicio = $this->cargar_modelo('img_inicio');
  
@@ -20,32 +22,21 @@ class movil_Controlador extends controller {
     public function index() {
         $this->_vista->publicidad = $this->_publicidad->selecciona();
         $this->_vista->inicio = $this->_inicio->selecciona();
-        $this->_vista->renderiza_movil('index',false,true);
+        $this->_vista->renderiza_movil('index','inicio');
     }
     
     public function inicio(){
-        $this->_vista->renderiza_movil('inicio','inicio',true);
+        
+        $this->_vista->renderiza_movil('inicio','inicio');
     }
     public function nosotros(){
-        
-        $this->_vista->renderiza_movil('nosotros','nosotros',false);
+        $this->_vista->datos = $this->_model->selecciona();
+        $this->_vista->renderiza_movil('nosotros','nosotros');
     }
     public function productos($categoria=false,$id=false){
-        
-        $this->_vista->categoria = $categoria; 
-        $this->_vista->setCss(array('productos'));
-        if(!$categoria && !$id){
-            $this->_vista->datos = $this->_web_categoria_productos->getCategoria_Productos();
-            $this->_vista->renderiza_movil('pro_categoria',true,'productos');
-        }else if($categoria && !$id) {
-            $this->_vista->datos = $this->_web_productos->getProductosxCategoria($categoria);
-            $this->_vista->renderiza_movil('pro_lista',true,'productos');
-        }else if($categoria && $id){
-            $this->_vista->datos = $this->_web_productos->getProducto($id);
-            $this->_vista->renderiza_movil('pro_detalle',true,'productos');  
-        }
-        
-        
+    
+        $this->_vista->datos = $this->_web_productos->getProducto($id);
+            $this->_vista->renderiza_movil('pro_detalle',true,'productos');      
     }
     public function servicios($servicio=false){
         $this->_vista->informacion =$servicio;

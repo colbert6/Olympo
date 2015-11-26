@@ -7,7 +7,7 @@
                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <?php for($i = 0; $i < count($this->publicidad); $i++){ ?>
-                        <li data-target="#carousel-example-generic" data-slide-to="<?php echo $i ?>" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="$i" class="active"></li>
                         <?php } ?>
                     </ol> 
                      <div class="carousel-inner">
@@ -23,16 +23,17 @@
                             
                         </div>
                         <?php } ?>
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
                     </div>
-                    <?php } ?>
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
                 </div>
                    
+                <?php } ?>
+                
 
             </div>
 
@@ -54,7 +55,7 @@
                             </div>    
                             <img src="<?php echo $_webParams['ruta_img']; ?><?php if(isset ($this->inicio[$i]['IMAGEN']))echo $this->inicio[$i]['IMAGEN']?>" alt="" style="height: 90%;"> 
                             <div class="caption">
-                                <h4 ><strong><?php if(isset ($this->inicio[$i]['TITULO']))echo $this->inicio[$i]['TITULO']?></strong></h4>  
+                                <h4 ><?php if(isset ($this->inicio[$i]['TITULO']))echo $this->inicio[$i]['TITULO']?></h4>  
                             </div>
                         </div>
                     </div>

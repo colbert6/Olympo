@@ -13,13 +13,12 @@
             </td>
         </tr>
 
-        <tr>
-            <td><label>Url</label></td>
-            <td>
-                <input type="text" id="url" name="url" class="form-control" style="width: 300px"
+        
+            
+                <input type="hidden" id="url" name="url" class="form-control" style="width: 300px"
                 value="<?php if(isset ($this->datos[0]['URL']))echo $this->datos[0]['URL']?>"/>
-            </td>
-        </tr>
+            
+        
 
         <tr>             
                  <td><label  >Descripcion:</label></td>

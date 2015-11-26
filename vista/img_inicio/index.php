@@ -7,7 +7,7 @@
         <tr>
             <th>ITEM</th>
             <th>TITULO</th>
-            <th>URL</th>
+           <!-- <th>URL</th>-->
             <th>ACCIONES</th>
         </tr>
         </thead>
@@ -16,11 +16,11 @@
             <tr>
                 <td><?php echo $i+1 ?></td>
                 <td><?php echo $this->datos[$i]['TITULO'] ?></td>
-                <td><?php echo $this->datos[$i]['URL'] ?></td>
+               <!-- <td><?php echo $this->datos[$i]['URL'] ?></td>-->
                 <td>
                     <a href="#myModal" role="button" data-toggle="modal" title=" VER IMAGEN" onclick="ver('<?php echo $this->datos[$i]['ID_IMAGEN_INICIO'] ?>')" class="btn btn-warning btn-minier"><i class="icon-eye-open icon-white"></i></a>
                     <a href="javascript:void(0)" title=" EDITAR" onclick="editar('<?php echo BASE_URL?>img_inicio/editar/<?php echo $this->datos[$i]['ID_IMAGEN_INICIO'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
-                    <a href="javascript:void(0)" title=" ELIMINAR" onclick="eliminar('<?php echo BASE_URL?>img_inicio/eliminar/<?php echo $this->datos[$i]['ID_IMAGEN_INICIO'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
+                  <!--  <a href="javascript:void(0)" title=" ELIMINAR" onclick="eliminar('<?php echo BASE_URL?>img_inicio/eliminar/<?php echo $this->datos[$i]['ID_IMAGEN_INICIO'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>-->
                 </td>
             </tr>
         <?php } ?>
@@ -28,14 +28,14 @@
     </table>
     </div>
     
-    <div class="navbar-inner">
+   <!-- <div class="navbar-inner">
     <a href="<?php echo BASE_URL?>img_inicio/nuevo" class="btn btn-primary">Nuevo</a>
-    </div>
+    </div>-->
     <?php } else { ?>
-      <div class="navbar-inner">
+    <!--  <div class="navbar-inner">
         <p>NO SE ENCONTRARON DATOS</p>
         <a href="<?php echo BASE_URL?>img_inicio/nuevo" class="btn btn-primary">Nuevo</a>
-      </div>
+      </div>-->
 <?php } ?>
     
     <!-- Modal -->
