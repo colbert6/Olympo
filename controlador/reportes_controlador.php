@@ -73,7 +73,7 @@ class reportes_controlador extends controller {
                 $this->_pdf->SetY(24);
                 $this->_pdf->SetX(0);
                 $this->_pdf->Cell(210,5, utf8_decode('REGISTRO DEL STOCK ACTUAL POR ALMACEN'),0,0,'C');
-                $this->_pdf->SetFillColor(96,197,253);
+                $this->_pdf->SetFillColor(255,164,032);
                 $this->_pdf->SetFont('Arial','B',10);
                 $this->_pdf->SetY(35);
                 $this->_pdf->SetX(15);
