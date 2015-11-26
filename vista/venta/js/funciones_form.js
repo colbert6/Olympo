@@ -646,7 +646,7 @@ function montoCuota(num) {
     if(restante<0){
        var exceso= (parseFloat($("#monto_cuota"+num).val())+parseFloat(restante)).toFixed(2);
        $("#monto_cuota"+num).val(exceso)
-       $("#restante_cuota").val(0);
+       $("#restante_cuota").val('0.00');
        $("#guardar_cuotas").show();
     }else{
        $("#restante_cuota").val(restante);

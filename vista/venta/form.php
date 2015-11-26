@@ -308,7 +308,7 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Cronograma de Pago</h3>
-            <h4>Fecha: <?php echo $hoy; ?></h4>
+            <h4>Fecha: <?php echo new Date(); ?></h4>
         </div>
         <div class="modal-body">
             <div id="VtnCuotas">
