@@ -25,6 +25,7 @@ class producto_controlador extends controller {
     }   
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
+            echo '<pre>';print_r($_POST);exit;
             $this->_model->id_marca = $_POST['id_marca'];
             $this->_model->id_categoria_producto = $_POST['id_categoria_producto'];
             $this->_model->nombre = $_POST['nombre'];

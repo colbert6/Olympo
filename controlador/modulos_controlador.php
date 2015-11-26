@@ -54,6 +54,7 @@ class modulos_controlador extends controller{
         }
         
         if ($_POST['guardar'] == 1) {
+            //echo '<pre>';print_r($_POST);exit;
             $this->_modulos->id_modulo = $_POST['id_modulo'];
             $this->_modulos->nombre = ucwords(strtolower($_POST['nombre']));
             $this->_modulos->url = strtolower($_POST['url']);
@@ -71,6 +72,7 @@ class modulos_controlador extends controller{
                  $this->_modulos->url = '#';
             
             }
+            $this->_modulos->orden = $_POST['orden'];
             $this->_modulos->actualiza();
             $this->redireccionar('modulos');
         }

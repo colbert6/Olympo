@@ -28,9 +28,9 @@ Class menu {
                 if($this->_c==0){
                     $descripcion= ucwords(strtolower($this->_datos[$i]['MODULO_PADRE']));
                     if($this->_datos[$i]['ID_PADRE']==$this->_id_modulopadre){
-                            echo "<li class='has_sub'><a href='javascript:void' class='open'><i class='".strtolower($this->_datos[$i]['ICONO_PADRE'])."'></i><span>$descripcion</span><span class='pull-right'><i class='icon-chevron-right'></i></span></a><ul>";
+                        echo "<li class='has_sub'><a href='javascript:void' class='open subdrop'><i class='".strtolower($this->_datos[$i]['ICONO_PADRE'])."'></i><span>$descripcion</span><span class='pull-right'><i class='icon-chevron-down'></i></span></a><ul style='overflow: hidden; display: block;'>";
                     }else{
-                        echo "<li class='has_sub'><a href='javascript:void'><i class='".strtolower($this->_datos[$i]['ICONO_PADRE'])."'></i><span>$descripcion</span><span class='pull-right'><i class='icon-chevron-right'></i></span></a><ul>";
+                        echo "<li class='has_sub'><a href='javascript:void' class='opcion_menu' ><i class='".strtolower($this->_datos[$i]['ICONO_PADRE'])."'></i><span>$descripcion</span><span class='pull-right'><i class='icon-chevron-right'></i></span></a><ul class='lista_menu'>";
                     }
                     $this->_c = 1;
                 }
