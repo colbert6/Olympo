@@ -3,20 +3,23 @@
 class movil_Controlador extends controller {
     
     private $_publicidad;
+    private $_inicio;
     
     public function __construct() {
         
-       /* if(!$this->web_movil()){
+       if(!$this->web_movil()){
             $this->redireccionar('web');
-        }*/
+        }
         
         parent::__construct();
         $this->_publicidad = $this->cargar_modelo('img_publicidad');
+        $this->_inicio = $this->cargar_modelo('img_inicio');
  
     }
     
     public function index() {
         $this->_vista->publicidad = $this->_publicidad->selecciona();
+        $this->_vista->inicio = $this->_inicio->selecciona();
         $this->_vista->renderiza_movil('index',false,true);
     }
     

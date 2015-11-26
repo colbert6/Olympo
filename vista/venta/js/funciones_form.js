@@ -4,7 +4,9 @@ $(function() {
         buscarSocio();
         $("#VtnBuscarSocio").show();
     });
+    
     $("#AbrirVtnBuscarSocio").click(function(){
+       
          buscarSocio();
         $("#VtnBuscarSocio").show();
     });
@@ -191,16 +193,17 @@ $(function() {
         if (bval) {
             if( $(".row_tmp").length ) {
                 if($("#id_tipopago").val()==2){
-                    if (!$("#CronogramaAbierto").is(':checked')) {
+                    if (!$("#CronogramaAbierto").is(':checked') || $("#estado_cronograma").val()=='0') {
                         crearCuotas();
+                        
                     }
-                    if ($("#restante_cuota").val()!=0 && $("#restante_cuota").val()!='0.00') {
+                    if ($("#restante_cuota").val()!='0' && $("#restante_cuota").val()!='0.00') {
                         mostrar_ver_cuotas();
                         return false;
                     }
                 }
                 
-                bootbox.confirm("¿Está seguro que desea guardar la venta?", function(result) {
+                bootbox.confirm("¿Está seguro que desea guardar la venta? ", function(result) {
                     if (result) {
                         
                         $("#celda_cronograma").html($("#grillaCuotas").html()); 
@@ -554,7 +557,7 @@ function sel_producto(id_p,id_a,a, p, s, pc) {
     $("#precio").val(parseFloat(pc).toFixed(2));
     $('#modalProducto').modal('hide');
     $("#cantidad").focus();
-    setImporte()
+    setImporte();
 }
 function sel_membresia(id_m,d,s,p,memb){
     $("#fecha_ini, #precio_m").val('');
