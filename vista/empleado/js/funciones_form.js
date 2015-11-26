@@ -2,19 +2,20 @@ $(document).ready(function() {
     $( "#fecha_nacimiento" ).datepicker({changeMonth: true,changeYear: true,dateFormat: 'yy-mm-dd',yearRange: '-100:+0'}); 
     $( "#save" ).click(function(){
         bval = true;
-        bval = bval && $("#id_categoria_empleado").required();   
+        bval = bval && $("#id_categoria_empleado").required();
+        bval = bval && $("#id_perfil_usuario").required();   
         bval = bval && $("#nombre").required();
         bval = bval && $("#apellido_paterno").required();
         bval = bval && $("#apellido_materno").required();
         bval = bval && $("#dni").required();
-        bval = bval && $("#email").required();
-        bval = bval && $("#direccion").required();
+        bval = bval && $("#email").email();
         bval = bval && $("#sexo").required();
+        bval = bval && $("#direccion").required();
         bval = bval && $("#estado_civil").required();
         bval = bval && $("#fecha_nacimiento").required();
         bval = bval && $("#usuario").required();
         bval = bval && $("#clave").required();
-        bval = bval && $("#id_perfil_usuario").required();
+        
         
         if (bval) 
         {

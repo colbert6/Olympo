@@ -12,6 +12,7 @@ $(document).ready(function() {
         bval = bval && $("#id_ubigeo").required();
         bval = bval && $("#direccion").required();
         bval = bval && $("#sexo").required();
+        bval = bval && $("#email").email();
         bval = bval && $("#estado_civil").required();
         bval = bval && $("#fecha_nacimiento").required();
         

@@ -108,7 +108,7 @@
                  <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="email" >E-MAIL:</label>
             
-                      <input  id="email" class="form-control"  placeholder="E-mail"  name='email'
+                      <input type="email" id="email" class="form-control"  placeholder="E-mail"  name='email'
                             value="<?php if(isset ($this->datos[0]['EMAIL'])) echo $this->datos[0]['EMAIL']?>">
                   
                   </div>
@@ -138,7 +138,7 @@
 
             <div class="col-md-4">
                  <div class="form-group" style="margin-right: 0px;">
-                    <label class="control-label" for="sexo" >SEXO:</label>
+                    <label class="control-label" for="sexo" >SEXO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
                       <select  class="form-control glyphicon" name='sexo' id='sexo'>
                         <option value='' >Selecciona...</option>
@@ -233,7 +233,7 @@
             
             <div class="col-md-4">
                  <div class="form-group" style="margin-right: 0px;">
-                        <label class="control-label" for="usuario" >USUARIO:</label>
+                        <label class="control-label" for="usuario" >USUARIO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
 
                           <input  name="usuario" id="usuario" class="form-control" placeholder="Usuario" 
                                 value="<?php if(isset ($this->datos[0]['USUARIO'])) echo $this->datos[0]['USUARIO']?>">
@@ -244,7 +244,7 @@
             
             <div class="col-md-4">
                  <div class="form-group" style="margin-right: 0px;">
-                        <label class="control-label" for="clave" >CLAVE:</label>
+                        <label class="control-label" for="clave" >CLAVE:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
 
                           <input type="password" name="clave" id="clave" class="form-control" placeholder="Clave" 
                                 value="<?php if(isset ($this->datos[0]['CLAVE'])) echo $this->datos[0]['CLAVE']?>">
