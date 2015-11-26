@@ -15,9 +15,9 @@
                 </td>
             </tr>
             <tr>
-                <td>Productos con Stock menor o igual a 5</td>
+                <td>Clientes Vegentes con Servicio</td>
                 <td style="text-align: center">
-                    <a target="_blank" href="<?php echo BASE_URL ?>reportes/stock_menor" class="btn btn-grey"><i class="icon-list icon-white"></i> Reportar</a>
+                    <a target="_blank" href="<?php echo BASE_URL ?>reportes/stock_cliente" class="btn btn-grey"><i class="icon-list icon-white"></i> Reportar</a>
                 </td>
             </tr>
         </tbody>
