@@ -24,7 +24,7 @@ class caja_controlador extends controller {
     public function nuevo() {
         if (@$_POST['guardar'] == 1) {
             
-            $this->_caja->nombre = $_POST['nombre'];
+            $this->_caja->nombre = ucwords(strtolower( $_POST['nombre']));
             $this->_caja->inserta();
             $this->redireccionar('caja');
         }
@@ -42,7 +42,7 @@ class caja_controlador extends controller {
 
         if (@$_POST['guardar'] == 1) {
             $this->_caja->id_caja = $_POST['id_caja'];
-            $this->_caja->nombre = $_POST['nombre'];
+            $this->_caja->nombre = ucwords(strtolower( $_POST['nombre']));
          
             $this->_caja->actualiza();
             $this->redireccionar('caja');

@@ -64,16 +64,18 @@ class web_Controlador extends controller {
     }    
     public function contactenos(){
 
-        $this->_vista->datos = $this->_model->selecciona();
-        $this->_vista->renderiza_web('contactenos','contactenos',false);
+        
         if ($_POST['guardar'] == 1) {
             $this->_contacto->nombre = $_POST['nombre'];
             $this->_contacto->telefono = $_POST['telefono'];
-            $this->_contacto->email = $_POST['email'];
+            $this->_contacto->correo = $_POST['email'];
             $this->_contacto->mensaje = $_POST['mensaje'];
             $datos = $this->_contacto->inserta();
-            
+
+          //  $this->redireccionar("web/contactenos");
         }
+        $this->_vista->datos = $this->_model->selecciona();
+        $this->_vista->renderiza_web('contactenos','contactenos',false);
     }
 
         

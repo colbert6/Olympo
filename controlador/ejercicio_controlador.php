@@ -29,7 +29,7 @@ class ejercicio_controlador extends controller {
             //$this->_model->id_ejercicio = $_POST['id_ejercicio'];
             $this->_model->id_servicio = $_POST['id_servicio'];
             $this->_model->id_categoria_ejercicio = $_POST['id_categoria_ejercicio'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower( $_POST['descripcion']));
             $datos = $this->_model->inserta();
             $this->redireccionar('ejercicio');
         }
@@ -50,7 +50,7 @@ class ejercicio_controlador extends controller {
             $this->_model->id_ejercicio = $_POST['id_ejercicio'];
             $this->_model->id_servicio = $_POST['id_servicio'];
             $this->_model->id_categoria_ejercicio = $_POST['id_categoria_ejercicio'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower( $_POST['descripcion']));
             $this->_model->actualiza();
             $this->redireccionar('ejercicio');
         }

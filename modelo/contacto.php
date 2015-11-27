@@ -52,6 +52,7 @@ class contacto extends Main{
     public function inserta() {
         $datos = array($this->nombre,$this->telefono,$this->correo,$this->mensaje);
         $r = $this->get_consulta("pa_i_contacto", $datos);
+        
         $error = $r[1];
         $r = null;
         return $error;

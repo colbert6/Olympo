@@ -27,8 +27,8 @@ class evento_controlador extends controller {
 
             //$this->_model->id_evento = $_POST['id_evento'];
             $this->_model->id_categoria_evento = $_POST['id_categoria_evento'];
-            $this->_model->nombre = $_POST['nombre'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->nombre = ucwords(strtolower($_POST['nombre']));
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->fecha_inicio = $_POST['fecha_inicio'];
             $this->_model->fecha_fin = $_POST['fecha_fin'];
             $this->_model->lugar = $_POST['lugar'];
@@ -52,8 +52,8 @@ class evento_controlador extends controller {
         if ($_POST['guardar'] == 1) {
             $this->_model->id_evento = $_POST['id_evento'];
             $this->_model->id_categoria_evento = $_POST['id_categoria_evento'];
-            $this->_model->nombre = $_POST['nombre'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->nombre = ucwords(strtolower($_POST['nombre']));
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->fecha_inicio = $_POST['fecha_inicio'];
             $this->_model->fecha_fin = $_POST['fecha_fin'];
             $this->_model->lugar = $_POST['lugar'];
