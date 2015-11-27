@@ -7,15 +7,16 @@
         
         <?php if(isset ($this->datos[0]['ID_PARAM'])) {?>  
         <div class="form-group">
-            <label class="control-label col-sm-6" >Item:</label>
+            <label class="control-label col-sm-6" >Nombre:</label>
             <div class="col-sm-6">
                 <input name="id_param" id="id_param" class="form-control"  readonly="readonly"
                    value="<?php echo $this->datos[0]['ID_PARAM'];?>">
             </div>
         </div>  
         <?php } else { ?> 
+        
         <div class="form-group">
-            <label class="control-label col-sm-6" >Item:</label>
+            <label class="control-label col-sm-6" >Nombre:</label>
             <div class="col-sm-6">
                 <input name="id_param" id="id_param" class="form-control" autofocus placeholder="Item"
                    value="">
