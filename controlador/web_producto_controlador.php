@@ -45,7 +45,7 @@ class web_producto_controlador extends controller {
             $this->redireccionar('web_producto');
         }
         }
-            $this->_model->titulo = $_POST['titulo'];
+            $this->_model->titulo = ucwords(strtolower($_POST['titulo']));
             $this->_model->imagen = $imagen;
             $this->_model->descripcion = $_POST['descripcion'];
             //print_r($this->_model->inserta());exit;
@@ -103,7 +103,7 @@ class web_producto_controlador extends controller {
             $this->_model->id_web_producto = $_POST['id_web_producto'];
             $this->_model->imagen = $imagen;
            // print_r($this->_model->imagen);exit();
-            $this->_model->titulo = $_POST['titulo'];
+            $this->_model->titulo = ucwords(strtolower($_POST['titulo']));
             $this->_model->descripcion = $_POST['descripcion'];
             $this->_model->actualiza();
             echo "<script>alert('Informacion Guardada')</script>";

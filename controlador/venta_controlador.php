@@ -113,6 +113,7 @@ class venta_controlador extends controller {
             if($_POST['id_tipopago']==2){
                 
                 for($i=0;$i<$_POST['cuotas'];$i++){
+
                     $this->_cronograma_cobro->id_venta=$dato_venta[0]['MAX_VENTA'];
                     $this->_cronograma_cobro->fecha_venc=$_POST['fecha_cuota'][$i];
                     $this->_cronograma_cobro->num_cuota=$i+1;

@@ -25,8 +25,8 @@ class servicio_controlador extends controller {
     public function nuevo() {
         if (@$_POST['guardar'] == 1) {
             $this->_model->id_ambiente = $_POST['id_ambiente'];
-            $this->_model->nombre = $_POST['nombre'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->nombre = ucwords(strtolower($_POST['nombre']));
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $datos = $this->_model->inserta();
             //print_r($datos);exit;
             $this->redireccionar('servicio');
@@ -47,8 +47,8 @@ class servicio_controlador extends controller {
         if (@$_POST['guardar'] == 1) {
             $this->_model->id_servicio = $_POST['id_servicio'];
             $this->_model->id_ambiente = $_POST['id_ambiente'];
-            $this->_model->nombre = $_POST['nombre'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->nombre = ucwords(strtolower($_POST['nombre']));
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->actualiza();
             //print_r($this->_model);exit;
             $this->redireccionar('servicio');

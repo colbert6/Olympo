@@ -22,7 +22,7 @@ class vigencia_controlador extends controller {
         
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->dias = $_POST['dias'];
             $datos = $this->_model->inserta();
             $this->redireccionar('vigencia');
@@ -40,7 +40,7 @@ class vigencia_controlador extends controller {
 
         if ($_POST['guardar'] == 1) {
             $this->_model->id_vigencia = $_POST['id_vigencia'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->dias = $_POST['dias'];
             $this->_model->actualiza();
             $this->redireccionar('vigencia');
