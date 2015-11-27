@@ -32,6 +32,7 @@ class evento_controlador extends controller {
             $this->_model->fecha_inicio = $_POST['fecha_inicio'];
             $this->_model->fecha_fin = $_POST['fecha_fin'];
             $this->_model->lugar = $_POST['lugar'];
+            $this->_model->hora_evento = $_POST['hora_evento'];
             $datos = $this->_model->inserta();
             $this->redireccionar('evento');
         }
@@ -57,6 +58,8 @@ class evento_controlador extends controller {
             $this->_model->fecha_inicio = $_POST['fecha_inicio'];
             $this->_model->fecha_fin = $_POST['fecha_fin'];
             $this->_model->lugar = $_POST['lugar'];
+            $this->_model->hora_evento = $_POST['hora_evento'];
+
             $this->_model->actualiza();
             $this->redireccionar('evento');
         }

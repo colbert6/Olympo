@@ -68,6 +68,13 @@
                 maxlength="50"  value="<?php if(isset ($this->datos[0]['LUGAR']))echo $this->datos[0]['LUGAR']?>">
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-sm-6" >Hora:</label>
+            <div class="col-sm-6">
+                <input type="time"  name="hora_evento" id="hora_evento" class="form-control"  placeholder="hora_evento" autofocus
+                 value="<?php if(isset ($this->datos[0]['HORA_EVENTO']))echo $this->datos[0]['HORA_EVENTO']?>">
+            </div>
+        </div>
        
         <div class="form-group" style="margin-top: 8%"> 
             <div class="col-sm-offset-3 col-sm-8">

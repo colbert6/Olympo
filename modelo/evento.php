@@ -10,7 +10,7 @@ class evento extends Main{
     public $fecha_fin;
     public $lugar;
     public $estado;
-    
+    public $hora_evento;
     public function selecciona() {
         $r = $this->get_consulta("pa_m1_evento",null);
         if ($r[1] == '') {
@@ -51,7 +51,7 @@ class evento extends Main{
     
     public function inserta() {
         $datos = array($this->id_categoria_evento,$this->nombre,$this->descripcion,
-            $this->fecha_inicio,$this->fecha_fin,$this->lugar);
+            $this->fecha_inicio,$this->fecha_fin,$this->lugar,$this->hora_evento);
 
         $r = $this->get_consulta("pa_i_evento", $datos);
 
@@ -62,8 +62,8 @@ class evento extends Main{
 
     public function actualiza() {
        
-        $datos = array($this->id_evento,$this->id_categoria_evento,$this->nombre,$this->descripcion,
-            $this->fecha_inicio,$this->fecha_fin,$this->lugar);
+        $datos = array($this->id_categoria_evento,$this->nombre,$this->descripcion,
+            $this->fecha_inicio,$this->fecha_fin,$this->lugar,$this->hora_evento,$this->id_evento);
         
         $r = $this->get_consulta("pa_u_evento", $datos);
         $error = $r[1];
