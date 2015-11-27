@@ -14,7 +14,7 @@
                                 
                              ?>   
                               <?php } ?>  
-                                <strong >EVENTOS ?></strong>
+                                <strong >EVENTOS</strong>
                             <?php } ?> 
                             
                         </div> 
