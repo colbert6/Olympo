@@ -23,7 +23,7 @@ class informacion_controlador extends controller {
         $this->_vista->datos = $this->_informacion->selecciona();
         if ($_POST['guardar'] == 1) {
             
-            $this->_informacion->razon = $_POST['razon_social'];
+            $this->_informacion->razon = ucwords(strtolower($_POST['razon_social']));
             $this->_informacion->ruc = $_POST['ruc'];
             $this->_informacion->telefono = $_POST['telefono'];
             $this->_informacion->direccion = $_POST['direccion'];

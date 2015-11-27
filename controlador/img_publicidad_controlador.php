@@ -56,7 +56,7 @@ class img_publicidad_controlador extends controller {
             $this->redireccionar('img_publicidad');
         }
         }
-            $this->_model->nombre = $_POST['nombre'];
+            $this->_model->nombre = ucwords(strtolower($_POST['nombre']));
             $this->_model->imagen = $imagen;
             //print_r($this->_model->inserta());exit;
             //echo "<pre>"; print_r($this->_model->titulo,$this->_model->imagen,$this->_model->descripcion);exit;
@@ -121,7 +121,7 @@ class img_publicidad_controlador extends controller {
             $this->_model->id_img_publicidad = $_POST['id_img_publicidad'];
             $this->_model->imagen = $imagen;
            // print_r($this->_model->imagen);exit();
-            $this->_model->nombre = $_POST['nombre'];
+            $this->_model->nombre = ucwords(strtolower($_POST['nombre']));
            // print($this->_model->nombre);exit();
             $this->_model->actualiza();
 

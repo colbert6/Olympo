@@ -23,7 +23,7 @@ class tipo_socio_controlador extends controller{
 
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->inserta();
             $this->redireccionar('tipo_socio');
         }
@@ -40,7 +40,7 @@ class tipo_socio_controlador extends controller{
         
         if ($_POST['guardar'] == 1) {
             $this->_model->id_tipo_socio = $_POST['id_tipo_socio'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->actualiza();
             $this->redireccionar('tipo_socio');
         }

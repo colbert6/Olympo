@@ -39,9 +39,9 @@ class socio_controlador extends controller {
             $this->_socio->idubigeo = $_POST['id_ubigeo'];
             $this->_socio->dni = $_POST['dni'];
             $this->_socio->aliass = $_POST['aliass'];
-            $this->_socio->nombre = $_POST['nombre'];
-            $this->_socio->apellido_paterno = $_POST['apellido_paterno'];
-            $this->_socio->apellido_materno = $_POST['apellido_materno'];
+            $this->_socio->nombre = ucwords(strtolower($_POST['nombre']));
+            $this->_socio->apellido_paterno = ucwords(strtolower($_POST['apellido_paterno']));
+            $this->_socio->apellido_materno = ucwords(strtolower($_POST['apellido_materno']));
             $this->_socio->email = $_POST['email'];
             $this->_socio->telefono = $_POST['telefono'];
             $this->_socio->celular = $_POST['celular'];
@@ -49,7 +49,7 @@ class socio_controlador extends controller {
             $this->_socio->fecha_nacimiento = $_POST['fecha_nacimiento'];
             $this->_socio->sexo = $_POST['sexo'];
             $this->_socio->estado_civil = $_POST['estado_civil'];
-            $this->_socio->ocupacion = $_POST['ocupacion'];
+            $this->_socio->ocupacion = ucwords(strtolower($_POST['ocupacion']));
            // $this->_socio->grupo_sanguineo = $_POST['grupo_sanguineo'];
            // $this->_socio->hobby = $_POST['hobby'];
            // $this->_socio->nacionalidad = $_POST['nacionalidad'];
@@ -60,7 +60,7 @@ class socio_controlador extends controller {
            // $this->_socio->fax = $_POST['fax'];
             $this->_socio->numero_hijo = $_POST['numero_hijo'];
             $this->_socio->sector = $_POST['sector'];
-            $this->_socio->grado_estudio = $_POST['grado_estudio'];
+            $this->_socio->grado_estudio = ucwords(strtolower($_POST['grado_estudio']));
             //$this->_socio->ingresos = $_POST['ingresos'];
 
 
@@ -88,9 +88,9 @@ class socio_controlador extends controller {
             $this->_socio->idubigeo = $_POST['id_ubigeo'];
             $this->_socio->dni = $_POST['dni'];
             $this->_socio->aliass = $_POST['aliass'];
-            $this->_socio->nombre = $_POST['nombre'];
-            $this->_socio->apellido_paterno = $_POST['apellido_paterno'];
-            $this->_socio->apellido_materno = $_POST['apellido_materno'];
+            $this->_socio->nombre = ucwords(strtolower($_POST['nombre']));
+            $this->_socio->apellido_paterno = ucwords(strtolower($_POST['apellido_paterno']));
+            $this->_socio->apellido_materno = ucwords(strtolower($_POST['apellido_materno']));
             $this->_socio->email = $_POST['email'];
             $this->_socio->telefono = $_POST['telefono'];
             $this->_socio->celular = $_POST['celular'];
@@ -98,7 +98,7 @@ class socio_controlador extends controller {
             $this->_socio->fecha_nacimiento = $_POST['fecha_nacimiento'];
             $this->_socio->sexo = $_POST['sexo'];
             $this->_socio->estado_civil = $_POST['estado_civil'];
-            $this->_socio->ocupacion = $_POST['ocupacion'];
+            $this->_socio->ocupacion = ucwords(strtolower($_POST['ocupacion']));
            // $this->_socio->grupo_sanguineo = $_POST['grupo_sanguineo'];
            // $this->_socio->hobby = $_POST['hobby'];
            // $this->_socio->nacionalidad = $_POST['nacionalidad'];
@@ -109,7 +109,7 @@ class socio_controlador extends controller {
            // $this->_socio->fax = $_POST['fax'];
             $this->_socio->numero_hijo = $_POST['numero_hijo'];
             $this->_socio->sector = $_POST['sector'];
-            $this->_socio->grado_estudio = $_POST['grado_estudio'];
+            $this->_socio->grado_estudio = ucwords(strtolower($_POST['grado_estudio']));
             //$this->_socio->ingresos = $_POST['ingresos'];
 
             $this->_socio->actualiza();

@@ -27,8 +27,8 @@ class producto_controlador extends controller {
         if ($_POST['guardar'] == 1) {
             $this->_model->id_marca = $_POST['id_marca'];
             $this->_model->id_categoria_producto = $_POST['id_categoria_producto'];
-            $this->_model->nombre = $_POST['nombre'];
-            $this->_model->presentacion = $_POST['presentacion'];
+            $this->_model->nombre = ucwords(strtolower($_POST['nombre']));
+            $this->_model->presentacion = ucwords(strtolower($_POST['presentacion']));
             $this->_model->precio = $_POST['precio'];
             $this->_model->stock_max = $_POST['stock_max'];
             $this->_model->stock_min = $_POST['stock_min'];
@@ -52,8 +52,8 @@ class producto_controlador extends controller {
             $this->_model->id_producto = $_POST['id_producto'];
             $this->_model->id_marca = $_POST['id_marca'];
             $this->_model->id_categoria_producto = $_POST['id_categoria_producto'];
-            $this->_model->nombre = $_POST['nombre'];
-            $this->_model->presentacion = $_POST['presentacion'];
+            $this->_model->nombre = ucwords(strtolower($_POST['nombre']));
+            $this->_model->presentacion = ucwords(strtolower($_POST['presentacion']));
             $this->_model->precio = $_POST['precio'];
             $this->_model->stock_max = $_POST['stock_max'];
             $this->_model->stock_min = $_POST['stock_min'];
