@@ -113,6 +113,7 @@ class venta_controlador extends controller {
             if($_POST['id_tipopago']==2){
                 
                 for($i=0;$i<$_POST['cuotas'];$i++){
+<<<<<<< HEAD
 
                     $this->_cronograma_pago->id_venta=$dato_venta[0]['MAX_VENTA'];
                     $this->_cronograma_pago->fecha_venc=$_POST['fecha_cuota'][$i];
@@ -120,12 +121,17 @@ class venta_controlador extends controller {
                     $this->_cronograma_pago->monto_cuota=$_POST['monto_cuota'][$i];
                     $this->_cronograma_pago->inserta();
 
+=======
+>>>>>>> c2e51b2552b3e6c826afdbc3b198baf83fabffcd
                     $this->_cronograma_cobro->id_venta=$dato_venta[0]['MAX_VENTA'];
                     $this->_cronograma_cobro->fecha_venc=$_POST['fecha_cuota'][$i];
                     $this->_cronograma_cobro->num_cuota=$i+1;
                     $this->_cronograma_cobro->monto_cuota=$_POST['monto_cuota'][$i];
                     $this->_cronograma_cobro->inserta();
+<<<<<<< HEAD
 
+=======
+>>>>>>> c2e51b2552b3e6c826afdbc3b198baf83fabffcd
                 }
                 
             }else{

@@ -56,7 +56,7 @@ class web_Controlador extends controller {
         $this->_vista->renderiza_web('productos','productos',false);
 
     }
-    public function servicios($servicio=false){
+    public function servicios(){
         
         $this->_vista->datos_servicio = $this->_servicios->selecciona();//
         $this->_vista->setCss(array('servicios'));

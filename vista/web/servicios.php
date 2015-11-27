@@ -13,6 +13,7 @@
 
         <?php if (isset($this->datos_servicio) && count($this->datos_servicio)){ ?>
             <?php for($i = 0; $i < count($this->datos_servicio); $i++){?> 
+            
                 <div class="col-sm-4" style="margin: 0px 0px 20px 100px;">
                     <div class="thumbnail">
                         <div class="hover-bg">
@@ -31,9 +32,8 @@
                     </div>
                </div>
 
-            <?php } ?> 
-        <?php } ?>
-                            
+              <?php } ?> 
+        <?php } ?>       
                                 
                     </div>
             </div>

@@ -23,6 +23,21 @@ html, body {
         
         
 }
+.lista_eventos{
+  background-color:#33ADD6; 
+  width: 50px;
+  height: 50px;
+  padding: 4px; 
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border: 0px solid #000000;
+
+
+}
 .advert {
 	border-radius: 3px;
 	border: 1px solid #727272;

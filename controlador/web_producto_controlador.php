@@ -35,8 +35,8 @@ class web_producto_controlador extends controller {
         if ($handle->uploaded) {
             $handle->file_new_name_body = 'producto_' . uniqid();
             $handle->image_resize = true;
-            $handle->image_x = 370;//
-            $handle->image_y = 372;//
+            $handle->image_x = 350;//
+            $handle->image_y = 270;//
             $handle->Process($dir_dest);
             $imagen = $handle->file_dst_name;
             //echo "<pre>"; print_r($handle);exit;
@@ -76,14 +76,19 @@ class web_producto_controlador extends controller {
           //print_r($_POST['modificar_imagen']);exit();
             if($_POST['modificar_imagen'] == 1){
                 //echo '<pre>';print_r($_POST['modificar_imagen');exit;
-                $this->get_Libreria('upload' . DS . 'class.upload');
+                $this->_model->id_web_producto = $this->filtrarInt($id);
+                $datos_img = $this->_model->selecciona_id();
+                $imagen = $datos_img[0]["IMAGEN"];
                 $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'producto' . DS;
+                unlink($dir_dest.$imagen);
+                $this->get_Libreria('upload' . DS . 'class.upload');
+            
                 $handle = new Upload($_FILES['archivo'], 'es_ES');
                 if ($handle->uploaded) {
                     $handle->file_new_name_body = 'producto_' . uniqid();
                     $handle->image_resize = true;
-                    $handle->image_x = 370;
-                    $handle->image_y = 372;
+                    $handle->image_x = 350;
+                    $handle->image_y = 270;
                     $handle->Process($dir_dest);
                     $imagen = $handle->file_dst_name;
                   //  print_r($imagen);exit();
@@ -123,6 +128,14 @@ class web_producto_controlador extends controller {
         if (!$this->filtrarInt($id)) {
             $this->redireccionar('web_producto');
         }
+        //ELIMINADO FISICO DE LA IMAGEN  
+        $this->_model->id_web_producto = $this->filtrarInt($id);
+        $datos_img =  $this->_model->selecciona_id();
+        $imagen = $datos_img[0]["IMAGEN"];
+        $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'producto' . DS;
+        unlink($dir_dest.$imagen);
+
+
         $this->_model->id_web_producto = $this->filtrarInt($id);
         $this->_model->elimina();
         $this->redireccionar('web_producto');

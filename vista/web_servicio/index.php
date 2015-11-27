@@ -7,7 +7,6 @@
         <tr>
             <th>ITEM</th>
             <th>TITULO</th>
-            <th>ESTADO</th>
             <th>ACCIONES</th>
         </tr>
         </thead>
@@ -16,11 +15,7 @@
             <tr>
                 <td><?php echo $i+1 ?></td>
                 <td><?php echo $this->datos[$i]['TITULO'] ?></td>
-                <td><?php if($this->datos[$i]['ESTADO']=='1'){
-                    echo 'Activo';
-                } else{
-                    echo 'Inactivo';
-                } ?></td>
+                
                 <td>
                     <a href="#myModal" role="button" data-toggle="modal" title=" VER IMAGEN" onclick="ver('<?php echo $this->datos[$i]['ID_WEB_SERVICIO'] ?>')" class="btn btn-warning btn-minier"><i class="icon-eye-open icon-white"></i></a>
                     <a href="javascript:void(0)" title=" EDITAR" onclick="editar('<?php echo BASE_URL?>web_servicio/editar/<?php echo $this->datos[$i]['ID_WEB_SERVICIO'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>

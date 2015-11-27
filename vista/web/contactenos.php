@@ -60,13 +60,15 @@
                                   </h3>
                                   <aside class="thumbnailbox listformat">                 
                                       <div id="map">
-                                          <p class="lead"><p><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7928.577112153539!2d-
+                                          <p class="lead"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7928.577112153539!2d-
                                      76.3594834!3d-6.4850947!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ba0c07765eff75%3A
                                      0xdb6f16d92c725847!2sJiron+San+Martin+422%2C+Tarapoto%2C+Per%C3%BA!5e0!3m2!1ses!
                                      2s!4v1443068297596" width="405" height="300" frameborder="0" scrolling="no" marginheight="3" marginwidth="0"></iframe>
-                                     </p><img src="<?php echo $_webParams['ruta_img']; ?>olympo.png" alt=""> 
+                                     </p>
+
+                                     <img src="<?php echo $_webParams['ruta_img']; ?>olympo.png" alt=""> 
                                      <?php if(isset ($this->datos[0]['RAZON_SOCIAL']))echo $this->datos[0]['RAZON_SOCIAL']?><br>
-                                      <p class="glyphicon glyphicon-map-marker">
+                                      <p class="glyphicon glyphicon-map-marker"></p>
                                      <?php if(isset ($this->datos[0]['DIRECCION']))echo $this->datos[0]['DIRECCION']?></br>
                                      
                                       <p class="glyphicon glyphicon-earphone ">
