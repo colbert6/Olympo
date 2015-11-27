@@ -14,7 +14,7 @@
                                 
                              ?>   
                               <?php } ?>  
-                                <strong >EVENTOS &nbsp;<?php echo $dia[0]?></strong>
+                                <strong >EVENTOS ?></strong>
                             <?php } ?> 
                             
                         </div> 

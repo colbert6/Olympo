@@ -193,22 +193,22 @@ class view {
             array(
                 'id' => 'servicios',
                 'titulo' => 'SERVICIOS',
-                'enlace' => BASE_URL. 'web/servicios'
+                'enlace' => BASE_URL. 'movil/servicios/'
                 ),
             array(
                 'id' => 'productos',
                 'titulo' => 'PRODUCTOS',
-                'enlace' => BASE_URL. 'web/productos'
+                'enlace' => BASE_URL. 'movil/productos/'
                 ),
             array(
                 'id' => 'eventos',
                 'titulo' => 'EVENTOS',
-                'enlace' => '#'
+                'enlace' => BASE_URL. 'movil/eventos/'
                 ),
             array(
                 'id' => 'contactenos',
                 'titulo' => 'CONTÁCTENOS',
-                'enlace' => BASE_URL. 'web/contactenos'
+                'enlace' => BASE_URL. 'movil/contactenos'
                 )
             
         );
@@ -218,6 +218,8 @@ class view {
             'ruta_js' => BASE_URL . 'vista/movil/js/',
             'ruta_img' => BASE_URL . 'lib/img/web_movil/',
             'ruta_img_web' => BASE_URL . 'lib/img/web/',
+            'ruta_img_serv' => BASE_URL . 'lib/img/servicio/',
+            'ruta_img_pro' => BASE_URL . 'lib/img/producto/',
             'menu'=>$menu,            
             'js' => $js,
             'css' => $css

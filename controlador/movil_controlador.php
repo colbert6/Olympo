@@ -5,7 +5,11 @@ class movil_Controlador extends controller {
     private $_publicidad;
     private $_inicio;
     private $_model;
-    
+    private $_servicios;
+    private $_productos;
+    private $_evento;
+    private $_contacto;
+
     public function __construct() {
         
        /*if(!$this->web_movil()){
@@ -16,6 +20,10 @@ class movil_Controlador extends controller {
         $this->_model = $this->cargar_modelo('informacion');
         $this->_publicidad = $this->cargar_modelo('img_publicidad');
         $this->_inicio = $this->cargar_modelo('img_inicio');
+        $this->_servicios = $this->cargar_modelo('web_servicio');
+        $this->_productos = $this->cargar_modelo('web_producto');
+        $this->_evento = $this->cargar_modelo('evento');
+        $this->_contacto = $this->cargar_modelo('contacto');
  
     }
     
@@ -33,21 +41,35 @@ class movil_Controlador extends controller {
         $this->_vista->datos = $this->_model->selecciona();
         $this->_vista->renderiza_movil('nosotros','nosotros');
     }
-    public function productos($categoria=false,$id=false){
-    
-        $this->_vista->datos = $this->_web_productos->getProducto($id);
-            $this->_vista->renderiza_movil('pro_detalle',true,'productos');      
-    }
-    public function servicios($servicio=false){
-        $this->_vista->informacion =$servicio;
-        $this->_vista->datos_servicio = $this->_web_servicios->getServicios();
-        //$this->_vista->img_servicio = $this->_web_img_servicios->getImgServicios();
+     public function servicios(){
+        $this->_vista->datos_servicio = $this->_servicios->selecciona();//
         $this->_vista->setCss(array('servicios'));
-        //$this->_vista->js=>setJs(array('sexylightbox','jquery.easing'));
-        $this->_vista->renderiza_movil('servicios','servicios',true);
-    }    
+        $this->_vista->renderiza_movil('servicios','servicios');
+    } 
+    public function productos(){
+    
+        $this->_vista->datos_producto = $this->_productos->selecciona();
+
+        $this->_vista->setCss(array('servicios'));
+        
+        $this->_vista->renderiza_movil('productos','productos');   
+    }
+    public function eventos(){
+        $this->_vista->evento = $this->_evento->selecciona();
+        $this->_vista->renderiza_movil('eventos','eventos');
+    }
     public function contactenos(){
-        $this->_vista->renderiza_movil('contactenos','contactenos',false);
+        if ($_POST['guardar'] == 1) {
+            $this->_contacto->nombre = $_POST['nombre'];
+            $this->_contacto->telefono = $_POST['telefono'];
+            $this->_contacto->email = $_POST['email'];
+            $this->_contacto->mensaje = $_POST['mensaje'];
+            $datos = $this->_contacto->inserta();
+            $this->redireccionar("movil/contactenos");
+            
+        }
+        $this->_vista->datos = $this->_model->selecciona();
+        $this->_vista->renderiza_movil('contactenos','contactenos');
     }
 
         
