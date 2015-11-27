@@ -1,3 +1,5 @@
+<link href="<?php echo $_params['ruta_css']; ?>jquery-ui.custom.css" rel="stylesheet" />
+<script src="<?php echo $_params['ruta_js']; ?>bootbox.min.js"></script>
 <div class="navbar-inner">
   </script>
     <div class="col-md-1"></div>

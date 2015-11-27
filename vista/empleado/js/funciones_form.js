@@ -31,15 +31,25 @@ $(document).ready(function() {
                     if($("#id_empleado").val()==datos[0].ID_EMPLEADO){   
                         
                     }else{
-                        alert("El DNI ya se encuentra Registrado");
-                        $("#dni").focus();
+                        bootbox.confirm("El DNI ya se encuentra registrado. ", function(result) {
+                                if (result) {
+                                    $("#dni").focus();
+                                }else{
+                                    $("#dni").focus();
+                                }
+                        });
                     }
                     
                 }
             },'json');
         }else if($(this).val().length<8){
-            alert("El DNI tiene 8 numeros");
+            bootbox.confirm("DNI invalido,por ser menor de 8 digitos.  ", function(result) {
+                    if (result) {
                         $("#dni").focus();
+                    }else{
+                        $("#dni").focus();
+                    }
+            });
         }
     });
     /*$('#region').change(function(){

@@ -5,7 +5,7 @@
         <thead>
             <tr>
                 <th>ITEM</th>
-                <th>CODIGO</th>
+                <th>NOMBRE</th>
                 <th>VALOR</th>
                 <th>DESCRIPCION </th>
                 <th>ACCIONES</th>
