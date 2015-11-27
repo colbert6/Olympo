@@ -208,7 +208,7 @@ class view {
             array(
                 'id' => 'contactenos',
                 'titulo' => 'CONTÁCTENOS',
-                'enlace' => BASE_URL. 'movil/contactenos'
+                'enlace' => BASE_URL. 'movil/contactenos/'
                 )
             
         );

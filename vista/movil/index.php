@@ -103,7 +103,7 @@
                                         <strong>¡No lo pienses más!</strong> y únete a la familia <strong>Olimpo Ginevra & Company Fitness </strong>.
                                     </p>
                                     <p class='text-center'>
-                                        <a type="button" class="btn btn-warning btn-lg" href="<?php echo BASE_URL.'web/contactenos' ; ?>">
+                                        <a type="button" class="btn btn-warning btn-lg" href="<?php echo BASE_URL.'movil/contactenos' ; ?>">
                                             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contactenos
                                         </a>
                                     </p>
