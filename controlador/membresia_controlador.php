@@ -26,10 +26,10 @@ class membresia_controlador extends controller {
         
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->numero_servicios = $_POST['numero_servicios'];
             $this->_model->duracion = $_POST['duracion'];
-            $this->_model->vigencia = $_POST['vigencia'];
+            $this->_model->vigencia = ucwords(strtolower($_POST['vigencia']));
             $this->_model->precio = $_POST['precio']; 
             $datos = $this->_model->inserta();
             $this->redireccionar('membresia');
@@ -47,10 +47,10 @@ class membresia_controlador extends controller {
 
         if ($_POST['guardar'] == 1) {
             $this->_model->id_tipo_membresia = $_POST['id_tipo_membresia'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->numero_servicios = $_POST['numero_servicios'];
             $this->_model->duracion = $_POST['duracion'];
-            $this->_model->vigencia = $_POST['vigencia'];
+            $this->_model->vigencia = ucwords(strtolower($_POST['vigencia']));
             $this->_model->precio = $_POST['precio']; 
             $this->_model->actualiza();
             $this->redireccionar('membresia');
