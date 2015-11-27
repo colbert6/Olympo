@@ -6,7 +6,7 @@
             <tr>
                 <th>ITEM</th>
                 <th>NRO COMPROBANTE</th>
-                <th>PROVEEDOR</th>
+                <th>CLIENTE</th>
                 <th>FECHA VENTA</th>
                 <th>TOTAL</th>
                 <th>PAGADO</th>
@@ -19,7 +19,7 @@
             <?php $var = 0; 
         if (isset($this->datos) && count($this->datos)){ 
             for ($j = 0; $j < count($this->datos); $j++) {
-                if($this->datos[$i]['ID_COMPRA'] == $this->datos[$j]['ID_COMPRA']){
+                if($this->datos[$i]['ID_VENTA'] == $this->datos[$j]['ID_VENTA']){
                     if($this->datos[$j]['MONTO'] ==$this->datos[$j]['XMONTO_PAGADO']){
                         $var = 1;
                     }else{
@@ -33,24 +33,20 @@
                 }
             }
         }
-        if($var == 1){ ?>
-             <tr class="warning" style="background: greenyellow;">
-        <?php }
-        if($var == 2){ ?>
-            <tr class="error" >
-        <?php }?> 
+        
+        ?> 
                 <?php $total= round($this->datos[$i]['MONTO']*(1+$this->datos[$i]['IGV']), 2); ?>
                 
                 <td><?php echo ($i+1);//id ?></td>
                 <td><?php echo $this->datos[$i]['NUM_DOCUMENTO']; ?></td>
-                <td><?php echo $this->datos[$i]['XPROVEEDOR']; ?></td>
+                <td><?php echo $this->datos[$i]['XCLIENTE']; ?></td>
                 <td><?php echo $this->datos[$i]['FECHA'];?></td>
                 <td><?php echo $total;?></td> 
                 <td><?php echo $this->datos[$i]['XMONTO_PAGADO'];?></td> 
                 <td><?php echo ($total-$this->datos[$i]['XMONTO_PAGADO']);?></td> 
                 
                 <td>
-                    <a title="Cronograma" title="Cronograma" href="<?php echo BASE_URL ?>cronograma_pago/cronograma/<?php echo $this->datos[$i]['ID_COMPRA'].'/'.(($this->datos[$i]['IGV']+1)*$this->datos[$i]['MONTO'] - $this->datos[$i]['XMONTO_PAGADO'])?>" class="btn btn-info btn-minier"><i class="icon-list-alt icon-white"></i></a>
+                    <a title="Cronograma" title="Cronograma" href="<?php echo BASE_URL ?>cronograma_cobro/cronograma/<?php echo $this->datos[$i]['ID_VENTA'].'/'.(($this->datos[$i]['IGV']+1)*$this->datos[$i]['MONTO'] - $this->datos[$i]['XMONTO_PAGADO'])?>" class="btn btn-info btn-minier"><i class="icon-list-alt icon-white"></i></a>
                 </td>
             </tr>
         <?php } ?>

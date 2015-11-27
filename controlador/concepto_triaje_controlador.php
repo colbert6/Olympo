@@ -23,7 +23,7 @@ class concepto_triaje_controlador extends controller{
 
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
-            $this->_concepto_triaje->descripcion = $_POST['descripcion'];
+            $this->_concepto_triaje->descripcion = ucwords(strtolower( $_POST['descripcion']));
             $datos =  $this->_concepto_triaje->inserta();
             $this->redireccionar('concepto_triaje');
         }
@@ -40,7 +40,7 @@ class concepto_triaje_controlador extends controller{
         
         if ($_POST['guardar'] == 1) {
             $this->_concepto_triaje->id_concepto_triaje = $_POST['id_concepto_triaje'];
-            $this->_concepto_triaje->descripcion = $_POST['descripcion'];
+            $this->_concepto_triaje->descripcion = ucwords(strtolower( $_POST['descripcion']));
             $this->_concepto_triaje->actualiza();
             $this->redireccionar('concepto_triaje');
         }

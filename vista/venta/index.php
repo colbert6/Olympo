@@ -41,7 +41,7 @@
 <?php } else { ?>
     
         <br/>
-        <p>No hay Ventas</p>
+        <p>NO SE ENCONTRARON DATOS</p>
         <a href="<?php echo BASE_URL ?>venta/nuevo" class="btn btn-primary">Nuevo</a>
     <?php } ?>
 <!-- Modal -->

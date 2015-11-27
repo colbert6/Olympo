@@ -112,33 +112,37 @@ class reportes_controlador extends controller {
         $this->_pdf->Output();
     }
     
-    public function stock_menor(){
+    public function stock_cliente(){
         $Y_table_position = 41;
         
-        $almacenes = $this->_almacen->selecciona();
+   //     $clienete = $this->_reportes->selecciona_cliente();
 //        echo "<pre>";
 //        print_r($almacenes);
 //        echo "</pre>";exit;
-        $n_almacenes = count($almacenes);
+        $n_clienete = 1;
         $opp = 47;
         $contapag = 1;
         $abs = 1;
-        for ($x = 0; $x < $n_almacenes; $x++) {
-            $this->_reportes->idalmacen = $almacenes[$x]['ID_ALMACEN'];
-            $datos = $this->_reportes->selecciona_stock_menor();
+        for ($x = 0; $x < $n_clienete; $x++) {
+           // $this->_reportes->idalmacen = $almacenes[$x]['ID_ALMACEN'];
+            $datos = $this->_reportes->selecciona_cliente();
+         //   print_r($datos);exit();
             $datacount = count($datos);
             $contaobj = 0;
             $c_codigo[$contapag] = "";
+            $c_nombre[$contapag] = "";
+            $c_apell_pater[$contapag] = "";
+            $c_apell_mater[$contapag] = "";
             $c_descripcion[$contapag] = "";
-            $c_tipo_producto[$contapag] = "";
-            $c_almacen[$contapag] = "";
-            $c_unidad_medida[$contapag] = "";
-            $c_stock[$contapag] = "";
+            $c_duracion[$contapag] = "";
+            $c_vigencia[$contapag] = "";
+            
             for ($i = 0; $i < $datacount; $i++) {
                 $c_codigo[$contapag] = $c_codigo[$contapag] . ($i+1) . "\n";
-                $c_descripcion[$contapag] = $c_descripcion[$contapag] . substr(utf8_decode($datos[$i]['XINSUMO']), 0, 45) . "\n";
-                $c_unidad_medida[$contapag] = $c_unidad_medida[$contapag] . substr($datos[$i]['UNIDAD_MEDIDA'], 0, 30) . "\n";
-                $c_stock[$contapag] = $c_stock[$contapag] . number_format($datos[$i]['XSTOCK'],0) . "\n";
+                $c_nombre[$contapag] = $c_nombre[$contapag] . substr(utf8_decode($datos[$i]['NOMBRES']), 0, 45) . "\n";
+                $c_descripcion[$contapag] = $c_descripcion[$contapag] . substr(utf8_decode($datos[$i]['DESCRIPCION']), 0, 45) . "\n";
+                $c_vigencia[$contapag] = $c_vigencia[$contapag] . substr(utf8_decode($datos[$i]['VIGENCIA']), 0,45) . "\n";
+     //           print_r($c_vigencia[$contapag]);exit();
                 $contaobj = $contaobj + 1;
                 if ($contaobj == $opp) {
                     $contaobj = 0;
@@ -154,38 +158,38 @@ class reportes_controlador extends controller {
                 $this->_pdf->SetFont('Arial','B',12);
                 $this->_pdf->SetY(24);
                 $this->_pdf->SetX(0);
-                $this->_pdf->Cell(210,5, utf8_decode('PRODUCTOS CON STOCK MENOR O IGUAL A CINCO(5) POR ALMACEN'),0,0,'C');
+                $this->_pdf->Cell(210,5, utf8_decode('CLIENTES VIGENTES CON SERVICIOS'),0,0,'C');
                 $this->_pdf->SetFillColor(96,197,253);
                 $this->_pdf->SetFont('Arial','B',10);
                 $this->_pdf->SetY(35);
                 $this->_pdf->SetX(15);
                 $this->_pdf->Cell(13,6,utf8_decode('Item'),'BT',0,'L',1);
                 $this->_pdf->SetX(28);
-                $this->_pdf->Cell(92,6,utf8_decode('Insumo'),'BT',0,'L',1);
+                $this->_pdf->Cell(92,6,utf8_decode('Cliente'),'BT',0,'L',1);
                 $this->_pdf->SetX(120);
-                $this->_pdf->Cell(50,6,utf8_decode('Unidad Medida'),'BT',0,'L',1);
+                $this->_pdf->Cell(50,6,utf8_decode('Membresia'),'BT',0,'L',1);
                 $this->_pdf->SetX(170);
-                $this->_pdf->Cell(25,6,utf8_decode('Stock'),'BT',0,'R',1);
+                $this->_pdf->Cell(25,6,utf8_decode('Vigencia'),'BT',0,'R',1);
                 //MARGEN TOTAL: HASTA=195 (ULTIMO SETX + ANCHO DE ULTIMO CELL)
                 //UBICACIÓN:
                 $this->_pdf->SetFont('Arial', '', 11);
                 $this->_pdf->SetFillColor(255, 255, 255);
                 $this->_pdf->SetY(29);
                 $this->_pdf->SetX(15);
-                $this->_pdf->Cell(30, 5, utf8_decode('Almacen :   ' . $almacenes[$x]['DESCRIPCION']) , 0, 'L', 1);
+                $this->_pdf->Cell(30, 5, utf8_decode('CLIENTES   ') , 0, 'L', 1);
                 $this->_pdf->SetFont('Arial', '', 10);
                 $this->_pdf->SetY($Y_table_position);
                 $this->_pdf->SetX(15);
                 $this->_pdf->MultiCell(13, 5, $c_codigo[$i], 1);
                 $this->_pdf->SetY($Y_table_position);
                 $this->_pdf->SetX(28);
-                $this->_pdf->MultiCell(92, 5, $c_descripcion[$i], 1);
+                $this->_pdf->MultiCell(92, 5, $c_nombre[$i], 1);
                 $this->_pdf->SetY($Y_table_position);
                 $this->_pdf->SetX(120);
-                $this->_pdf->MultiCell(50, 5, $c_unidad_medida[$i], 1);
+                $this->_pdf->MultiCell(50, 5, $c_descripcion[$i], 1);
                 $this->_pdf->SetY($Y_table_position);
                 $this->_pdf->SetX(170);
-                $this->_pdf->MultiCell(25, 5, $c_stock[$i], 1, 'R');
+                $this->_pdf->MultiCell(25, 5,$c_vigencia[$i], 1, 'R');
                 $abs = $abs + 1;
             }
             $abs = 1;

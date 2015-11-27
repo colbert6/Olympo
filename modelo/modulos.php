@@ -34,7 +34,7 @@ class modulos extends Main{
     }
     public function selecciona_menu() {
         if ($this->id_perfil_usuario==""){
-            $this->id_perfil_usuario=NULL;
+            $this->id_perfil_usuario=1;
         }       
         $datos = array($this->id_perfil_usuario);
         //echo '<pre>';print_r($datos);exit;

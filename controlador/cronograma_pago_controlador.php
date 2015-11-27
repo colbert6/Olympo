@@ -27,7 +27,6 @@ class cronograma_pago_controlador extends controller {
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->titulo = 'Cronograma de Pagos';
-        $this->_vista->btn_action = BASE_URL . 'cronograma_pago/amortizar/' . $idcompra . '/' . $monto_restante;
         $this->_vista->renderizar('cronograma');
     }
     
