@@ -62,14 +62,16 @@ class movil_Controlador extends controller {
         if ($_POST['guardar'] == 1) {
             $this->_contacto->nombre = $_POST['nombre'];
             $this->_contacto->telefono = $_POST['telefono'];
-            $this->_contacto->email = $_POST['email'];
+            $this->_contacto->correo = $_POST['email'];
             $this->_contacto->mensaje = $_POST['mensaje'];
             $datos = $this->_contacto->inserta();
+
             $this->redireccionar("movil/contactenos");
             
         }
         $this->_vista->datos = $this->_model->selecciona();
         $this->_vista->renderiza_movil('contactenos','contactenos');
+        $this->_vista->setJs_public(array('validaciones'));
     }
 
         
