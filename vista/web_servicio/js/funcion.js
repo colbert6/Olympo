@@ -14,8 +14,11 @@ function ver(id){
            
                 titulo = datos[0].TITULO;
                 imagen = datos[0].IMAGEN;
+                descripcion= datos[0].DESCRIPCION;
+               // alert(descripcion);
 		if(imagen != ''){
 		    html += "<div class='text-center'><img src='"+url+"lib/img/servicio/"+imagen.toLowerCase()+"' /></div>";
+        html += "<div class='text-center' style='font-size: 2em;padding: 15px 0px 0px 0px;'>"+descripcion+"</div>";
 		}else{
 		    html += "<h4>No tiene imagen</h4>";
 		}
