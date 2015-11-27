@@ -115,4 +115,14 @@
             </div>
         </div>
 
+        <div class='row'>
+            <div class="fb-page" data-href="https://www.facebook.com/OlympoFitness?ref=ts&amp;fref=ts"
+                         data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
+                        data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore">
+                           <blockquote cite="https://www.facebook.com/OlympoFitness?ref=ts&amp;fref=ts">
+                               <a href="https://www.facebook.com/OlympoFitness?ref=ts&amp;fref=ts">Olympo Fitness</a>
+                           </blockquote></div>
+                   </div>
+        </div>
+
 </div>
