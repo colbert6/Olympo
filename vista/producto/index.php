@@ -10,8 +10,6 @@
                 <th>CAT PRODUCTO</th>
                 <th>PRESENTACION</th>
                 <th>PRECIO</th>
-                <th>STOCK MIN</th>
-                <th>STOCK MAX</th>
                 <th>ACCIONES</th>
             </tr>
         </thead>
@@ -24,8 +22,6 @@
                 <td><?php echo $this->datos[$i]['DESCRIPCION_CAPR'];//nombre ?></td>
                 <td><?php echo $this->datos[$i]['PRESENTACION'];//nombre ?></td>
                 <td><?php echo $this->datos[$i]['PRECIO'];//nombre ?></td>
-                <td><?php echo $this->datos[$i]['STOCK_MIN'];//nombre ?></td>
-                <td><?php echo $this->datos[$i]['STOCK_MAX'];//nombre ?></td>
                 <td>
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>producto/editar/<?php echo $this->datos[$i]['ID_PRODUCTO'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
                     <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>producto/eliminar/<?php echo $this->datos[$i]['ID_PRODUCTO'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
