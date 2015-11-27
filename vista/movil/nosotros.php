@@ -1,10 +1,15 @@
 <div class="container-fluid">
-    <h3 class='text-center'><strong> BIENVENIDOS</strong></h3><hr>
+    
     <div class="row">
+        <ol class="breadcrumb" >
+            <li><a href="<?php echo $_movilParams['menu'][0]['enlace']?>">Inicio</a></li>
+            <li class="active">Nosotros</li>
+        </ol>
         <div class="col-xs-12 col-sm-6">
-            <img class="img-responsive" src="<?php echo $_movilParams['ruta_img_web']; ?>img_nosotros.png" alt="">
+            <legend><img class="img-responsive" src="<?php echo $_movilParams['ruta_img']."logo_menu.png"; ?>" alt=""></legend>
         </div>
-        <div class="col-xs-12 col-sm-6">            
+
+        <div class="col-xs-12 col-sm-6" >            
             <p class="text-justify" ><?php if(isset ($this->datos[0]['HISTORIA']))echo $this->datos[0]['HISTORIA']?></p>
         </div>
         <div class="col-xs-12 col-sm-6 nosotros_column"> 
@@ -15,3 +20,5 @@
         </div>
     </div>
 </div>
+
+

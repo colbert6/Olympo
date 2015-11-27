@@ -29,9 +29,9 @@ class empleado_controlador extends controller {
         if (@$_POST['guardar'] == 1) {
             
             $this->_empleado->id_categoria_empleado = $_POST['id_categoria_empleado'];//36
-            $this->_empleado->nombre = $_POST['nombre'];//37
-            $this->_empleado->apellido_paterno = $_POST['apellido_paterno'];//38
-            $this->_empleado->apellido_materno = $_POST['apellido_materno'];//39
+            $this->_empleado->nombre = ucwords(strtolower($_POST['nombre']));//37
+            $this->_empleado->apellido_paterno = ucwords(strtolower($_POST['apellido_paterno']));//38
+            $this->_empleado->apellido_materno = ucwords(strtolower($_POST['apellido_materno']));//39
             $this->_empleado->dni = $_POST['dni'];//40
             $this->_empleado->email = $_POST['email'];//41
             $this->_empleado->telefono = $_POST['telefono'];//42
@@ -79,9 +79,9 @@ class empleado_controlador extends controller {
         if (@$_POST['guardar'] == 1) {
             $this->_empleado->id_empleado = $_POST['id_empleado'];//104
             $this->_empleado->id_categoria_empleado = $_POST['id_categoria_empleado'];//36
-            $this->_empleado->nombre = $_POST['nombre'];//37
-            $this->_empleado->apellido_paterno = $_POST['apellido_paterno'];//38
-            $this->_empleado->apellido_materno = $_POST['apellido_materno'];//39
+            $this->_empleado->nombre = ucwords(strtolower($_POST['nombre']));//37
+            $this->_empleado->apellido_paterno = ucwords(strtolower($_POST['apellido_paterno']));//38
+            $this->_empleado->apellido_materno = ucwords(strtolower($_POST['apellido_materno']));//39
             $this->_empleado->dni = $_POST['dni'];//40
             $this->_empleado->email = $_POST['email'];//41
             $this->_empleado->telefono = $_POST['telefono'];//42

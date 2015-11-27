@@ -23,6 +23,7 @@
                 <td>
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>almacen/editar/<?php echo $this->datos[$i]['ID_ALMACEN'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
                     <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>almacen/eliminar/<?php echo $this->datos[$i]['ID_ALMACEN'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
+                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>almacen/mostrar/<?php echo $this->datos[$i]['ID_ALMACEN'] ?>')" class="btn btn-success btn-minier"><i class="icon-eye-open icon-white"></i></a>
                 </td>
             </tr>
         <?php } ?>

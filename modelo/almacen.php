@@ -5,9 +5,30 @@ class almacen extends Main{
     public $id_almacen;
     public $descripcion;
     public $estado;
+
     
     public function selecciona() {
         $r = $this->get_consulta("pa_m1_almacen",null);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+        
+    }
+    
+    
+    public function selecciona1() {
+          $datos = array($this->id_almacen);
+        $r = $this->get_consulta("pa_m3_almacen", $datos);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {

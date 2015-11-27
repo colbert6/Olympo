@@ -22,7 +22,7 @@ class categoria_ejercicio_controlador extends controller {
         
     public function nuevo() {
         if ($_POST['guardar'] == 1) {
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $datos = $this->_model->inserta();
             $this->redireccionar('categoria_ejercicio');
         }
@@ -39,7 +39,7 @@ class categoria_ejercicio_controlador extends controller {
 
         if ($_POST['guardar'] == 1) {
             $this->_model->id_categoria_ejercicio = $_POST['id_categoria_ejercicio'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->actualiza();
             $this->redireccionar('categoria_ejercicio');
         }

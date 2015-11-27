@@ -23,7 +23,7 @@ class categoria_producto_controlador extends controller{
     
     public function nuevo() {
         if (@$_POST['guardar'] == 1) {
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->inserta();
             $this->redireccionar('categoria_producto');
         }
@@ -40,7 +40,7 @@ class categoria_producto_controlador extends controller{
         
         if (@$_POST['guardar'] == 1) {
             $this->_model->id_categoria_producto = $_POST['id_categoria_producto'];
-            $this->_model->descripcion = $_POST['descripcion'];
+            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
             $this->_model->edita();
             
             $this->redireccionar('categoria_producto');

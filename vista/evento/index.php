@@ -9,7 +9,7 @@
                 <th>LUGAR</th> 
                 <th>F. INICIO</th>   
                 <th>F. FIN</th> 
-                  
+                <th>HORA</th> 
                 <th>ESTADO</th> 
                 <th>ACCIONES</th>
             </tr>
@@ -22,7 +22,7 @@
                  <td><?php echo $this->datos[$i]['LUGAR'];//nombre ?></td> 
                  <td><?php echo $this->datos[$i]['FECHA_INICIO'];//nombre ?></td>
                  <td><?php echo $this->datos[$i]['FECHA_FIN'];//nombre ?></td>
-               
+                <td><?php echo $this->datos[$i]['HORA_EVENTO'];//nombre ?></td>
                 <td><?php if($this->datos[$i]['ESTADO']=='1'){
                     echo 'Activo';
                 } else{

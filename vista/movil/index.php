@@ -18,7 +18,7 @@
                 <?php for($i = 0; $i < count($this->publicidad); $i++){ ?>
                 <?php if($i==0){ $clase = "class='item active'";}else{$clase = "class='item'";}?>
                     <div <?php echo $clase; ?> >
-                        <img class='img-responsive' src="<?php echo $_movilParams['ruta_img']."web/".$this->publicidad[$i]['IMAGEN'];  ?>" alt="">
+                        <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web'].$this->publicidad[$i]['IMAGEN'];  ?>" alt="">
                     </div>
                 <?php } ?>
                 </div>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="panel-body">
                             <h4 style='font-family: fantasy'><?php echo $this->inicio[$i]['TITULO'];?></h4>
-                            <a href="#" class="btn btn-warning">Ver Mas</a>
+                            <a href="<?php if(isset ($this->inicio[$i]['URL']))echo BASE_URL."movil/".$this->inicio[$i]['URL'] ; ?>" class="btn btn-warning">Ver Mas</a>
                         </div>
                     </div>
                 </div>
@@ -60,12 +60,12 @@
             <?php } ?>
                     <div class="col-xs-6 col-sm-6 " >
                         <div class="panel panel-default text-center">
-                            <div class="hover-text">
+                            <div class="hover-text text-center">
                                 <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web']."eventos.png"  ?>" alt="">
                             </div>
                             <div class="panel-body">
                                 <h4 style='font-family: fantasy'><?php echo "Eventos Importantes";?></h4>
-                                <a href="#" class="btn btn-warning">Ver Mas</a>
+                                <a href="<?php if(isset ($_movilParams['menu'][4]['enlace']))echo $_movilParams['menu'][4]['enlace'] ; ?>" class="btn btn-warning">Ver Mas</a>
                             </div>
                         </div>
                     </div>
