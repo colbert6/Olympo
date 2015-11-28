@@ -6,16 +6,18 @@ $(function() {
     });
     
     $("#AbrirVtnBuscarSocio").click(function(){
-       
-         buscarSocio();
+        buscarSocio();
         $("#VtnBuscarSocio").show();
     });
     
     $("#id_tipopago").change(function(){
         if($(this).val()==2){
             $("#celda_credito").show();
+            $("#verCuotas").show();
+            
         }else{
             $("#celda_credito").hide();
+            $("#verCuotas").hide();
             limpiar_tipo_pago();
         }
     });
@@ -239,6 +241,7 @@ $(function() {
     $("#cantidad").blur(function(){
         var resta;
     });
+    
     $("#verCuotas").click(function() {
         mostrar_ver_cuotas();
     });
@@ -247,11 +250,9 @@ $(function() {
         if ($("#CronogramaAbierto").is(':checked')) {
             var completo= mostrar_ver_cuotas();
             if(completo){
-                $("#verCuotas").show();
                 limpiar_cuotas();
             }
-            
-            
+                        
         } else {
             quitar_cronograma_abierto()
         }
@@ -619,7 +620,6 @@ function mostrar_ver_cuotas() {
 function quitar_cronograma_abierto() {
     $("#estado_cronograma").val('0');
     document.getElementById("CronogramaAbierto").checked=false;
-     $("#verCuotas").hide();
     
 }
 function limpiar_cuotas() {
