@@ -7,6 +7,7 @@ class contacto extends Main{
     public $telefono;
     public $correo;
     public $mensaje;
+    public $fecha;
     
     public function selecciona() {
         $r = $this->get_consulta("pa_m1_contacto",null);
@@ -50,9 +51,17 @@ class contacto extends Main{
    
     
     public function inserta() {
-        $datos = array($this->nombre,$this->telefono,$this->correo,$this->mensaje);
+        $datos = array($this->nombre,$this->telefono,$this->correo,$this->mensaje,$this->fecha);
         $r = $this->get_consulta("pa_i_contacto", $datos);
         
+        $error = $r[1];
+        $r = null;
+        return $error;
+    }
+
+    public function elimina() {
+        $datos = array($this->id_contacto);
+        $r = $this->get_consulta("pa_d_contacto", $datos);
         $error = $r[1];
         $r = null;
         return $error;

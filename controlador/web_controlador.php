@@ -70,6 +70,7 @@ class web_Controlador extends controller {
             $this->_contacto->telefono = $_POST['telefono'];
             $this->_contacto->correo = $_POST['email'];
             $this->_contacto->mensaje = $_POST['mensaje'];
+            $this->_contacto->fecha =  date("Y")."-".date("m")."-".date("d");//
             $datos = $this->_contacto->inserta();
 
           //  $this->redireccionar("web/contactenos");
