@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>OlympoGym</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo $_movilParams['ruta_css']; ?>bootstrap.css" rel="stylesheet">
