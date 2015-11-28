@@ -30,7 +30,11 @@ class web_servicio_controlador extends controller {
         set_time_limit(0);
         $this->get_Libreria('upload' . DS . 'class.upload');
         $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'servicio' . DS;
+        $dir_dest_movil = ROOT . 'lib' . DS . 'img' . DS . 'web_movil' . DS ."servicio" . DS;
+
         $handle = new Upload($_FILES['archivo'], 'es_ES');
+        $handle_movil = new Upload($_FILES['archivo'], 'es_ES');
+
         //echo "<pre>"; print_r($dir_dest);exit;
         if ($handle->uploaded) {
             $handle->file_new_name_body = 'servicio_' . uniqid();
@@ -39,6 +43,12 @@ class web_servicio_controlador extends controller {
             $handle->image_y = 296;
             $handle->Process($dir_dest);
             $imagen = $handle->file_dst_name;
+            //MOVIL
+            $handle_movil->file_new_name_body = substr($imagen, 0, -4); ;
+            $handle_movil->image_resize = true;
+            $handle_movil->image_x = 740;
+            $handle_movil->image_y = 450;
+            $handle_movil->Process($dir_dest_movil);
             //echo "<pre>"; print_r($handle);exit;
         }else {
             die('Error al Subir Imagen');
@@ -80,10 +90,17 @@ class web_servicio_controlador extends controller {
                 $datos_img =  $this->_model->selecciona_id();
                 $imagen = $datos_img[0]["IMAGEN"];
                 $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'servicio' . DS;
+                $dir_dest_movil = ROOT . 'lib' . DS . 'img' . DS . 'web_movil' . DS ."servicio" . DS;
+
                 unlink($dir_dest.$imagen);
+                unlink($dir_dest_movil.$imagen);
+
                 $this->get_Libreria('upload' . DS . 'class.upload');
     
                 $handle = new Upload($_FILES['archivo'], 'es_ES');
+                $handle_movil = new Upload($_FILES['archivo'], 'es_ES');
+
+
                 if ($handle->uploaded) {
                     $handle->file_new_name_body = 'servicio_' . uniqid();
                     $handle->image_resize = true;
@@ -91,6 +108,13 @@ class web_servicio_controlador extends controller {
                     $handle->image_y = 296;
                     $handle->Process($dir_dest);
                     $imagen = $handle->file_dst_name;
+                    //MOVIL
+                    $handle_movil->file_new_name_body = substr($imagen, 0, -4); ;
+                    $handle_movil->image_resize = true;
+                    $handle_movil->image_x = 740;
+                    $handle_movil->image_y = 450;
+                    $handle_movil->Process($dir_dest_movil);
+
                 }else {
                     die('Error al Subir Imagen');
                 }
@@ -128,11 +152,13 @@ class web_servicio_controlador extends controller {
         }
         //ELIMINAMOS FISICAMENTE LA IMAGEN
         $this->_model->id_web_servicio = $this->filtrarInt($id);
-        $datos_img = $this->_model->selecciona_id();
+        $datos_img =  $this->_model->selecciona_id();
         $imagen = $datos_img[0]["IMAGEN"];
         $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'servicio' . DS;
-        
+        $dir_dest_movil = ROOT . 'lib' . DS . 'img' . DS . 'web_movil' . DS ."servicio" . DS;
+
         unlink($dir_dest.$imagen);
+        unlink($dir_dest_movil.$imagen);
 
         $this->_model->id_web_servicio = $this->filtrarInt($id);
         $this->_model->elimina();

@@ -209,6 +209,11 @@ class view {
                 'id' => 'contactenos',
                 'titulo' => 'CONTÁCTENOS',
                 'enlace' => BASE_URL. 'movil/contactenos/'
+                ),
+            array(
+                'id' => 'login',
+                'titulo' => 'INICIAR SESION',
+                'enlace' => BASE_URL. 'movil/login/'
                 )
             
         );
@@ -218,8 +223,8 @@ class view {
             'ruta_js' => BASE_URL . 'vista/movil/js/',
             'ruta_img' => BASE_URL . 'lib/img/web_movil/',
             'ruta_img_web' => BASE_URL . 'lib/img/web/',
-            'ruta_img_serv' => BASE_URL . 'lib/img/servicio/',
-            'ruta_img_pro' => BASE_URL . 'lib/img/producto/',
+            'ruta_img_serv' => BASE_URL . 'lib/img/web_movil/servicio/',
+            'ruta_img_pro' => BASE_URL . 'lib/img/web_movil/producto/',
             'menu'=>$menu,            
             'js' => $js,
             'css' => $css

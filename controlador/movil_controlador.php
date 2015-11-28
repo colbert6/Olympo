@@ -75,8 +75,8 @@ class movil_Controlador extends controller {
     }
 
         
-    public function fotos(){
-        $this->_vista->renderiza_movil('fotos','fotos');
+    public function login(){
+        $this->_vista->renderiza_movil('login','login');
     }
         
      public function web_movil() {
