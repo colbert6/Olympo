@@ -18,7 +18,7 @@
                 <?php for($i = 0; $i < count($this->publicidad); $i++){ ?>
                 <?php if($i==0){ $clase = "class='item active'";}else{$clase = "class='item'";}?>
                     <div <?php echo $clase; ?> >
-                        <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web'].$this->publicidad[$i]['IMAGEN'];  ?>" alt="">
+                        <img class='img-responsive' src="<?php echo $_movilParams['ruta_img']."web/".$this->publicidad[$i]['IMAGEN'];  ?>" alt="">
                     </div>
                 <?php } ?>
                 </div>
@@ -48,7 +48,7 @@
                 <div class="col-xs-6 col-sm-6 " >
                     <div class="panel panel-default text-center">
                         <div class="hover-text">
-                            <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web'].$this->inicio[$i]['IMAGEN'];  ?>" alt="">
+                            <img class='img-responsive' src="<?php echo $_movilParams['ruta_img']."web/".$this->inicio[$i]['IMAGEN'];  ?>" alt="">
                         </div>
                         <div class="panel-body">
                             <h4 style='font-family: fantasy'><?php echo $this->inicio[$i]['TITULO'];?></h4>
@@ -61,7 +61,7 @@
                     <div class="col-xs-6 col-sm-6 " >
                         <div class="panel panel-default text-center">
                             <div class="hover-text text-center">
-                                <img class='img-responsive' src="<?php echo $_movilParams['ruta_img_web']."eventos.png"  ?>" alt="">
+                                <img class='img-responsive' src="<?php echo $_movilParams['ruta_img']."web/"."eventos.png"  ?>" alt="">
                             </div>
                             <div class="panel-body">
                                 <h4 style='font-family: fantasy'><?php echo "Eventos Importantes";?></h4>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="row">
-            <div class="col-sm-12 col-lg-12 col-md-12" >
+            <div class="col-xs-12" >
                  
                 <ul class="nav nav-tabs" >
                     <li class="active"><a data-toggle="tab" href="#bienvenida">BIENVENIDA</a></li>
@@ -87,8 +87,8 @@
                     <div id="bienvenida" class="tab-pane fade in active">
                         <br>
                             <div class="media">
-                                <a class="pull-left" href="#">
-                                  <img class="" src="<?php echo $_movilParams['ruta_img_web']; ?>bienvenida.jpg" alt="">
+                                <a class="pull-left text-center" href="#">
+                                  <img class="img-responsive" src="<?php echo $_movilParams['ruta_img']."web/"; ?>bienvenida.jpg" alt="">
                                 </a>
 
                                 <div class="media-body">
@@ -115,14 +115,5 @@
             </div>
         </div>
 
-        <div class='row'>
-            <div class="fb-page" data-href="https://www.facebook.com/OlympoFitness?ref=ts&amp;fref=ts"
-                         data-small-header="false" data-adapt-container-width="true" data-hide-cover="false"
-                        data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore">
-                           <blockquote cite="https://www.facebook.com/OlympoFitness?ref=ts&amp;fref=ts">
-                               <a href="https://www.facebook.com/OlympoFitness?ref=ts&amp;fref=ts">Olympo Fitness</a>
-                           </blockquote></div>
-                   </div>
-        </div>
 
 </div>

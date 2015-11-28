@@ -1,4 +1,4 @@
-
+<script src="<?php echo $_params['ruta_js']; ?>bootbox.min.js"></script>
 <div class="navbar-inner">
 <form method="post" action="<?php if(isset ($this->action))echo $this->action ?>" id="frm" enctype="multipart/form-data">
     <input type="hidden" name="guardar" id="guardar" value="1"/>

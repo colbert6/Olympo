@@ -30,8 +30,10 @@ class img_publicidad_controlador extends controller {
         set_time_limit(0);
         $this->get_Libreria('upload' . DS . 'class.upload');
         $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'web' . DS;
+        $dir_dest_movil = ROOT . 'lib' . DS . 'img' . DS . 'web_movil' . DS ."web" . DS;
         
         $handle = new Upload($_FILES['archivo'], 'es_ES');
+        $handle_movil = new Upload($_FILES['archivo'], 'es_ES');
         //echo "<pre>"; print_r($dir_dest);exit;
         if ($handle->uploaded) {
             //WEB
@@ -41,6 +43,12 @@ class img_publicidad_controlador extends controller {
             $handle->image_y = 365;
             $handle->Process($dir_dest);
             $imagen = $handle->file_dst_name;
+            //MOVIL
+            $handle_movil->file_new_name_body = substr($imagen, 0, -4); ;
+            $handle_movil->image_resize = true;
+            $handle_movil->image_x = 1480;
+            $handle_movil->image_y = 900;
+            $handle_movil->Process($dir_dest_movil);
 
         }else {
             die('Error al Subir Imagen');
@@ -80,13 +88,15 @@ class img_publicidad_controlador extends controller {
                 $datos_img = $this->_model->selecciona_id();
                 $imagen2 = $datos_img[0]["IMAGEN"];
                 $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'web' . DS;
-            
+                $dir_dest_movil = ROOT . 'lib' . DS . 'img' . DS . 'web_movil' . DS ."web" . DS;
                 
                 unlink($dir_dest.$imagen2);
+                unlink($dir_dest_movil.$imagen2);
 
                 $this->get_Libreria('upload' . DS . 'class.upload');
 
                 $handle = new Upload($_FILES['archivo'], 'es_ES');
+                $handle_movil = new Upload($_FILES['archivo'], 'es_ES');
                 
                 if ($handle->uploaded) {
                     $handle->file_new_name_body = 'web_' . uniqid();
@@ -95,6 +105,12 @@ class img_publicidad_controlador extends controller {
                     $handle->image_y = 365;
                     $handle->Process($dir_dest);
                     $imagen = $handle->file_dst_name;
+                    //MOVIL
+                    $handle_movil->file_new_name_body = substr($imagen, 0, -4); ;
+                    $handle_movil->image_resize = true;
+                    $handle_movil->image_x = 1480;
+                    $handle_movil->image_y = 900;
+                    $handle_movil->Process($dir_dest_movil);
                 }else {
                     die('Error al Subir Imagen');
                 }
@@ -132,11 +148,14 @@ class img_publicidad_controlador extends controller {
             $this->redireccionar('img_publicidad');
         }
         //ELIMINAR DE IMG
-        $this->_model->id_img_publicidad = $this->filtrarInt($id);
+       $this->_model->id_img_publicidad = $this->filtrarInt($id);
         $datos_img = $this->_model->selecciona_id();
-        $imagen = $datos_img[0]["IMAGEN"];
+        $imagen2 = $datos_img[0]["IMAGEN"];
         $dir_dest = ROOT . 'lib' . DS . 'img' . DS . 'web' . DS;
-        unlink($dir_dest.$imagen);
+        $dir_dest_movil = ROOT . 'lib' . DS . 'img' . DS . 'web_movil' . DS ."web" . DS;
+        
+        unlink($dir_dest.$imagen2);
+        unlink($dir_dest_movil.$imagen2);
         //ELIMINADO DE LA BASE DE DATOS
         $this->_model->id_img_publicidad = $this->filtrarInt($id);
         $this->_model->elimina();

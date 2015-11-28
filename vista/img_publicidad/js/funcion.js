@@ -4,6 +4,7 @@
  */
 
 $(function(){
+    
 });
 function ver(id){
     

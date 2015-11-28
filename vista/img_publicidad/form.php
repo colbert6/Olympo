@@ -1,4 +1,4 @@
-
+<script src="<?php echo $_params['ruta_js']; ?>bootbox.min.js"></script>
 <div class="navbar-inner">
 <form method="post" action="<?php if(isset ($this->action))echo $this->action ?>" id="frm" enctype="multipart/form-data">
     <input type="hidden" name="guardar" id="guardar" value="1"/>
@@ -39,12 +39,13 @@
         </tr>
         <tr>
             <td colspan="2" align="center">
-                <p><button type="submit" class="btn btn-primary" id="save">Guardar</button>
+                <p><button type="button" class="btn btn-primary" id="save">Guardar</button>
                 <a href="<?php echo BASE_URL ?>img_publicidad" class="btn btn-info">Cancelar</a></p>
             </td>
         </tr>
     </table>
 </form>
+
 <div id="script">
 <script>
 $('input[id=archivo]').change(function(){

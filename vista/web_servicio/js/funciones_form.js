@@ -13,6 +13,7 @@ $(function(){
         
         if (bval) 
         {
+            bootbox.alert('Este Proceso Puede tardara uno Segundos.¡Por favor Espere!');
             $("#frm").submit();
         }
         return false;
