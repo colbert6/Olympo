@@ -1,7 +1,4 @@
-$(document).ready(function(){
 
-
-});
 
 function ver(id){
     //alert(id);
@@ -70,17 +67,6 @@ function ver(id){
         html+= '<th>GRADO DE ESTUDIO:</th>';
         html+= '<td>'+datos[0]["GRADO_ESTUDIO"]+'</td>';
         html+= '</tr>';
-        html+= '</tr>';
-        html+= '<th>USUARIO:</th>';
-        html+= '<td>'+datos[0]["USUARIO"]+'</td>';
-        html+= '</tr>';
-        html+= '</tr>';
-        html+= '<th>CLAVE:</th>';
-        html+= '<td>'+"***********"+'</td>';
-        html+= '</tr>';
-        html+= '</tr>';
-        html+= '<th>PERFIL DE USUARIO:</th>';
-        html+= '<td>'+datos[0]["PERFILUSUARIO"]+'</td>';
         html+= '</tr>';
         html+= '</table>';
         $("#titulo").html(titulo);

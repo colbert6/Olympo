@@ -40,22 +40,8 @@ class empleado_controlador extends controller {
             $this->_empleado->direccion = $_POST['direccion'];//45
             $this->_empleado->fecha_nacimiento = $_POST['fecha_nacimiento'];//46
             $this->_empleado->estado_civil = $_POST['estado_civil'];//47
-            //$this->_empleado->grupo_sanguineo = $_POST['grupo_sanguineo'];//48
-            //$this->_empleado->hobby = $_POST['hobby'];//49
-            //$this->_empleado->alias = $_POST['aliass'];//50
-            //$this->_empleado->nacionalidad = $_POST['nacionalidad'];//51
-           // $this->_empleado->seguro_medico = $_POST['seguro_medico'];//52
-            //$this->_empleado->observacion = $_POST['observacion'];//53
-            //$this->_empleado->antecedente_medico = $_POST['antecedente_medico'];//54
-            //$this->_empleado->codigo_postal = $_POST['codigo_postal'];//55
             $this->_empleado->numero_hijo = $_POST['numero_hijo'];//56
-            //$this->_empleado->sector = $_POST['sector'];//57
             $this->_empleado->grado_estudio = $_POST['grado_estudio'];//58
-            //$this->_empleado->tipo_vivienda = $_POST['tipo_vivienda'];//59
-            //$this->_empleado->anio_contratacion = $_POST['anio_contratacion'];//60
-            $this->_empleado->usuario = $_POST['usuario'];//61
-            $this->_empleado->clave = md5($_POST['clave']);//62
-            $this->_empleado->id_perfil_usuario = $_POST['id_perfil_usuario'];//63
             
             
             $this->_empleado->inserta();
@@ -90,25 +76,9 @@ class empleado_controlador extends controller {
             $this->_empleado->direccion = $_POST['direccion'];//45
             $this->_empleado->fecha_nacimiento = $_POST['fecha_nacimiento'];//46
             $this->_empleado->estado_civil = $_POST['estado_civil'];//47
-            //$this->_empleado->grupo_sanguineo = $_POST['grupo_sanguineo'];//48
-            //$this->_empleado->hobby = $_POST['hobby'];//49
-            //$this->_empleado->alias = $_POST['aliass'];//50
-            //$this->_empleado->nacionalidad = $_POST['nacionalidad'];//51
-           // $this->_empleado->seguro_medico = $_POST['seguro_medico'];//52
-            //$this->_empleado->observacion = $_POST['observacion'];//53
-            //$this->_empleado->antecedente_medico = $_POST['antecedente_medico'];//54
-            //$this->_empleado->codigo_postal = $_POST['codigo_postal'];//55
             $this->_empleado->numero_hijo = $_POST['numero_hijo'];//56
-            //$this->_empleado->sector = $_POST['sector'];//57
-            $this->_empleado->grado_estudio = $_POST['grado_estudio'];//58
-            //$this->_empleado->tipo_vivienda = $_POST['tipo_vivienda'];//59
-            //$this->_empleado->anio_contratacion = $_POST['anio_contratacion'];//60
-            $this->_empleado->usuario = $_POST['usuario'];//61
-            $this->_empleado->clave = $_POST['clave'];//62
-            $this->_empleado->id_perfil_usuario = $_POST['id_perfil_usuario'];//63
-            
+            $this->_empleado->grado_estudio = $_POST['grado_estudio'];//5            
             $this->_empleado->actualiza();
-            //print_r($this->_empleado);exit;
             $this->redireccionar('empleado');
         }
         $this->_vista->cat_empleado = $this->_cat_empleado->selecciona();
@@ -136,9 +106,9 @@ class empleado_controlador extends controller {
         if(isset($_POST['dni'])){
             $this->_empleado->dni=$_POST['dni'];
             $empleado = $this->_empleado->selecciona_dni();
-            
         }else if(isset($_POST['id'])){
             $this->_empleado->id_empleado=$_POST['id'];
+           // print($this->_empleado->id);exit();
             $empleado = $this->_empleado->selecciona_id_e();
         }
         echo json_encode($empleado);
