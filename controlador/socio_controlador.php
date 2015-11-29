@@ -8,6 +8,7 @@ class socio_controlador extends controller {
     private $_triaje;
     private $_concepto_triaje;
     private $_rutina;
+    private $_usuario;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -20,6 +21,8 @@ class socio_controlador extends controller {
         $this->_triaje = $this->cargar_modelo('triaje');
         $this->_concepto_triaje = $this->cargar_modelo('concepto_triaje');
         $this->_rutina = $this->cargar_modelo('rutina');
+        $this->_usuario = $this->cargar_modelo('usuario');
+
     }
 
     public function index() {
@@ -65,6 +68,15 @@ class socio_controlador extends controller {
 
 
             $datos = $this->_socio->inserta();
+            //AQUI AGREGAMOS  EL USUARIO
+
+            //$this->_usuario->id_usuario;
+            $this->_usuario->id_actor = $datos[0]["ID_SOCIO"];
+            $this->_usuario->usuario = $_POST['dni'];
+            $this->_usuario->clave = md5($_POST['dni']);
+            $this->_usuario->tipo_actor = 's';
+            $this->_usuario->id_perfil_usuario = 2;
+            $this->_usuario->inserta();
             $this->redireccionar('socio');
         }
         $this->_vista->titulo = 'Registrar socio';
@@ -174,6 +186,9 @@ class socio_controlador extends controller {
             $socio = $this->_socio->selecciona_id();
         }else if(isset($_POST['matricula'])){
             $socio = $this->_socio->selecciona();
+        }else if(isset($_POST['historia'])){
+              $this->_socio->id_socio=$_POST['historia'];
+            $socio = $this->_socio->selecciona_historial();
         }
         echo json_encode($socio);
     }

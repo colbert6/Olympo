@@ -21,14 +21,14 @@ class almacen_controlador extends controller {
     }
      public function mostrar($id) {
 
-      if (!$this->filtrarInt($id)) {
+        if (!$this->filtrarInt($id)) {
             $this->redireccionar('almacen');
       
-}       $this->_model->id_almacen = $this->filtrarInt($id);
+        }       $this->_model->id_almacen = $this->filtrarInt($id);
         $this->_vista->datos = $this->_model->selecciona1();
         $this->_vista->titulo = 'Transito de Producto';
      
-         $this->_vista->action = BASE_URL . 'almacen/mostrar/'.$id;
+        $this->_vista->action = BASE_URL . 'almacen/mostrar/'.$id;
         $this->_vista->setCss_public(array('jquery.dataTables'));
         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
         $this->_vista->renderizar('indexx');
@@ -40,7 +40,7 @@ class almacen_controlador extends controller {
             $this->redireccionar('almacen');
         }
         $this->_vista->titulo = 'Registrar Almacen';
-    
+        $this->_vista->action = BASE_URL . 'almacen/nuevo/';
         $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('form');
     }

@@ -110,6 +110,8 @@ class empleado_controlador extends controller {
             $this->_empleado->id_empleado=$_POST['id'];
            // print($this->_empleado->id);exit();
             $empleado = $this->_empleado->selecciona_id_e();
+        }else if(isset($_POST['all'])){
+            $empleado = $this->_empleado->selecciona();
         }
         echo json_encode($empleado);
     }

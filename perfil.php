@@ -3,7 +3,11 @@
                                 <i class="icon-user"></i>
                                 <span id="user_info">
                                     <small>Bienvenido,</small>
+                                    <?php if(session::get('tipo_actor')=='e'){?>
                                     <?php echo session::get('perfil')?> <?php echo session::get('empleado')?>
+                                    <?php }else{ ?>
+                                    <?php echo session::get('perfil')?> <?php echo session::get('socio')?>
+                                    <?php } ?>
                                     | <?php echo Main::get_servidor() ?>
                                 </span>
 

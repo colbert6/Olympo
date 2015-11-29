@@ -12,16 +12,31 @@
                 <th>CANTIDAD</th>
             </tr>
         </thead>
-         <tbody>
+         <tbody >
             <?php for ($i = 0; $i < count($this->datos); $i++) { ?>
-            <tr>
-                <td><?php echo ($i+1);//id ?></td>
-                <td><?php echo $this->datos[$i]['MOVIMIENTO'];//nombre ?></td> 
-                <td><?php echo $this->datos[$i]['ALMACEN'];?></td> 
-                <td><?php echo $this->datos[$i]['PRODUCTO'];//nombre ?></td> 
-                <td><?php echo $this->datos[$i]['FECHA'];//nombre ?></td> 
-                <td><?php echo $this->datos[$i]['CANTIDAD'];//nombre ?></td> 
+             <?php 
+        
+             if($this->datos[$i]['MOVIMIENTO']=='compra'){?>
+            <tr  >
+                <td style="background: #FFA7A7"><?php echo ($i+1);//id ?></td>
+                <td style="background: #FFA7A7"><?php echo $this->datos[$i]['MOVIMIENTO'];//nombre ?></td> 
+                <td style="background: #FFA7A7"><?php echo $this->datos[$i]['ALMACEN'];?></td> 
+                <td style="background: #FFA7A7"><?php echo $this->datos[$i]['PRODUCTO'];//nombre ?></td> 
+                <td style="background: #FFA7A7"><?php echo $this->datos[$i]['FECHA'];//nombre ?></td> 
+                <td style="background: #FFA7A7"><?php echo $this->datos[$i]['CANTIDAD'];//nombre ?></td> 
                          </tr>
+
+                         <?php }
+                         else {?>
+                <td style="background: #ABF1A3"><?php echo ($i+1);//id ?></td>
+                <td style="background: #ABF1A3"><?php echo $this->datos[$i]['MOVIMIENTO'];//nombre ?></td> 
+                <td style="background: #ABF1A3"><?php echo $this->datos[$i]['ALMACEN'];?></td> 
+                <td style="background: #ABF1A3"><?php echo $this->datos[$i]['PRODUCTO'];//nombre ?></td> 
+                <td style="background: #ABF1A3"><?php echo $this->datos[$i]['FECHA'];//nombre ?></td> 
+                <td style="background: #ABF1A3"><?php echo $this->datos[$i]['CANTIDAD'];//nombre ?></td> 
+                        
+                         <?php }?>
+
         <?php } ?>
         </tbody>
     </table>  

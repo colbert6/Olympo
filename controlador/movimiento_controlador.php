@@ -13,6 +13,7 @@ class movimiento_controlador extends controller {
     private $_tipo_movimiento;
     private $_empleado;
     private $_param;
+    private $_usuario;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -30,6 +31,7 @@ class movimiento_controlador extends controller {
         $this->_venta = $this->cargar_modelo('venta');
         $this->_empleado = $this->cargar_modelo('empleado');
         $this->_param = $this->cargar_modelo('param');
+        $this->_usuario = $this->cargar_modelo('usuario');
     } 
 
     public function index() {
@@ -556,7 +558,7 @@ class movimiento_controlador extends controller {
         echo json_encode($datos);
     }
     public function validaAdmin(){
-        echo json_encode($this->_empleado->validaAdmin($_POST["user"],md5($_POST["pass"])));
+        echo json_encode($this->_usuario->validaAdmin($_POST["user"],md5($_POST["pass"])));
     }
 
 

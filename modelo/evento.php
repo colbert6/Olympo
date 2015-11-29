@@ -48,7 +48,8 @@ class evento extends Main{
         }
       
     }
-    
+
+
     public function inserta() {
         $datos = array($this->id_categoria_evento,$this->nombre,$this->descripcion,
             $this->fecha_inicio,$this->fecha_fin,$this->lugar,$this->hora_evento);

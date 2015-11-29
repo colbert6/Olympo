@@ -16,8 +16,12 @@ Class menu {
 
     function unemenu() {
         echo "<ul id='nav'>";
+        if(session::get('tipo_actor')=='s'){
+            echo "<li><a href='" . BASE_URL."reglamento/" . "'><i class='icon-desktop'></i><span>Reglamento</span></a></li>";   
+        }
         $this->cargarmenu();
         echo "<li><a href='" . BASE_URL . "'><i class='icon-desktop'></i><span>Portal Web</span></a></li>";
+        
         echo "</ul>";
         echo '</div><div class="mainbar">';
     }

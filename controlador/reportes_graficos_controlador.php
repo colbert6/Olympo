@@ -3,6 +3,7 @@
 class reportes_graficos_controlador extends controller {
 
     private $_reportes_graficos;
+    private $_socio;
 
     //put your code here
     public function __construct() {
@@ -13,6 +14,7 @@ class reportes_graficos_controlador extends controller {
         $this->get_Libreria('highchart' . DS . 'Highchart');
         $this->_vista->setJs(array('funciones'));
         $this->_reportes_graficos = $this->cargar_modelo('reportes_graficos');
+        $this->_socio = $this->cargar_modelo('socio');
     }
 
     public function index() {
@@ -34,8 +36,13 @@ class reportes_graficos_controlador extends controller {
     
     public function r_prod() {
         $this->_vista->datos= $this->_reportes_graficos->reporte_prod();
-       // print_r($this->_vista->datos);exit();
         $this->_vista->renderizar_reporte('r_prod');
+    }
+    public function historial_graf_socio($id_socio) {
+        $this->_socio->id_socio=$id_socio;
+        $this->_vista->datos= $this->_socio->selecciona_historial_graf();
+        //print_r($this->_vista->datos);exit();
+        $this->_vista->renderizar_reporte('historial');
     }
 
 }
