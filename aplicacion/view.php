@@ -318,7 +318,7 @@ class view {
             include_once $ruta_vista;
             //incluimos la vista
         } else {
-            throw new Exception('Error de vista');
+            throw new Exception('Error de vista'.$ruta_vista);
         }
     }
 

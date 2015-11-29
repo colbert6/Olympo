@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="telefono" class="control-label">Teléfono:</label>
-                                    <input type="tel" onkeypress="return soloNumeros(event)" id="telefono" class="form-control input-sm" name="telefono" placeholder="Telefono" required>
+                                    <input type="tel" onkeypress="return soloNumeros(event)" maxlength='10' id="telefono" class="form-control input-sm" name="telefono" placeholder="Telefono">
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="email" class="control-label">Correo electrónico:<span>*</span></label>

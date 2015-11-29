@@ -1,10 +1,7 @@
-$(document).ready(function(){
 
-
-});
 
 function ver(id){
-    //alert(id);
+    //alert(date("Y")."-".date("m")."-".date("d"));
     $.post(url+'empleado/buscador','id='+id,function(datos){
         empleado = datos[0]["NOMBRE"]+" "+datos[0]["APELLIDO_PATERNO"]+" "+datos[0]["APELLIDO_MATERNO"];
         titulo = "<strong>EMPLEADO</strong>: "+empleado.toUpperCase();
@@ -70,17 +67,6 @@ function ver(id){
         html+= '<th>GRADO DE ESTUDIO:</th>';
         html+= '<td>'+datos[0]["GRADO_ESTUDIO"]+'</td>';
         html+= '</tr>';
-        html+= '</tr>';
-        html+= '<th>USUARIO:</th>';
-        html+= '<td>'+datos[0]["USUARIO"]+'</td>';
-        html+= '</tr>';
-        html+= '</tr>';
-        html+= '<th>CLAVE:</th>';
-        html+= '<td>'+"***********"+'</td>';
-        html+= '</tr>';
-        html+= '</tr>';
-        html+= '<th>PERFIL DE USUARIO:</th>';
-        html+= '<td>'+datos[0]["PERFILUSUARIO"]+'</td>';
         html+= '</tr>';
         html+= '</table>';
         $("#titulo").html(titulo);

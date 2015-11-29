@@ -33,7 +33,7 @@
                            <option value='' >Selecciona...</option>
                            <?php for($i=0;$i<count($this->cat_empleado);$i++){ ?> 
                             <?php if( strcmp($this->datos[0]['ID_CATEGORIA_EMPLEADO'], $this->cat_empleado[$i]['ID_CATEGORIA_EMPLEADO']) == 0){?>
-                                 <option selected value="<?php echo $this->cat_empleado[$i]['ID_CATEGORIA_EMPLEADO'];?>"><?php echo $this->cat_empleado[$i]['DESCRIPCION']?></option>
+                                 <option selected value="<?php if(isset ($this->cat_empleado[$i]['ID_CATEGORIA_EMPLEADO'])) echo $this->cat_empleado[$i]['ID_CATEGORIA_EMPLEADO'];?>"><?php echo $this->cat_empleado[$i]['DESCRIPCION']?></option>
                             <?php }else{?>
                                  <option value="<?php echo $this->cat_empleado[$i]['ID_CATEGORIA_EMPLEADO'];?>"><?php echo $this->cat_empleado[$i]['DESCRIPCION']?></option>
                             <?php } ?>
@@ -47,19 +47,25 @@
               }else{
                             echo '<div class="col-md-6">' ;
               } ?>
-                <div class="form-group" style="margin-right: 0px;">
-                        <label class="control-label" >PERFIL USUARIO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
-                       <select class="form-control glyphicon" name='id_perfil_usuario' id='id_perfil_usuario'>
+
+              <div class="form-group" style="margin-right: 0px;">
+                    <label class="control-label" for="estado_civil" >ESTADO CIVIL:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                  
+                      <select  class="form-control glyphicon" name='estado_civil' id='estado_civil'>
                            <option value='' >Selecciona...</option>
-                           <?php for($i=0;$i<count($this->perfil);$i++){ ?> 
-                            <?php if( strcmp($this->datos[0]['ID_PERFIL_USUARIO'], $this->perfil[$i]['ID_PERFIL_USUARIO']) == 0){?>
-                                 <option selected value="<?php echo $this->perfil[$i]['ID_PERFIL_USUARIO'];?>"><?php echo $this->perfil[$i]['DESCRIPCION']?></option>
+                           <?php 
+                           $estado_civil = array('soltero(a)','casado(a)','divorciado(a)','viudo(a)');
+                            for($i=0;$i<count($estado_civil);$i++){ ?> 
+                            <?php if(strcmp($this->datos[0]['ESTADO_CIVIL'], $estado_civil[$i])==0){?>
+                                 <option selected value="<?php echo $estado_civil[$i];?>"><?php echo strtoupper($estado_civil[$i]);?></option>
                             <?php }else{?>
-                                 <option value="<?php echo $this->perfil[$i]['ID_PERFIL_USUARIO'];?>"><?php echo $this->perfil[$i]['DESCRIPCION']?></option>
+                                 <option value="<?php echo $estado_civil[$i];?>"><?php echo strtoupper($estado_civil[$i]);?></option>
                             <?php } ?>
                            <?php } ?>
+                          
                       </select>
-                </div>
+                
+                  </div>
             </div>
        </div>
 
@@ -203,80 +209,6 @@
                       </div>
 
             </div>
-            
-            
-
-        
-        
-        </div>
-
-        <div class="row" >
-            
-            <div class="col-md-4">
-                <div class="form-group" style="margin-right: 0px;">
-                    <label class="control-label" for="estado_civil" >ESTADO CIVIL:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
-                  
-                      <select  class="form-control glyphicon" name='estado_civil' id='estado_civil'>
-                           <option value='' >Selecciona...</option>
-                           <?php 
-                           $estado_civil = array('soltero(a)','casado(a)','divorciado(a)','viudo(a)');
-                            for($i=0;$i<count($estado_civil);$i++){ ?> 
-                            <?php if(strcmp($this->datos[0]['ESTADO_CIVIL'], $estado_civil[$i])==0){?>
-                                 <option selected value="<?php echo $estado_civil[$i];?>"><?php echo strtoupper($estado_civil[$i]);?></option>
-                            <?php }else{?>
-                                 <option value="<?php echo $estado_civil[$i];?>"><?php echo strtoupper($estado_civil[$i]);?></option>
-                            <?php } ?>
-                           <?php } ?>
-                          
-                      </select>
-                
-                  </div>
-            </div>
-            
-            <div class="col-md-4">
-                 <div class="form-group" style="margin-right: 0px;">
-                        <label class="control-label" for="usuario" >USUARIO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
-
-                          <input  name="usuario" id="usuario" class="form-control" placeholder="Usuario" 
-                                value="<?php if(isset ($this->datos[0]['USUARIO'])) echo $this->datos[0]['USUARIO']?>">
-
-                      </div>
-
-            </div>
-            
-            <div class="col-md-4">
-                 <div class="form-group" style="margin-right: 0px;">
-                        <label class="control-label" for="clave" >CLAVE:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
-
-                          <input type="password" name="clave" id="clave" class="form-control" placeholder="Clave" 
-                                value="<?php if(isset ($this->datos[0]['CLAVE'])) echo $this->datos[0]['CLAVE']?>">
-
-                      </div>
-
-            </div>
-            
-            
-            <!--div class="col-md-12">
-                <div class="form-group">
-                    <label class="control-label" for="ingreso" >INGRESO:</label>
-                  
-                      <input <?php echo $bloqueo;?> name="ingresos" id="ingreso" class="form-control"  placeholder="Ingreso" 
-                            value="<?php if(isset ($this->datos[0]['INGRESOS'])) echo $this->datos[0]['INGRESOS']?>">
-                 
-                  </div>
-
-
-            </div-->
-            <!--div class="col-md-12">
-               <div class="form-group">
-                <label class="control-label" for="sector" >SECTOR:</label>
-               
-                  <input <?php echo $bloqueo;?> name="sector" id="sector" class="form-control"  placeholder="Sector" 
-                        value="<?php if(isset ($this->datos[0]['SECTOR'])) echo $this->datos[0]['SECTOR']?>">
-
-              </div>
-
-            </div-->
         </div>
         
         <div class="form-group" style="margin-top: 8%"> 

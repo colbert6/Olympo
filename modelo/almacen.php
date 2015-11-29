@@ -8,7 +8,7 @@ class almacen extends Main{
 
     
     public function selecciona() {
-        $r = $this->get_consulta("pa_m1_almacen",null);
+        $r = $this->get_consulta("pa_m4_almacen",null);
         if ($r[1] == '') {
             $stmt = $r[0];
         } else {
