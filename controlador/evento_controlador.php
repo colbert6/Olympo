@@ -4,6 +4,7 @@ class evento_controlador extends controller {
 
     private $_model;
     private $_categoria_evento;
+    private $_socio_x_evento;
 
     public function __construct() {
         if (!$this->acceso()) {
@@ -12,6 +13,7 @@ class evento_controlador extends controller {
         parent::__construct();
         $this->_model = $this->cargar_modelo('evento');
         $this->_categoria_evento= $this->cargar_modelo('categoria_evento');
+        $this->_socio_x_evento= $this->cargar_modelo('socio_x_evento');
     }
 
     public function index() {
@@ -85,6 +87,8 @@ class evento_controlador extends controller {
         $this->_model->elimina();
         $this->redireccionar('evento');
     }
+
+    
 
 }
 

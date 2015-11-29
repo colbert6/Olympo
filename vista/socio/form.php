@@ -28,7 +28,7 @@
             <div class="col-md-4">
             <div class="form-group" style="margin-right: 0px;">
                 <label class="col-md-6 control-label" for="apellido_paterno" style="width: 180px;">APELLIDO PATERNO:  &nbsp;&nbsp;&nbsp;&nbsp;*</label>
-                      <input onKeyPress="return soloLetras(event);" maxlength='30' <?php echo $bloqueo;?> name="apellido_paterno" id="apellido_paterno" class="form-control"  placeholder="Apellido Paterno" 
+                      <input onKeyPress="return soloLetras(event);" maxlength='30' name="apellido_paterno" id="apellido_paterno" class="form-control"  placeholder="Apellido Paterno" 
                             value="<?php if(isset ($this->datos[0]['APELLIDO_PATERNO']))echo $this->datos[0]['APELLIDO_PATERNO']?>">
                     
                   </div>
@@ -142,7 +142,7 @@
                 <div class="form-group" style="margin-right: 0px;">
                     <label  class="control-label" for="direccion" >DIRECION: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
-                      <input <?php echo $bloqueo;?> name="direccion" id="direccion" class="form-control"  placeholder="Direccion" 
+                      <input name="direccion" id="direccion" class="form-control"  placeholder="Direccion" 
                             maxlength='45' value="<?php if(isset ($this->datos[0]['DIRECCION'])) echo $this->datos[0]['DIRECCION']?>">
                     </div>
             </div>
@@ -195,7 +195,7 @@
             <div class="col-md-4">
             <div class="form-group" style="margin-right: 0px;">
                 <label class="col-md-6 control-label" for="aliass" >ALIAS:</label>
-                  <input maxlength='45' <?php echo $bloqueo;?> name="aliass" id="aliass" class="form-control"  placeholder="Alias" 
+                  <input maxlength='45'  name="aliass" id="aliass" class="form-control"  placeholder="Alias" 
                         value="<?php if(isset ($this->datos[0]['ALIASS']))echo $this->datos[0]['ALIASS']?>">
         
               </div>

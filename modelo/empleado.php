@@ -145,41 +145,8 @@ class empleado extends Main{
         $r = null;
         return $error;
     }
+    
 
-    public function login($usuario,$clave) {
-        $datos = array($usuario,$clave);
-        $r = $this->get_consulta("pa_usuario", $datos);
-        if ($r[1] == '') {
-            $stmt = $r[0];
-        } else {
-            die($r[1]);
-        }
-        $r = null;
-        if (BaseDatos::$_servidor == 'oci') {
-            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
-            return $data;
-        } else {
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);       
-            return $stmt->fetchall();
-        }
-    }
 
-    public function validaAdmin($usuario,$clave){
-        $datos = array($usuario,$clave);
-        $r = $this->get_consulta("valida_admin", $datos);
-        if ($r[1] == '') {
-            $stmt = $r[0];
-        } else {
-            die($r[1]);
-        }
-        $r = null;
-        if (BaseDatos::$_servidor == 'oci') {
-            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
-            return $data;
-        } else {
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);       
-            return $stmt->fetchall();
-        }
-    }
 }
 ?>

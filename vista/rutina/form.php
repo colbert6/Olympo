@@ -42,31 +42,8 @@
                         <input style="border:none;background:none " name="dia[]" id="dia" readonly value="<?php echo strtoupper($dias[$i]) ;?>">
                       </td>
                       <td  width='50'>
-                  
-                            <?php $medida = array('m','cm',"kg");?>
-                            <select name="id_categoria_ejercicio[]" id="id_categoria_ejercicio">
-                                <?php if(isset($this->rutina)){?>
-                                
-                                <?php   for ($j=0; $j<count($this->rutina) ; $j++) {?>
-                                
-                                <?php       if(strcmp($this->rutina[$j]["DIA"],$dias[$i]) == 0) {?>
-                                    
-                                <?php           for ($k=0; $k<count($this->categoria_ejercicio) ; $k++) {?>
-                                                                
-                                <?php               if(strcmp($this->categoria_ejercicio[$k]["ID_CATEGORIA_EJERCICIO"],$this->rutina[$j]["ID_CATEGORIA_EJERCICIO"]) == 0){?>       
-                                                        <option selected value="<?php echo $this->categoria_ejercicio[$k]["ID_CATEGORIA_EJERCICIO"]; ?>"><?php echo $this->categoria_ejercicio[$k]["DESCRIPCION"]; ?></option>              
-                                <?php               }else{?>
-                                                        <option value="<?php echo $this->categoria_ejercicio[$k]["ID_CATEGORIA_EJERCICIO"]; ?>"><?php echo $this->categoria_ejercicio[$k]["DESCRIPCION"]; ?></option> 
-                                <?php               }?>
-                                <?php           }?>
-                                <?php       }?>
-                                <?php   }?>
-                                <?php }else{?>
-                                <?php   for ($j=0; $j<count($this->categoria_ejercicio) ; $j++) {?>
-                                            <option value="<?php echo $this->categoria_ejercicio[$j]["ID_CATEGORIA_EJERCICIO"]; ?>"><?php echo $this->categoria_ejercicio[$j]["DESCRIPCION"]; ?></option>              
-                                <?php   }?>
-                                <?php }?>
-                            </select>
+                            <a  data-toggle="modal" data-target="#modalEjercicio" href="javascript:void(0)" onclick="validaEjercicio('<?php echo $dias[$i] ?>')" class="btn btn-success"><i class="icon-list-alt icon-white"></i>&nbsp;&nbsp;&nbsp;Agregar Ejercicio &nbsp;</a>
+                            
 
                       </td>
                   </tr>
@@ -77,10 +54,43 @@
         </table>
         <div class="form-group" style="margin-top: 8%"> 
             <div class="col-sm-offset-3 col-sm-8">
-            <button type="button" class="btn btn-primary" id="save"> Guardar</button>
-                <a style="margin-left: 8%" href="<?php echo BASE_URL?>socio"  class="btn btn-danger">Cancelar</a>
+            <a type="button" class="btn btn-primary" href="<?php echo BASE_URL?>socio">VOLVER</a>
+                
             </div>
         </div>
 
     </form>
+    </div>
+
+<style type="text/css">
+    #modalEjercicio .modal-content{
+            width: 500px;
+            left: 18%;
+    }
+</style>
+<div id="modalEjercicio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Asignar Categoria de Ejercicio</h3>
+        </div>
+        <div class="modal-body">
+            <form id="btn-ejercicio">
+                <div class="navbar-inner text-center">
+                    <input type='hidden' name='dia' id='dia'>
+                    <div id="grillaEjercicio">
+                        <div class="page-header">
+                            <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        </div>
+        </div>
+        </div>
     </div>

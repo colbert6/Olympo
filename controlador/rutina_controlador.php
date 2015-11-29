@@ -21,20 +21,7 @@ class rutina_controlador extends controller {
     }
 
     public function nuevo($id) {
-        if ($_POST['guardar'] == 1) {
-            $id_categoria_ejercicio = $_POST['id_categoria_ejercicio'];
-            $dia = $_POST['dia'];
-            $id_socio = $_POST['id_socio'];
-
-            for ($i=0; $i < count($dia); $i++) { 
-                //$this->_triaje->id_triaje =;
-                $this->_rutina->id_socio = $id_socio;
-                $this->_rutina->dia = $dia[$i];
-                $this->_rutina->id_categoria_ejercicio = $id_categoria_ejercicio[$i];
-                $this->_rutina->inserta();
-            }
-            $this->redireccionar('socio');
-        }
+        
         $this->_vista->titulo = 'Registrar Rutina';
         //EXTRAER SOCIO
         $this->_socio->id_socio = $this->filtrarInt($id);
@@ -48,21 +35,7 @@ class rutina_controlador extends controller {
     }
 
     public function editar($id) {
-        if ($_POST['guardar'] == 1) {
-            $id_rutina = $_POST['id_rutina'];
-            $id_categoria_ejercicio = $_POST['id_categoria_ejercicio'];
-            $dia = $_POST['dia'];
-            $id_socio = $_POST['id_socio'];
-
-            for ($i=0; $i < count($dia); $i++) { 
-                $this->_rutina->id_rutina = $id_rutina[$i];
-                $this->_rutina->id_socio = $id_socio;
-                $this->_rutina->dia = $dia[$i];
-                $this->_rutina->id_categoria_ejercicio = $id_categoria_ejercicio[$i];
-                $this->_rutina->actualiza();
-            }
-            $this->redireccionar('socio');
-        }
+        
         $this->_vista->titulo = 'Registrar Rutina';
         //EXTRAER SOCIO
         $this->_socio->id_socio = $this->filtrarInt($id);
@@ -84,6 +57,24 @@ class rutina_controlador extends controller {
         $this->redireccionar('triaje/historial/'.$id);
     }
 
+    public function registrarRutina(){
+        $this->_rutina->id_socio = $_POST["id_socio"];
+        $this->_rutina->dia = $_POST["dia"];
+        $this->_rutina->id_categoria_ejercicio = $_POST["id_categoria_ejercicio"];
+        $this->_rutina->inserta();
+    }
+
+    public function rutina_dia(){
+        $this->_rutina->id_socio = $_POST["id_socio"];
+        $this->_rutina->dia = $_POST["dia"];
+        echo json_encode($this->_rutina->rutina_x_dia());
+    }
+    public function eliminarRutina(){
+        $this->_rutina->id_socio = $_POST["id_socio"];
+        $this->_rutina->dia = $_POST["dia"];
+        $this->_rutina->id_categoria_ejercicio = $_POST["id_categoria_ejercicio"];
+        $this->_rutina->elimina_2();
+    }
 }
 
 ?>

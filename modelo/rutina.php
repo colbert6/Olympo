@@ -45,6 +45,48 @@ class rutina extends Main{
         }
       
     }
+    public function rutina_x_dia() {
+        
+      
+        $datos = array($this->dia,$this->id_socio);
+        
+        $r = $this->get_consulta("pa_m3_rutina",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
+    public function elimina_2() {
+        
+      
+        $datos = array($this->dia,$this->id_socio,$this->id_categoria_ejercicio);
+        
+        $r = $this->get_consulta("pa_d_rutina2",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+      
+    }
     
     public function socio_x_rutina() {
         

@@ -40,7 +40,7 @@ class almacen_controlador extends controller {
             $this->redireccionar('almacen');
         }
         $this->_vista->titulo = 'Registrar Almacen';
-    
+        $this->_vista->action = BASE_URL . 'almacen/nuevo/';
         $this->_vista->setJs(array('funciones_form'));
         $this->_vista->renderizar('form');
     }

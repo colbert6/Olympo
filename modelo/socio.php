@@ -31,6 +31,8 @@ class socio extends Main{
     public $sector;
     public $grado_estudio;
     public $ingresos;
+    public $usuario;
+    public $clave;
     
     public function selecciona() {
         $r = $this->get_consulta("pa_m1_socio",null);
@@ -121,9 +123,19 @@ class socio extends Main{
                        $this->ingresos);
         //print_r($datos); exit;
         $r = $this->get_consulta("pa_i_socio", $datos);
-        $error = $r[1];
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
         $r = null;
-        return $error;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
     }
 
     public function actualiza() {
