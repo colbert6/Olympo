@@ -14,7 +14,7 @@
         </thead>
          <tbody>
             <?php for ($i = 0; $i < count($this->datos); $i++) { ?>
-            <tr>
+            <tr >
                 <td><?php echo ($i+1);//id ?></td>
                 <td><?php echo $this->datos[$i]['DESCRIPCION'];//nombre ?></td> 
                 <td><?php if($this->datos[$i]['ESTADO']=='1'){
@@ -25,8 +25,12 @@
                 <td>
 
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>almacen/editar/<?php echo $this->datos[$i]['ID_ALMACEN'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
+<<<<<<< HEAD
                      <?php 
                      if($this->datos[$i]['STOCK']=='0'){?>
+=======
+                    <?php if($this->datos[$i]['STOCK']=='0'){?>
+>>>>>>> d43c6b7792f09c63041e2d81dca6292227399092
                     <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>almacen/eliminar/<?php echo $this->datos[$i]['ID_ALMACEN'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
                     <?php }?>
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>almacen/mostrar/<?php echo $this->datos[$i]['ID_ALMACEN'] ?>')" class="btn btn-success btn-minier"><i class="icon-eye-open icon-white"></i></a>

@@ -90,7 +90,42 @@ class socio extends Main{
         }
       
     }
-    
+    public function selecciona_historial() {
+        $datos = array($this->id_socio);
+        $r = $this->get_consulta("pa_m3_socio",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+        
+    }
+    public function selecciona_historial_graf() {
+        $datos = array($this->id_socio);
+        $r = $this->get_consulta("pa_m4_socio",$datos);
+        if ($r[1] == '') {
+            $stmt = $r[0];
+        } else {
+            die($r[1]);
+        }
+        $r = null;
+        if (BaseDatos::$_servidor == 'OCI') {
+            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
+            return $data;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $stmt->fetchall();
+        }
+        
+    }
     public function inserta() {
         $datos = array($this->id_tipo_socio,
                        $this->idubigeo,

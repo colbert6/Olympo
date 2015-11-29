@@ -1,5 +1,34 @@
 <div class="navbar-inner ">
-
+    <div class="form-group">
+        <label class="control-label col-sm-1" >Total:</label>
+        <div class="col-sm-2">
+            <input name="descripcion" id="descripcion" class="form-control"  placeholder="Descripcion" readonly
+            maxlength="30"  value="<?php echo $this->datos[0]['MONTO']?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-1 col-sm-offset-1" >Pagado:</label>
+        <div class="col-sm-2">
+            <input name="descripcion" id="descripcion" class="form-control"  placeholder="Descripcion" readonly
+            maxlength="30"  value="<?php 
+                $pagado=0;
+                for($i=0;$i<count($this->datos);$i++){
+                    $pagado=$pagado+$this->datos[$i]['MONTO_PAGADO'];
+                }
+                echo $pagado;
+            
+            
+            ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-1 col-sm-offset-1" >Restante:</label>
+        <div class="col-sm-2">
+            <input name="descripcion" id="descripcion" class="form-control"  placeholder="Descripcion" readonly
+            maxlength="30"  value="<?php echo ($this->datos[0]['MONTO']-$pagado)?>">
+        </div>
+    </div>
+    <br><br><hr>
 <table id="table" class="display" cellspacing="0" width="100%">
     <thead>
     <tr>
