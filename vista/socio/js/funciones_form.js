@@ -8,26 +8,31 @@ $(document).ready(function() {
         changeMonth: true,
         dateFormat: 'yy-mm-dd'}); 
     $('#fecha_nacimiento').datepicker('option', 'maxDate', new Date(year, month, day)); //Ejemplo
+    
     $( "#save" ).click(function(){
         bval = true;   
         bval = bval && $("#nombre").required();
         bval = bval && $("#apellido_paterno").required();
         bval = bval && $("#apellido_materno").required();
-        bval = bval && $("#id_tipo_socio").required();
         bval = bval && $("#dni").required();
+        bval = bval && $("#id_tipo_socio").required();
         bval = bval && $("#region").required();
         bval = bval && $("#provincia").required();
         bval = bval && $("#id_ubigeo").required();
+        bval = bval && $("#fecha_nacimiento").required();
         bval = bval && $("#direccion").required();
         bval = bval && $("#sexo").required();
-        bval = bval && $("#email").email();
         bval = bval && $("#estado_civil").required();
-        bval = bval && $("#fecha_nacimiento").required();
+        bval = bval && $("#email").email();
+        
+        
         
         
         if (bval) 
         {
-            $("#frm").submit();
+            alert('as');
+
+            //$("#frm").submit();
         }
         return false;
     }); 

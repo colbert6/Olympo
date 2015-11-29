@@ -4,30 +4,31 @@
     <div class="col-md-10" style="color:#000">
     <form  role="form" id="frm" method="post" action="<?php echo $this->action; ?>" class="form-horizontal">
         <input name="guardar" id="guardar" type="hidden" value="1">
-
+    <div class="row"  >
          <?php 
         if(isset ($this->datos[0]['ID_SOCIO'])) {?>  
-              <div class="form-group">
-                <label class="col-md-6 control-label" style="width:110px ; " >IDENTIFICADOR:</label>
-                <div class="col-md-3">
+            <div class="col-md-4">
+                <div class="form-group" style="margin-right: 0px;">
+                  <label class="control-label">IDENTIFICADOR:</label>
+                
                     <input name="id_socio" id="id_socio" class="form-control"  readonly="readonly"
                            value="<?php echo $this->datos[0]['ID_SOCIO'];?>">
                 </div>
-              </div>  
+            </div>  
         <?php } ?> 
-        <div class="row"  >
+        
             <div class="col-md-4" >
                 <div class="form-group" style="margin-right: 0px;">
-                    <label class="col-md-6 control-label "  >NOMBRE:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
-                    <input onKeyPress="return soloLetras(event);" maxlength='30' name="nombre" id="nombre" class="form-control"  placeholder="Nombre(s)" autofocus
-                            value="<?php if(isset ($this->datos[0]['NOMBRE']))echo $this->datos[0]['NOMBRE']?>">
+                    <label class="control-label" for="nombre" >NOMBRE:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                    <input maxlength='30' name="nombre" id="nombre" class="form-control"  placeholder="Nombre(s)"
+                          onKeyPress="return soloLetras(event);"  value="<?php if(isset ($this->datos[0]['NOMBRE']))echo $this->datos[0]['NOMBRE']?>">
                     
                 </div>  
             </div> 
             
             <div class="col-md-4">
             <div class="form-group" style="margin-right: 0px;">
-                <label class="col-md-6 control-label" for="apellido_paterno" style="width: 180px;">APELLIDO PATERNO:  &nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                <label class=" control-label" for="apellido_paterno" style="width: 180px;">APELLIDO PATERNO:  &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                       <input onKeyPress="return soloLetras(event);" maxlength='30' <?php echo $bloqueo;?> name="apellido_paterno" id="apellido_paterno" class="form-control"  placeholder="Apellido Paterno" 
                             value="<?php if(isset ($this->datos[0]['APELLIDO_PATERNO']))echo $this->datos[0]['APELLIDO_PATERNO']?>">
                     
@@ -35,27 +36,31 @@
             </div>
             <div class="col-md-4">
             <div class="form-group" style="margin-right: 0px;">
-                    <label class="col-md-6 control-label" for="apellido_materno" style="width: 180px;">APELLIDO MATERNO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                    <label class="control-label" for="apellido_materno" style="width: 180px;">APELLIDO MATERNO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     <input  onKeyPress="return soloLetras(event);" maxlength='30' name="apellido_materno" id="apellido_materno" class="form-control"  placeholder="Apellido Materno" 
                             value="<?php if(isset ($this->datos[0]['APELLIDO_MATERNO']))echo $this->datos[0]['APELLIDO_MATERNO']?>">
                     </div>
             </div>
-        </div>
 
-        <br>
-        
-        <div class="row" >
-            
-            <div class="col-md-4">
+            <?php if(isset ($this->datos[0]['ID_SOCIO'])) {
+                           echo '<div class="col-md-4">' ;
+              }else{
+                            echo '<div class="col-md-6">' ;
+              } ?>
                 <div class="form-group" style="margin-right: 0px;">
-                <label class="col-md-6 control-label" for="dni" >DNI: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                <label class=" control-label" for="dni" >DNI: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     <input onKeyPress="return soloNumeros(event);" maxlength='8' name="dni" id="dni" class="form-control"  placeholder="DNI" 
                         value="<?php if(isset ($this->datos[0]['DNI']))echo $this->datos[0]['DNI']?>">
                 </div>
             </div>
-            <div class="col-md-4" >
+
+            <?php if(isset ($this->datos[0]['ID_SOCIO'])) {
+                           echo '<div class="col-md-4">' ;
+              }else{
+                            echo '<div class="col-md-6">' ;
+              } ?>
                 <div class="form-group" style="margin-right: 0px;">
-                    <label class="col-md-6 control-label" style="width: 180px;" >TIPO SOCIO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                    <label class=" control-label" >TIPO SOCIO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                         <select class="form-control" name='id_tipo_socio' id='id_tipo_socio'>
                            <option value='' >Selecciona...</option>
                            <?php for($i=0;$i<count($this->tipo_socio);$i++){ ?> 
@@ -68,16 +73,13 @@
                       </select>  
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group" style="margin-right: 0px;" >
-                    <label class="col-md-6 control-label" for="fecha_nacimiento" style="width: 180px;" >FECHA NACIMIENTO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
-                        <input readonly name="fecha_nacimiento" id="fecha_nacimiento" class="form-control"   placeholder="Fecha Nacimiento" 
-                            value="<?php if(isset ($this->datos[0]['FECHA_NACIMIENTO'])) echo $this->datos[0]['FECHA_NACIMIENTO']?>">
-                </div>
-            </div>
         </div>
+
+      <!--  <br>-->
         
         <div class="row" >
+            
+
             <div class="col-md-4">
                 <div class="form-group" style="margin-right: 0px;">
                         <label class="control-label" >DEPARTAMENTO:</label>
@@ -93,6 +95,7 @@
                       </select>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="form-group" style="margin-right: 0px;">
                         <label class="control-label" >PROVINCIA:</label>
@@ -108,6 +111,7 @@
                       </select>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="form-group" style="margin-right: 0px;">
                         <label class="control-label" >DISTRITO</label>
@@ -124,10 +128,18 @@
                       </select>
                 </div>
             </div>
-
         </div>
+        
+        <div class="row" >
 
-        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group" style="margin-right: 0px;" >
+                    <label class=" control-label" for="fecha_nacimiento" style="width: 180px;" >FECHA NACIMIENTO: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
+                        <input readonly name="fecha_nacimiento" id="fecha_nacimiento" class="form-control"   placeholder="Fecha Nacimiento" 
+                            value="<?php if(isset ($this->datos[0]['FECHA_NACIMIENTO'])) echo $this->datos[0]['FECHA_NACIMIENTO']?>">
+                </div>
+            </div>
+
             <div class="col-md-4">
                <div class="form-group" style="margin-right: 0px;">
                 <label class="control-label" for="sector" >SECTOR:</label>
@@ -136,9 +148,9 @@
                         value="<?php if(isset ($this->datos[0]['SECTOR'])) echo $this->datos[0]['SECTOR']?>">
 
               </div>
-
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-4">
                 <div class="form-group" style="margin-right: 0px;">
                     <label  class="control-label" for="direccion" >DIRECION: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
@@ -148,12 +160,12 @@
             </div>
             
         </div>
-        
-        <br>
+
         <div class="row">
-            <div class="col-md-3">
+        
+            <div class="col-md-4">
                  <div class="form-group" style="margin-right: 0px;">
-                    <label class="control-label" for="sexo" >SEXO:</label>
+                    <label class="control-label" for="sexo" >SEXO:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
                     
                       <select class="form-control glyphicon" name='sexo' id='sexo'>
                         <option value='' >Selecciona...</option>
@@ -172,7 +184,8 @@
                    
                   </div>
             </div>
-            <div class="col-md-3">
+
+            <div class="col-md-4">
                 <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="estado_civil" style="width: 130px;" >ESTADO CIVIL: &nbsp;&nbsp;&nbsp;&nbsp;*</label>
                   
@@ -192,6 +205,7 @@
                 
                   </div>
             </div>
+
             <div class="col-md-4">
             <div class="form-group" style="margin-right: 0px;">
                 <label class="col-md-6 control-label" for="aliass" >ALIAS:</label>
@@ -200,20 +214,23 @@
         
               </div>
             </div>
-
+            
         </div>
         
-        <div class="row" >
-            <div class="col-md-6">
+        <!--<br>-->
+        <div class="row">
+
+            <div class="col-md-4">
                  <div class="form-group" style="margin-right: 0px;">
-                    <label class="control-label" for="email" >E-MAIL:</label>
+                    <label class="control-label" for="email" >E-MAIL:&nbsp;&nbsp;&nbsp;&nbsp;*</label>
             
                       <input type="email"   id="email" class="form-control"  placeholder="E-mail"  name='email'
                             value="<?php if(isset ($this->datos[0]['EMAIL'])) echo $this->datos[0]['EMAIL']?>">
                   
                   </div>
             </div>
-            <div class="col-md-3">
+
+            <div class="col-md-4">
                 <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label " for="telefono" >TELEFONO: </label>
                     
@@ -222,7 +239,8 @@
                 
                   </div>
             </div>
-            <div class="col-md-3">
+
+            <div class="col-md-4">
                 <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="celular" >CELULAR: </label>
                     
@@ -231,19 +249,20 @@
                 
                   </div>
             </div>
+
         </div>
-
         
+        <div class="row" >
 
-         <div class="row" >
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="form-group" style="margin-right: 0px;">
                         <label class="control-label" for="grado_estudio" style="width: 130px;" >GRADO DE ESTUDIO:</label>
                             <input name="grado_estudio" id="grado_estudio" class="form-control" placeholder="Grado de Estudio" 
                                 value="<?php if(isset ($this->datos[0]['GRADO_ESTUDIO'])) echo $this->datos[0]['GRADO_ESTUDIO']?>">
                 </div>
             </div>
-            <div class="col-md-4">
+
+              <div class="col-md-4">
                  <div class="form-group" style="margin-right: 0px;">
                     <label class="control-label" for="ocupacion" >OCUPACION:</label>
                    
@@ -252,7 +271,8 @@
                    
                   </div>
             </div>
-            <div class="col-md-3">
+
+            <div class="col-md-4">
                 <div class="form-group" style="margin-right: 0px;">
                 <label class="control-label" for="numero_hijo" style="width: 130px;" >NUMERO DE HIJOS:</label>
                
@@ -261,8 +281,6 @@
             
                 </div>
             </div>
-           
-            
         </div>
 
         <div class="form-group" style="margin-top: 8%"> 
