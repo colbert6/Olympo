@@ -1,6 +1,8 @@
+
 <div class="navbar-inner">
 <?php if (isset($this->datos) && count($this->datos)) { ?>
     
+
     <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -21,8 +23,12 @@
                     echo 'Inactivo';
                 } ?></td>
                 <td>
+
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>almacen/editar/<?php echo $this->datos[$i]['ID_ALMACEN'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
+                     <?php 
+                     if($this->datos[$i]['STOCK']=='0'){?>
                     <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>almacen/eliminar/<?php echo $this->datos[$i]['ID_ALMACEN'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
+                    <?php }?>
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>almacen/mostrar/<?php echo $this->datos[$i]['ID_ALMACEN'] ?>')" class="btn btn-success btn-minier"><i class="icon-eye-open icon-white"></i></a>
                 </td>
             </tr>
