@@ -1,6 +1,18 @@
 $(document).ready(function() {   
-    $( "#fecha_nacimiento" ).datepicker({changeMonth: true,changeYear: true,dateFormat: 'yy-mm-dd',yearRange: '-100:+0'}); 
+    
+    var nueva_fecha = new Date();
+    var month =  parseInt(nueva_fecha.getMonth());
+    var day = parseInt(nueva_fecha.getDate())-1;
+    var year = parseInt(nueva_fecha.getFullYear());
+    $( "#fecha_nacimiento" ).datepicker({
+        changeYear: true,
+        changeMonth: true,
+        dateFormat: 'yy-mm-dd'}); 
+    $('#fecha_nacimiento').datepicker('option', 'maxDate', new Date(year, month, day)); //Ejemplo
+
     $( "#save" ).click(function(){
+
+
         bval = true;
         bval = bval && $("#id_categoria_empleado").required();
         bval = bval && $("#estado_civil").required();
@@ -49,5 +61,6 @@ $(document).ready(function() {
             });
         }
     });
+    
  
 });

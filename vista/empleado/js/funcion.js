@@ -1,7 +1,7 @@
 
 
 function ver(id){
-    //alert(id);
+    //alert(date("Y")."-".date("m")."-".date("d"));
     $.post(url+'empleado/buscador','id='+id,function(datos){
         empleado = datos[0]["NOMBRE"]+" "+datos[0]["APELLIDO_PATERNO"]+" "+datos[0]["APELLIDO_MATERNO"];
         titulo = "<strong>EMPLEADO</strong>: "+empleado.toUpperCase();
