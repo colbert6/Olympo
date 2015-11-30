@@ -28,14 +28,14 @@
     </table>
     </div>
     
-   <!-- <div class="navbar-inner">
+   <!--div class="navbar-inner">
     <a href="<?php echo BASE_URL?>img_inicio/nuevo" class="btn btn-primary">Nuevo</a>
-    </div>-->
+    </div>
     <?php } else { ?>
-    <!--  <div class="navbar-inner">
+     <div class="navbar-inner">
         <p>NO SE ENCONTRARON DATOS</p>
         <a href="<?php echo BASE_URL?>img_inicio/nuevo" class="btn btn-primary">Nuevo</a>
-      </div>-->
+      </div-->
 <?php } ?>
     
     <!-- Modal -->

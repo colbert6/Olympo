@@ -5,9 +5,11 @@
  * 
  */
 class inicio_controlador extends controller {
+    private $_model;
     function __construct() {
     //llamamos al metodo constructor de la clase padre
         parent::__construct();
+        $this->_model = $this->cargar_modelo('matricula');
     }
     function index() {
         
@@ -17,6 +19,10 @@ class inicio_controlador extends controller {
             }
            
             $this->_vista->renderizar('index');
+
+            $this->_model->actualiza_fechas();
+            $this->_vista->renderizar('index');
+            
 
         }
         else{

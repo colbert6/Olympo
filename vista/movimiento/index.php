@@ -5,6 +5,7 @@
     <table name="table" id="table3" class="display" cellspacing="0" width="100%">
         <thead>
         <tr>
+            <th>ITEM</th>
             <th>FECHA</th>
             <th>TIPO MOVIMIENTO</th>
             <th>CONCEPTO MOVIMIENTO</th>
@@ -16,7 +17,7 @@
         <tbody>
         <?php for ($i = 0; $i < count($this->datos); $i++) { ?>
             <tr>
-                
+                <td><?php echo $i+1 ?></td>
                 <td><?php 
                     $date = new DateTime($this->datos[$i]['FECHA']);
                     echo $date->format('d-m-Y');
@@ -49,7 +50,7 @@
     <?php } ?>
 
     <style>
-        #myModal .modal-content {
+        #validaAdministrador .modal-content {
             width: 300px;
             margin: 0 auto;
         }

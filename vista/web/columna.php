@@ -83,26 +83,26 @@
                                       <div class="pull-left" >
                                       <div type="button" class="media-object" >
                                        <!-- <button type="button" style="width: 50px;height: 50px;padding: 4px; " class="btn btn-info btn-lg " data-toggle="modal" data-target="#myModa"><?php echo $dia[2]?></br><?php echo $mes?>l</button>-->
-                                        <button type="button" class="lista_eventos" style="margin: 0px 14px 0px 0px; border-radius: 5px 5px 5px 5px;"data-toggle="modal" data-target="#myModa"><?php echo $dia[2]?></br><?php echo $mes?></button>
+                                        <button type="button" class="lista_eventos" style="margin: 0px 14px 0px 0px; border-radius: 5px 5px 5px 5px;"data-toggle="modal" data-target="#myModa<?php echo $i ?>"><?php echo $dia[2]?></br><?php echo $mes?></button>
                                       </div>
                                     </div>
                                     <div class="media-body">
-                                      <h5 class="media-heading"><strong><u>Comp. Fitness</u></strong></h5>
+                                      <h5 class="media-heading"><strong><u><?php if(isset ($this->evento[$i]['NOMBRE']))echo $this->evento[$i]['NOMBRE']?></u></strong></h5>
                                       <small><strong>Lugar:</strong> <?php if(isset ($this->evento[$i]['LUGAR']))echo $this->evento[$i]['LUGAR']?></small> </br>
-                                      <small><strong>Hora:</strong> 3:00 pm</small>
+                                      <small><strong>Hora:</strong> <?php if(isset ($this->evento[$i]['HORA_EVENTO']))echo $this->evento[$i]['HORA_EVENTO']?></small>
                                         <!-- Trigger the modal with a button -->
                                         
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="myModa" role="dialog">
+                                        <div class="modal fade" id="myModa<?php echo $i ?>" role="dialog">
                                           <div class="modal-dialog modal-sm">
                                            <div class="modal-content">
                                               <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Modal Header</h4>
+                                                <h4 class="modal-title"><?php echo $this->evento[$i]['NOMBRE']?></h4>
                                               </div>
                                               <div class="modal-body">
-                                                <p>This is a small modal.</p>
+                                                <p><?php if(isset ($this->evento[$i]['DESCRIPCION']))echo $this->evento[$i]['DESCRIPCION']?></p>
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

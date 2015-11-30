@@ -89,25 +89,15 @@ class matricula extends Main{
         $r = null;
         return $error;
     }
-    public function actualiza() {
+    public function actualiza_fechas() {
        
-        $datos = array($this->id_tipo_membresia,$this->id_socio,$this->fecha_registro,$this->fecha_registro,
-                    $this->fecha_registro,$this->costo,$this->estado_pago);
-        $r = $this->get_consulta("pa_u_matricula", $datos);
-        if ($r[1] == '') {
-            $stmt = $r[0];
-        } else {
-            die($r[1]);
-        }
+        
+        $r = $this->get_consulta("pa_u_matricula", NULL);
+         $error = $r[1];
         $r = null;
-        if (BaseDatos::$_servidor == 'OCI') {
-            oci_fetch_all($stmt, $data, null, null, OCI_FETCHSTATEMENT_BY_ROW);
-            return $data;
-        } else {
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            return $stmt->fetchall();
-        }
+        return $error;
     }
+    
     public function elimina() {
         $datos = array($this->id_matricula);
         $r = $this->get_consulta("pa_d_matricula", $datos);

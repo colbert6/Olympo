@@ -30,7 +30,7 @@
                 } ?></td>
                 
                 <td>
-                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>evento/vermas/<?php echo $this->datos[$i]['ID_EVENTO'] ?>')" class="btn btn-warning btn-minier"><i class="icon-eye-open icon-white"></i></a>
+                    <!--a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>evento/vermas/<?php echo $this->datos[$i]['ID_EVENTO'] ?>')" class="btn btn-warning btn-minier"><i class="icon-eye-open icon-white"></i></a-->
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>evento/editar/<?php echo $this->datos[$i]['ID_EVENTO'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
                     <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL?>evento/eliminar/<?php echo $this->datos[$i]['ID_EVENTO'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
                 </td>

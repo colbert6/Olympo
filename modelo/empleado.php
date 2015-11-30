@@ -115,7 +115,7 @@ class empleado extends Main{
             $this->email, $this->telefono,$this->celular,$this->sexo,   $this->direccion, $this->fecha_nacimiento,$this->estado_civil,$this->grupo_sanguineo,  
             $this->hobby,$this->aliass,$this->nacionalidad,$this->seguro_medico,$this->observacion,
             $this->antecedente_medico,$this->codigo_postal,$this->numero_hijo, $this->sector,
-            $this->grado_estudio,$this->tipo_vivienda,$this->anio_contratacion, $this->usuario,$this->clave,$this->id_perfil_usuario);
+            $this->grado_estudio,$this->tipo_vivienda,$this->anio_contratacion);
         $r = $this->get_consulta("pa_i_empleado", $datos);
         $error = $r[1];
         $r = null;
@@ -128,7 +128,7 @@ class empleado extends Main{
             $this->email, $this->telefono,$this->celular,$this->sexo,   $this->direccion, $this->fecha_nacimiento,$this->estado_civil,$this->grupo_sanguineo,  
             $this->hobby,$this->aliass,$this->nacionalidad,$this->seguro_medico,$this->observacion,
             $this->antecedente_medico,$this->codigo_postal,$this->numero_hijo, $this->sector,
-            $this->grado_estudio,$this->tipo_vivienda,$this->anio_contratacion, $this->usuario,$this->clave,$this->id_perfil_usuario);
+            $this->grado_estudio,$this->tipo_vivienda,$this->anio_contratacion);
         //print_r($datos);exit;
         $r = $this->get_consulta("pa_u_empleado", $datos);
         $error = $r[1];

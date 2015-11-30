@@ -58,7 +58,7 @@ class img_inicio_controlador extends controller {
         }
             $this->_model->titulo = ucwords(strtolower($_POST['titulo']));
             $this->_model->imagen = $imagen;
-            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
+            $this->_model->descripcion = $_POST['descripcion'];
             $this->_model->url1 = strtolower($_POST['url']);
             //print_r($this->_model->inserta());exit;
             //echo "<pre>"; print_r($this->_model->titulo,$this->_model->imagen,$this->_model->descripcion);exit;
@@ -127,7 +127,7 @@ class img_inicio_controlador extends controller {
            // print_r($this->_model->imagen);exit();
             $this->_model->titulo = ucwords(strtolower($_POST['titulo']));
             $this->_model->imagen = $imagen;
-            $this->_model->descripcion = ucwords(strtolower($_POST['descripcion']));
+            $this->_model->descripcion = $_POST['descripcion'];
             $this->_model->url1 = strtolower($_POST['url']);
 
             $this->_model->actualiza();

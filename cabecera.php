@@ -55,7 +55,7 @@
 		      <!-- Upload to server link. Class "dropdown-big" creates big dropdown -->
 		      <li class="dropdown dropdown-big">
 			<a href="<?php echo BASE_URL ?>inicio">
-			    <img src="<?php echo BASE_URL ?>lib/themes/images/titulo1.png" width="150px" alt=""/>
+			    <img src="<?php echo BASE_URL ?>lib/img/logo/logo_sin_fondo.png" width="150px" alt=""/>
 			</a>
 		      </li>
 		  </ul>

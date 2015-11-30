@@ -6,6 +6,7 @@
 $(function(){
     $( "#titulonot" ).focus();
     $( "#save" ).click(function(){
+        
         bval = true;        
         bval = bval && $( "#titulo" ).required();
         bval = bval && $( "#url" ).required();

@@ -21,7 +21,7 @@
                     <?php if($this->e_caja[$i]['ESTADO']==1){?>
                             <a href="javascript:void(0)" onclick="cerrarCaja('<?php echo BASE_URL?>sesion_caja/cerrar/<?php echo $this->e_caja[$i]['ID_CAJA']?>','<?php echo BASE_URL?>sesion_caja/reporte_movimientos/<?php echo $this->e_caja[$i]['ID_SESION_CAJA'] ?>')" class="btn btn-success btn-minier"><i class="icon-stop icon-white"></i>&nbsp;&nbsp;&nbsp;Cerrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                     <?php }else{?>
-                            <a href="javascript:void(0)" onclick="apertura('<?php echo $this->e_caja[$i]['ID_CAJA']?>')" class="btn btn-success btn-minier"><i class="icon-play icon-white"></i>&nbsp;&nbsp;&nbsp;Aperturar</a>
+                            <a href="javascript:void(0)" onclick="apertura('<?php echo $this->e_caja[$i]['ID_CAJA']?>')" class="btn btn-success btn-minier" id="mostrarVtnApertura"><i class="icon-play icon-white"></i>&nbsp;&nbsp;&nbsp;Aperturar</a>
                     <?php }?>
                     
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>sesion_caja/historial/<?php echo $this->e_caja[$i]['ID_CAJA'] ?>')" class="btn btn-danger btn-minier"><i class="icon-th-list icon-white"></i>&nbsp;&nbsp;&nbsp;Historial</a>

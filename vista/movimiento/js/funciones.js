@@ -63,10 +63,10 @@ function ValidaExtorno(id){
      $('#user').val("");
      $('#pass').val("");
      $("#alerta").html("");
+
     if(confirm("¿Esta Seguro de Extornar este Movimiento?")){
         $('#id_movimiento').val(id);
-         $('#myModal').modal('show');
+         $('#validaAdministrador').modal('show');
 
-         
     }
 }
