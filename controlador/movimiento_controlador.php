@@ -225,14 +225,6 @@ class movimiento_controlador extends controller {
                         }
                     }
                     
-                    $this->_venta->id_venta = $cuotas[0]['ID_VENTA'];
-                    
-                    if($pago_total!=0){  $this->_venta->estado_pago = '1';      }
-                    if($deuda_total == 0){ $this->_venta->estado_pago = '2';    }
-                    if ($_POST['id_modalidad_t']=='CONTADO'){ $this->_venta->estado_pago = '2'; }
-                    
-                    $this->_venta->actualizar_estado();
-
                     //-------------CALCULAR RETRASO MAXIMO-----------------
                     $this->_cronograma_cobro->id_venta = $id_accion;
                     $cuotas = $this->_cronograma_cobro->cuota_x_venta();
@@ -248,6 +240,16 @@ class movimiento_controlador extends controller {
                     $this->_venta->id_venta = $cuotas[0]['ID_VENTA'];
                     $this->_venta->retraso = $max;
                     $this->_venta->actualizar_retraso();
+
+                    $this->_venta->id_venta = $cuotas[0]['ID_VENTA'];
+                    
+                    if($pago_total!=0){  $this->_venta->estado_pago = '1';      }
+                    if($deuda_total == 0){ $this->_venta->estado_pago = '2';    }
+                    if ($_POST['id_modalidad_t']=='CONTADO'){ $this->_venta->estado_pago = '2'; }
+                    
+                    $this->_venta->actualizar_estado();
+
+                    
                     
                 }else if($tipo_movimiento == "EGRESO"){
                     
@@ -289,13 +291,7 @@ class movimiento_controlador extends controller {
                             }
                         }
                     }
-                    $this->_compra->id_compra = $cuotas[0]["ID_COMPRA"];
-                    
-                    if($pago_total!=0){   $this->_compra->estado_pago = '1';   }
-                    if($deuda_total == 0){  $this->_compra->estado_pago = '2'; }
-                    if ($_POST['id_modalidad_t']=='CONTADO'){ $this->_compra->estado_pago = '2'; }
-                    
-                    $this->_compra->actualizar_estado();
+
                      //-------------CALCULAR RETRASO MAXIMO-----------------
                     $this->_cronograma_pago->id_compra = $id_accion;
                     $cuotas = $this->_cronograma_pago->cuota_x_compra();
@@ -311,6 +307,16 @@ class movimiento_controlador extends controller {
                     $this->_compra->id_compra = $cuotas[0]["ID_COMPRA"];
                     $this->_compra->retraso = $max;
                     $this->_compra->actualizar_retraso();
+
+
+
+                    $this->_compra->id_compra = $cuotas[0]["ID_COMPRA"];
+                    
+                    if($pago_total!=0){   $this->_compra->estado_pago = '1';   }
+                    if($deuda_total == 0){  $this->_compra->estado_pago = '2'; }
+                    if ($_POST['id_modalidad_t']=='CONTADO'){ $this->_compra->estado_pago = '2'; }
+                    
+                    $this->_compra->actualizar_estado();
 
 
                 }
@@ -475,15 +481,35 @@ class movimiento_controlador extends controller {
                             $this->_cronograma_cobro->actualiza();
                         }
                         // ACTUALIZA ESTADO DE VENTA
-                        
+
                         if(($total_pagado - $total_amortizacion)==0){
+
                             $this->_venta->id_venta = $id_venta;
                             $this->_venta->estado_pago = '0';
                             $this->_venta->actualizar_estado();
+                            //-------------ACTUALIZAR CAMPO RETRASO ----------------
+                            $this->_venta->id_venta = $id_venta;
+                            $this->_venta->retraso = 0;
+                            $this->_venta->actualizar_retraso();
                         }else if(($total_pagado - $total_amortizacion)!=0){
-                            $this->_venta->id_compra = $id_compra;
+                            $this->_venta->id_venta = $id_venta;
                             $this->_venta->estado_pago = '1';
                             $this->_venta->actualizar_estado();
+                            // ----------ACTUALIZAR RETRAZO---------
+                            $this->_cronograma_cobro->id_venta = $id_venta;
+                            $cuotas = $this->_cronograma_cobro->cuota_x_venta();
+                            $max = 0;
+                            for ($i=0; $i < count($cuotas); $i++) { 
+                                $dato = $cuotas[$i]["RETRASO"];
+                                if($cuotas[$i]["FECHA_CANCELACION"]!='1990-01-01'){
+                                    if($dato>$max){
+                                        $max = $dato;
+                                    }
+                                }
+                            }
+                            $this->_venta->id_venta = $id_venta;
+                            $this->_venta->retraso = $max;
+                            $this->_venta->actualizar_retraso();
                         }
                         //ELIMINA AMORTIZACIONES
                         $this->_amortizacion_venta->id_movimiento = $this->filtrarInt($id);
