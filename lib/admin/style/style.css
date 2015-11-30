@@ -834,7 +834,7 @@ border: 1px solid transparent;
 
 .sidebar #nav li ul li a { 
   display: block; 
-  background: none;
+  background: #f8f8f8;
   padding: 5px 0px;
   padding-left: 30px;
   text-decoration: none;

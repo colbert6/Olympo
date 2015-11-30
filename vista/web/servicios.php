@@ -9,7 +9,7 @@
         <?php  for ($i = 0; $i < count($this->datos_servicio); $i++) { ?>
 
         <div class="col-md-12" >
-            <div class"row" >
+            <div class="row" >
 
         <?php if (isset($this->datos_servicio) && count($this->datos_servicio)){ ?>
             <?php for($i = 0; $i < count($this->datos_servicio); $i++){?> 
@@ -43,7 +43,7 @@
         <?php }  //lista de Servicios   
 
         } else {
-            echo "<h1>No hay Servicios Disponibles</h1>"; 
+            echo "<h4>No hay Servicios Disponibles</h4>"; 
         }
         ?>
      

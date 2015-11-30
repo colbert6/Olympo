@@ -6,7 +6,7 @@ Class alerta {
 
     public function __construct($datos) {
         $this->_datos = $datos;
-        $this->newalertas();
+        //$this->newalertas();
     }
 
     function newalertas() {

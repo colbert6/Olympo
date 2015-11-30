@@ -43,23 +43,7 @@ class venta_controlador extends controller {
     }
      
     public function nuevo() {
-        $sesiones =  $this->_sesion_caja->cajas_activas();
-        $emp_existente = false;
-        $fecha_sesion = "";
-        $id_sesion_caja = "";
-        for ($i=0; $i <count($sesiones); $i++) { 
-            if($sesiones[$i]["ID_EMPLEADO"] == session::get('id_empleado')){
-                $emp_existente = true;
-                $fecha_sesion = $sesiones[$i]["FECHA_ENTRADA"];
-                $id_sesion_caja = $sesiones[$i]["ID_SESION_CAJA"];
-                $monto_caja = $sesiones[$i]["MONTO_CIERRE"];
-            }
-        }
         
-        if(!$emp_existente){
-            echo "<script>alert('Aperture una Caja antes de Realizar cualquier Venta');</script>";
-            $this->redireccionar('sesion_caja'); 
-        }
         if ($_POST['guardar'] == 1) {
             //echo '<pre>';print_r($_POST);exit;
             $this->_venta->id_cliente = $_POST['id_cliente'];
@@ -144,43 +128,28 @@ class venta_controlador extends controller {
         $this->_vista->renderizar('form');
     }
     
-    public function nuevo_membresia($id) {
-        if (!$this->filtrarInt($id)) {
-            $this->redireccionar('matricula');
-        }
-        $sesiones =  $this->_sesion_caja->cajas_activas();
-        $emp_existente = false;
-        $fecha_sesion = "";
-        $id_sesion_caja = "";
-        for ($i=0; $i <count($sesiones); $i++) { 
-            if($sesiones[$i]["ID_EMPLEADO"] == session::get('id_empleado')){
-                $emp_existente = true;
-                $fecha_sesion = $sesiones[$i]["FECHA_ENTRADA"];
-                $id_sesion_caja = $sesiones[$i]["ID_SESION_CAJA"];
-                $monto_caja = $sesiones[$i]["MONTO_CIERRE"];
-            }
-        }
-        
-        if(!$emp_existente){
-            echo "<script>alert('Aperture una Caja antes de Realizar cualquier Venta');</script>";
-            $this->redireccionar('sesion_caja'); 
-        }
-                
-        $this->_vista->titulo = 'Registrar Venta';
-        $this->_vista->action = BASE_URL . 'venta/nuevo';
-        
-        
-        $this->_vista->almacen = $this->_almacen->selecciona();
-        
-        $this->_matricula->id_matricula=$this->filtrarInt($id);
-        $this->_vista->matricula = $this->_matricula->selecciona_id();
-        //echo '<pre>';print_r($this->_vista->matricula);exit;
-        
-        $this->_vista->setCss_public(array('jquery.dataTables'));
-        $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
-        $this->_vista->setJs(array('funciones_form','jquery-ui.min'));
-        $this->_vista->renderizar('form');
-    }
+     public function nuevo_membresia($id) {
+         if (!$this->filtrarInt($id)) {
+             $this->redireccionar('matricula');
+         }
+         
+                 
+         $this->_vista->titulo = 'Registrar Venta';
+         $this->_vista->action = BASE_URL . 'venta/nuevo';
+         
+         
+         $this->_vista->almacen = $this->_almacen->selecciona();
+         
+         $this->_matricula->id_matricula=$this->filtrarInt($id);
+         $this->_vista->matricula = $this->_matricula->selecciona_id();
+         //echo '<pre>';print_r($this->_vista->matricula);exit;
+         
+         $this->_vista->setCss_public(array('jquery.dataTables'));
+         $this->_vista->setJs_public(array('jquery.dataTables.min','run_table'));
+         $this->_vista->setJs(array('funciones_form','jquery-ui.min'));
+         $this->_vista->renderizar('form');
+     }
+   
         
     public function eliminar($id) {
         if (!$this->filtrarInt($id)) {

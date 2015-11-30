@@ -48,23 +48,7 @@ class compra_controlador extends controller {
     }
     
     public function nuevo() {
-        $sesiones =  $this->_sesion_caja->cajas_activas();
-        $emp_existente = false;
-        $fecha_sesion = "";
-        $id_sesion_caja = "";
-        for ($i=0; $i <count($sesiones); $i++) { 
-            if($sesiones[$i]["ID_EMPLEADO"] == session::get('id_empleado')){
-                $emp_existente = true;
-                $fecha_sesion = $sesiones[$i]["FECHA_ENTRADA"];
-                $id_sesion_caja = $sesiones[$i]["ID_SESION_CAJA"];
-                $monto_caja = $sesiones[$i]["MONTO_CIERRE"];
-            }
-        }
         
-        if(!$emp_existente){
-            echo "<script>alert('Aperture una Caja antes de Realizar cualquier Venta');</script>";
-            $this->redireccionar('sesion_caja'); 
-        }
         if ($_POST['guardar'] == 1) {
             //echo '<pre>';print_r($_POST);exit;
             $this->_compra->id_proveedor = $_POST['id_proveedor'];

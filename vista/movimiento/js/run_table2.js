@@ -25,7 +25,7 @@
                             'sSortDescending': ': Activar para ordenar la columna de manera descendente'
                         }
                     },
-                    'aaSorting': [[ 0, 'desc' ]],//ordenar
+                    'aaSorting': [[ 0, 'asc' ]],//ordenar
                     'iDisplayLength': 10,
                     'aLengthMenu': [[5, 10, 20, -1], [5, 10, 20, 'All']]
                     

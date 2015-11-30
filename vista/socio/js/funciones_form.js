@@ -30,9 +30,8 @@ $(document).ready(function() {
         
         if (bval) 
         {
-            alert('as');
 
-            //$("#frm").submit();
+         $("#frm").submit();
         }
         return false;
     }); 
