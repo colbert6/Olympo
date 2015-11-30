@@ -10,17 +10,40 @@ class inicio_controlador extends controller {
         parent::__construct();
     }
     function index() {
-        //enviamos el parametro a la vista index.phtml
-        //$this->_vista->titulo = 'Portada';
-        //llamamos al metodo renderizar para que muestre la vista enviada
-        //por parametro
+        
         if(session::get('autenticado')){
+            if($this->web_movil()){
+                $this->redireccionar('movil/sistema_movil/sistema');
+            }
+           
             $this->_vista->renderizar('index');
+
         }
         else{
+            if($this->web_movil()){
+                $this->redireccionar('movil/login/');
+            }
+           
             header('location:' . BASE_URL );
             exit;
         }
+    }
+
+    public function web_movil() {
+         
+         $detect = new Mobile_Detect();
+        
+            if ($detect->isAndroidtablet() || $detect->isIpad() || $detect->isBlackberrytablet() ) {
+                return true;
+            } elseif( $detect->isAndroid() ) {
+                return true;
+            } elseif ( $detect->isIphone() ) {
+               return true;
+            } elseif ( $detect->isMobile() ) {
+                return true;
+            } 
+            return false;
+           
     }
 }
 ?>

@@ -16,7 +16,7 @@
             <tr>
                 <td><?php echo ($i+1);//id ?></td>
                 <td><?php echo $this->e_caja[$i]['NOMBRE'];//nombre ?></td> 
-                <td><?php if($this->e_caja[$i]['ESTADO']==1){echo $this->e_caja[$i]['MONTO_CIERRE'];}else{echo "Sin Saldo";} //nombre ?></td> 
+                <td><?php if($this->e_caja[$i]['ESTADO']==1){echo $this->e_caja[$i]['MONTO_CIERRE'];}else{echo "Caja Cerrada";} //nombre ?></td> 
                 <td><!-- icon-stop -->
                     <?php if($this->e_caja[$i]['ESTADO']==1){?>
                             <a href="javascript:void(0)" onclick="cerrarCaja('<?php echo BASE_URL?>sesion_caja/cerrar/<?php echo $this->e_caja[$i]['ID_CAJA']?>','<?php echo BASE_URL?>sesion_caja/reporte_movimientos/<?php echo $this->e_caja[$i]['ID_SESION_CAJA'] ?>')" class="btn btn-success btn-minier"><i class="icon-stop icon-white"></i>&nbsp;&nbsp;&nbsp;Cerrar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>

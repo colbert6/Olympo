@@ -9,6 +9,9 @@ class movil_Controlador extends controller {
     private $_productos;
     private $_evento;
     private $_contacto;
+    private $_sesion_caja;
+    private $_categoria_ejercicio;
+    private $_rutina;
 
     public function __construct() {
         
@@ -24,6 +27,12 @@ class movil_Controlador extends controller {
         $this->_productos = $this->cargar_modelo('web_producto');
         $this->_evento = $this->cargar_modelo('evento');
         $this->_contacto = $this->cargar_modelo('contacto');
+        $this->_sesion_caja = $this->cargar_modelo('sesion_caja');
+        $this->_categoria_ejercicio =  $this->cargar_modelo('categoria_ejercicio');
+        $this->_rutina =  $this->cargar_modelo('rutina');
+        $this->_triaje = $this->cargar_modelo('triaje');
+        $this->_concepto_triaje = $this->cargar_modelo('concepto_triaje');
+        $this->_socio = $this->cargar_modelo('socio');
  
     }
     
@@ -76,14 +85,49 @@ class movil_Controlador extends controller {
 
         
     public function login(){
+        $this->_vista->action = BASE_URL . 'login/';
         $this->_vista->renderiza_movil('login','login');
+    }
+
+    public function sistema_movil($metodo){
+        if(session::get('autenticado')){
+            if($metodo=='sistema'){
+                $this->_vista->renderiza_movil('sistema');    
+            }else if($metodo=='saldo_cajas'){
+                $this->_vista->e_caja = $this->_sesion_caja->selecciona();
+                $this->_vista->renderiza_movil('saldo_cajas');
+            }else if($metodo=='reglamento'){
+                $this->_vista->renderiza_movil('reglamento');
+            }else if($metodo=='mi_rutina'){
+                $this->_rutina->id_socio = session::get('id_socio');
+                $this->_vista->rutina = $this->_rutina->socio_x_rutina();
+                $this->_vista->categoria_ejercicio = $this->_categoria_ejercicio->selecciona();
+                $this->_vista->renderiza_movil('mi_rutina');
+            }else if($metodo=='mis_medidas'){
+               //EXTRAER SOCIO
+                $this->_socio->id_socio = session::get('id_socio');
+                $this->_vista->socio = $this->_socio->selecciona_id();
+                //EXTRAER TRIAJE
+                $this->_triaje->id_socio = session::get('id_socio');
+                $this->_vista->utriaje = $this->_triaje->ultimo_triaje();
+                //EXTRAER CONCEPTO DE TRIAJE
+                $this->_vista->concepto_triaje = $this->_concepto_triaje->selecciona();
+                
+                $this->_vista->renderiza_movil('mis_medidas');
+            }else if($metodo=='mis_eventos'){
+                $this->_vista->renderiza_movil('mis_eventos');
+            }
+                
+        }else{
+            $this->redireccionar('movil/login');
+        }
     }
         
      public function web_movil() {
          
          $detect = new Mobile_Detect();
         
-            if ($detect->isAndroidtablet() || $detect->isIpad() || $detect->isBlackberrytablet() ) {
+            if ($detect->isAndroidtablet() || $detect->isIpad() || $detect->isBlackberrytablet()) {
                 return true;
             } elseif( $detect->isAndroid() ) {
                 return true;

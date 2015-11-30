@@ -209,12 +209,12 @@ class view {
                 'id' => 'contactenos',
                 'titulo' => 'CONTÁCTENOS',
                 'enlace' => BASE_URL. 'movil/contactenos/'
-                ),
-            array(
+                )
+            /*array(
                 'id' => 'login',
                 'titulo' => 'INICIAR SESION',
                 'enlace' => BASE_URL. 'movil/login/'
-                )
+                )*/
             
         );
         

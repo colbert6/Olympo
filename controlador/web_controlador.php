@@ -84,7 +84,7 @@ class web_Controlador extends controller {
         $this->_vista->renderiza_web('fotos','fotos');
     }
         
-     public function web_movil() {
+    public function web_movil() {
          
          $detect = new Mobile_Detect();
         
