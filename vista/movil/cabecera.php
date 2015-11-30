@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="<?php echo $_movilParams['ruta_css']; ?>slidebars.min.css">
     <link rel="stylesheet" href="<?php echo $_movilParams['ruta_css']; ?>parametros.css">
     <script src="<?php echo BASE_URL?>lib/js/validaciones.js"></script>
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
