@@ -44,7 +44,7 @@
         <div class="form-group" style="margin-top: 8%"> 
             
             <button type="button" class="btn btn-primary" id="save"> Guardar</button>
-                <a style='margin-left:8%' href="<?php echo BASE_URL?>ejercicio"  class="btn btn-danger">Cancelar</a>
+                <a style='margin-left:8%' href="<?php echo BASE_URL?>movimiento"  class="btn btn-danger">Cancelar</a>
             
         </div>
 

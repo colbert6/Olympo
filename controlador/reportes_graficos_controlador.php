@@ -41,6 +41,10 @@ class reportes_graficos_controlador extends controller {
     public function historial_graf_socio($id_socio) {
         $this->_socio->id_socio=$id_socio;
         $this->_vista->datos= $this->_socio->selecciona_historial_graf();
+        if(count($this->_vista->datos)<=0){
+            echo '<h4> No se encontraron registros historicos del cliente </h4>';
+            return false;
+        }
         //print_r($this->_vista->datos);exit();
         $this->_vista->renderizar_reporte('historial');
     }

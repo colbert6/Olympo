@@ -18,8 +18,6 @@ class inicio_controlador extends controller {
                 $this->redireccionar('movil/sistema_movil/sistema');
             }
            
-            $this->_vista->renderizar('index');
-
             $this->_model->actualiza_fechas();
             $this->_vista->renderizar('index');
             

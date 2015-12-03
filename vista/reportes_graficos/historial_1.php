@@ -5,44 +5,32 @@ $chart->chart->type = "spline";
 $chart->title->text = utf8_decode("HISTORIAL DEL SOCIO");
 $chart->subtitle->text = utf8_decode("Registro de cuotas pagadas");
 
-$chart->xAxis->type= 'datetime';
-$chart->xAxis->labels->overflow= 'justify';
 
-$chart->yAxis->title->text = "CALIFICACION";
-$chart->yAxis->minorGridLineWidth = 0;
-$chart->yAxis->gridLineWidth = 0;
-$chart->yAxis->alternateGridColor = null;
-
-$chart->yAxis->plotBands=array(array( 'from'=>0,
-                                'to'=>10,
-                                'color'=>'rgba(68, 170, 213, 0.1)',
-                                'label'=> array( 'text'=>'Light air','style'=>array( 'color'=>'#606060' ) )),
-                               array( 'from'=>10,
-                                'to'=>15,
-                                'color'=>'rgba(0, 0, 0, 0)',
-                                'label'=> array( 'text'=>'Light air','style'=>array( 'color'=>'#606060' ) )),
-                               array( 'from'=>15,
-                                'to'=>20,
-                                'color'=>'rgba(68, 170, 213, 0.1)',
-                                'label'=> array( 'text'=>'Light air','style'=>array( 'color'=>'#606060' ) )));
-
-$chart->yAxis->tooltip->valueSuffix=' m/s';
 
 
 $chart->chart->renderTo = "container";
+$chart->xAxis->categories
+xAxis: {
+            type: 'datetime',
+            labels: {
+                overflow: 'justify'
+            }
+        },
+
+
 for ($i = 0; $i < count($this->datos); $i++) {
     $chart->xAxis->categories [] =  $this->datos[$i]['FECHA_VENC'];
 }
 
 $chart->yAxis->min = 0;
-$chart->yAxis->max = 20;
 
+$chart->yAxis->title->text = "Calificacion";
 $chart->legend->layout = "vertical";
 $chart->legend->backgroundColor = "#FFFFFF";
 $chart->legend->align = "left";
 $chart->legend->verticalAlign = "top";
 $chart->legend->x = 100;
-$chart->legend->y = 40;
+$chart->legend->y = 30;
 $chart->legend->floating = 1;
 $chart->legend->shadow = 1;
 
@@ -69,8 +57,7 @@ for ($i = 0; $i < count($this->datos); $i++) {
     }
     
 }
-$chart->series[]=array('name' => "",'data'=>$calificacion);
-$chart->series->navigation->menuItemStyle->fontSize='10px';
+$chart->series[]=array('name' => "Dinero s",'data'=>$calificacion);
 
 
 ?>
