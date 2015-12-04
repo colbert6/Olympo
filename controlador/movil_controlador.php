@@ -13,6 +13,7 @@ class movil_Controlador extends controller {
     private $_categoria_ejercicio;
     private $_rutina;
     private $_socio_x_evento;
+    private $_matricula;
 
     public function __construct() {
         
@@ -35,7 +36,7 @@ class movil_Controlador extends controller {
         $this->_concepto_triaje = $this->cargar_modelo('concepto_triaje');
         $this->_socio = $this->cargar_modelo('socio');
         $this->_socio_x_evento= $this->cargar_modelo('socio_x_evento');
- 
+        $this->_matricula = $this->cargar_modelo('matricula');
     }
     
     public function index() {
@@ -91,7 +92,7 @@ class movil_Controlador extends controller {
         $this->_vista->renderiza_movil('login','login');
     }
 
-    public function sistema_movil($metodo){
+    public function sistema_movil($metodo,$id=false){
         if(session::get('autenticado')){
             if($metodo=='sistema'){
                 $this->_vista->renderiza_movil('sistema');    
@@ -121,6 +122,16 @@ class movil_Controlador extends controller {
                 $this->_vista->event_part = $this->_socio_x_evento->selecciona(); 
                 $this->_vista->evento = $this->_evento->selecciona();
                 $this->_vista->renderiza_movil('mis_eventos');
+            }else if($metodo=='mis_membresias'){
+               $this->_matricula->id_socio = session::get('id_socio');
+                $this->_vista->matricula = $this->_matricula->membresiasxsocio();
+                $this->_vista->renderiza_movil('mis_membresias');
+            }else if($metodo=='det_memb'){
+                $this->_matricula->id_matricula = $this->filtrarInt($id);
+                $this->_vista->det_matricula = $this->_matricula->selecciona_id();
+                $this->_vista->serv_x_matricula = $this->_matricula->servicioxmatricula();
+                
+                $this->_vista->renderiza_movil('det_memb');
             }
                 
         }else{

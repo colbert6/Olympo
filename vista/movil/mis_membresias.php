@@ -1,14 +1,19 @@
-<div class="navbar-inner">
-<?php if (isset($this->matricula) && count($this->matricula)) { ?>
+<div class="container-fluid">
     
-    <table id="table" class="display" cellspacing="0" width="100%">
+    <div class="row">
+        <ol class="breadcrumb" >
+            <li><a href="<?php echo BASE_URL."movil/sistema_movil/sistema/"; ?>">Inicio</a></li>
+            <li class="active">Mis Membresias</li>
+        </ol>
+        
+        <?php if (isset($this->matricula) && count($this->matricula)) { ?>
+    
+    <table class="table">
         <thead>
             <tr>
-                <th class='text-center'>ITEM</th>
+                <th class='text-center'>#</th>
                 <th class='text-center'>MEMBRESIA</th>
                 <th class='text-center'>DURACION</th>
-                <th class='text-center'>FECHA INICIO</th>
-                <th class='text-center'>FECHA FIN</th>
                 <th class='text-center'>ACCION</th>
             </tr>
         </thead>
@@ -18,11 +23,9 @@
                 <td class='text-center'><?php echo ($i+1);//id ?></td>
                 <td class='text-center'><?php echo $this->matricula[$i]['TIPO_MEMBRESIA'];//nombre ?></td> 
                 <td class='text-center'><?php echo $this->matricula[$i]['DURACION'];//nombre ?></td> 
-                <td class='text-center'><?php echo $this->matricula[$i]['FECHA_INICIO'];//nombre ?></td> 
-                <td class='text-center'><?php echo $this->matricula[$i]['FECHA_FIN'];//nombre ?></td> 
                 
                 <td class='text-center'>
-                    <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>mis_membresias/detalle/<?php echo $this->matricula[$i]['ID_MATRICULA'] ?>')" class="btn btn-success btn-minier"><i class="icon-eye-open icon-white"></i></a>
+                    <a href="<?php echo BASE_URL?>movil/sistema_movil/det_memb/<?php echo $this->matricula[$i]['ID_MATRICULA'] ?>" class="btn btn-success btn-minier"><span class="glyphicon glyphicon-plus"></span></a>
                 </td>
             </tr>
         <?php } ?>
@@ -32,4 +35,5 @@
     <p>NO SE ENCONTRARON DATOS</p>
 
     <?php } ?>
-        
+    </div>
+</div>

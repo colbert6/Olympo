@@ -7,7 +7,7 @@
         </ol>
         <?php $dias = array('LUNES','MARTES','MIERCOLES','JUEVES','VIERNES','SABADO');?>
         <?php for ($i=0; $i < count($dias) ; $i++) { ?>
-            <div class="col-xs-12">
+            <div class="col-xs-12 text-center">
                 <div class="panel panel-default">
                     <div class="panel-heading"  >
                         <h4 style='font-family: fantasy;font-size: 18px;' ><?php echo $dias[$i]?></h4>
