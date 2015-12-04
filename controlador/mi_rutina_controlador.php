@@ -6,8 +6,9 @@ class mi_rutina_controlador extends controller {
     private $_rutina;
 
     public function __construct() {
-        if (!$this->acceso()) {
-            $this->redireccionar('error/access/5050');
+        if(!session::get('autenticado')){
+            header('location:' . BASE_URL );
+            exit;
         }
         parent::__construct();
 

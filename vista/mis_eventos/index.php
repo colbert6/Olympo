@@ -33,14 +33,14 @@
                     <?php if($participar){?>
                         <a id='btn_pa<?php echo ($i+1);?>' idsocioevento='<?php echo $id;?>' estado='0' href="javascript:void(0)" onclick="participar('<?php echo ($i+1)?>','<?php echo $this->datos[$i]['ID_EVENTO'] ?>','<?php echo session::get('id_socio') ?>')" class="btn btn-warning btn-minier">
                                 <div id='accion<?php echo ($i+1)?>'>
-                                <span class='glyphicon glyphicon-remove'></span>&nbsp;NO ASISTIR
+                                [&nbsp;NO ASISTIR&nbsp;]
                             </div>
 
                         </a>          
                     <?php }else{?>
                         <a id='btn_pa<?php echo ($i+1);?>' idsocioevento='<?php echo $id;?>' estado='1' href="javascript:void(0)" onclick="participar('<?php echo ($i+1)?>','<?php echo $this->datos[$i]['ID_EVENTO'] ?>','<?php echo session::get('id_socio') ?>')" class="btn btn-warning btn-minier">
                                 <div id='accion<?php echo ($i+1)?>'>
-                                    <span class='glyphicon glyphicon-ok'></span>&nbsp;ASISTIR
+                                    [&nbsp;ASISTIR&nbsp;]
                                 </div>
                         </a> 
                     <?php }?>
