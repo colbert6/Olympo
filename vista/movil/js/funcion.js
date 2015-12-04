@@ -1,13 +1,8 @@
-$(function() {    
+function participar(id_btn,id_evento,id_socio,url){
 
-});
-
-function participar(id_btn,id_evento,id_socio){
-    
-	
     if($('#btn_pa'+id_btn).attr('estado')=='1'){
         $.post(url+'mis_eventos/insertaSocioxEvento',{id_evento:id_evento,id_socio:id_socio},function(datos){
-            
+        	
             $('#btn_pa'+id_btn).attr('idsocioevento', datos[0].ID_SOCIO_X_EVENTO);
             $('#accion'+id_btn).html("<span class='glyphicon glyphicon-remove'></span>&nbsp;NO ASISTIR");
             $('#btn_pa'+id_btn).attr('estado', '0');

@@ -6,8 +6,9 @@ class mis_eventos_controlador extends controller {
     private $_socio_x_evento;
 
     public function __construct() {
-        if (!$this->acceso()) {
-            $this->redireccionar('error/access/5050');
+        if(!session::get('autenticado')){
+            header('location:' . BASE_URL );
+            exit;
         }
         parent::__construct();
         $this->_model = $this->cargar_modelo('evento');

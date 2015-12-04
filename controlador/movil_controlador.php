@@ -12,6 +12,7 @@ class movil_Controlador extends controller {
     private $_sesion_caja;
     private $_categoria_ejercicio;
     private $_rutina;
+    private $_socio_x_evento;
 
     public function __construct() {
         
@@ -33,6 +34,7 @@ class movil_Controlador extends controller {
         $this->_triaje = $this->cargar_modelo('triaje');
         $this->_concepto_triaje = $this->cargar_modelo('concepto_triaje');
         $this->_socio = $this->cargar_modelo('socio');
+        $this->_socio_x_evento= $this->cargar_modelo('socio_x_evento');
  
     }
     
@@ -115,6 +117,9 @@ class movil_Controlador extends controller {
                 
                 $this->_vista->renderiza_movil('mis_medidas');
             }else if($metodo=='mis_eventos'){
+                $this->_socio_x_evento->id_socio = session::get("id_socio");   
+                $this->_vista->event_part = $this->_socio_x_evento->selecciona(); 
+                $this->_vista->evento = $this->_evento->selecciona();
                 $this->_vista->renderiza_movil('mis_eventos');
             }
                 
@@ -139,7 +144,7 @@ class movil_Controlador extends controller {
             return false;
            
     }
-    
+
 }
 
 ?>
