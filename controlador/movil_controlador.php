@@ -14,6 +14,7 @@ class movil_Controlador extends controller {
     private $_rutina;
     private $_socio_x_evento;
     private $_matricula;
+    private $_movimiento;
 
     public function __construct() {
         
@@ -37,6 +38,7 @@ class movil_Controlador extends controller {
         $this->_socio = $this->cargar_modelo('socio');
         $this->_socio_x_evento= $this->cargar_modelo('socio_x_evento');
         $this->_matricula = $this->cargar_modelo('matricula');
+        $this->_movimiento = $this->cargar_modelo('movimiento');
     }
     
     public function index() {
@@ -96,44 +98,55 @@ class movil_Controlador extends controller {
         if(session::get('autenticado')){
             if($metodo=='sistema'){
                 $this->_vista->renderiza_movil('sistema');    
-            }else if($metodo=='saldo_cajas'){
-                $this->_vista->e_caja = $this->_sesion_caja->selecciona();
-                $this->_vista->renderiza_movil('saldo_cajas');
-            }else if($metodo=='reglamento'){
-                $this->_vista->renderiza_movil('reglamento');
-            }else if($metodo=='mi_rutina'){
-                $this->_rutina->id_socio = session::get('id_socio');
-                $this->_vista->rutina = $this->_rutina->socio_x_rutina();
-                $this->_vista->categoria_ejercicio = $this->_categoria_ejercicio->selecciona();
-                $this->_vista->renderiza_movil('mi_rutina');
-            }else if($metodo=='mis_medidas'){
-               //EXTRAER SOCIO
-                $this->_socio->id_socio = session::get('id_socio');
-                $this->_vista->socio = $this->_socio->selecciona_id();
-                //EXTRAER TRIAJE
-                $this->_triaje->id_socio = session::get('id_socio');
-                $this->_vista->utriaje = $this->_triaje->ultimo_triaje();
-                //EXTRAER CONCEPTO DE TRIAJE
-                $this->_vista->concepto_triaje = $this->_concepto_triaje->selecciona();
-                
-                $this->_vista->renderiza_movil('mis_medidas');
-            }else if($metodo=='mis_eventos'){
-                $this->_socio_x_evento->id_socio = session::get("id_socio");   
-                $this->_vista->event_part = $this->_socio_x_evento->selecciona(); 
-                $this->_vista->evento = $this->_evento->selecciona();
-                $this->_vista->renderiza_movil('mis_eventos');
-            }else if($metodo=='mis_membresias'){
-               $this->_matricula->id_socio = session::get('id_socio');
-                $this->_vista->matricula = $this->_matricula->membresiasxsocio();
-                $this->_vista->renderiza_movil('mis_membresias');
-            }else if($metodo=='det_memb'){
-                $this->_matricula->id_matricula = $this->filtrarInt($id);
-                $this->_vista->det_matricula = $this->_matricula->selecciona_id();
-                $this->_vista->serv_x_matricula = $this->_matricula->servicioxmatricula();
-                
-                $this->_vista->renderiza_movil('det_memb');
             }
-                
+            if(session::get('tipo_actor')=='s'){
+                if($metodo=='reglamento'){
+                    $this->_vista->renderiza_movil('reglamento');
+                }else if($metodo=='mi_rutina'){
+                    $this->_rutina->id_socio = session::get('id_socio');
+                    $this->_vista->rutina = $this->_rutina->socio_x_rutina();
+                    $this->_vista->categoria_ejercicio = $this->_categoria_ejercicio->selecciona();
+                    $this->_vista->renderiza_movil('mi_rutina');
+                }else if($metodo=='mis_medidas'){
+                   //EXTRAER SOCIO
+                    $this->_socio->id_socio = session::get('id_socio');
+                    $this->_vista->socio = $this->_socio->selecciona_id();
+                    //EXTRAER TRIAJE
+                    $this->_triaje->id_socio = session::get('id_socio');
+                    $this->_vista->utriaje = $this->_triaje->ultimo_triaje();
+                    //EXTRAER CONCEPTO DE TRIAJE
+                    $this->_vista->concepto_triaje = $this->_concepto_triaje->selecciona();
+                    
+                    $this->_vista->renderiza_movil('mis_medidas');
+                }else if($metodo=='mis_eventos'){
+                    $this->_socio_x_evento->id_socio = session::get("id_socio");   
+                    $this->_vista->event_part = $this->_socio_x_evento->selecciona(); 
+                    $this->_vista->evento = $this->_evento->selecciona();
+                    $this->_vista->renderiza_movil('mis_eventos');
+                }else if($metodo=='mis_membresias'){
+                   $this->_matricula->id_socio = session::get('id_socio');
+                    $this->_vista->matricula = $this->_matricula->membresiasxsocio();
+                    $this->_vista->renderiza_movil('mis_membresias');
+                }else if($metodo=='det_memb'){
+                    $this->_matricula->id_matricula = $this->filtrarInt($id);
+                    $this->_vista->det_matricula = $this->_matricula->selecciona_id();
+                    $this->_vista->serv_x_matricula = $this->_matricula->servicioxmatricula();
+                    
+                    $this->_vista->renderiza_movil('det_memb');
+                }
+            }else if(session::get('tipo_actor')=='e' && session::get('idperfil')=='1'){
+                if($metodo=='saldo_cajas'){
+                    $this->_vista->e_caja = $this->_sesion_caja->selecciona();
+                    $this->_vista->renderiza_movil('saldo_cajas');
+                }else if($metodo=='extorno'){
+                    
+                    $this->_vista->renderiza_movil('extorno');
+                }
+              
+            }else{
+                $this->_vista->renderiza_movil('restringido');
+            }
+              
         }else{
             $this->redireccionar('movil/login');
         }
@@ -154,6 +167,10 @@ class movil_Controlador extends controller {
             } 
             return false;
            
+    }
+    public function sel_movimiento(){
+        $this->_movimiento->id_movimiento = $_POST["id"];
+        echo json_encode($this->_movimiento->selecciona_id());
     }
 
 }

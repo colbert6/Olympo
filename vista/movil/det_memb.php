@@ -6,19 +6,20 @@
             <li><a href="<?php echo BASE_URL."movil/sistema_movil/mis_membresias/"; ?>">Mis Membresias</a></li>
             <li class="active">Detalle</li>
         </ol>
-        
+        <?php $inicio = new DateTime($this->det_matricula[0]['FECHA_INICIO']);?>
+        <?php $fin = new DateTime($this->det_matricula[0]['FECHA_FIN']);?>
         <legend class='text-center'><i>SOCIO</i></legend>
       
-       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE &nbsp; &nbsp;&nbsp; : &nbsp;<?php echo $this->det_matricula[0]['NOMBRE'];?></h5>
-       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APELLIDO &nbsp;&nbsp; : &nbsp;<?php echo $this->det_matricula[0]['APELLIDO_PATERNO']." ".$this->det_matricula[0]['APELLIDO_MATERNO'];?></h5>
-       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DNI &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;<?php echo $this->det_matricula[0]['DNI'];?></h5>
+       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>NOMBRE &nbsp; &nbsp;&nbsp; : &nbsp;</strong> <?php echo $this->det_matricula[0]['NOMBRE'];?></h5>
+       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>APELLIDO &nbsp;&nbsp; : &nbsp;</strong><?php echo $this->det_matricula[0]['APELLIDO_PATERNO']." ".$this->det_matricula[0]['APELLIDO_MATERNO'];?></h5>
+       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>DNI &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;</strong><?php echo $this->det_matricula[0]['DNI'];?></h5>
        <br>
        <legend class='text-center'><i>MEMBRESIA</i></legend>
-       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NOMBRE &nbsp; &nbsp;&nbsp; : &nbsp;<?php echo $this->det_matricula[0]['DESCRIPCION'];?></h5>
-       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIGENCIA &nbsp;&nbsp; : &nbsp;<?php echo $this->det_matricula[0]['DURACION']." ".$this->det_matricula[0]['VIGENCIA'];?></h5>
-       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INICIO &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp;<?php echo $this->det_matricula[0]['FECHA_INICIO'];?></h5>
-       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FIN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;: &nbsp;<?php echo $this->det_matricula[0]['FECHA_FIN'];?></h5>
-       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRECIO &nbsp; &nbsp; &nbsp;&nbsp;: &nbsp;<?php echo $this->det_matricula[0]['COSTO'];?></h5>
+       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>NOMBRE &nbsp; &nbsp;&nbsp; : &nbsp;</strong><?php echo $this->det_matricula[0]['DESCRIPCION'];?></h5>
+       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>VIGENCIA &nbsp;&nbsp; : &nbsp;</strong><?php echo $this->det_matricula[0]['DURACION']." ".$this->det_matricula[0]['VIGENCIA'];?></h5>
+       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>INICIO &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp;</strong><?php echo date_format($inicio,'d/m/Y') ;?></h5>
+       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>FIN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;: &nbsp;</strong><?php echo date_format($fin,'d/m/Y');?></h5>
+       <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>PRECIO &nbsp; &nbsp; &nbsp;&nbsp;: &nbsp;</strong><?php echo $this->det_matricula[0]['COSTO'];?></h5>
        <br>
        <legend class='text-center'><i>SERVICIOS</i></legend>
        <?php if (isset ($this->serv_x_matricula) && count($this->serv_x_matricula)){?>
