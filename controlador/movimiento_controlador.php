@@ -542,15 +542,29 @@ class movimiento_controlador extends controller {
                     $this->_movimiento->id_movimiento = $this->filtrarInt($id);
                     $this->_movimiento->extorna();
 
-                    $this->redireccionar('movimiento'); 
+                    
+                    if($this->web_movil()){
+                        $this->redireccionar('movil/sistema_movil/extorno/');
+                    }else{
+                        $this->redireccionar('movimiento');     
+                    }
                 }
             }else{
                 echo "<script>alert('Este Movimiento Pertenece a una Caja ya Cerrada');</script>";
-                $this->redireccionar('movimiento');        
+                if($this->web_movil()){
+                    $this->redireccionar('movil/sistema_movil/extorno/');
+                }else{
+                    $this->redireccionar('movimiento');     
+                }     
             }
         }else{
             echo "<script>alert('Aperture una Caja antes de Realizar cualquier Movimiento');</script>";
-            $this->redireccionar('sesion_caja');    
+            if($this->web_movil()){
+                $this->redireccionar('movil/sistema_movil/extorno/');
+            }else{
+                $this->redireccionar('sesion_caja');   
+            }
+             
         }
     }
     public function getActores(){
@@ -559,6 +573,23 @@ class movimiento_controlador extends controller {
     }
     public function validaAdmin(){
         echo json_encode($this->_usuario->validaAdmin($_POST["user"],md5($_POST["pass"])));
+    }
+
+     public function web_movil() {
+         
+         $detect = new Mobile_Detect();
+        
+            if ($detect->isAndroidtablet() || $detect->isIpad() || $detect->isBlackberrytablet()) {
+                return true;
+            } elseif( $detect->isAndroid() ) {
+                return true;
+            } elseif ( $detect->isIphone() ) {
+               return true;
+            } elseif ( $detect->isMobile() ) {
+                return true;
+            } 
+            return false;
+           
     }
 
 

@@ -1,3 +1,4 @@
+<script src="<?php echo $_params['ruta_js']; ?>bootbox.min.js"></script>
 <div class="navbar-inner">
 <?php if (isset($this->datos) && count($this->datos)) { ?>
 <div class="navbar-inner text-center">
@@ -27,7 +28,7 @@
                 <td><?php echo $this->datos[$i]['DESCRIPCION'] ?></td>
                 <td><?php echo $this->datos[$i]['MONTO'] ?></td>
                 <td>
-                    
+                    <a href="javascript:void(0)" onclick="bootbox.alert('ID : <?php echo " ".$this->datos[$i]['ID_MOVIMIENTO'];?>')" class="btn btn-success btn-minier"><i class="icon-key icon-white"></i></a>
                     <a href="javascript:void(0)" onclick="ValidaExtorno('<?php echo $this->datos[$i]['ID_MOVIMIENTO'] ?>')" class="btn btn-danger btn-minier"><i class="icon-repeat icon-white"></i></a>
                 </td>
 

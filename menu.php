@@ -17,9 +17,20 @@ Class menu {
     function unemenu() {
         echo "<ul id='nav'>";
         if(session::get('tipo_actor')=='s'){
-            echo "<li><a href='" . BASE_URL."reglamento/" . "'><i class='icon-desktop'></i><span>Reglamento</span></a></li>";   
+            echo "<li><a href='" . BASE_URL."reglamento/" . "'><i class='icon-gears'></i><span>Reglamento</span></a></li>"; 
+            echo "<li class='has_sub'><a href='javascript:void' class='opcion_menu' ><i class='icon-male'></i><span>Mi Membresia</span><span class='pull-right'><i class='icon-chevron-right'></i></span></a>";
+            echo "<ul class='lista_menu'>";
+            echo "<li><a href='" . BASE_URL."mi_rutina/" . "'>Mi Rutina</a></li>";
+            echo "<li><a href='" . BASE_URL."mis_medidas/" . "'>Medidas Antropometricas</a></li>";
+            echo "<li><a href='" . BASE_URL."mis_membresias/" . "'>Mis Membresias</a></li>";
+            echo "<li><a href='" . BASE_URL."mis_eventos/" . "'>Eventos</a></li>";
+            echo "</ul>";
+
+
+        }else{
+            $this->cargarmenu();
         }
-        $this->cargarmenu();
+        
         echo "<li><a href='" . BASE_URL . "'><i class='icon-desktop'></i><span>Portal Web</span></a></li>";
         
         echo "</ul>";

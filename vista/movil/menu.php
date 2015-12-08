@@ -8,10 +8,13 @@
             <!--EMPLEADO ADMIN-->
                 <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/sistema/"; ?>">INICIO</a></li>
                 <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/saldo_cajas/"; ?>">SALDOS CAJA</a></li>
+                <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/extorno/"; ?>">EXTORNOS</a></li>
+                <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/saldo_cajas/"; ?>">REPORTES</a></li>
             <?php }else if (session::get('tipo_actor')=='s' && session::get('idperfil')=='2'){ ?>              
             <!--SOCIO-->
                 <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/sistema/"; ?>">INICIO</a></li>
                 <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/reglamento/"; ?>">REGLAMENTO</a></li>
+                <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/mis_membresias/"; ?>">MIS MEMBRESIAS</a></li>
                 <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/mi_rutina/"; ?>">MI RUTINA</a></li>
                 <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/mis_medidas/"; ?>">MIS MEDIDAS</a></li>
                 <li class="sb-close"  ><a style='<?php echo $seleccion; ?>' href="<?php echo BASE_URL."movil/sistema_movil/mis_eventos/"; ?>">MIS EVENTOS</a></li>

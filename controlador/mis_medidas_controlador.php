@@ -5,8 +5,9 @@ class mis_medidas_controlador extends controller {
     private $_model;
 
     public function __construct() {
-        if (!$this->acceso()) {
-            $this->redireccionar('error/access/5050');
+       if(!session::get('autenticado')){
+            header('location:' . BASE_URL );
+            exit;
         }
         parent::__construct();
         

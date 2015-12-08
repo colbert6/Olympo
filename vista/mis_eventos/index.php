@@ -31,9 +31,18 @@
                     ?>
                     <?php }?>
                     <?php if($participar){?>
-                        <a id='btn_pa' idsocioevento='<?php echo $id;?>' estado='0' href="javascript:void(0)" onclick="participar('<?php echo $this->datos[$i]['ID_EVENTO'] ?>','<?php echo session::get('id_socio') ?>')" class="btn btn-warning btn-minier"><div id='accion'>NO PARTICIPAR</div></a>          
+                        <a id='btn_pa<?php echo ($i+1);?>' idsocioevento='<?php echo $id;?>' estado='0' href="javascript:void(0)" onclick="participar('<?php echo ($i+1)?>','<?php echo $this->datos[$i]['ID_EVENTO'] ?>','<?php echo session::get('id_socio') ?>')" class="btn btn-warning btn-minier">
+                                <div id='accion<?php echo ($i+1)?>'>
+                                [&nbsp;NO ASISTIR&nbsp;]
+                            </div>
+
+                        </a>          
                     <?php }else{?>
-                        <a id='btn_pa' idsocioevento='<?php echo $id;?>' estado='1' href="javascript:void(0)" onclick="participar('<?php echo $this->datos[$i]['ID_EVENTO'] ?>','<?php echo session::get('id_socio') ?>')" class="btn btn-warning btn-minier"><div id='accion'>PARTICIPAR</div></a> 
+                        <a id='btn_pa<?php echo ($i+1);?>' idsocioevento='<?php echo $id;?>' estado='1' href="javascript:void(0)" onclick="participar('<?php echo ($i+1)?>','<?php echo $this->datos[$i]['ID_EVENTO'] ?>','<?php echo session::get('id_socio') ?>')" class="btn btn-warning btn-minier">
+                                <div id='accion<?php echo ($i+1)?>'>
+                                    [&nbsp;ASISTIR&nbsp;]
+                                </div>
+                        </a> 
                     <?php }?>
 
                 </td>
