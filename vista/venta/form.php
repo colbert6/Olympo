@@ -246,8 +246,8 @@
             left: -18%;
         }
         #modalHistorialSocio .modal-content{
-            width: 700px;
-            left: -6%;
+            width: 850px;
+            left: -20%;
         }
     </style>
     <div id="modalSocio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
