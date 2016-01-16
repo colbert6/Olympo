@@ -1,5 +1,6 @@
 $(function() {
-    $("#cliente").focus();
+    $("#sel_tipo_documento").focus();
+    
     $("#cliente").click(function(){
         buscarSocio();
         $("#VtnBuscarSocio").show();
@@ -12,10 +13,12 @@ $(function() {
     
     $("#id_tipopago").change(function(){
         if($(this).val()==2){
+            $("#historia_socio").show();
             $("#celda_credito").show();
             $("#verCuotas").show();
             
         }else{
+            $("#historia_socio").hide();
             $("#celda_credito").hide();
             $("#verCuotas").hide();
             limpiar_tipo_pago();
@@ -544,6 +547,28 @@ function crearCuotas() {
           
 }
 function sel_socio(id_s,soc){
+    
+    $.post(url + 'socio/buscador','historia='+id_s, function(datos) {
+        var deuda = (parseFloat(datos[0].DEUDA)).toFixed(2);
+        var retraso = datos[0].ULTIMO_RETRASO;
+        var calificacion;
+        
+        if(retraso<100){
+            var maximo_dia_retraso=100;
+            var maxima_calificacion=20;
+
+            var perdidad=(maxima_calificacion/maximo_dia_retraso).toFixed(2);
+            calificacion=(((-perdidad)*retraso)+maxima_calificacion).toFixed(2);
+        }else{
+            calificacion=0;
+        }
+        
+                
+        $("#deuda_socio").val(deuda);
+        $("#retraso_socio").val(calificacion);
+        
+    }, 'json');
+    
     $("#id_cliente").val(id_s);
     $("#cliente").val(soc);
     $('#modalSocio').modal('hide');
@@ -662,4 +687,20 @@ function montoCuota(num) {
        
     }
     
+}
+function cargarHistorialGraf(){
+        
+        bval = true;   
+        bval = bval && $("#cliente").required();
+        if(!bval){
+            return false;
+        }
+        $('#modalHistorialSocio').modal("show");
+        $('#VtnSocioHistorial').html("<br/><img src='"+url+"lib/img/loading.gif' />");
+        $('#VtnSocioHistorial').load(url+"reportes_graficos/historial_graf_socio/"+$('#id_cliente').val(),function(){
+            $('#VtnSocioHistorial').show("slow");
+            
+        });
+        
+
 }

@@ -174,6 +174,9 @@ class socio_controlador extends controller {
             $socio = $this->_socio->selecciona_id();
         }else if(isset($_POST['matricula'])){
             $socio = $this->_socio->selecciona();
+        }else if(isset($_POST['historia'])){
+              $this->_socio->id_socio=$_POST['historia'];
+            $socio = $this->_socio->selecciona_historial();
         }
         echo json_encode($socio);
     }

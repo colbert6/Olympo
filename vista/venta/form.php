@@ -72,7 +72,24 @@
             </div>
         </div>
         <div class="row" style="border-bottom: solid 1px #D8D8D8;margin: 0px 0px 5px 0px;" >
-            <div class="col-md-6 col-md-offset-6" >
+            <div class="col-md-6 " >
+                <div id="historia_socio" style="float:left;" >
+                    <div class="form-group" style="float:left;margin: 5px 20px 5px 40px;">
+                        <label class="col-md-4 control-label" style="width: 50px;margin-right: 0px;"> Deuda:</label>
+                        <input name="deuda_socio" id="deuda_socio" class="form-control"  placeholder="Deuda" readonly
+                                style="width: 70px"   >
+                    </div>
+                    <div class="form-group" style="float:left;margin: 5px 20px 5px auto;">
+                        <label class="col-md-4 control-label" style="width: 70px;margin-right: 5px;"> Calificacion:</label>
+                        <input name="retraso_socio" id="retraso_socio" class="form-control"  placeholder="Deuda" readonly
+                                style="width: 70px"   >
+                    </div>
+                    <div class="form-group" style="float:left;margin: 8px 0px auto 10px; ">
+                        <button type="button" class="btn btn-primary btn-sm" title="Ver Historial" id="verHistorial"  onclick="cargarHistorialGraf()"><i class="icon-signal icon-white"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" >
                 <input type="hidden" name="estado_cronograma"  id="estado_cronograma" value="0" >
                 <div id="celda_cronograma" style="display: none;"></div>
                 <div id="celda_credito" style="float:left;display: none;" >
@@ -228,6 +245,10 @@
             width: 800px;
             left: -18%;
         }
+        #modalHistorialSocio .modal-content{
+            width: 700px;
+            left: -6%;
+        }
     </style>
     <div id="modalSocio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -335,4 +356,24 @@
         </div>
         </div>
     </div>
-    
+    <div id="modalHistorialSocio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Historial del Socio</h3>             
+        </div>
+        <div class="modal-body">
+            <div id="VtnSocioHistorial">
+                <div class="page-header" >
+                            <img src="<?php echo BASE_URL ?>lib/img/loading.gif" />
+                        </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="guardar_cuotas" name="guardar_cuotas" class="btn btn-success" data-dismiss="modal" aria-hidden="true" style="display:none;" >Guardar</button>
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        </div>
+        </div>
+        </div>
+    </div>
