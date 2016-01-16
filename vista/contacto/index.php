@@ -28,8 +28,6 @@
                                 <a ><i class="icon-check icon-black"></i></a>
                   <?php     } ?>
                 </td>
-              <!--  <td><?php echo $this->datos[$i]['FECHA_EMISION'] ?></td>-->
-                icon-envelope
                 
                 <td>
                     <a href="#myModal" role="button" data-toggle="modal" title=" VER IMAGEN" onclick="ver('<?php echo $this->datos[$i]['ID_CONTACTO'] ?>')" class="btn btn-warning btn-minier"><i class="icon-eye-open icon-white"></i></a>

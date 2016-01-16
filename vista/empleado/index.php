@@ -6,10 +6,9 @@
         <thead>
         <tr>
             <th>ID</th>
+            <th>CATEGORIA EMPLEADO</th>
             <th>NOMBRE</th>
             <th>APELLIDOS</th>
-            <th>USUARIO</th>
-            <th>PERFIL</th>
             <th>ACCIONES</th>
         </tr>
         </thead>
@@ -17,10 +16,10 @@
         <?php for ($i = 0; $i < count($this->datos); $i++) { ?>
             <tr>
                 <td><?php echo $i+1 ?></td>
+                <td><?php echo $this->datos[$i]['CATEGORIA EMPLEADO']?></td>
                 <td><?php echo $this->datos[$i]['NOMBRE'] ?></td>
                 <td><?php echo $this->datos[$i]['APELLIDO_PATERNO']." ".$this->datos[$i]['APELLIDO_MATERNO'] ?></td>
-                <td><?php echo $this->datos[$i]['USUARIO'] ?></td>
-                <td><?php echo $this->datos[$i]['PERFILUSUARIO'] ?></td>
+
                 <td>
                     <a href="#myModal" role="button" data-toggle="modal" onclick="ver('<?php echo $this->datos[$i]['ID_EMPLEADO'] ?>')" class="btn btn-warning btn-minier"><i class="icon-eye-open icon-white"></i></a>
                     <a href="javascript:void(0)" onclick="editar('<?php echo BASE_URL?>empleado/editar/<?php echo $this->datos[$i]['ID_EMPLEADO'] ?>')" class="btn btn-success btn-minier"><i class="icon-pencil icon-white"></i></a>
