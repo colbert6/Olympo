@@ -510,6 +510,8 @@ class movimiento_controlador extends controller {
                             $this->_venta->id_venta = $id_venta;
                             $this->_venta->retraso = $max;
                             $this->_venta->actualizar_retraso();
+
+                        
                         }
                         //ELIMINA AMORTIZACIONES
                         $this->_amortizacion_venta->id_movimiento = $this->filtrarInt($id);

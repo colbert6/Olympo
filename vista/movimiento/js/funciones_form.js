@@ -230,6 +230,25 @@ function maxCompra(id,callback){
         async: true
     });
 }
+function maxVenta(id,callback){
+    $.ajaxSetup({
+        async: false
+    });
+    $.post(url + 'cronograma_cobro/getCuotasVenta',"id_c="+id, function(cuotas) {
+        var max=0;
+        for (var i = 0; i < cuotas.length; i++) {
+            var dato = cuotas[i].RETRASO;
+            if(dato>max){
+                max = dato;
+            }
+
+        }
+        callback(max);
+    },'json');
+    $.ajaxSetup({
+        async: true
+    });
+}
 function asignarMaximo(max){
     retraso = max;
 }
@@ -307,10 +326,11 @@ function mostrarVentas(id_c){
 
         for (var i = 0; i < cliente.length; i++) {
             var importe= (cliente[i].MONTO*(1+parseFloat(cliente[i].IGV))).toFixed(2);
+            maxVenta(cliente[i].ID_VENTA,asignarMaximo);
             HTML += '<tr>';
             HTML += '   <td class=\'text-center\'>' + (i + 1) + '</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].FECHA + '</td>';
-            HTML += '   <td class=\'text-center\'>' + cliente[i].RETRASO +'</td>';
+            HTML += '   <td class=\'text-center\'>' + retraso +'</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].NUM_DOCUMENTO + '</td>';
             HTML += '   <td class=\'text-center\'>' + cliente[i].MODALIDAD_TRANSACCION + '</td>';
             HTML += '   <td class=\'text-center\'>' + importe + '</td>';
