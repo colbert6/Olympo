@@ -173,7 +173,7 @@ $(function() {
     });
     $("input:text[readonly=readonly]").css('cursor','pointer');
     
-    limpiar();
+    
     $("#fecha_ini").datepicker({dateFormat:'yy-mm-dd',changeMonth:true,changeYear:true});
     
     $("#save").click(function(){

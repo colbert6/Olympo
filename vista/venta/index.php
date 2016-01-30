@@ -28,6 +28,7 @@
                         <?php if($this->datos[$i]['ESTADO_PAGO'] == 0) {  ?>
                         <a href="javascript:void(0)" onclick="eliminar('<?php echo BASE_URL ?>venta/eliminar/<?php echo $this->datos[$i]['ID_VENTA'] ?>')" class="btn btn-danger btn-minier"><i class="icon-remove icon-white"></i></a>
                         <?php } ?>
+                        
                     </td>
                 </tr>
             <?php } ?>
